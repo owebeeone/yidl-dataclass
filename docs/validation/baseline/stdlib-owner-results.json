@@ -1,0 +1,318 @@
+{
+  "scope": "Independent standard-library baseline only; generated Dataclass parity remains unverified.",
+  "captured_utc": "2026-10-12T08:11:47.747748+00:00",
+  "probe": "docs/validation/baseline/stdlib_owner_probe.py",
+  "results": [
+    {
+      "all_field_names": [
+        "kind",
+        "seed",
+        "value",
+        "cache"
+      ],
+      "dataclass_params_signature": "(init, repr, eq, order, unsafe_hash, frozen, match_args, kw_only, slots, weakref_slot)",
+      "decorator_parameters": [
+        "cls",
+        "init",
+        "repr",
+        "eq",
+        "order",
+        "unsafe_hash",
+        "frozen",
+        "match_args",
+        "kw_only",
+        "slots",
+        "weakref_slot"
+      ],
+      "eq_bytecode_opnames": [
+        "RESUME",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "IS_OP",
+        "POP_JUMP_IF_FALSE",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "BUILD_TUPLE",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "BUILD_TUPLE",
+        "COMPARE_OP",
+        "RETURN_VALUE",
+        "LOAD_GLOBAL",
+        "RETURN_VALUE"
+      ],
+      "field_function_parameters": [
+        "default",
+        "default_factory",
+        "init",
+        "repr",
+        "hash",
+        "compare",
+        "metadata",
+        "kw_only"
+      ],
+      "field_slots": [
+        "name",
+        "type",
+        "default",
+        "default_factory",
+        "repr",
+        "hash",
+        "init",
+        "compare",
+        "metadata",
+        "kw_only",
+        "_field_type"
+      ],
+      "field_type": "Field",
+      "get_field_signature": "(cls, a_name, a_type, default_kw_only)",
+      "helper_field_names": [
+        "value",
+        "cache"
+      ],
+      "match_args": [
+        "seed",
+        "value"
+      ],
+      "params_slots": [
+        "init",
+        "repr",
+        "eq",
+        "order",
+        "unsafe_hash",
+        "frozen",
+        "match_args",
+        "kw_only",
+        "slots",
+        "weakref_slot"
+      ],
+      "params_type": "_DataclassParams",
+      "python": "3.12.12",
+      "self_eq_calls": [],
+      "shared_operand_eq_calls": [],
+      "stdlib_helper_baseline": "pass"
+    },
+    {
+      "all_field_names": [
+        "kind",
+        "seed",
+        "value",
+        "cache"
+      ],
+      "dataclass_params_signature": "(init, repr, eq, order, unsafe_hash, frozen, match_args, kw_only, slots, weakref_slot)",
+      "decorator_parameters": [
+        "cls",
+        "init",
+        "repr",
+        "eq",
+        "order",
+        "unsafe_hash",
+        "frozen",
+        "match_args",
+        "kw_only",
+        "slots",
+        "weakref_slot"
+      ],
+      "eq_bytecode_opnames": [
+        "RESUME",
+        "LOAD_FAST_LOAD_FAST",
+        "IS_OP",
+        "POP_JUMP_IF_FALSE",
+        "RETURN_CONST",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "IS_OP",
+        "POP_JUMP_IF_FALSE",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "COMPARE_OP",
+        "COPY",
+        "TO_BOOL",
+        "POP_JUMP_IF_FALSE",
+        "POP_TOP",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "LOAD_FAST",
+        "LOAD_ATTR",
+        "COMPARE_OP",
+        "RETURN_VALUE",
+        "LOAD_GLOBAL",
+        "RETURN_VALUE"
+      ],
+      "field_function_parameters": [
+        "default",
+        "default_factory",
+        "init",
+        "repr",
+        "hash",
+        "compare",
+        "metadata",
+        "kw_only"
+      ],
+      "field_slots": [
+        "name",
+        "type",
+        "default",
+        "default_factory",
+        "repr",
+        "hash",
+        "init",
+        "compare",
+        "metadata",
+        "kw_only",
+        "_field_type"
+      ],
+      "field_type": "Field",
+      "get_field_signature": "(cls, a_name, a_type, default_kw_only)",
+      "helper_field_names": [
+        "value",
+        "cache"
+      ],
+      "match_args": [
+        "seed",
+        "value"
+      ],
+      "params_slots": [
+        "init",
+        "repr",
+        "eq",
+        "order",
+        "unsafe_hash",
+        "frozen",
+        "match_args",
+        "kw_only",
+        "slots",
+        "weakref_slot"
+      ],
+      "params_type": "_DataclassParams",
+      "python": "3.13.12",
+      "self_eq_calls": [],
+      "shared_operand_eq_calls": [
+        "eq",
+        "eq"
+      ],
+      "stdlib_helper_baseline": "pass"
+    },
+    {
+      "all_field_names": [
+        "kind",
+        "seed",
+        "value",
+        "cache"
+      ],
+      "dataclass_params_signature": "(init, repr, eq, order, unsafe_hash, frozen, match_args, kw_only, slots, weakref_slot)",
+      "decorator_parameters": [
+        "cls",
+        "init",
+        "repr",
+        "eq",
+        "order",
+        "unsafe_hash",
+        "frozen",
+        "match_args",
+        "kw_only",
+        "slots",
+        "weakref_slot"
+      ],
+      "eq_bytecode_opnames": [
+        "RESUME",
+        "LOAD_FAST_BORROW_LOAD_FAST_BORROW",
+        "IS_OP",
+        "POP_JUMP_IF_FALSE",
+        "NOT_TAKEN",
+        "LOAD_CONST",
+        "RETURN_VALUE",
+        "LOAD_FAST_BORROW",
+        "LOAD_ATTR",
+        "LOAD_FAST_BORROW",
+        "LOAD_ATTR",
+        "IS_OP",
+        "POP_JUMP_IF_FALSE",
+        "NOT_TAKEN",
+        "LOAD_FAST_BORROW",
+        "LOAD_ATTR",
+        "LOAD_FAST_BORROW",
+        "LOAD_ATTR",
+        "COMPARE_OP",
+        "COPY",
+        "TO_BOOL",
+        "POP_JUMP_IF_FALSE",
+        "NOT_TAKEN",
+        "POP_TOP",
+        "LOAD_FAST_BORROW",
+        "LOAD_ATTR",
+        "LOAD_FAST_BORROW",
+        "LOAD_ATTR",
+        "COMPARE_OP",
+        "RETURN_VALUE",
+        "LOAD_GLOBAL",
+        "RETURN_VALUE"
+      ],
+      "field_function_parameters": [
+        "default",
+        "default_factory",
+        "init",
+        "repr",
+        "hash",
+        "compare",
+        "metadata",
+        "kw_only",
+        "doc"
+      ],
+      "field_slots": [
+        "name",
+        "type",
+        "default",
+        "default_factory",
+        "repr",
+        "hash",
+        "init",
+        "compare",
+        "metadata",
+        "kw_only",
+        "doc",
+        "_field_type"
+      ],
+      "field_type": "Field",
+      "get_field_signature": "(cls, a_name, a_type, default_kw_only)",
+      "helper_field_names": [
+        "value",
+        "cache"
+      ],
+      "match_args": [
+        "seed",
+        "value"
+      ],
+      "params_slots": [
+        "init",
+        "repr",
+        "eq",
+        "order",
+        "unsafe_hash",
+        "frozen",
+        "match_args",
+        "kw_only",
+        "slots",
+        "weakref_slot"
+      ],
+      "params_type": "_DataclassParams",
+      "python": "3.14.3",
+      "self_eq_calls": [],
+      "shared_operand_eq_calls": [
+        "eq",
+        "eq"
+      ],
+      "stdlib_helper_baseline": "pass"
+    }
+  ]
+}
