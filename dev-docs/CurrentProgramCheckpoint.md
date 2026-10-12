@@ -67,6 +67,9 @@ declarations. The operator explicitly accepted that spec amendment without anoth
 review. `DataclassSpec-OperatorAmendment.md` records the override and evidence
 boundary. The two GO reports do not review the final amended bytes.
 
+Accepted requirements revision: `2abedb40c2c0b3037420d59d5a45eefe13503bee`.
+See `DataclassSpec-ReviewResult.md` for exact object/verdict boundaries.
+
 The final requirements object adds `DeclarativeEvaluation.md` to the concept,
 protocol and golden amendment. The owner records its exact committed revision in
 the review result. Acceptance covers suitability as a brief for detailed design
