@@ -67,6 +67,16 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+At 2026-10-12T15:07:14.647023Z the fresh final-Code reviewer finishes its
+public-only author phase before implementation inspection: four final cards
+pass in 276.647023 seconds, eight executions/three failures and documented
+repairs retained. Failures were replacement-cache expectation and counter-window
+errors, not established product defects. No required clarification remains.
+The author-only actor observation estimates $0.249136 Standard API-equivalent
+USD; actual billing unavailable. It is one actor now added to experiment totals,
+not a calibrated authoring score or final Code verdict. Raw/verbatim evidence
+is externally content-addressed with explicitly sanitized committed derivatives.
+
 At 2026-10-12T14:58Z Stage G package/installation gates are owner-verified.
 All 18 installed suites and six owner final public-example smokes pass; wheel
 and sdist inventories/hashes are independently checked, with runtime/resources

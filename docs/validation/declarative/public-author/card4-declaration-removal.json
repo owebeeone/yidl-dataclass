@@ -1,0 +1,4 @@
+{
+  "only_deleted_line": "    cache: dict = field(default_factory=dict, mutable=True, compare=False, hash=False, repr=False)\n",
+  "unchanged_options": "frozen=True, order=True"
+}

@@ -1,0 +1,32 @@
+ASTICHI_LOWER_ENGINE: native-rust
+astichi public names: ['Composable', 'ComposableDescription', 'ComposableHole', 'GeneratedAstCache', 'TargetAddress', 'ast_provenance', 'asttools', 'build', 'builder', 'cache', 'compile', 'diagnostics', 'frontend', 'hygiene', 'lowering', 'model', 'path_resolution', 'perf_counters', 'shell_refs']
+Composable ()
+ComposableDescription (holes: 'tuple[ComposableHole, ...]' = (), demand_ports: 'tuple[PortDescriptor, ...]' = (), supply_ports: 'tuple[PortDescriptor, ...]' = (), external_binds: 'tuple[ExternalBindDescriptor, ...]' = (), identifier_demands: 'tuple[IdentifierDemandDescriptor, ...]' = (), identifier_supplies: 'tuple[IdentifierSupplyDescriptor, ...]' = (), productions: 'tuple[ProductionDescriptor, ...]' = ()) -> None
+ComposableHole (name: 'str', descriptor: 'HoleDescriptor', address: 'TargetAddress', port: 'PortDescriptor', add_policy: 'AddPolicy', has_default: 'bool' = False, when_empty: 'ClauseEmptyPolicy | None' = None) -> None
+GeneratedAstCache (cache_dir: 'str | os.PathLike[str]') -> 'None'
+TargetAddress (target_name: 'str', root_instance: 'str | None' = None, ref_path: 'RefPath' = (), leaf_path: 'tuple[int, ...]' = ()) -> None
+build () -> 'BuilderHandle'
+compile (source: 'str', file_name: 'str | None' = None, line_number: 'int' = 1, offset: 'int' = 0, *, arg_names: 'Mapping[str, str] | None' = None, keep_names: 'Iterable[str] | None' = None, source_kind: 'SourceKind | str' = _AuthoredSource(name='authored')) -> 'Composable'
+yidl_dataclass public names: ['DataclassDefinitionError', 'Field', 'FieldConversionError', 'FieldInitializationError', 'FieldValidationError', 'FrozenInstanceError', 'InitVar', 'KW_ONLY', 'LazyInitializationError', 'MISSING', 'asdict', 'astuple', 'classvar', 'const', 'dataclass', 'dataclass_definition', 'dataclass_harvester', 'dataclass_markers', 'errors', 'field', 'field_kinds', 'fields', 'generated_source', 'initvar', 'is_dataclass', 'lazy', 'local_store', 'method_actions', 'policy_plan', 'provider_plan', 'replace', 'retention_plan', 'stdlib_adapter', 'storage_fields']
+DataclassDefinitionError signature unavailable
+Field (default, default_factory, init, repr, hash, compare, metadata, kw_only)
+FieldConversionError signature unavailable
+FieldInitializationError signature unavailable
+FieldValidationError signature unavailable
+FrozenInstanceError signature unavailable
+InitVar (type)
+LazyInitializationError signature unavailable
+asdict (obj, *, dict_factory=<class 'dict'>)
+astuple (obj, *, tuple_factory=<class 'tuple'>)
+classvar (*, default=<dataclasses._MISSING_TYPE object at 0x103bd5250>, metadata=None, doc=None)
+const (**field_options)
+dataclass (cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+field (*, default=<dataclasses._MISSING_TYPE object at 0x103bd5250>, default_factory=<dataclasses._MISSING_TYPE object at 0x103bd5250>, init=True, repr=True, hash=None, compare=True, metadata=None, kw_only=<dataclasses._MISSING_TYPE object at 0x103bd5250>, doc=None, mutable=None, converter=<dataclasses._MISSING_TYPE object at 0x103bd5250>, validator=None, allow_self_factory=False)
+fields (class_or_instance)
+generated_source (cls)
+initvar (**field_options)
+is_dataclass (obj)
+lazy (*, default_factory, init=False, **field_options)
+local_store (*, default=<dataclasses._MISSING_TYPE object at 0x103bd5250>, default_factory=<dataclasses._MISSING_TYPE object at 0x103bd5250>, repr=False, metadata=None, doc=None, converter=<dataclasses._MISSING_TYPE object at 0x103bd5250>, validator=None, allow_self_factory=False)
+replace (obj, /, **changes)
+storage_fields (class_or_instance)

@@ -1,0 +1,18 @@
+[
+  {
+    "card": 1,
+    "from": "attempt01",
+    "to": "attempt02",
+    "failure": "AssertionError at revised cache expectation after successful quote operations",
+    "rationale": "Author incorrectly expected every cache to rebuild. Public API Helpers, replacement and copying says existing init=True ordinary fields are read unless changed; this cache has default init=True. Keep declaration unchanged and assert the public cache object is passed to replacement.",
+    "change": "Replaced fresh-empty-cache assertion with revised.cache is quote.cache."
+  },
+  {
+    "card": 4,
+    "from": "attempt01 (both variants)",
+    "to": "attempt02 (both variants)",
+    "failure": "All logical assertions passed and result printed, then native lowering count assertion failed because decoration ran before collection started.",
+    "rationale": "Author instrumentation error. Decoration must occur within the public performance-counter context; move the existing declaration into main, which is called within that context.",
+    "change": "Both variants receive the same indentation/location repair. Their only mutual source difference remains deletion of the cache declaration; frozen=True and order=True are unchanged."
+  }
+]

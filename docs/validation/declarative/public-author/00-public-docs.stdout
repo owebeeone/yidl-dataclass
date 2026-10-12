@@ -1,0 +1,403 @@
+wheel_sha256: 50e7a1b17f68de56d88441ee47df8d2b0a4377981dd236e591d2a8eff8ff5f1b
+distribution: yidl-dataclass 0.1.0.dev0
+distribution: astichi 1.1.3
+distribution: yidl 0.1.0
+public_origin: yidl_dataclass external:verification-root/venv-3.12/lib/python3.12/site-packages/yidl_dataclass/__init__.py
+public_origin: astichi external:verification-root/venv-3.12/lib/python3.12/site-packages/astichi/__init__.py
+public_origin: yidl external:verification-root/venv-3.12/lib/python3.12/site-packages/yidl/__init__.py
+sys.prefix: external:verification-root/venv-3.12
+sys.path: ['external:python-install/cpython-3.12.12-macos-aarch64-none/lib/python312.zip', 'external:python-install/cpython-3.12.12-macos-aarch64-none/lib/python3.12', 'external:python-install/cpython-3.12-macos-aarch64-none/lib/python3.12/lib-dynload', 'external:verification-root/venv-3.12/lib/python3.12/site-packages']
+
+PUBLIC DOCUMENT: README.md sha256: bca02bb92faec55dc0eba82132ca1371504fd91b1e36e9bfdf698dc0fcf0774a
+# YIDL Dataclass
+
+`yidl_dataclass` creates Python dataclasses from modular YIDL templates. Ordinary
+fields use direct writable slots by default. Named factories, conversion,
+validation, constant and lazy fields add specialized generated methods for the
+fields that need them.
+
+This is an unreleased consumer candidate for **CPython 3.12, 3.13 and 3.14**.
+Stages A–F are independently verified; public packaging/usability and performance
+assessment remain in progress. No speed or memory advantage is claimed.
+
+Install the supplied wheel with the original SDK wheels available locally:
+
+```sh
+python -m pip install --no-index --find-links wheelhouse wheelhouse/yidl_dataclass-0.1.0.dev0-py3-none-any.whl
+```
+
+The locked runtime dependencies are Astichi 1.1.3 and YIDL 0.1.0. Sibling SDK
+checkouts and SDK rebuilds are unnecessary. The wheel contains this README,
+public guides and the first-use example under `yidl_dataclass/documentation`.
+
+```python
+from yidl_dataclass import dataclass, field, fields, asdict, replace
+
+@dataclass
+class Inventory:
+    count: int
+    label: str = "stock"
+    tags: list = field(default_factory=list, compare=False, repr=False)
+
+item = Inventory(3)
+item.count = 4
+assert asdict(item) == {"count": 4, "label": "stock", "tags": []}
+assert not hasattr(item, "__dict__")
+assert replace(item, count=5).count == 5
+assert [description.name for description in fields(item)] == ["count", "label", "tags"]
+```
+
+Run [examples/first_use.py](examples/first_use.py) for the complete introductory
+example. The [API guide](docs/API.md) covers defaults, field families, factories,
+pipelines, lazy state, inspection, copying, replacement and supported inheritance.
+The [generation guide](docs/Generation.md) explains emitted source, packaging,
+regeneration and the reusable comparison resource.
+
+The main differences from stdlib dataclasses are slots enabled by default, strict
+boolean flags, generated class replacement, no `__post_init__`, hidden InitVars,
+field-specific read-only properties, and explicitly excluded writable frozen
+caches. Several advanced combinations are rejected rather than silently ignored;
+the API guide lists them. Std `Field`, `MISSING`, `InitVar`, `KW_ONLY`, inspection
+and data helpers remain interoperable on the documented subset.
+
+Development checks use the original SDK wheels: `python -m pytest -q` and
+`python -m yidl_dataclass.regenerate_dataclass_base`. Regeneration checks by
+default; `--write` refreshes the base from the packaged authored YIDL resources.
+`python -m hatchling build` builds only this consumer. Source compilation/cache
+reuse during generation is permitted; no parser-free or wholly Rust execution
+claim is made.
+
+The [experiment record](dev-docs/CurrentProgramCheckpoint.md) preserves the
+original GO time, scope correction, dependency detour, TDD deviations, independent
+reviews and actual evidence. The [active boundary](dev-docs/TaskBoundary.md)
+keeps SDKs/Lifecycle reference-only. The authoritative shared comparison resource
+is owned here; Undoable consumes it at regeneration time and has no Dataclass
+runtime dependency. See [E/F evidence](docs/validation/stage-ef/README.md).
+
+
+PUBLIC DOCUMENT: docs/API.md sha256: dc56c40a909d3347c75101a6ee2fe77a279bbe36cc146d314f5c115116702512
+# Public API and behavior
+
+Import declarations/helpers from `yidl_dataclass`. CPython 3.12–3.14 is supported;
+other runtimes/minors fail decoration. An annotation declares a field; it does
+not validate its runtime type unless conversion/validation is selected.
+
+## Decorator defaults
+
+```python
+dataclass(cls=None, /, *, init=True, repr=True, eq=True, order=False,
+          unsafe_hash=False, frozen=False, match_args=True, kw_only=False,
+          slots=True, weakref_slot=False, convert=False)
+```
+
+All switches require exact booleans. Use `@dataclass` or `@dataclass(...)`.
+Decoration returns a generated replacement class with the declaration's bases,
+name/module/qualified name and supported methods/attributes. Bind that result as
+usual; retain the old declaration only when deliberately inspecting it.
+`slots=False` selects dictionary storage. `weakref_slot=True` requires slots.
+An existing local custom initializer or `init=False` suppresses ordinary generated
+initialization, including factories. A source-free ordinary `field(init=False)`
+may remain absent. Policy/frozen/InitVar/local-store/named-provider models require
+generated initialization and reject these initializer overrides.
+
+Local custom repr/equality methods follow the std suppression rules. `order=True`
+requires equality and rejects conflicting local ordering methods. Hash generation
+follows std's equality/frozen/unsafe-hash action table and explicit-hash conflicts:
+ordinary equality models are unhashable; frozen equality models normally hash
+included fields. `eq=False` normally preserves inherited identity/hash behavior.
+`hash=True, compare=False` is rejected. In frozen models, explicitly writable fields must be excluded
+from comparison and hashing. `hash=None` with compare=False qualifies; repr=False
+is useful for management caches but is not required.
+
+Equality/order require the exact same generated class. Python 3.12 uses tuple
+equality; 3.13/3.14 use a self shortcut followed by ordered field comparisons.
+Callback order, short-circuiting and raw nonboolean equality results follow that
+minor's std behavior. Ordering and hashing use selected field tuples. Repr is
+recursive-safe and uses `repr=True` fields; it may evaluate lazy fields.
+
+## Fields and metadata
+
+```python
+field(*, default=MISSING, default_factory=MISSING, init=True, repr=True,
+      hash=None, compare=True, metadata=None, kw_only=MISSING, doc=None,
+      mutable=None, converter=MISSING, validator=None, allow_self_factory=False)
+const(**field_options)
+lazy(*, default_factory, init=False, **field_options)
+initvar(**field_options)
+classvar(*, default=MISSING, metadata=None, doc=None)
+local_store(*, default=MISSING, default_factory=MISSING, repr=False,
+            metadata=None, doc=None, converter=MISSING, validator=None,
+            allow_self_factory=False)
+```
+
+An ordinary default and factory are mutually exclusive. Mutable unhashable
+literal defaults retain std rejection; use a factory. A stdlib `dataclasses.Field`
+is accepted and copied, so reusing it across declarations does not share name/type
+mutation. Std metadata is a read-only mapping; values remain application objects.
+`doc` is accepted only on 3.14 when non-None. `kw_only` inherits the decorator
+unless explicit. `KW_ONLY` creates the standard local keyword-only fence.
+Unknown keywords and invalid option types fail instead of being ignored.
+`match_args=True` selects positional init fields excluding keyword-only fields;
+InitVars can appear in that tuple but their hidden attributes cannot satisfy an
+attribute pattern. String pseudo-annotations are recognized in their defining
+module without arbitrary eval; unresolved annotations can remain metadata when
+conversion is disabled.
+
+| Declaration | Constructor and storage | Inspection/operations |
+| --- | --- | --- |
+| Ordinary annotation/default/`field` | `init=True` by default; writable public slot unless policy needs a property | Included in std fields/helpers; repr/compare/hash flags are local |
+| `const` | Read-only after initialization; rejects mutable=True | Standard instance field; included by its flags |
+| `lazy` | Factory required; no default; `init=False` by default; init=True accepts an explicit seed | Standard instance field; included operations can trigger its getter |
+| `initvar` or `InitVar[T]` | Construction provider, with optional default/factory/init=False | No public attribute, repr/compare/hash/helper entry |
+| `classvar` or `ClassVar[T]` | Class storage, no instance pipeline/factory | Std pseudo-field; omitted from fields/helpers and instance operations |
+| `local_store` | Eager per-instance management storage, always writable/init=False | Omitted from std fields/helpers/compare/hash; repr=False unless requested |
+
+Convenience InitVars default repr/compare/hash to false and reject explicit
+inclusion. Ordinary std Field pseudo-field flags retain their metadata, but kind
+still excludes them from instance operations. Contradictory annotations/marker
+families fail. Field names `self`/`cls` and generated `_y_dc_` names are reserved.
+Private storage is an implementation detail, not a security boundary.
+
+## Named factories and initialization order
+
+Factory signature parameters name providers. For example, a factory named
+`def doubled(value): return value * 2` receives the processed `value` field when
+assigned to another field's `default_factory`. Declaration order need not place
+the provider first. Dependencies form a checked DAG; cycles fail decoration even
+when an explicit constructor input might bypass a factory.
+
+Functions, lambdas, callable objects and class factories need an introspectable
+signature. The builtins list/dict/set/tuple/int/float/str/bytes/bool are supported as
+zero-argument factories. Wrap other nonintrospectable callables. Positional-only,
+positional-or-keyword and keyword-only parameters work. Unknown optional
+parameters keep their callable defaults; positional default bridging preserves
+argument positions. An unknown required parameter or variadic signature fails.
+A parameter matching a known field always selects that provider, even if optional;
+if its declaration has no available source, decoration reports the dependency
+path instead of silently using the callable's default.
+
+`cls` receives `type(self)`. `self` receives the partially initialized instance
+only with `allow_self_factory=True`; prefer named providers because their ordering
+can be checked. These special providers do not appear as API fields. Eager
+consumers materialize a lazy dependency first. Factory/converter/validator calls
+happen during construction/access/assignment, not decoration; generation inspects
+signatures and captures application objects without serializing or repr-ing them.
+
+For generated initialization, explicit input/default/factory result flows through
+conversion, then validation, then storage installation, then dependent consumers.
+An ordinary source-free init=False field is legal when nothing consumes it.
+Dictionary-mode ordinary init=False simple defaults use class fallback (including
+later class-default changes); init=False factories still initialize an instance.
+These fallback rules do not bypass a policy pipeline.
+
+## Conversion, validation and mutability
+
+`converter=MISSING` inherits decorator `convert`; `converter=None` explicitly
+disables conversion. With `convert=True`, exact int/float/str/bytes/bool annotations
+and their one-type nullable unions select that constructor (None is preserved for
+nullable conversion). Other/unresolved annotations need an explicit converter or
+None. There is no inferred container conversion or runtime annotation validator.
+An explicit converter takes one positional candidate.
+
+A validator takes the converted value: None or exact True succeeds, exact False
+rejects, and any other result raises a direct TypeError contract error. The same
+pipeline applies to permitted assignment; failure leaves the previous value
+unchanged. Deleting a mutable eager field leaves it absent until reassignment.
+Read-only fields reject replacement/deletion with FrozenInstanceError.
+
+`frozen=True` makes fields read-only through field-specific properties. It is
+shallow: mutating a contained object remains possible. A writable cache exception
+uses `mutable=True, compare=False, hash=False, repr=False`; local_store already
+has those exclusions. Such caches may be assigned/deleted. Freezing does not add a
+generic attribute dispatcher. Frozen models require slots=True; unknown slotted
+attributes raise ordinary AttributeError rather than std FrozenInstanceError.
+Nonfrozen policy models can use slots=False.
+
+## Lazy evaluation, retry and hidden-provider lifetime
+
+A lazy getter has UNREADY/BUSY/READY state. Its first successful read calls its
+specialized factory/pipeline and caches the result. Failure returns to UNREADY
+for retry; BaseException also clears busy state. Opaque recursive access and a
+concurrent second first access raise LazyInitializationError. Concurrent first
+access is unsupported, rather than automatically locked.
+
+Delayed factories read current public fields/properties/ClassVars at evaluation
+time. A named cycle fails decoration; callbacks must not mutate their provider
+model during evaluation. Effective ordinary/lazy mutability is explicit `mutable` when supplied, otherwise
+`not frozen`. Select `mutable=False` for a read-only lazy field. `mutable=True`
+enables explicit override and reset
+(`del instance.lazy_field`); assignment runs its pipeline and marks it ready.
+`init=True` accepts an explicit initial seed; omission remains delayed.
+Setter/deleter access while that field is BUSY is rejected.
+
+Only InitVars directly needed by delayed consumers receive private retention.
+An eager intermediate cuts the retention graph. Failed reads retain providers.
+When every nonresettable direct consumer becomes ready, their provider is released;
+if any consumer can reset, its provider remains for the instance's lifetime.
+Hidden providers never become public fields or helper entries.
+
+## Helpers, replacement and copying
+
+`MISSING`, `Field`, `InitVar`, `KW_ONLY`, `FrozenInstanceError`, `fields`,
+`is_dataclass`, `asdict` and `astuple` are stdlib objects/helpers. Data helpers read
+public instance fields, including compare=False fields; they evaluate lazy fields
+and use their usual recursive copying. They omit InitVars/ClassVars/local storage
+and private state. Standard cyclic-graph limitations and getter errors apply.
+
+`storage_fields(model_or_instance)` returns an immutable tuple of descriptions
+including extension/provider/local kinds in field order. A description exposes
+`name`, `kind.label`, `field` (std metadata), `mutable`, `converter`, `validator`,
+`dependencies` and `retained`; it never exposes retained provider values. Treat
+`__yidl_dataclass_definition__` as read-only versioned generation metadata.
+
+`replace(obj, /, **changes)` constructs a new model. Existing init=True ordinary/
+const fields are read unless changed; init=True lazy fields are also materialized
+unless changed. init=False fields, lazy caches and local stores rebuild. Required
+init=True InitVars must be supplied again; omitted defaulted/factory InitVars use
+the declaration again; init=False InitVars recompute. Hidden retained values are
+never replayed. Unknown changes or changes to init=False fields fail.
+
+Std `dataclasses.replace` works when there are no InitVars or every init=True
+InitVar is supplied. Its omitted hidden/defaulted InitVar getter behavior is an
+unsupported subset; use the package helper. On 3.13/3.14 generated `__replace__`
+supports `copy.replace`; a local custom method is preserved. No method is added
+on 3.12.
+
+Copy/deepcopy/pickle preserve ready/unready/absent storage, caches/local state and
+still-retained providers without evaluating lazy factories. Shallow copy shares
+references; deepcopy uses its memo. Copy/pickle while lazy evaluation is active
+raises RuntimeError. Pickle uses explicit state, not sentinel identity; normal
+module-level class importability is still required. Policy models reject custom
+copy/state/reduction hooks that could bypass this contract.
+
+## Inheritance and explicit exclusions
+
+One generated model base plus compatible plain mixins is supported. Fields merge
+in reverse-MRO order; overrides retain their position and inherited slots are
+reused. Same-shape defaults/factories/pipelines/init/kw-only/repr/compare/hash may
+change; field family, storage shape and effective mutability may not. Frozen and
+nonfrozen generated models cannot mix. The merged provider graph is rechecked.
+Undecorated subclasses receive normal inherited behavior without new metadata.
+
+Generated slotted models reject any base with an instance dictionary. Plain
+unslotted bases are permitted with slots=False. Multiple model bases, std-dataclass
+bases, manual slots, descriptor-valued field defaults, required subclass-creation
+keywords and custom metaclasses are rejected. type/ABCMeta and no-argument subclass
+hooks work; abstract-method state is updated. Normal descriptors receive
+__set_name__. Copied supported methods/descriptors get fresh __class__ cells for
+zero-argument super without mutating the old declaration; class replacement can
+repeat a base __init_subclass__ callback.
+
+There is **no `__post_init__` mechanism**: local or inherited hooks are rejected;
+use named factories/pipelines. Policy models reject custom __getattribute__,
+__setattr__, __delattr__ and bypassing copy/state hooks. Aliases, whole-model
+validation, JSON/schema frameworks and arbitrary metaclasses are outside this
+release.
+
+## Failure classes
+
+DataclassDefinitionError is a TypeError for declaration/availability/conflict
+errors. Factory failures raise FieldInitializationError (RuntimeError), converter
+failures FieldConversionError (TypeError), and validator rejection/failure
+FieldValidationError (ValueError). Lazy recursion/concurrent access raises
+LazyInitializationError (RuntimeError). Diagnostics identify the model/field/role
+and known dependency path; original callback exceptions remain causes. Existing
+contextual errors propagate without repeated wrapping; BaseException is not
+relabeled. Construction/assignment do not roll back application callback side
+effects or a self factory leaking a partially initialized instance.
+
+
+PUBLIC DOCUMENT: docs/Generation.md sha256: bee2d0798b3f66a6f358a62a46cfb2a645cb0c34b5f18e8dd96538a2f77fb624
+# Generation, source inspection and distributions
+
+The consumer uses original Astichi 1.1.3 and YIDL 0.1.0. Authored modules live in
+`yidl_dataclass/yidl`: core layout/constructor, comparison adapter, factories,
+providers, pipelines, policies, lazy initialization/retention and copy support.
+Inheritance and matching select only the field-specific contributions needed by
+a declaration. The generated user class is plain Python; std dataclass method
+generators do not produce its behavior.
+
+Ordinary writable fields have public slots and direct operations. Policy fields
+have individual private backing storage and generated bodies. The public property
+is assigned from captured builtin property plus its field-specific getter/setter/
+deleter functions. This is equivalent descriptor construction to @property and
+@field.setter; separated public decorator contributions scoped identifiers
+inconsistently on the original Python backend. There is no additional runtime
+field access dispatcher. Private builtin captures also protect valid user names
+such as property/type/Exception from accidental shadowing.
+
+`generated_source(Model)` exposes the actual generated composition as readable
+inspection source. It references a consumer-installed capture namespace and is
+not a standalone model module. Defaults, factories/converters/validators and
+callable argument defaults remain application objects in that namespace; existing
+SDK name/path bindings refer to them. Objects are not supplied to literal SDK
+bindings, serialized or repr-ed into source. Fresh decoration owns fresh captures;
+shared resource compilation/caches do not share live user values or final classes.
+
+YIDL/Astichi composition is the generation architecture. It does not imply wholly
+Rust backend execution or parser-free decoration. Existing source templates may
+compile/cache during generation. Both explicit original SDK selections,
+`ASTICHI_LOWER_ENGINE=python` and `ASTICHI_LOWER_ENGINE=native-rust`, are verified.
+No handwritten dynamic method-source generator or consumer AST repair is used.
+
+Run `python -m yidl_dataclass.regenerate_dataclass_base` from an installed wheel to
+check its base against packaged resources; `--write` is for intentional consumer
+source maintenance. Stable logical source names make regeneration independent of
+checkout/install paths. The wheel and sdist include all authored resources,
+compiled Python base, regeneration code and py.typed, plus public documentation
+and the introductory example. Rebuilding the wheel from the sdist requires the
+same fixed SDK wheels and the build tool, not SDK source/rebuilds.
+
+`yidl/shared/comparison.yidl` is a neutral, reusable native YIDL module. Dataclass
+and independently authored consumers inherit its actual equality/order/hash
+productions and override read/prelude matching as needed. The Undoable consumer
+loads the pinned authoritative Dataclass wheel resource at regeneration time,
+checks version and SHA256, and embeds generated resources/provenance in its own
+base. It has no hand-maintained shared copy or Dataclass runtime dependency.
+
+Undoable defaults eq=False/order=False. Its logical field compare is boolean,
+while managed write_compare=value/identity is separate; legacy compare strings
+retain write meaning. Enabled default/current/working views compare selected
+exposed values with exact-class guards and are unhashable. During historical
+value-write detection only, native bool(old == value) runs on original operands
+within its existing ownership fence; an expiring ContextVar marker makes generated
+facade equality use historical state identity for that callback scope. Normal
+structural equality resumes outside it. Dataclass comparison has no such prelude.
+See the Undoable public API for its separate transaction/view contracts.
+
+The experimental candidate is not published. Packaging and correctness evidence
+is separate from performance measurements and independent review; source shape
+alone proves no speed/memory claim.
+
+
+PUBLIC DOCUMENT: examples/first_use.py sha256: bf78302fb7ff863f6762a7e9c90fc12117edd9c736d6ee7957ac6c9db28363d0
+"""Introductory ordinary-field model; works from an installed consumer wheel."""
+
+from yidl_dataclass import dataclass, field, fields, asdict, replace
+
+
+@dataclass
+class Inventory:
+    count: int
+    label: str = "stock"
+    tags: list = field(default_factory=list, compare=False, repr=False)
+
+
+def main():
+    first = Inventory(3)
+    second = Inventory(3)
+    first.tags.append("reviewed")
+    assert first == second and second.tags == []
+    first.count = 4
+    assert not hasattr(first, "__dict__")
+    assert replace(first, count=5).count == 5
+    assert [item.name for item in fields(first)] == ["count", "label", "tags"]
+    assert asdict(first) == {"count": 4, "label": "stock", "tags": ["reviewed"]}
+    print(
+        "ordinary-slots; independent-factories; field-local-comparison; standard-helpers"
+    )
+
+
+if __name__ == "__main__":
+    main()
+

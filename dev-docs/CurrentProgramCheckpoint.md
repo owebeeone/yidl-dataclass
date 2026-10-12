@@ -47,7 +47,8 @@ observations: `OutsideScopeFindings.md`; they do not authorize implementation.
 Stage G package/installation gates are now owner-verified; see
 `Dataclass-StageGResult.md`. Final wheels preserve D/EF runtime/resource bytes,
 18 installed suites and six owner public-resource smokes pass. Cold public-only
-authoring is next; H measurements and final Code/State review remain.
+authoring now passes all four cards with repairs preserved; H measurements and
+final Code/State review remain.
 
 ## Requirements review history and authority
 

@@ -1,0 +1,85 @@
+module: astichi.lowering
+CALL_CONTEXT public value type: _CallContext
+COMMENT public value type: _CommentMarker
+DECORATOR_CONTEXT public value type: _DecoratorContext
+DEFINITIONAL_CONTEXT public value type: _DefinitionalContext
+DOUBLE_STAR_FUNC_ARG_REGION public value type: _DoubleStarFuncArgRegion
+DirectiveFuncArgItem (directive_name: 'str', name: 'str', call: 'ast.Call') -> None
+DoubleStarFuncArgItem (expr: 'ast.expr') -> None
+FuncArgPayload (items: 'tuple[FuncArgPayloadItem, ...]') -> None
+FuncArgPayloadItem () -> None
+FuncArgRegion ()
+IDENTIFIER_CONTEXT public value type: _IdentifierContext
+KeywordFuncArgItem (name: 'str', expr: 'ast.expr') -> None
+MARKERS_BY_NAME public value type: dict
+MarkerContext ()
+MarkerSpec ()
+PARAMS_PAYLOAD_NAME astichi_params
+PLAIN_FUNC_ARG_REGION public value type: _PlainFuncArgRegion
+PayloadLocalDirective (spec: 'MarkerSpec', name: 'str') -> None
+PortTemplate (shape: 'MarkerShape', mutability: 'PortMutability', origin: 'PortOrigin') -> None
+PositionalFuncArgItem (expr: 'ast.expr') -> None
+PyImportDeclaration (marker: 'RecognizedMarker', module_path: 'tuple[str, ...] | None', names: 'tuple[ast.Name, ...]', as_name: 'ast.Name | None') -> None
+PyImportLocalBinding (marker: 'RecognizedMarker', node: 'ast.Name') -> None
+RecognizedMarker (spec: 'MarkerSpec', node: 'ast.AST', context: 'MarkerContext', shape: 'MarkerShape | None' = None) -> None
+STARRED_FUNC_ARG_REGION public value type: _StarredFuncArgRegion
+StarredFuncArgItem (expr: 'ast.expr') -> None
+StatementPrefixScan (body: 'tuple[ast.stmt, ...]', prefix_statements: 'tuple[ast.Expr, ...]', first_non_prefix_index: 'int') -> None
+apply_external_bindings (tree: 'ast.Module', bindings: 'dict[str, object]') -> 'None'
+apply_external_ref_lowering (tree: 'ast.Module') -> 'None'
+boundaries public value type: module
+call_argument_payloads public value type: module
+collect_payload_local_directives (tree: 'ast.Module') -> 'tuple[PayloadLocalDirective, ...]'
+desugar_external_ref_kwargs (tree: 'ast.AST') -> 'None'
+direct_funcargs_directive_calls (call: 'ast.Call') -> 'tuple[ast.Call, ...]'
+evaluate_restricted_path_expression (node: 'ast.expr') -> 'tuple[str, ...]'
+external_bind public value type: module
+external_ref public value type: module
+extract_dotted_reference_chain (node: 'ast.AST') -> 'tuple[str, ...]'
+extract_funcargs_payload (call: 'ast.Call') -> 'FuncArgPayload'
+extract_params_payload_from_body (body: 'list[ast.stmt]') -> 'ast.arguments | None'
+group_markers_by_astichi_scope (tree: 'ast.Module', markers: 'tuple[RecognizedMarker, ...]') -> 'dict[int, _ScopeMarkers]'
+has_params_payload (body: 'list[ast.stmt]') -> 'bool'
+is_astichi_funcargs_call (node: 'ast.AST') -> 'bool'
+is_astichi_params_def (node: 'ast.AST') -> 'bool'
+lower_payload_for_region (payload: 'FuncArgPayload', *, region: 'FuncArgRegion', hole_name: 'str', transform_expr: 'Callable[[ast.expr], ast.expr]') -> 'tuple[list[ast.expr], list[ast.keyword]]'
+marker_contexts public value type: module
+marker_metadata_name_node_ids (markers: 'Iterable[RecognizedMarker]') -> 'set[int]'
+marker_metadata_name_nodes (markers: 'Iterable[RecognizedMarker]') -> 'tuple[ast.Name, ...]'
+markers public value type: module
+param_hole_name (argument: 'ast.arg') -> 'str | None'
+parameters public value type: module
+payload_prefix public value type: module
+pyimport public value type: module
+pyimport_local_bindings (markers: 'tuple[object, ...]') -> 'tuple[PyImportLocalBinding, ...]'
+recognize_markers (tree: 'ast.AST') -> 'tuple[RecognizedMarker, ...]'
+register_explicit_keyword (name: 'str', seen: 'set[str]') -> 'None'
+scan_statement_prefix (body: 'Sequence[ast.stmt]', *, allowed_specs: 'Container[MarkerSpec]') -> 'StatementPrefixScan'
+sentinel_attrs public value type: module
+validate_boundary_interaction_matrix (tree: 'ast.Module', markers: 'tuple[RecognizedMarker, ...]') -> 'None'
+validate_boundary_marker_placement (tree: 'ast.Module') -> 'None'
+validate_call_argument_payload_surface (tree: 'ast.Module') -> 'None'
+validate_external_ref_surface (tree: 'ast.AST') -> 'None'
+validate_parameter_hole_surface (tree: 'ast.Module', markers: 'tuple[RecognizedMarker, ...]') -> 'None'
+validate_parameter_payload_surface (tree: 'ast.Module') -> 'None'
+validate_payload_for_region (payload: 'FuncArgPayload', *, region: 'FuncArgRegion', hole_name: 'str', seen_explicit_keywords: 'set[str] | None' = None) -> 'None'
+validate_pyimport_declarations (tree: 'ast.Module', markers: 'tuple[RecognizedMarker, ...]') -> 'tuple[PyImportDeclaration, ...]'
+module: astichi.perf_counters
+AstichiPerfCounters (counts: 'Counter[str]' = <factory>, seconds: 'Counter[str]' = <factory>, max_seconds: 'dict[str, float]' = <factory>) -> None
+Callable ()
+ContextVar signature unavailable
+Counter (iterable=None, /, **kwds)
+Iterator ()
+P public value type: ParamSpec
+ParamSpec signature unavailable
+T public value type: TypeVar
+TypeVar signature unavailable
+active_perf_counters () -> 'AstichiPerfCounters | None'
+annotations public value type: _Feature
+collect_perf_counters () -> 'Iterator[AstichiPerfCounters]'
+contextmanager (func)
+counted_perf_call (key: 'str') -> 'Callable[[Callable[P, T]], Callable[P, T]]'
+dataclass (cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False)
+field (*, default=<dataclasses._MISSING_TYPE object at 0x102ff93a0>, default_factory=<dataclasses._MISSING_TYPE object at 0x102ff93a0>, init=True, repr=True, hash=None, compare=True, metadata=None, kw_only=<dataclasses._MISSING_TYPE object at 0x102ff93a0>)
+perf_counter signature unavailable
+wraps (wrapped, assigned=('__module__', '__name__', '__qualname__', '__doc__', '__annotations__', '__type_params__'), updated=('__dict__',))

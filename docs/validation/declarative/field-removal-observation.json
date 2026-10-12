@@ -1,0 +1,15 @@
+{
+  "scope": "Raw one-line declaration-removal observation, not a calibrated E6/overall score",
+  "unit": "Python tokenizer lexical tokens excluding encoding/endmarker/indent/dedent/newline/NL/comments",
+  "counting_boundary": "entire saved final before/after author programs, including imports/assertions/instrumentation; only field-declaration deletion differs",
+  "before_tokens": 343,
+  "after_tokens": 317,
+  "deleted_line_tokens": 26,
+  "only_deleted_line": "        cache: dict = field(default_factory=dict, mutable=True, compare=False, hash=False, repr=False)\n",
+  "unchanged_class_options": "frozen=True, order=True",
+  "repaired_counter_window": "same in both final sources",
+  "original_source_sha256": {
+    "before": "c2c9f2547e9ed235bf9d80f6fb58a19dcc5d55976d83ae0d5c2b351a1df6f340",
+    "after": "d89eb587cbf6722227880270536c243e703b43e1d8fbff18cff8554e34abf47e"
+  }
+}

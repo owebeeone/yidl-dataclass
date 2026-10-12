@@ -1,0 +1,20 @@
+{
+  "actual_author_start_utc": "2026-10-12T15:02:38+00:00",
+  "actual_author_end_utc": "2026-10-12T15:07:14.647023+00:00",
+  "author_elapsed_seconds": 276.647023,
+  "original_go_utc_as_dispatched": "03:36:48Z",
+  "immutable_consumer_revision_as_dispatched": "446dc1ee5d9cbe9d2b4c485bb2675eaddbdc138f",
+  "wheel_sha256": "50e7a1b17f68de56d88441ee47df8d2b0a4377981dd236e591d2a8eff8ff5f1b",
+  "billing_metadata": "Unavailable to author; not zero. Captured separately by owner.",
+  "final_programs": [
+    "card1_attempt02.py",
+    "card2_attempt01.py",
+    "card3_attempt01.py",
+    "card4_with_cache_attempt02.py",
+    "card4_without_cache_attempt02.py"
+  ],
+  "card_program_executions": 8,
+  "card_failed_executions": 3,
+  "required_clarification": null,
+  "implementation_verdict": "Not performed in author phase"
+}

@@ -1,0 +1,14 @@
+{
+  "label": "99-end-check",
+  "command": [
+    "env",
+    "ASTICHI_LOWER_ENGINE=native-rust",
+    "external:verification-root/venv-3.12/bin/python",
+    "-I",
+    "external:public-author/end_check.py"
+  ],
+  "cwd": "external:public-author",
+  "started_utc": "2026-10-12T15:06:10.896493+00:00",
+  "ended_utc": "2026-10-12T15:06:11.231147+00:00",
+  "exit_code": 0
+}

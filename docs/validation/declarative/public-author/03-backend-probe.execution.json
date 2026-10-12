@@ -1,0 +1,14 @@
+{
+  "label": "03-backend-probe",
+  "command": [
+    "env",
+    "ASTICHI_LOWER_ENGINE=native-rust",
+    "external:verification-root/venv-3.12/bin/python",
+    "-I",
+    "external:public-author/backend_probe.py"
+  ],
+  "cwd": "external:public-author",
+  "started_utc": "2026-10-12T15:03:30.465058+00:00",
+  "ended_utc": "2026-10-12T15:03:30.884609+00:00",
+  "exit_code": 0
+}

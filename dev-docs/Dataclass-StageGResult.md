@@ -1,7 +1,7 @@
 # Standalone consumer packaging — G checkpoint
 
 Status: **package/installation gates independently owner-verified; cold public
-author and Stage H/final reviews remain pending**. No final acceptance claim.
+author completed; Stage H/final reviews remain pending**. No final acceptance claim.
 Undoable package checkpoint: `6e7edd17de5b30568f2ffa96dee24fa023dd3061`.
 
 The isolated installed corpus passes on each original backend: Dataclass has
@@ -43,3 +43,16 @@ Latest observations around 2026-10-12T14:58Z estimate $67.5929676 Standard
 API-equivalent USD across twelve actors, about 11h22m from original GO.
 Actual billing remains unavailable. Performance is unmeasured; final
 Code/State review has not started.
+
+The fresh Code reviewer completed the four frozen public-author cards before
+reading implementation: actual interval 15:02:38–15:07:14.647023 UTC, 276.647023
+seconds. Eight card executions include three preserved failures (one incorrect
+replacement-cache expectation, two instrumentation-window errors). Final models
+pass all requested behaviors without product changes or clarification. Verbatim
+originals are content-addressed externally; committed path-sanitized derivatives
+are explicitly labeled in `docs/validation/declarative/public-author/`. This is
+an uncalibrated usability observation, not an implementation review or grade.
+The one-line cache declaration deletion removes 26 lexical tokens; complete
+before/after programs have 343/317 tokens with layout/comments excluded. The
+first author actor observation estimates $0.249136 Standard API-equivalent USD;
+actual billing remains unavailable.

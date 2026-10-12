@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "external:public-author/card4_with_cache_attempt01.py", line 36, in <module>
+    assert counters.counts['native_scope_batch_native_only'] > 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
