@@ -54,6 +54,8 @@ separate measurement stages.
 
 | 2026-10-12T08:07Z / P2 implementation checkpoint | Latest ten-actor observations estimate approximately $29.48 Standard API-equivalent USD, about 4h30m from GO; actual billing unavailable. Working focused gates pass for structural comment rendering, native workspace ownership/name rewrites and read-only lexical planning; defaulted-hole native-to-Python replay now passes. Lifecycle marker correspondence, complete native shell/lowering integration and broader installed/minor gates remain outstanding. P2 and product work are not accepted. |
 
+| 2026-10-12T08:22Z / operator progress report | Latest ten-actor observations estimate approximately $30.91 Standard API-equivalent USD, about 4h46m from GO; actual billing unavailable. Native metadata/artifact refactor gate reports 58 passed and one skipped; raw invalid-table registration was independently reproduced and verified rejected without consuming index or parser entry after its owning RED/GREEN fix. Native node-identity conversion preflight has a new focused RED. Full native lowering, P3/P4 and product A–H remain outstanding. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated
