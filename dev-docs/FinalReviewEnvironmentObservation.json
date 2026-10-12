@@ -1,0 +1,29 @@
+{
+  "observed_at_utc": "2026-10-12T17:37:38.514731+00:00",
+  "observations": [
+    {
+      "environment": "venv-312",
+      "lark_init_present": false,
+      "metadata_present": false,
+      "record_present": false,
+      "directory_mtime_utc": "2026-10-12T16:35:08.142262+00:00"
+    },
+    {
+      "environment": "venv-313",
+      "lark_init_present": false,
+      "metadata_present": false,
+      "record_present": false,
+      "directory_mtime_utc": "2026-10-12T16:35:07.802047+00:00"
+    },
+    {
+      "environment": "venv-314",
+      "lark_init_present": false,
+      "metadata_present": false,
+      "record_present": false,
+      "directory_mtime_utc": "2026-10-12T16:35:07.929672+00:00"
+    }
+  ],
+  "cause": "unknown",
+  "source_tuple_changed": false,
+  "recorded_prior_smoke": "docs/validation/stage-g/g11-final-smoke-native-rust-312-verification.log reports final-wheel regeneration PASS"
+}

@@ -224,3 +224,19 @@ P1 checkpoint: Python artifact APIs and structural frontend verified at Astichi
 installed owner probes and evidence. Source/native legacy behavior is distinct
 from new native artifact capability, which remains absent. Next action: sole
 drafter P2 native IR restoration, strict parser counters and no fallback.
+
+## Final implementation review and bounded remediation
+
+Both final axes returned NO-GO on Dataclass
+`f6c1c561c1670fc26b19da09537fc6822140d8d2` and Undoable
+`6e7edd17de5b30568f2ffa96dee24fa023dd3061`. Reports are filed verbatim in
+`Dataclass-FinalReviewCode.md` and `Dataclass-FinalReviewState.md`.
+`Dataclass-FinalRemPlan.md` merges every finding into one bounded consumer patch.
+The sole drafter is correcting separate Dataclass globals and Undoable lexical
+name collisions, inherited lazy flag slot reuse, and dictionary-mode identity
+documentation. Dependencies remain reference-only. No architecture/API redesign
+is requested; final acceptance and same-reviewer closure remain pending.
+Original H2 measurements retain their original byte provenance. Supplied
+external environments now lack Lark source/metadata; recorded prior smokes pass,
+delete cause unknown. The observation is retained separately, and fresh isolated
+environments will verify the correction without dependency source changes.
