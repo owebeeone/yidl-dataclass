@@ -1,13 +1,23 @@
 # YIDL Dataclass checkpoint
 
-Status: P1 Python compiler prerequisite is verified and committed at Astichi
-`4a62b093498dae7b6d346306eae23e5925aaa004`. P2 native core has 13 passing working-tree tests. NativeLoweringAddendum is accepted at `1f1bc534b460753e8cd91230e5349ea802c90b5c` after dual GO; native lowering TDD resumes under its architecture. P2 code remains unaccepted. Product Stage A remains
-paused until P1–P4 pass. Detailed-design dual GO and TDD-plan GO remain historical
-gates, not proof of the missing facility.
-GO/start was 2026-10-12T03:36:48Z; implementation preparation starts
-at approximately 2026-10-12T04:36Z. No product writes or behavioral RED yet. This
-checkpoint governs the experiment; historical requirement and design reviews
-below retain their original acceptance boundaries.
+Status: **operator scope correction: no Astichi or YIDL SDK changes belong to
+this task**. All SDK implementation is stopped. The committed P1 and partial P2
+work are a preserved out-of-scope detour, not active Dataclass prerequisites.
+P2 source currently does not compile; its last successful prototype binary
+predates the unfinished statement-splice addition. SDK bytes remain available
+for inspection and a separate verified backup exists. No detour was published.
+
+The original installed Astichi 1.1.3 / YIDL 0.1.0 route passes focused generation
+checks for slots, equality, frozen hashing, direct field reference specialization
+and existing resource caching with both backend selections. This establishes
+core feasibility only, not the full requested product. Product implementation
+has not started. Next action: finish the read-only original-API assessment and
+correct the consumer design/plan to remove SDK prerequisites before resuming.
+
+GO/start remains 2026-10-12T03:36:48Z. The detour's time, tokens and estimated
+cost remain part of the experiment record; no retrospective success claim or
+metric reset. Historical reviews below retain their original exact scope but
+do not authorize SDK work against the operator's correction.
 
 ## Requirements review history and authority
 

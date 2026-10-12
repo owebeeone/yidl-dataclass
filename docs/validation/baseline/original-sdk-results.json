@@ -1,0 +1,31 @@
+{
+  "captured_utc": "2026-10-12T08:37:14.273237+00:00",
+  "scope": "Original installed SDK feasibility only; no full Dataclass feature/parity/benchmark acceptance. Backend selections do not imply entirely Rust-owned finalization.",
+  "fixture_owner_repository": "yidl",
+  "fixture_path": "tests/data/yidl/dataclasses_example.yidl",
+  "fixture_sha256": "c30983d5f50d09c596887e214ceeb3d22148b49c96b2439190b390a5ddd0e22d",
+  "probe": "docs/validation/baseline/original_sdk_probe.py",
+  "results": [
+    {
+      "astichi": "1.1.3",
+      "yidl": "0.1.0",
+      "selected_backend": "python",
+      "existing_yidl_dataclass_slots_eq_hash": "pass",
+      "field_specific_attribute_specialization": "pass",
+      "existing_resource_compilation_cache": "pass"
+    },
+    {
+      "astichi": "1.1.3",
+      "yidl": "0.1.0",
+      "selected_backend": "native-rust",
+      "existing_yidl_dataclass_slots_eq_hash": "pass",
+      "field_specific_attribute_specialization": "pass",
+      "existing_resource_compilation_cache": "pass"
+    }
+  ],
+  "earlier_attempts": [
+    "Expanded existing fixture with order and unsafe_hash: Python selection failed duplicate field_name_text binding at SelfLeOrderContribution; native selection reached class assertions but probe then failed invalid attribute identifier marker assumption. Neither is a completed full-product result.",
+    "Attribute suffix field__astichi_arg__ is not an attribute identifier demand. Corrected probe uses existing self.astichi_ref(external=field_name).bind(field_name=count).",
+    "Final probe uses baseline fixture slots/frozen equality/hash configuration and existing direct-ref specialization; both selected backends pass."
+  ]
+}

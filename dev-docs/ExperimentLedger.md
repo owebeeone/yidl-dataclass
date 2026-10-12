@@ -1,7 +1,7 @@
 # YIDL Dataclass preparation and review ledger
 
-Status: autonomous run authorized; designs and TDD plan accepted; compiler
-prerequisite P1 verified; P2 next before product Stage A. The original
+Status: autonomous Dataclass run authorized; operator has excluded SDK changes.
+Compiler detour stopped and preserved; consumer design correction precedes Stage A. The original
 Undoable experiment and this experiment's earlier requirements preparation remain
 separate measurement stages.
 
@@ -55,6 +55,8 @@ separate measurement stages.
 | 2026-10-12T08:07Z / P2 implementation checkpoint | Latest ten-actor observations estimate approximately $29.48 Standard API-equivalent USD, about 4h30m from GO; actual billing unavailable. Working focused gates pass for structural comment rendering, native workspace ownership/name rewrites and read-only lexical planning; defaulted-hole native-to-Python replay now passes. Lifecycle marker correspondence, complete native shell/lowering integration and broader installed/minor gates remain outstanding. P2 and product work are not accepted. |
 
 | 2026-10-12T08:22Z / operator progress report | Latest ten-actor observations estimate approximately $30.91 Standard API-equivalent USD, about 4h46m from GO; actual billing unavailable. Native metadata/artifact refactor gate reports 58 passed and one skipped; raw invalid-table registration was independently reproduced and verified rejected without consuming index or parser entry after its owning RED/GREEN fix. Native node-identity conversion preflight has a new focused RED. Full native lowering, P3/P4 and product A–H remain outstanding. |
+
+| 2026-10-12T08:37:48.284477+00:00 / operator scope correction | Operator states no Astichi/YIDL SDK changes were in scope. Owner acknowledges introducing an unnecessarily strict parser-free/native-restoration prerequisite. SDK implementation stops; P1/P2 remain a preserved detour, not active product prerequisites. Original installed SDK probe passes core slots/equality/frozen-hash/direct-field-reference/cache checks for both backend selections. Product design/plan correction follows; original elapsed time and cumulative usage remain intact. |
 
 ## Autonomous scope and intervention rules
 
