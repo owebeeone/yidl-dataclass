@@ -66,6 +66,12 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+At 2026-10-12T10:53:08Z the operator requested status and an estimate without
+stopping work. Owner reported A/B implemented/verified, C in progress, D–H and
+final acceptance outstanding, and an uncertain remaining estimate of 4–6 hours.
+That estimate is prospective, not a measured completion time. No pause or new
+approval gate was inferred; the sole drafter continued.
+
 Stage B is verified and committed at
 `d3997d6f27f178b5b16df6e479f3e41c920b69cf`. Its final six source runs have
 86 passed/one skip and all six independent installed std differential probes
