@@ -66,18 +66,6 @@ def test_dependencies_are_immutable_provider_names_without_values():
         descriptions[1].dependencies = ("other",)
 
 
-def test_generated_model_inheritance_is_explicitly_pending():
-    @dataclass
-    class Base:
-        value: int = 2
-
-    class Child(Base):
-        other: int = 3
-
-    with pytest.raises(NotImplementedError, match="inheritance.*Stage D"):
-        dataclass(Child)
-
-
 @pytest.mark.parametrize("private_name", ("_y_dc_store_0", "_y_dc_factory_0"))
 def test_inherited_private_generated_name_collision_rejected(private_name):
     base = type("Private", (), {"__slots__": (private_name,)})

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="12" time="1.192" timestamp="2026-10-12T23:15:05.219613+11:00" hostname="[host]"><testcase classname="tests.test_inheritance_failures" name="test_frozen_mixing_rejected[False]" time="0.377" /><testcase classname="tests.test_inheritance_failures" name="test_frozen_mixing_rejected[True]" time="0.087" /><testcase classname="tests.test_inheritance_failures" name="test_inherited_incompatible_shape_rejected[family]" time="0.064" /><testcase classname="tests.test_inheritance_failures" name="test_inherited_incompatible_shape_rejected[mutability]" time="0.039" /><testcase classname="tests.test_inheritance_failures" name="test_inherited_incompatible_shape_rejected[layout]" time="0.045" /><testcase classname="tests.test_inheritance_failures" name="test_multiple_models_and_std_model_bases_rejected" time="0.034" /><testcase classname="tests.test_inheritance_failures" name="test_merged_provider_graph_revalidated" time="0.034" /><testcase classname="tests.test_inheritance_failures" name="test_custom_metaclass_and_required_subclass_keyword_rejected" time="0.028" /><testcase classname="tests.test_inheritance_failures" name="test_abcmeta_and_abstract_property_slot_resolution" time="0.029" /><testcase classname="tests.test_inheritance_failures" name="test_abcmeta_without_abc_base_preserved" time="0.067" /><testcase classname="tests.test_inheritance_failures" name="test_string_pseudo_annotations_use_defining_module_without_eval" time="0.031" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_inheritance_helpers.py]" time="0.122"><failure message="AssertionError">case = 'dataclass_inheritance_helpers.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1568/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        events=[]
+        class Named:
+            def __set_name__(self,owner,name):events.append((owner.__name__,name))
+        class Mixin:
+            __slots__=()
+            def greet(self):return "mixin"
+            def __init_subclass__(cls):events.append((cls.__name__,"subclass"))
+        class BaseDeclaration(Mixin):
+            "base documentation"
+            units:int=2
+            token:int=const(default=3)
+            named=Named()
+            def greet(self):return super().greet()+"/base"
+            @classmethod
+            def owner(cls):return __class__.__name__,cls.__name__
+            @staticmethod
+            def declared():return __class__.__name__
+            @property
+            def title(self):return __class__.__name__
+        original_cell=BaseDeclaration.greet.__closure__[0]
+        Base=dataclass(BaseDeclaration)
+        assert original_cell.cell_contents is BaseDeclaration
+        assert Base.greet.__closure__[0] is not original_cell
+        assert Base.greet.__closure__[0].cell_contents is Base
+        @dataclass
+        class Child(Base):
+            units:int=5
+            token:int=const(default=8)
+            tag:str="child"
+            def greet(self):return super().greet()+"/child"
+        value=Child()
+        assert value.greet()=="mixin/base/child"
+        assert [item.name for item in std.fields(Child)]==["units","token","tag"]
+        assert std.asdict(value)=={"units":5,"token":8,"tag":"child"}
+        assert Child.__slots__==("tag",)
+        assert Base.__doc__=="base documentation" and value.title=="BaseDeclaration"
+        assert Base.owner()==("BaseDeclaration","BaseDeclaration") and Base.declared()=="BaseDeclaration"
+        assert not hasattr(value,"__dict__")
+&gt;       assert events==[("BaseDeclaration","subclass"),("BaseDeclaration","named"),("BaseDeclaration","subclass"),("BaseDeclaration","named"),("Child","subclass"),("Child","subclass")]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+tests/data/gold_src/dataclass_inheritance_helpers.py:45: AssertionError</failure></testcase></testsuite></testsuites>

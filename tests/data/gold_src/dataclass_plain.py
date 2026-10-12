@@ -1,4 +1,5 @@
 """Canonical direct-storage and constructor contrast; no comparison/repr yet."""
+
 from inspect import signature
 from yidl_dataclass import dataclass, generated_source
 
@@ -19,11 +20,14 @@ def render_case():
     assert (first.count, first.label, first.reserve) == (4, "stock", 2)
     assert (second.count, second.label, second.reserve) == (8, "custom", 5)
     assert (third.count, third.label, third.reserve) == (0, "stock", 9)
+
     class SharedSlot:
         __slots__ = ("inherited",)
+
     class Declaration(SharedSlot):
         inherited: int
         units: int = 6
+
     Replacement = dataclass(Declaration, eq=False, repr=False)
     assert Replacement.__bases__ == (SharedSlot,)
     assert Declaration not in Replacement.__mro__
@@ -32,11 +36,16 @@ def render_case():
     assert (inherited.inherited, inherited.units) == (12, 6)
     assert not hasattr(inherited, "__dict__")
     return {
-        "generated_output.py": generated_source(Inventory) + "\n" + generated_source(Replacement),
-        "behavior.txt": "\n".join((
-            "slots=count,label,reserve; instance-dict=False",
-            str(signature(Inventory)),
-            "first=4,stock,2; second=8,custom,5; third=0,stock,9",
-            "replacement-bases=SharedSlot; declaration-base=False; inherited=12; units=6",
-        )) + "\n",
+        "generated_output.py": generated_source(Inventory)
+        + "\n"
+        + generated_source(Replacement),
+        "behavior.txt": "\n".join(
+            (
+                "slots=count,label,reserve; instance-dict=False",
+                str(signature(Inventory)),
+                "first=4,stock,2; second=8,custom,5; third=0,stock,9",
+                "replacement-bases=SharedSlot; declaration-base=False; inherited=12; units=6",
+            )
+        )
+        + "\n",
     }

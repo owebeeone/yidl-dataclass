@@ -1,0 +1,105 @@
+............................................................ss.......... [ 36%]
+.............................s.......................................... [ 73%]
+..........................................F..F..F..                      [100%]
+=================================== FAILURES ===================================
+___________________ test_canonical_case[dataclass_layout.py] ___________________
+
+case = 'dataclass_layout.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1582/test_canonical_case_dataclass_5')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+            source_path, runpy.run_path(str(source_path))["render_case"]()
+        )
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        manifest_path = expected / "runtime_manifest.json"
+        manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+        minor = f"py{sys.version_info.major}{sys.version_info.minor}"
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+            expected_name = manifest.get(name, {}).get(minor, name)
+>           assert actual == (expected / expected_name).read_text(), name
+E           AssertionError: generated_output.py
+E           assert 'class Dictio...s\n    pass\n' == 'class Dictio...)\n    pass\n'
+E             
+E             Skipping 204 identical leading characters in diff, use -v to show
+E               
+E             -     pass
+E             -     pass
+E             -     pass
+E             -     pass...
+E             
+E             ...Full output truncated (97 lines hidden), use '-vv' to show
+
+tests/test_yidl_goldens.py:31: AssertionError
+__________________ test_canonical_case[dataclass_metadata.py] __________________
+
+case = 'dataclass_metadata.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1582/test_canonical_case_dataclass_8')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+            source_path, runpy.run_path(str(source_path))["render_case"]()
+        )
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        manifest_path = expected / "runtime_manifest.json"
+        manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+        minor = f"py{sys.version_info.major}{sys.version_info.minor}"
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+            expected_name = manifest.get(name, {}).get(minor, name)
+>           assert actual == (expected / expected_name).read_text(), name
+E           AssertionError: generated_output.py
+E           assert 'class Catalo...s\n    pass\n' == 'class Catalo...)\n    pass\n'
+E             
+E             Skipping 1259 identical leading characters in diff, use -v to show
+E               s
+E                   pass
+E             -     pass
+E             -     pass
+E             -     pass...
+E             
+E             ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_yidl_goldens.py:31: AssertionError
+___________________ test_canonical_case[dataclass_plain.py] ____________________
+
+case = 'dataclass_plain.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1582/test_canonical_case_dataclass_11')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+            source_path, runpy.run_path(str(source_path))["render_case"]()
+        )
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        manifest_path = expected / "runtime_manifest.json"
+        manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+        minor = f"py{sys.version_info.major}{sys.version_info.minor}"
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+            expected_name = manifest.get(name, {}).get(minor, name)
+>           assert actual == (expected / expected_name).read_text(), name
+E           AssertionError: generated_output.py
+E           assert 'class Invent...s\n    pass\n' == 'class Invent...)\n    pass\n'
+E             
+E             Skipping 440 identical leading characters in diff, use -v to show
+E               
+E             -     pass
+E             -     pass
+E             -     pass
+E             -     pass...
+E             
+E             ...Full output truncated (31 lines hidden), use '-vv' to show
+
+tests/test_yidl_goldens.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_layout.py]
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_metadata.py]
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_plain.py] - ...
+3 failed, 189 passed, 3 skipped in 120.19s (0:02:00)

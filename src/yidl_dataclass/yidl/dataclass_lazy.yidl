@@ -1,0 +1,306 @@
+module dataclass.lazy
+import "dataclass_retention.yidl" as retention
+export concept DataclassLazy
+
+concept DataclassLazy extends retention.DataclassRetention {
+    resource LazyPropertyShell = code $[
+        astichi_hole(getter)
+        astichi_hole(setter)
+        astichi_hole(deleter)
+        field_name__astichi_arg__ = _y_dc_property(astichi_pass(getter_name__astichi_arg__, outer_bind=True), astichi_pass(setter_name__astichi_arg__, outer_bind=True), astichi_pass(deleter_name__astichi_arg__, outer_bind=True))
+    ]$ { keep _y_dc_property }
+    resource LazyGetterShell = template $[
+        def field_name__astichi_arg__(self):
+            astichi_hole(body)
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self }
+    resource LazyGetterBody = template $[
+    if self.astichi_ref(external=ready_path):
+        return self.astichi_ref(external=backing_path)
+    if self.astichi_ref(external=busy_path):
+        raise _y_dc_LazyInitializationError(lazy_message__astichi_arg__)
+    self.astichi_ref(external=busy_path)._ = True
+    try:
+        try:
+            lazy_value__astichi_arg__ = factory_name__astichi_arg__(*astichi_hole(positional_arguments), **astichi_hole(keyword_arguments))
+        except _y_dc_ContextErrors:
+            raise
+        except _y_dc_Exception as _y_dc_factory_error:
+            raise _y_dc_FieldInitializationError(factory_message__astichi_arg__) from _y_dc_factory_error
+        astichi_hole(pipeline)
+        self.astichi_ref(external=backing_path)._ = astichi_pass(processed_name__astichi_arg__, outer_bind=True)
+        self.astichi_ref(external=ready_path)._ = True
+        astichi_hole(release)
+        return self.astichi_ref(external=backing_path)
+    finally:
+        self.astichi_ref(external=busy_path)._ = False
+        astichi_export(lazy_value__astichi_arg__)
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, _y_dc_LazyInitializationError, _y_dc_ContextErrors, _y_dc_FieldInitializationError, _y_dc_Exception, _y_dc_factory_error }
+    resource LazySetter = template $[
+        def field_name__astichi_arg__(self, value):
+            if self.astichi_ref(external=busy_path):
+                raise _y_dc_LazyInitializationError(lazy_message__astichi_arg__)
+            astichi_hole(pipeline)
+            self.astichi_ref(external=backing_path)._ = astichi_pass(processed_name__astichi_arg__, outer_bind=True)
+            self.astichi_ref(external=ready_path)._ = True
+            astichi_hole(release)
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, value, _y_dc_LazyInitializationError }
+    resource LazyDeleter = template $[
+        def field_name__astichi_arg__(self):
+            if self.astichi_ref(external=busy_path):
+                raise _y_dc_LazyInitializationError(lazy_message__astichi_arg__)
+            if self.astichi_ref(external=ready_path):
+                del self.astichi_ref(external=backing_path)._
+            self.astichi_ref(external=ready_path)._ = False
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, _y_dc_LazyInitializationError }
+    resource LazyRejectSet = template $[
+        def field_name__astichi_arg__(self, value):
+            if self.astichi_ref(external=busy_path):
+                raise _y_dc_LazyInitializationError(lazy_message__astichi_arg__)
+            raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, value, _y_dc_LazyInitializationError, _y_dc_FrozenInstanceError }
+    resource LazyRejectDelete = template $[
+        def field_name__astichi_arg__(self):
+            if self.astichi_ref(external=busy_path):
+                raise _y_dc_LazyInitializationError(lazy_message__astichi_arg__)
+            raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, _y_dc_LazyInitializationError, _y_dc_FrozenInstanceError }
+    resource LazyProviderPositional = template $[
+        astichi_funcargs(astichi_pass(self, outer_bind=True).astichi_ref(external=read_path))
+    ]$
+    resource LazyProviderKeyword = template $[
+        astichi_funcargs(argument_name__astichi_arg__=astichi_pass(self, outer_bind=True).astichi_ref(external=read_path))
+    ]$
+    resource LazyClassPositional = template $[
+        astichi_funcargs(_y_dc_type(astichi_pass(self, outer_bind=True)).astichi_ref(external=read_path))
+    ]$ { keep _y_dc_type }
+    resource LazyClassKeyword = template $[
+        astichi_funcargs(argument_name__astichi_arg__=_y_dc_type(astichi_pass(self, outer_bind=True)).astichi_ref(external=read_path))
+    ]$ { keep _y_dc_type }
+    resource GetterConvert = template $[
+        try:
+            converted_name__astichi_arg__ = converter_name__astichi_arg__(astichi_pass(raw_name__astichi_arg__, outer_bind=True))
+        except _y_dc_ContextErrors:
+            raise
+        except _y_dc_Exception as _y_dc_conversion_error:
+            raise _y_dc_FieldConversionError(conversion_message__astichi_arg__) from _y_dc_conversion_error
+        astichi_export(converted_name__astichi_arg__)
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldConversionError, _y_dc_Exception, _y_dc_conversion_error }
+    resource GetterNullableConvert = template $[
+        if astichi_pass(raw_name__astichi_arg__, outer_bind=True) is None:
+            converted_name__astichi_arg__ = None
+        else:
+            try:
+                converted_name__astichi_arg__ = converter_name__astichi_arg__(astichi_pass(raw_name__astichi_arg__, outer_bind=True))
+            except _y_dc_ContextErrors:
+                raise
+            except _y_dc_Exception as _y_dc_conversion_error:
+                raise _y_dc_FieldConversionError(conversion_message__astichi_arg__) from _y_dc_conversion_error
+        astichi_export(converted_name__astichi_arg__)
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldConversionError, _y_dc_Exception, _y_dc_conversion_error }
+    contribution GetterConversion = GetterConvert {
+        as Converter
+        index PipelineIdentity
+        target convert { build /Pipeline }
+        ident raw_name = PipelineRawName
+        ident converted_name = PipelineValueName
+        ident converter_name = ConverterName
+        ident conversion_message = ConversionMessage
+    }
+    contribution GetterNullableConversion = GetterNullableConvert {
+        as Converter
+        index PipelineIdentity
+        target convert { build /Pipeline }
+        ident raw_name = PipelineRawName
+        ident converted_name = PipelineValueName
+        ident converter_name = ConverterName
+        ident conversion_message = ConversionMessage
+    }
+    matcher ConversionContributions(pipe: PipelineSites) -> contribution {
+        rule getter_convert when LazyPipeline == True and HasConverter == True and NullableConverter == False -> GetterConversion weight 2
+        rule getter_nullable when LazyPipeline == True and HasConverter == True and NullableConverter == True -> GetterNullableConversion weight 2
+    }
+    contribution LazyProperty = LazyPropertyProduction {
+        as Property
+        index AccessorOrder
+        order AccessorOrder
+        target properties { build /ClassDef }
+    }
+    matcher PropertyContributions(field: PolicyFields, cls: Classes) -> contribution {
+        rule lazy when IsLazy == True -> LazyProperty weight 2
+    }
+    contribution LazyGetterContribution = LazyGetterProduction {
+        as Getter
+        index AccessorOrder
+        target getter { build /Property }
+    }
+    contribution LazySetterContribution = LazySetterProduction {
+        as Setter
+        index AccessorOrder
+        target setter { build /Property }
+    }
+    contribution LazyDeleteContribution = LazyDeleter {
+        as Deleter
+        index AccessorOrder
+        target deleter { build /Property }
+        ident field_name = LazyDeleterName
+        ident lazy_message = LazyMessage
+        external busy_path = BusyName
+        external ready_path = ReadyName
+        external backing_path = BackingName
+    }
+    contribution LazyRejectSetContribution = LazyRejectSet {
+        as Setter
+        index AccessorOrder
+        target setter { build /Property }
+        ident field_name = LazySetterName
+        ident lazy_message = LazyMessage
+        ident frozen_message = FrozenMessage
+        external busy_path = BusyName
+    }
+    contribution LazyRejectDeleteContribution = LazyRejectDelete {
+        as Deleter
+        index AccessorOrder
+        target deleter { build /Property }
+        ident field_name = LazyDeleterName
+        ident lazy_message = LazyMessage
+        ident frozen_message = FrozenMessage
+        external busy_path = BusyName
+    }
+    matcher LazyGetters(field: PolicyFields, cls: Classes) -> contribution {
+        default -> LazyGetterContribution
+    }
+    matcher LazySetters(field: PolicyFields, cls: Classes) -> contribution {
+        default -> LazyRejectSetContribution
+        rule writable when WritableAccessor == True -> LazySetterContribution
+    }
+    matcher LazyDeleters(field: PolicyFields, cls: Classes) -> contribution {
+        default -> LazyRejectDeleteContribution
+        rule writable when WritableAccessor == True -> LazyDeleteContribution
+    }
+    contribution LazyProviderPos = LazyProviderPositional {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target positional_arguments { build /Candidate }
+        external read_path = DelayedPath
+    }
+    contribution LazyProviderKw = LazyProviderKeyword {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target keyword_arguments { build /Candidate }
+        ident argument_name = ArgumentName
+        external read_path = DelayedPath
+    }
+    contribution LazyClassPos = LazyClassPositional {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target positional_arguments { build /Candidate }
+        external read_path = DelayedPath
+    }
+    contribution LazyClassKw = LazyClassKeyword {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target keyword_arguments { build /Candidate }
+        ident argument_name = ArgumentName
+        external read_path = DelayedPath
+    }
+    matcher DelayedArgumentContributions(argument: FactoryArguments, field: PolicyFields, cls: Classes) -> contribution {
+        rule providerpos when InstanceArgument == False and ClassArgument == False and CapturedArgument == False and DelayedClassProvider == False and PositionalArgument == True -> LazyProviderPos
+        rule providerkw when InstanceArgument == False and ClassArgument == False and CapturedArgument == False and DelayedClassProvider == False and PositionalArgument == False -> LazyProviderKw
+        rule classpos when DelayedClassProvider == True and PositionalArgument == True -> LazyClassPos
+        rule classkw when DelayedClassProvider == True and PositionalArgument == False -> LazyClassKw
+        rule capturedpos when CapturedArgument == True and PositionalArgument == True -> CapturedPositionalArgumentContribution
+        rule capturedkw when CapturedArgument == True and PositionalArgument == False -> CapturedKeywordArgumentContribution
+        rule selfpos when InstanceArgument == True and PositionalArgument == True -> InstancePositionalArgumentContribution
+        rule selfkw when InstanceArgument == True and PositionalArgument == False -> InstanceKeywordArgumentContribution
+        rule clspos when ClassArgument == True and PositionalArgument == True -> ClassPositionalArgumentContribution
+        rule clskw when ClassArgument == True and PositionalArgument == False -> ClassKeywordArgumentContribution
+    }
+    contribution LazyEmptyPos = EmptyCallArguments {
+        as PositionalStart
+        index AccessorOrder
+        target positional_arguments { build /Candidate }
+    }
+    contribution LazyEmptyKw = EmptyCallArguments {
+        as KeywordStart
+        index AccessorOrder
+        target keyword_arguments { build /Candidate }
+    }
+    contribution LazyPipeline = PipelineProduction {
+        as GetterPipeline
+        index PipelineIdentity
+        target pipeline { build /Candidate }
+    }
+    contribution GetterNoRelease = EmptyStatement {
+        as GetterEmptyRelease
+        index AccessorOrder
+        target release { build /Candidate }
+    }
+    contribution SetterNoRelease = EmptyStatement {
+        as SetterEmptyRelease
+        index AccessorOrder
+        target release { build /Setter }
+    }
+    matcher LazyEmptyPosContributions(field: PolicyFields, cls: Classes) -> contribution { default -> LazyEmptyPos }
+    matcher LazyEmptyKwContributions(field: PolicyFields, cls: Classes) -> contribution { default -> LazyEmptyKw }
+    matcher LazyPipelineContributions(pipe: PipelineSites, field: PolicyFields, cls: Classes) -> contribution { default -> LazyPipeline }
+    matcher GetterReleaseContributions(field: PolicyFields, cls: Classes) -> contribution { default -> GetterNoRelease }
+    matcher SetterReleaseContributions(field: PolicyFields, cls: Classes) -> contribution { default -> SetterNoRelease }
+    contribution LazyBody = LazyBodyProduction { as GetterBody index AccessorOrder target body { build /LazyFunction } }
+    matcher LazyBodyContributions(field: PolicyFields, cls: Classes) -> contribution { default -> LazyBody }
+    production LazyGetterProduction(field: PolicyFields, cls: Classes) -> composable {
+        root LazyFunction = LazyGetterShell { ident field_name = LazyGetterName }
+        apply body using LazyBodyContributions
+    }
+    production LazyBodyProduction(field: PolicyFields, cls: Classes) -> composable {
+        root Candidate = LazyGetterBody {
+            ident lazy_value = LazyValueName
+            ident processed_name = LazyProcessedName
+            ident factory_name = GetterFactoryName
+            ident factory_message = GetterFactoryMessage
+            ident lazy_message = LazyMessage
+            external ready_path = ReadyName
+            external busy_path = BusyName
+            external backing_path = BackingName
+        }
+        apply empty_pos using LazyEmptyPosContributions
+        apply empty_kw using LazyEmptyKwContributions
+        apply args from argument: FactoryArguments where CallerFieldId == FieldId using DelayedArgumentContributions
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and GetterSite == True using LazyPipelineContributions
+        apply release using GetterReleaseContributions
+        apply providers from site: ReleaseSites where ReleaseOwner == FieldId and ReleaseConstructor == False using DirectGetterReleaseContributions
+    }
+    production LazySetterProduction(field: PolicyFields, cls: Classes) -> composable {
+        root Setter = LazySetter {
+            ident field_name = LazySetterName
+            ident processed_name = LazySetterProcessedName
+            ident lazy_message = LazyMessage
+            external ready_path = ReadyName
+            external busy_path = BusyName
+            external backing_path = BackingName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == False and GetterSite == False using SetterPipelineContributions
+        apply release using SetterReleaseContributions
+        apply providers from site: ReleaseSites where ReleaseOwner == FieldId using DirectSetterReleaseContributions
+    }
+    production LazyPropertyProduction(field: PolicyFields, cls: Classes) -> composable {
+        root Property = LazyPropertyShell {
+            ident field_name = FieldName
+            ident getter_name = LazyGetterName
+            ident setter_name = LazySetterName
+            ident deleter_name = LazyDeleterName
+        }
+        apply getter using LazyGetters
+        apply setter using LazySetters
+        apply deleter using LazyDeleters
+    }
+}

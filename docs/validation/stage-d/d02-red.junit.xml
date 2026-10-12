@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.517" timestamp="2026-10-12T22:51:45.353596+11:00" hostname="[host]"><testcase classname="tests.test_lazy_retention" name="test_failed_terminal_preserves_provider_and_successful_prerequisite_cache" time="0.002"><failure message="NameError: name 'second' is not defined">def test_failed_terminal_preserves_provider_and_successful_prerequisite_cache():
+        calls=[];fail=[True]
+        def second(seed,first):
+            calls.append("second")
+            if fail[0]:raise ValueError("retry")
+            return seed+first
+        @dataclass(repr=False)
+&gt;       class Retry:
+
+tests/test_lazy_retention.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @dataclass(repr=False)
+    class Retry:
+        seed:int=initvar()
+        first:int=lazy(default_factory=lambda seed:calls.append("first") or seed,mutable=False)
+&gt;       second:int=lazy(default_factory=second,mutable=False)
+                                        ^^^^^^
+E       NameError: name 'second' is not defined
+
+tests/test_lazy_retention.py:16: NameError</failure></testcase><testcase classname="tests.test_lazy_retention" name="test_seeded_nonresettable_consumers_release_without_factory_evaluation" time="0.322" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy_retention.py]" time="0.044"><failure message="AssertionError">case = 'dataclass_lazy_retention.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1551/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        class Seed:
+            def __init__(self,value):self.value=value
+        @dataclass(repr=False)
+        class Terminals:
+            seed:object=initvar()
+            first:int=lazy(default_factory=lambda seed:seed.value,mutable=False)
+            second:int=lazy(default_factory=lambda seed:seed.value+1,mutable=False)
+        seed=Seed(5); ref=weakref.ref(seed); terminals=Terminals(seed);del seed
+&gt;       gc.collect();assert ref() is not None
+                            ^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+tests/data/gold_src/dataclass_lazy_retention.py:16: AssertionError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,33 @@
+.......F                                                                 [100%]
+=================================== FAILURES ===================================
+____________________ test_canonical_case[dataclass_lazy.py] ____________________
+
+case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1554/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:13: in render_case
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:199: in decorate
+    exec(
+<yidl-dataclass-model>:64: in <module>
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: name 'total__astichi_scoped_1' is not defined
+
+<yidl-dataclass-model>:55: NameError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_lazy.py] - N...
+1 failed, 7 passed in 2.37s

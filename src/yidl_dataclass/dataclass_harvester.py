@@ -35,11 +35,16 @@ def harvest(
         raise DataclassDefinitionError(
             "__post_init__ is unsupported; use named factories"
         )
-    if any(
-        "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
-    ):
-        raise NotImplementedError("generated model inheritance belongs to Stage D")
+    from .inheritance_plan import (
+        model_base_for,
+        inherited_fields,
+        validate_inherited_layout,
+    )
+
+    model_base = model_base_for(cls, options)
     for base in cls.__mro__[1:]:
+        if "__yidl_dataclass_definition__" in base.__dict__:
+            continue
         for name in base.__dict__:
             if name.startswith("_y_dc_"):
                 raise DataclassDefinitionError(f"reserved generated name: {name}")
@@ -68,8 +73,6 @@ def harvest(
             raise DataclassDefinitionError(
                 f"{name}: descriptor-valued defaults are unsupported"
             )
-        if isinstance(value, LazyDeclaration):
-            raise NotImplementedError("lazy fields belong to Stage D")
     items = adapter.fields_for(cls, annotations, kw_only=options.kw_only)
     kinds = {}
     for item in items:
@@ -84,7 +87,14 @@ def harvest(
             )
         )
         kinds[item.name] = kind
-    instance = tuple(item for item in items if kinds[item.name].parameter)
+    inherited = inherited_fields(model_base)
+    merged_items = {item.name: item.field for item in inherited}
+    merged_kinds = {item.name: item.kind for item in inherited}
+    merged_items.update((item.name, item) for item in items)
+    merged_kinds.update(kinds)
+    instance = tuple(
+        item for item in merged_items.values() if merged_kinds[item.name].parameter
+    )
     positional = tuple(item for item in instance if item.init and not item.kw_only)
     keyword_only = tuple(item for item in instance if item.init and item.kw_only)
     seen_default = False
@@ -115,8 +125,10 @@ def harvest(
         slot_names += ("__weakref__",)
     generate_init = options.init and "__init__" not in cls.__dict__
     definitions = []
+    inherited_by_name = {item.name: item for item in inherited}
     captures = {"__name__": cls.__module__}
-    for index, item in enumerate(items):
+    local_names = {item.name for item in items}
+    for index, item in enumerate(merged_items.values()):
         annotation_name, default_name, factory_name = (
             f"_y_dc_{role}_{index}" for role in ("annotation", "default", "factory")
         )
@@ -127,7 +139,15 @@ def harvest(
             factory = item.default_factory
             captures[factory_name] = factory
         definitions.append(
-            StorageField(
+            std.replace(
+                inherited_by_name[item.name],
+                annotation_name=annotation_name,
+                default_name=default_name,
+                factory_name=factory_name,
+                parameter_order=orders.get(item.name, index),
+            )
+            if item.name not in local_names
+            else StorageField(
                 item.name,
                 item,
                 annotation_name,
@@ -148,13 +168,29 @@ def harvest(
     definitions, policy_class = normalize_policies(
         cls, tuple(definitions), options, captures
     )
+    validate_inherited_layout(cls, model_base, definitions)
+    annotations = {item.name: item.field.type for item in definitions}
     slot_names = tuple(
         item.store_name
         for item in definitions
-        if item.kind.stored and item.name not in inherited_slots
+        if item.kind.stored and item.store_name not in inherited_slots
     ) + (("__weakref__",) if "__weakref__" in slot_names else ())
+    slot_names += tuple(
+        name
+        for item in definitions
+        if item.kind.label == "lazy"
+        for name in (item.ready_name, item.busy_name)
+    )
     steps, calls, planned = plan_initialization(
         cls, definitions, options, generate_init, captures
+    )
+    from .retention_plan import plan_retention
+
+    definitions, steps, retention = plan_retention(definitions, calls, steps)
+    slot_names += tuple(
+        item.provider_name
+        for item in definitions
+        if item.retained and item.provider_name not in inherited_slots
     )
     dependencies = {call.field_name: call.dependencies for call in calls}
     definitions = tuple(
@@ -170,5 +206,6 @@ def harvest(
         calls,
         planned,
         policy_class,
+        retention=retention,
     )
     return definition, annotations, captures

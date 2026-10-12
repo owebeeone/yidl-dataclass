@@ -11,6 +11,8 @@ concept DataclassCore {
     property UseSlots: bool = True
     property GenerateInit: bool = True
     property HasPlannedInit: bool = False
+    property HasHelperMethods: bool = False
+    property HasLazy: bool = False
     property HasProperties: bool = False
     property FieldId: str
     property FieldOwner: str
@@ -38,6 +40,8 @@ concept DataclassCore {
         GenerateInit
         HasPlannedInit
         HasProperties
+        HasLazy
+        HasHelperMethods
     }
     record DataclassField {
         FieldId
@@ -62,14 +66,14 @@ concept DataclassCore {
         astichi_hole(classes)
     ]$
     resource ClassShell = template $[
-        class class_name__astichi_arg__(*astichi_ref(external=bases_name)):
+        class class_name__astichi_arg__(*astichi_ref(external=bases_name), metaclass=_y_dc_metaclass):
             locals().update(astichi_ref(external=namespace_name))
             astichi_hole(slots)
             astichi_hole(methods)
             astichi_hole(comparison_methods)
             astichi_hole(repr_method)
     ]$ {
-        keep locals
+        keep locals, _y_dc_metaclass
     }
     resource EmptyStatement = template `pass`
     resource Slots = template $[

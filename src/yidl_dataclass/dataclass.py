@@ -47,12 +47,18 @@ def dataclass(
 
         definition, annotations, captures = harvest(declaration, options)
         actions = resolve_methods(declaration, options)
+        from .copy_generation import helper_actions, COPY_METHODS
+
+        copy_support, generate_replace = helper_actions(declaration, definition)
         names = {item.name for item in definition.fields}
+        from .inheritance_plan import namespace_value
+
         namespace = {
-            name: value
+            name: namespace_value(value)
             for name, value in declaration.__dict__.items()
             if name not in (*names, "__dict__", "__weakref__", "__classcell__")
         }
+        namespace.pop("__yidl_generated_copy_methods__", None)
         namespace["__qualname__"] = declaration.__qualname__
         namespace["__annotations__"] = annotations
         namespace["__dataclass_fields__"] = {
@@ -74,6 +80,7 @@ def dataclass(
                 namespace[item.name] = item.field.default
         captures.update(
             _y_dc_namespace=namespace,
+            _y_dc_metaclass=type(declaration),
             _y_dc_bases=declaration.__bases__,
             _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
             _y_dc_recursive_repr=recursive_repr_decorator(),
@@ -90,6 +97,8 @@ def dataclass(
                 use_slots=options.slots,
                 generate_init=definition.generate_init,
                 has_planned_init=definition.planned_init,
+                has_helper_methods=copy_support or generate_replace,
+                has_lazy=any(item.kind.label == "lazy" for item in definition.fields),
                 has_properties=any(item.has_accessor for item in definition.fields),
             ),
         )
@@ -192,6 +201,12 @@ def dataclass(
         from .policy_generation import add_policy_facts
 
         add_policy_facts(generated, builder, definition, captures)
+        from .retention_generation import add_retention_facts
+
+        add_retention_facts(generated, builder, definition)
+        from .copy_generation import add_copy_facts
+
+        add_copy_facts(generated, builder, definition, declaration, captures, replace)
         composable = generated.build_DataclassModule(builder.freeze())
         source = composable.emit_commented()
         tree = composable.to_executable_ast()
@@ -207,6 +222,17 @@ def dataclass(
                 if name not in ("__dict__", "__weakref__"):
                     setattr(declaration, name, value)
             model = declaration
+        if options.slots:
+            from .inheritance_plan import clone_class_cells
+
+            clone_class_cells(declaration, model)
+        from types import MappingProxyType
+
+        model.__yidl_generated_copy_methods__ = MappingProxyType(
+            {name: model.__dict__[name] for name in COPY_METHODS}
+            if copy_support
+            else {}
+        )
         model.__yidl_generated_source__ = source
         return model
 

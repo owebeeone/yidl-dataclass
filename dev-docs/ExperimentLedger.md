@@ -1,8 +1,8 @@
 # YIDL Dataclass preparation and review ledger
 
 Status: autonomous Dataclass run authorized; operator has excluded SDK changes.
-Compiler detour stopped and preserved; consumer-only Stages A–C are verified and
-Stage D is active. Final product acceptance remains outstanding. The original
+Compiler detour stopped and preserved; consumer-only Stages A–D are verified and
+Stages E/F are next. Final product acceptance remains outstanding. The original
 Undoable experiment and this experiment's earlier requirements preparation remain
 separate measurement stages.
 
@@ -66,6 +66,18 @@ separate measurement stages.
 | 2026-10-12T09:00Z / product Stage A resumed | Sole drafter begins consumer-only product work after amendment acceptance, using separate original-SDK environments and behavioral slot/constructor RED rather than import/setup failures. Latest twelve-actor observations estimate approximately $35.37 Standard API-equivalent USD, about 5h23m from original GO; actual billing unavailable. This includes the preserved scope detour, operator correction and independent amendment review, not a completed-product cost. SDK source/build changes remain forbidden. |
 
 ## Autonomous scope and intervention rules
+
+At 2026-10-12T13:13Z Stage D is owner-verified: post-fix D13 has 198 cases in
+each original backend/minor source run, with 195/196/197 passes and only 3/2/1
+version-specific skips. All 24 owner installed calls and both installed
+regeneration checks pass. The independent audit verifies 444 owned hashes,
+117 records, 188 artifact references, 149 distinct raw hashes and 71 JUnit artifacts.
+`Dataclass-StageDResult.md` names the exact stopped manifest and wheel hashes.
+Private builtin aliases fix independently reproduced C constructor collisions;
+all old RED/attempt records remain. E–H and final reviews remain outstanding.
+Latest twelve-actor samples estimate $57.8898954 Standard API-equivalent USD
+around 9h36m from original GO; actual billing unavailable. Prior scope/process
+lapses and test-sequencing limitations remain in the experiment, not reset.
 
 At 2026-10-12T12:54Z the independent owner pre-integration Undoable source
 baseline at `f79e4ce6d985ed0a6463552e163baabf1a28942d` passes all six original

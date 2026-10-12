@@ -1,0 +1,438 @@
+{
+  "stage": "D",
+  "manifest_sha256": "bc48813c900586d79911bbb17b18eb458d2b5aa3234a0604ff93f596719c2cef",
+  "owned_files": 444,
+  "increment_records": 117,
+  "artifact_references": 188,
+  "distinct_raw_hashes": 149,
+  "junit_files": 71,
+  "junit": {
+    "docs/validation/stage-d/d01-red.junit.xml": {
+      "tests": 8,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-corrected-red.junit.xml": {
+      "tests": 8,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-first-green.junit.xml": {
+      "tests": 8,
+      "failures": 7,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-second-green.junit.xml": {
+      "tests": 8,
+      "failures": 7,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-third-green.junit.xml": {
+      "tests": 8,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-green.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-python-verification.junit.xml": {
+      "tests": 8,
+      "failures": 7,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-red.junit.xml": {
+      "tests": 3,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-python-corrected-verification.junit.xml": {
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-corrected-red.junit.xml": {
+      "tests": 3,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-python-outer-verification.junit.xml": {
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-first-green.junit.xml": {
+      "tests": 3,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-second-green.junit.xml": {
+      "tests": 3,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d01-python-distinct-verification.junit.xml": {
+      "tests": 8,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-third-green.junit.xml": {
+      "tests": 3,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-green.junit.xml": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-python-verification.junit.xml": {
+      "tests": 11,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d03-red.junit.xml": {
+      "tests": 12,
+      "failures": 11,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-python-flat-verification.junit.xml": {
+      "tests": 11,
+      "failures": 6,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-python-export-verification.junit.xml": {
+      "tests": 11,
+      "failures": 6,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-python-separated-verification.junit.xml": {
+      "tests": 11,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-python-public-verification.junit.xml": {
+      "tests": 11,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-python-setter-verification.junit.xml": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d02-native-final-green.junit.xml": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d03-first-green.junit.xml": {
+      "tests": 12,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d03-green.junit.xml": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d03-python-verification.junit.xml": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-red.junit.xml": {
+      "tests": 8,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-replace313-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-first-green.junit.xml": {
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-green.junit.xml": {
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-replace313-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-python-verification.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d05-red.junit.xml": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-memo-green.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-python-ordered-verification.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d06-builtin-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d06-builtin-python-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d05-green.junit.xml": {
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d06-builtin-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d06-builtin-python-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-python-aliased-verification.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d05-preserved-wrapper-green.junit.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d04-python-portable-verification.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d07-ownership-red.junit.xml": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d08-stability-red.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d07-ownership-green.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d10-source-verification.junit.xml": {
+      "tests": 26,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d10-python-source-verification.junit.xml": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d11-final-native-rust-312-verification.junit.xml": {
+      "tests": 195,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 3
+    },
+    "docs/validation/stage-d/d11-final-native-rust-313-verification.junit.xml": {
+      "tests": 195,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "docs/validation/stage-d/d11-final-native-rust-314-verification.junit.xml": {
+      "tests": 195,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "docs/validation/stage-d/d11-final-python-312-verification.junit.xml": {
+      "tests": 195,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 3
+    },
+    "docs/validation/stage-d/d11-final-python-313-verification.junit.xml": {
+      "tests": 195,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "docs/validation/stage-d/d11-final-python-314-verification.junit.xml": {
+      "tests": 195,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "docs/validation/stage-d/d11-affected-native-rust-313-verification.junit.xml": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d11-affected-python-313-verification.junit.xml": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d11-affected-native-rust-314-verification.junit.xml": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d11-affected-python-314-verification.junit.xml": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d12-constructor-builtins-red.junit.xml": {
+      "tests": 4,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d12-constructor-builtins-python-red.junit.xml": {
+      "tests": 4,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d11-final-native-rust-312-repeat-verification.junit.xml": {
+      "tests": 195,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    "docs/validation/stage-d/d11-final-python-312-repeat-verification.junit.xml": {
+      "tests": 195,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    "docs/validation/stage-d/d12-constructor-builtins-native-rust-green.junit.xml": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d12-constructor-builtins-python-green.junit.xml": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-d/d13-final-native-rust-313-verification.junit.xml": {
+      "tests": 198,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "docs/validation/stage-d/d13-final-native-rust-312-verification.junit.xml": {
+      "tests": 198,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    "docs/validation/stage-d/d13-final-native-rust-314-verification.junit.xml": {
+      "tests": 198,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "docs/validation/stage-d/d13-final-python-312-verification.junit.xml": {
+      "tests": 198,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    "docs/validation/stage-d/d13-final-python-313-verification.junit.xml": {
+      "tests": 198,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    "docs/validation/stage-d/d13-final-python-314-verification.junit.xml": {
+      "tests": 198,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    }
+  },
+  "scope": "integrity/source-path audit; behavioral verdicts remain separately assessed"
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.368" timestamp="2026-10-12T23:33:49.503505+11:00" hostname="[host]"><testcase classname="tests.test_builtin_field_names" name="test_property_field_does_not_shadow_later_descriptor_creation" time="0.315"><failure message="TypeError: 'property' object is not callable">def test_property_field_does_not_shadow_later_descriptor_creation():
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_builtin_field_names.py:6: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:226: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:208: in decorate
+    exec(
+&lt;yidl-dataclass-model&gt;:1: in &lt;module&gt;
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   ???
+E   TypeError: 'property' object is not callable
+
+&lt;yidl-dataclass-model&gt;:1: TypeError</failure></testcase></testsuite></testsuites>

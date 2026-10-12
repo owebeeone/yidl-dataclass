@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.488" timestamp="2026-10-12T23:21:55.466947+11:00" hostname="[host]"><testcase classname="tests.test_copy_helpers" name="test_copy_replace_version_method_and_local_override" time="0.017"><failure message="assert '__replace__' in mappingproxy({'__module__': 'test_copy_helpers', '__firstlineno__': 56, '__annotations__': {'value': &lt;class 'int'&gt;}, '...__(self):\n        return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'\n&quot;})&#10; +  where mappingproxy({'__module__': 'test_copy_helpers', '__firstlineno__': 56, '__annotations__': {'value': &lt;class 'int'&gt;}, '...__(self):\n        return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'\n&quot;}) = &lt;class 'test_copy_helpers.test_copy_replace_version_method_and_local_override.&lt;locals&gt;.Model'&gt;.__dict__">def test_copy_replace_version_method_and_local_override():
+        @dataclass
+        class Model:value:int=2
+        if sys.version_info[:2]==(3,12):assert "__replace__" not in Model.__dict__
+        else:
+&gt;           assert "__replace__" in Model.__dict__
+E           assert '__replace__' in mappingproxy({'__module__': 'test_copy_helpers', '__firstlineno__': 56, '__annotations__': {'value': &lt;class 'int'&gt;}, '...__(self):\n        return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'\n"})
+E            +  where mappingproxy({'__module__': 'test_copy_helpers', '__firstlineno__': 56, '__annotations__': {'value': &lt;class 'int'&gt;}, '...__(self):\n        return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'\n"}) = &lt;class 'test_copy_helpers.test_copy_replace_version_method_and_local_override.&lt;locals&gt;.Model'&gt;.__dict__
+
+tests/test_copy_helpers.py:60: AssertionError</failure></testcase></testsuite></testsuites>

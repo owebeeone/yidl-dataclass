@@ -10,18 +10,21 @@ for inspection and a separate verified backup exists. No detour was published.
 The original installed Astichi 1.1.3 / YIDL 0.1.0 route passes focused generation
 checks for slots, equality, frozen hashing, direct field reference specialization
 and existing resource caching with both backend selections. This establishes
-core feasibility only, not the full requested product. Product Stages A–C are
+core feasibility only, not the full requested product. Product Stages A–D are
 now implemented and owner-verified; see `Dataclass-StageAResult.md`,
-`Dataclass-StageBResult.md` and `Dataclass-StageCResult.md`. Stage C has 156
+`Dataclass-StageBResult.md`, `Dataclass-StageCResult.md` and
+`Dataclass-StageDResult.md`. Stage C has 156
 passed/one version-specific skip in all six source runs and six independent
-installed extension probes. Stages D–H remain.
+installed extension probes. Stages E–H remain.
 The Stage B post-GREEN verification sequencing deviation and Stage C's broader
 post-GREEN verification are explicitly recorded;
 no strict test-first or final acceptance claim is made. Consumer-only amendment
 acceptance remains `382d389172f38e33de8a00af350b1b6b21d46f5b`.
-Next action: Stage D lazy lifetime, inheritance, copying and replacement, sole
-drafter with genuine preimplementation RED/GREEN against original installed
-SDKs. SDK changes remain
+Stage D full source suites pass on both original backends across three minors,
+with 198 cases per run and only version-specific skips. Independent owner
+installed probes and regeneration pass. Next action: sole drafter Stages E/F,
+real Undoable shared comparison integration and native write-comparison context.
+SDK changes remain
 outside scope. Literal nested BoolOp generation is an implementation choice,
 replaced by verified authored flat short-circuit/lifetime cleanup without changing
 public semantics; no new dependency prerequisite is inferred.

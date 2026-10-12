@@ -1,0 +1,511 @@
+FFFFFF.F                                                                 [100%]
+=================================== FAILURES ===================================
+______________ test_lazy_failure_is_unready_and_retries[factory] _______________
+
+role = 'factory'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:196: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1213: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1210: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1017: in build
+    return self._build_with_adapter(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1020: in _build_with_adapter
+    self._flush_deferred_composable_adapter_edges()
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1085: in _flush_deferred_composable_adapter_edges
+    self._apply_composable_to_builder_adapter(candidate)
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1092: in _apply_composable_to_builder_adapter
+    self.builder.add(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:304: in __call__
+    return _NamedAdder(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:269: in __call__
+    self.graph.add_instance(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=BasicComposable(tree=<ast.Module object at 0x1...verlay=EdgeSourceOverlay(arg_names=(), keep_names=frozenset(), bind_values=()))], _assigns=[], _identifier_bindings=[])
+name = 'Release'
+composable = BasicComposable(tree=<ast.Module object at 0x109d81910>, origin=CompileOrigin(file_name='dataclass/dataclass_core.yidl...'copyright', 'Exception', 'ChildProcessError', 'InterruptedError', 'MemoryError', 'AssertionError', 'oct', 'compile'}))
+placement = RootCapableInstancePlacement()
+
+    def add_instance(
+        self,
+        name: str,
+        composable: Composable,
+        *,
+        placement: InstancePlacement = ROOT_CAPABLE_INSTANCE,
+    ) -> InstanceRecord:
+        """Register a named composable instance."""
+        parsed = parse_indexed_instance_name(name)
+        if not name.isidentifier() and parsed is None:
+            raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"instance name must be a valid identifier: {name!r}",
+                    hint="use `builder.add.<Name>(...)` or `builder.add.<Name>[i](...)` with integer indexes",
+                )
+            )
+        if name in self._instances:
+>           raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"duplicate instance name: {name}",
+                    hint="choose a unique instance name for each `builder.add`",
+                )
+            )
+E           ValueError: build: duplicate instance name: Release; hint: choose a unique instance name for each `builder.add`
+
+.venv/lib/python3.12/site-packages/astichi/builder/graph.py:233: ValueError
+_____________ test_lazy_failure_is_unready_and_retries[converter] ______________
+
+role = 'converter'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:196: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1213: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1210: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1017: in build
+    return self._build_with_adapter(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1020: in _build_with_adapter
+    self._flush_deferred_composable_adapter_edges()
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1085: in _flush_deferred_composable_adapter_edges
+    self._apply_composable_to_builder_adapter(candidate)
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1092: in _apply_composable_to_builder_adapter
+    self.builder.add(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:304: in __call__
+    return _NamedAdder(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:269: in __call__
+    self.graph.add_instance(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=BasicComposable(tree=<ast.Module object at 0x1...verlay=EdgeSourceOverlay(arg_names=(), keep_names=frozenset(), bind_values=()))], _assigns=[], _identifier_bindings=[])
+name = 'Release'
+composable = BasicComposable(tree=<ast.Module object at 0x109d81910>, origin=CompileOrigin(file_name='dataclass/dataclass_core.yidl...'copyright', 'Exception', 'ChildProcessError', 'InterruptedError', 'MemoryError', 'AssertionError', 'oct', 'compile'}))
+placement = RootCapableInstancePlacement()
+
+    def add_instance(
+        self,
+        name: str,
+        composable: Composable,
+        *,
+        placement: InstancePlacement = ROOT_CAPABLE_INSTANCE,
+    ) -> InstanceRecord:
+        """Register a named composable instance."""
+        parsed = parse_indexed_instance_name(name)
+        if not name.isidentifier() and parsed is None:
+            raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"instance name must be a valid identifier: {name!r}",
+                    hint="use `builder.add.<Name>(...)` or `builder.add.<Name>[i](...)` with integer indexes",
+                )
+            )
+        if name in self._instances:
+>           raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"duplicate instance name: {name}",
+                    hint="choose a unique instance name for each `builder.add`",
+                )
+            )
+E           ValueError: build: duplicate instance name: Release; hint: choose a unique instance name for each `builder.add`
+
+.venv/lib/python3.12/site-packages/astichi/builder/graph.py:233: ValueError
+_____________ test_lazy_failure_is_unready_and_retries[validator] ______________
+
+role = 'validator'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:196: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1213: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1210: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1017: in build
+    return self._build_with_adapter(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1020: in _build_with_adapter
+    self._flush_deferred_composable_adapter_edges()
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1085: in _flush_deferred_composable_adapter_edges
+    self._apply_composable_to_builder_adapter(candidate)
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1092: in _apply_composable_to_builder_adapter
+    self.builder.add(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:304: in __call__
+    return _NamedAdder(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:269: in __call__
+    self.graph.add_instance(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=BasicComposable(tree=<ast.Module object at 0x1...verlay=EdgeSourceOverlay(arg_names=(), keep_names=frozenset(), bind_values=()))], _assigns=[], _identifier_bindings=[])
+name = 'Release'
+composable = BasicComposable(tree=<ast.Module object at 0x109d81910>, origin=CompileOrigin(file_name='dataclass/dataclass_core.yidl...'copyright', 'Exception', 'ChildProcessError', 'InterruptedError', 'MemoryError', 'AssertionError', 'oct', 'compile'}))
+placement = RootCapableInstancePlacement()
+
+    def add_instance(
+        self,
+        name: str,
+        composable: Composable,
+        *,
+        placement: InstancePlacement = ROOT_CAPABLE_INSTANCE,
+    ) -> InstanceRecord:
+        """Register a named composable instance."""
+        parsed = parse_indexed_instance_name(name)
+        if not name.isidentifier() and parsed is None:
+            raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"instance name must be a valid identifier: {name!r}",
+                    hint="use `builder.add.<Name>(...)` or `builder.add.<Name>[i](...)` with integer indexes",
+                )
+            )
+        if name in self._instances:
+>           raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"duplicate instance name: {name}",
+                    hint="choose a unique instance name for each `builder.add`",
+                )
+            )
+E           ValueError: build: duplicate instance name: Release; hint: choose a unique instance name for each `builder.add`
+
+.venv/lib/python3.12/site-packages/astichi/builder/graph.py:233: ValueError
+____________ test_lazy_failure_is_unready_and_retries[cancellation] ____________
+
+role = 'cancellation'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:196: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1213: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1210: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1017: in build
+    return self._build_with_adapter(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1020: in _build_with_adapter
+    self._flush_deferred_composable_adapter_edges()
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1085: in _flush_deferred_composable_adapter_edges
+    self._apply_composable_to_builder_adapter(candidate)
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1092: in _apply_composable_to_builder_adapter
+    self.builder.add(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:304: in __call__
+    return _NamedAdder(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:269: in __call__
+    self.graph.add_instance(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=BasicComposable(tree=<ast.Module object at 0x1...verlay=EdgeSourceOverlay(arg_names=(), keep_names=frozenset(), bind_values=()))], _assigns=[], _identifier_bindings=[])
+name = 'Release'
+composable = BasicComposable(tree=<ast.Module object at 0x109d81910>, origin=CompileOrigin(file_name='dataclass/dataclass_core.yidl...'copyright', 'Exception', 'ChildProcessError', 'InterruptedError', 'MemoryError', 'AssertionError', 'oct', 'compile'}))
+placement = RootCapableInstancePlacement()
+
+    def add_instance(
+        self,
+        name: str,
+        composable: Composable,
+        *,
+        placement: InstancePlacement = ROOT_CAPABLE_INSTANCE,
+    ) -> InstanceRecord:
+        """Register a named composable instance."""
+        parsed = parse_indexed_instance_name(name)
+        if not name.isidentifier() and parsed is None:
+            raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"instance name must be a valid identifier: {name!r}",
+                    hint="use `builder.add.<Name>(...)` or `builder.add.<Name>[i](...)` with integer indexes",
+                )
+            )
+        if name in self._instances:
+>           raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"duplicate instance name: {name}",
+                    hint="choose a unique instance name for each `builder.add`",
+                )
+            )
+E           ValueError: build: duplicate instance name: Release; hint: choose a unique instance name for each `builder.add`
+
+.venv/lib/python3.12/site-packages/astichi/builder/graph.py:233: ValueError
+____________ test_opaque_recursion_busy_guard_clears_after_failure _____________
+
+    def test_opaque_recursion_busy_guard_clears_after_failure():
+        repeat=[True]
+        def factory(self):
+            return self.value if repeat[0] else 3
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:196: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1213: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1210: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1017: in build
+    return self._build_with_adapter(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1020: in _build_with_adapter
+    self._flush_deferred_composable_adapter_edges()
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1085: in _flush_deferred_composable_adapter_edges
+    self._apply_composable_to_builder_adapter(candidate)
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1092: in _apply_composable_to_builder_adapter
+    self.builder.add(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:304: in __call__
+    return _NamedAdder(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:269: in __call__
+    self.graph.add_instance(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=BasicComposable(tree=<ast.Module object at 0x1...verlay=EdgeSourceOverlay(arg_names=(), keep_names=frozenset(), bind_values=()))], _assigns=[], _identifier_bindings=[])
+name = 'Release'
+composable = BasicComposable(tree=<ast.Module object at 0x109d81910>, origin=CompileOrigin(file_name='dataclass/dataclass_core.yidl...'copyright', 'Exception', 'ChildProcessError', 'InterruptedError', 'MemoryError', 'AssertionError', 'oct', 'compile'}))
+placement = RootCapableInstancePlacement()
+
+    def add_instance(
+        self,
+        name: str,
+        composable: Composable,
+        *,
+        placement: InstancePlacement = ROOT_CAPABLE_INSTANCE,
+    ) -> InstanceRecord:
+        """Register a named composable instance."""
+        parsed = parse_indexed_instance_name(name)
+        if not name.isidentifier() and parsed is None:
+            raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"instance name must be a valid identifier: {name!r}",
+                    hint="use `builder.add.<Name>(...)` or `builder.add.<Name>[i](...)` with integer indexes",
+                )
+            )
+        if name in self._instances:
+>           raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"duplicate instance name: {name}",
+                    hint="choose a unique instance name for each `builder.add`",
+                )
+            )
+E           ValueError: build: duplicate instance name: Release; hint: choose a unique instance name for each `builder.add`
+
+.venv/lib/python3.12/site-packages/astichi/builder/graph.py:233: ValueError
+__________ test_concurrent_access_and_set_delete_while_busy_rejected ___________
+
+    def test_concurrent_access_and_set_delete_while_busy_rejected():
+        entered=threading.Event(); release=threading.Event(); results=[]
+        def factory():
+            entered.set()
+            assert release.wait(5)
+            return 7
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:196: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1213: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1210: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1017: in build
+    return self._build_with_adapter(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1020: in _build_with_adapter
+    self._flush_deferred_composable_adapter_edges()
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1085: in _flush_deferred_composable_adapter_edges
+    self._apply_composable_to_builder_adapter(candidate)
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1092: in _apply_composable_to_builder_adapter
+    self.builder.add(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:304: in __call__
+    return _NamedAdder(
+.venv/lib/python3.12/site-packages/astichi/builder/handles.py:269: in __call__
+    self.graph.add_instance(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=BasicComposable(tree=<ast.Module object at 0x1...verlay=EdgeSourceOverlay(arg_names=(), keep_names=frozenset(), bind_values=()))], _assigns=[], _identifier_bindings=[])
+name = 'Release'
+composable = BasicComposable(tree=<ast.Module object at 0x109d81910>, origin=CompileOrigin(file_name='dataclass/dataclass_core.yidl...'copyright', 'Exception', 'ChildProcessError', 'InterruptedError', 'MemoryError', 'AssertionError', 'oct', 'compile'}))
+placement = RootCapableInstancePlacement()
+
+    def add_instance(
+        self,
+        name: str,
+        composable: Composable,
+        *,
+        placement: InstancePlacement = ROOT_CAPABLE_INSTANCE,
+    ) -> InstanceRecord:
+        """Register a named composable instance."""
+        parsed = parse_indexed_instance_name(name)
+        if not name.isidentifier() and parsed is None:
+            raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"instance name must be a valid identifier: {name!r}",
+                    hint="use `builder.add.<Name>(...)` or `builder.add.<Name>[i](...)` with integer indexes",
+                )
+            )
+        if name in self._instances:
+>           raise ValueError(
+                format_astichi_error(
+                    "build",
+                    f"duplicate instance name: {name}",
+                    hint="choose a unique instance name for each `builder.add`",
+                )
+            )
+E           ValueError: build: duplicate instance name: Release; hint: choose a unique instance name for each `builder.add`
+
+.venv/lib/python3.12/site-packages/astichi/builder/graph.py:233: ValueError
+____________________ test_canonical_case[dataclass_lazy.py] ____________________
+
+case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1550/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:13: in render_case
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:199: in decorate
+    exec(
+<yidl-dataclass-model>:64: in <module>
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: name 'total__astichi_scoped_1' is not defined
+
+<yidl-dataclass-model>:54: NameError
+=========================== short test summary info ============================
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[factory]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[converter]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[validator]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[cancellation]
+FAILED tests/test_lazy_failures.py::test_opaque_recursion_busy_guard_clears_after_failure
+FAILED tests/test_lazy_failures.py::test_concurrent_access_and_set_delete_while_busy_rejected
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_lazy.py] - N...
+7 failed, 1 passed in 2.57s

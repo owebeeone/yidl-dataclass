@@ -1,0 +1,54 @@
+{
+  "absolute_path_or_hostname_matches": 0,
+  "artifact_references": 188,
+  "final_full_runs": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-d/d13-final-native-rust-312-verification.junit.xml",
+      "skipped": 3,
+      "tests": 198
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-d/d13-final-native-rust-313-verification.junit.xml",
+      "skipped": 2,
+      "tests": 198
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-d/d13-final-native-rust-314-verification.junit.xml",
+      "skipped": 1,
+      "tests": 198
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-d/d13-final-python-312-verification.junit.xml",
+      "skipped": 3,
+      "tests": 198
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-d/d13-final-python-313-verification.junit.xml",
+      "skipped": 2,
+      "tests": 198
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-d/d13-final-python-314-verification.junit.xml",
+      "skipped": 1,
+      "tests": 198
+    }
+  ],
+  "increments": 117,
+  "junit_files": 71,
+  "owned_sdk_changes": false,
+  "owned_text_hygiene_files": 443,
+  "raw_hashes_verified": 188,
+  "sanitized_hashes_verified": 188
+}

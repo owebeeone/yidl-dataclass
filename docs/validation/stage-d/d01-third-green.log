@@ -1,0 +1,160 @@
+FF.F...F                                                                 [100%]
+=================================== FAILURES ===================================
+______________ test_lazy_failure_is_unready_and_retries[factory] _______________
+
+role = 'factory'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(value=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return str(value) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:155: in harvest
+    steps, calls, planned = plan_initialization(
+src/yidl_dataclass/provider_plan.py:157: in plan_initialization
+    check_cycle(item.name)
+src/yidl_dataclass/provider_plan.py:152: in check_cycle
+    check_cycle(provider)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'value'
+
+    def check_cycle(name):
+        if name in active:
+            path = active[active.index(name) :] + [name]
+>           raise DataclassDefinitionError(
+                f"{cls.__qualname__}: factory cycle {' -> '.join(path)}"
+            )
+E           yidl_dataclass.errors.DataclassDefinitionError: test_lazy_failure_is_unready_and_retries.<locals>.Retry: factory cycle value -> value
+
+src/yidl_dataclass/provider_plan.py:145: DataclassDefinitionError
+_____________ test_lazy_failure_is_unready_and_retries[converter] ______________
+
+role = 'converter'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(value=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return str(value) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+        with pytest.raises(error_type) as caught:instance.value
+        assert caught.value is original if role=="cancellation" else caught.value.__cause__ is original
+>       assert instance.value==2
+E       AssertionError: assert '2' == 2
+E        +  where '2' = <test_lazy_failures.test_lazy_failure_is_unready_and_retries.<locals>.Retry object at 0x108c68100>.value
+
+tests/test_lazy_failures.py:24: AssertionError
+____________ test_lazy_failure_is_unready_and_retries[cancellation] ____________
+
+role = 'cancellation'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(value=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return str(value) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+>       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:155: in harvest
+    steps, calls, planned = plan_initialization(
+src/yidl_dataclass/provider_plan.py:157: in plan_initialization
+    check_cycle(item.name)
+src/yidl_dataclass/provider_plan.py:152: in check_cycle
+    check_cycle(provider)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'value'
+
+    def check_cycle(name):
+        if name in active:
+            path = active[active.index(name) :] + [name]
+>           raise DataclassDefinitionError(
+                f"{cls.__qualname__}: factory cycle {' -> '.join(path)}"
+            )
+E           yidl_dataclass.errors.DataclassDefinitionError: test_lazy_failure_is_unready_and_retries.<locals>.Retry: factory cycle value -> value
+
+src/yidl_dataclass/provider_plan.py:145: DataclassDefinitionError
+____________________ test_canonical_case[dataclass_lazy.py] ____________________
+
+case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1548/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+            source_path, runpy.run_path(str(source_path))["render_case"]()
+        )
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        manifest_path = expected / "runtime_manifest.json"
+        manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+        minor = f"py{sys.version_info.major}{sys.version_info.minor}"
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+            expected_name = manifest.get(name, {}).get(minor, name)
+>           assert actual == (expected / expected_name).read_text(), name
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('[consumer-root]/tests/data/goldens/materialized/dataclass_lazy/generated_output.py')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '[consumer-root]/tests/data/goldens/materialized/dataclass_lazy/generated_output.py'
+
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1013: FileNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[factory]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[converter]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[cancellation]
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_lazy.py] - F...
+4 failed, 4 passed in 4.76s

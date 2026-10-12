@@ -1,0 +1,17 @@
+{
+  "purpose": "Independent installed C constructor-name counterexample before D correction",
+  "stage_c_wheel_sha256": "602024966e2b034fb6e484283da06abebeea6aee4ec05f6d523d88ed33fe5d3a",
+  "python": "3.12.12",
+  "results": [
+    {
+      "backend": "native-rust",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"<yidl-dataclass-model>\", line 1, in __init__\n  File \"owner-exception-name-probe.py\", line 5, in fail\n    def fail():raise ValueError('original callback')\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: original callback\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"owner-exception-name-probe.py\", line 10, in <module>\n    try:Names()\n        ^^^^^^^\n  File \"<yidl-dataclass-model>\", line 1, in __init__\nTypeError: catching classes that do not inherit from BaseException is not allowed\n"
+    },
+    {
+      "backend": "python",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"<yidl-dataclass-model>\", line 108, in __init__\n  File \"owner-exception-name-probe.py\", line 5, in fail\n    def fail():raise ValueError('original callback')\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: original callback\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"owner-exception-name-probe.py\", line 10, in <module>\n    try:Names()\n        ^^^^^^^\n  File \"<yidl-dataclass-model>\", line 111, in __init__\nTypeError: catching classes that do not inherit from BaseException is not allowed\n"
+    }
+  ]
+}

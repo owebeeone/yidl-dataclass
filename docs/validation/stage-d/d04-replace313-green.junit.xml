@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.499" timestamp="2026-10-12T23:26:27.840234+11:00" hostname="[host]"><testcase classname="tests.test_copy_helpers" name="test_copy_replace_version_method_and_local_override" time="0.022" /></testsuite></testsuites>

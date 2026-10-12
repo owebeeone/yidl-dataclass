@@ -1,0 +1,2 @@
+[('total', 4, 5, 'Lazy'), ('cache', 4), ('cache', 8)]
+seeded=99; immutable-cache=20; reset-current=9; eager-lazy=9; slots=True

@@ -1,0 +1,42 @@
+.........F.                                                              [100%]
+=================================== FAILURES ===================================
+____________________ test_canonical_case[dataclass_lazy.py] ____________________
+
+self = <<run_path>.render_case.<locals>.Lazy object at 0x109f6ee30>
+value = '40'
+
+>   ???
+E   UnboundLocalError: cannot access local variable 'value__astichi_scoped_1' where it is not associated with a value
+
+<yidl-dataclass-model>:48: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1564/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:31: in render_case
+    first.cache="40"
+    ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <<run_path>.render_case.<locals>.Lazy object at 0x109f6ee30>
+value = '40'
+
+>   ???
+E   yidl_dataclass.errors.FieldConversionError: render_case.<locals>.Lazy.cache: converter failed
+
+<yidl-dataclass-model>:52: FieldConversionError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_lazy.py] - y...
+1 failed, 10 passed in 7.97s

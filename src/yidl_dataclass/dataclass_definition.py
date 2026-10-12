@@ -4,6 +4,8 @@ from __future__ import annotations
 from dataclasses import dataclass, Field, field as support_field
 from typing import Any
 from .provider_plan import FactoryCall, InitializationStep
+from .dataclass_markers import FieldPolicy
+from .retention_plan import RetainedProvider
 from .field_kinds import FieldKind, OrdinaryKind
 
 
@@ -41,6 +43,11 @@ class StorageField:
     store_name: str = ""
     has_accessor: bool = False
     dependencies: tuple[str, ...] = ()
+    ready_name: str = ""
+    busy_name: str = ""
+    provider_name: str = ""
+    inherited: bool = False
+    policy: FieldPolicy = support_field(default_factory=FieldPolicy)
 
 
 @dataclass(frozen=True, slots=True)
@@ -53,4 +60,5 @@ class DataclassDefinition:
     factory_calls: tuple[FactoryCall, ...] = ()
     planned_init: bool = False
     policy_class: bool = False
+    retention: tuple[RetainedProvider, ...] = ()
     generation_schema: int = 1

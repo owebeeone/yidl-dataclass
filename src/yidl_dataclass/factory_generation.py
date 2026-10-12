@@ -11,6 +11,10 @@ from .errors import (
 
 def add_initialization_facts(generated, builder, definition, declaration, captures):
     captures.update(
+        _y_dc_type=type,
+        _y_dc_Exception=Exception,
+        _y_dc_TypeError=TypeError,
+        _y_dc_AttributeError=AttributeError,
         _y_dc_ContextErrors=(
             DataclassDefinitionError,
             FieldInitializationError,
@@ -41,6 +45,9 @@ def add_initialization_facts(generated, builder, definition, declaration, captur
                 factory_name=item.factory_name,
                 default_name=item.default_name,
                 candidate_input=step.input,
+                candidate_lazy=step.lazy,
+                materialize_lazy=step.materialize,
+                candidate_ready_name=item.ready_name,
                 candidate_factory=step.factory,
                 has_factory_arguments=(
                     bool(calls[item.name].arguments) if item.name in calls else False
@@ -49,7 +56,11 @@ def add_initialization_facts(generated, builder, definition, declaration, captur
                 candidate_fallback=step.fallback,
                 class_provider=step.class_provider,
                 install_value=step.install,
-                store_name=item.store_name or item.name,
+                store_name=(
+                    item.provider_name
+                    if item.retained
+                    else item.store_name or item.name
+                ),
                 factory_message=f"{declaration.__qualname__}.{item.name}: factory failed",
             ),
         )
@@ -70,6 +81,18 @@ def add_initialization_facts(generated, builder, definition, declaration, captur
                     captured_argument=bool(argument.capture),
                     argument_capture=argument.capture,
                     provider_value=values.get(argument.provider, ""),
+                    delayed_path=(
+                        (
+                            by_name[argument.provider].provider_name
+                            or by_name[argument.provider].name
+                        )
+                        if argument.provider
+                        else ""
+                    ),
+                    delayed_class_provider=bool(
+                        argument.provider
+                        and by_name[argument.provider].kind.label == "classvar"
+                    ),
                 ),
             )
             argument_identity += 1

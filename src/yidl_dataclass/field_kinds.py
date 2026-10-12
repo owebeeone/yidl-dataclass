@@ -48,3 +48,11 @@ class ConstKind(OrdinaryKind):
     mandatory_source = True
     extension_init = True
     class_fallback = False
+
+
+class LazyKind(OrdinaryKind):
+    __slots__ = ()
+    label = "lazy"
+    mandatory_source = True
+    extension_init = True
+    class_fallback = False

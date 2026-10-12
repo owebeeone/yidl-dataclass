@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.598" timestamp="2026-10-12T22:55:34.226588+11:00" hostname="[host]"><testcase classname="tests.test_lazy_retention" name="test_failed_terminal_preserves_provider_and_successful_prerequisite_cache" time="0.281"><failure message="AttributeError: module 'yidl_dataclass._generated_dataclass_base' has no attribute 'ReleaseSitesCollection'. Did you mean: 'PipelineSitesCollection'?">def test_failed_terminal_preserves_provider_and_successful_prerequisite_cache():
+        calls=[];fail=[True]
+        def make_second(seed,first):
+            calls.append("second")
+            if fail[0]:raise ValueError("retry")
+            return seed+first
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_retention.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:197: in decorate
+    add_retention_facts(generated, builder, definition)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x109017530&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa..., retention=(RetainedProvider(field_name='seed', consumers=('first', 'second'), lifetime=False),), generation_schema=1)
+
+    def add_retention_facts(generated,builder,definition):
+        by_name={item.name:item for item in definition.fields}
+        site_identity=0;check_identity=0
+        for provider in definition.retention:
+            if provider.lifetime:continue
+            for consumer in provider.consumers:
+                site_id=f"Model.{consumer}.{provider.field_name}"
+&gt;               builder.add(generated.ReleaseSitesCollection,generated.DataclassReleaseSite(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    release_site_id=site_id,release_owner=f"Model.{consumer}",release_provider_path=by_name[provider.field_name].provider_name,release_identity=site_identity))
+E               AttributeError: module 'yidl_dataclass._generated_dataclass_base' has no attribute 'ReleaseSitesCollection'. Did you mean: 'PipelineSitesCollection'?
+
+src/yidl_dataclass/retention_generation.py:11: AttributeError</failure></testcase><testcase classname="tests.test_lazy_retention" name="test_seeded_nonresettable_consumers_release_without_factory_evaluation" time="0.023"><failure message="AttributeError: module 'yidl_dataclass._generated_dataclass_base' has no attribute 'ReleaseSitesCollection'. Did you mean: 'PipelineSitesCollection'?">def test_seeded_nonresettable_consumers_release_without_factory_evaluation():
+        def forbidden(seed):raise AssertionError("seeded cache evaluated")
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_retention.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:197: in decorate
+    add_retention_facts(generated, builder, definition)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x10a0bca10&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa..., retention=(RetainedProvider(field_name='seed', consumers=('first', 'second'), lifetime=False),), generation_schema=1)
+
+    def add_retention_facts(generated,builder,definition):
+        by_name={item.name:item for item in definition.fields}
+        site_identity=0;check_identity=0
+        for provider in definition.retention:
+            if provider.lifetime:continue
+            for consumer in provider.consumers:
+                site_id=f"Model.{consumer}.{provider.field_name}"
+&gt;               builder.add(generated.ReleaseSitesCollection,generated.DataclassReleaseSite(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    release_site_id=site_id,release_owner=f"Model.{consumer}",release_provider_path=by_name[provider.field_name].provider_name,release_identity=site_identity))
+E               AttributeError: module 'yidl_dataclass._generated_dataclass_base' has no attribute 'ReleaseSitesCollection'. Did you mean: 'PipelineSitesCollection'?
+
+src/yidl_dataclass/retention_generation.py:11: AttributeError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy_retention.py]" time="0.042"><failure message="AttributeError: module 'yidl_dataclass._generated_dataclass_base' has no attribute 'ReleaseSitesCollection'. Did you mean: 'PipelineSitesCollection'?">case = 'dataclass_lazy_retention.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1555/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy_retention.py:10: in render_case
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:197: in decorate
+    add_retention_facts(generated, builder, definition)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x10a0bf6e0&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa..., retention=(RetainedProvider(field_name='seed', consumers=('first', 'second'), lifetime=False),), generation_schema=1)
+
+    def add_retention_facts(generated,builder,definition):
+        by_name={item.name:item for item in definition.fields}
+        site_identity=0;check_identity=0
+        for provider in definition.retention:
+            if provider.lifetime:continue
+            for consumer in provider.consumers:
+                site_id=f"Model.{consumer}.{provider.field_name}"
+&gt;               builder.add(generated.ReleaseSitesCollection,generated.DataclassReleaseSite(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    release_site_id=site_id,release_owner=f"Model.{consumer}",release_provider_path=by_name[provider.field_name].provider_name,release_identity=site_identity))
+E               AttributeError: module 'yidl_dataclass._generated_dataclass_base' has no attribute 'ReleaseSitesCollection'. Did you mean: 'PipelineSitesCollection'?
+
+src/yidl_dataclass/retention_generation.py:11: AttributeError</failure></testcase></testsuite></testsuites>

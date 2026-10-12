@@ -1,0 +1,101 @@
+module dataclass.lazy_init
+import "dataclass_lazy.yidl" as lazy
+export concept DataclassLazyInit
+
+concept DataclassLazyInit extends lazy.DataclassLazy {
+    resource LazyInitShell = template $[
+        def __init__(self, params__astichi_param_hole__):
+            astichi_hole(flags)
+            astichi_hole(stores)
+    ]$ { keep __init__, self }
+    resource InitializeLazyFlags = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=ready_path)._ = False
+        astichi_pass(self, outer_bind=True).astichi_ref(external=busy_path)._ = False
+    ]$
+    resource LazySeedCandidate = template $[
+        if astichi_pass(input_name__astichi_arg__, outer_bind=True) is not _y_dc_factory_sentinel:
+            value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
+            astichi_hole(pipeline)
+            astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = value_name__astichi_arg__
+            astichi_pass(self, outer_bind=True).astichi_ref(external=ready_path)._ = True
+            astichi_hole(release)
+        astichi_hole(materialize)
+    ]$ { keep _y_dc_factory_sentinel }
+    resource LazyDeferredCandidate = code $[
+        astichi_hole(materialize)
+    ]$
+    resource MaterializeCandidate = template $[
+        value_name__astichi_arg__ = astichi_pass(self, outer_bind=True).astichi_ref(external=field_path)
+        astichi_export(value_name__astichi_arg__)
+    ]$
+    contribution LazyFlag = InitializeLazyFlags {
+        as Flag
+        index AccessorOrder
+        order AccessorOrder
+        target flags { build /InitMethod }
+        external ready_path = ReadyName
+        external busy_path = BusyName
+    }
+    contribution EmptyFlags = EmptyStatement { as EmptyFlags target flags { build /InitMethod } }
+    matcher LazyFlags(field: PolicyFields, cls: Classes) -> contribution { rule lazy when IsLazy == True -> LazyFlag }
+    matcher EmptyFlagContributions(cls: Classes) -> contribution { default -> EmptyFlags }
+    contribution LazySeedStep = LazySeedProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    contribution LazyDeferredStep = LazyDeferredProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    contribution Materialize = MaterializeCandidate {
+        as Materialize
+        index ConstructorOrder
+        target materialize { build /Candidate }
+        ident value_name = ValueName
+        external field_path = FieldName
+    }
+    contribution SkipMaterialize = EmptyStatement { as Materialize index ConstructorOrder target materialize { build /Candidate } }
+    matcher MaterializeContributions(step: InitializationFields, cls: Classes) -> contribution {
+        default -> SkipMaterialize
+        rule eager when MaterializeLazy == True -> Materialize
+    }
+    matcher InitializationStepContributions(step: InitializationFields, cls: Classes) -> contribution {
+        rule lazy_input when CandidateLazy == True and CandidateInput == True -> LazySeedStep weight 3
+        rule lazy_deferred when CandidateLazy == True and CandidateInput == False -> LazyDeferredStep weight 3
+    }
+    contribution SeedNoRelease = EmptyStatement { as SeedEmptyRelease index ConstructorOrder target release { build /Candidate } }
+    matcher SeedReleaseContributions(step: InitializationFields, cls: Classes) -> contribution { default -> SeedNoRelease }
+    production LazySeedProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = LazySeedCandidate {
+            ident input_name = FieldName
+            ident value_name = ValueName
+            external store_path = StoreName
+            external ready_path = CandidateReadyName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+        apply release using SeedReleaseContributions
+        apply providers from site: ReleaseSites where ReleaseOwner == FieldId and ReleaseConstructor == True using DirectConstructorReleaseContributions
+        apply materialize using MaterializeContributions
+    }
+    production LazyDeferredProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = LazyDeferredCandidate
+        apply materialize using MaterializeContributions
+    }
+    contribution LazyInit = LazyPlannedInitProduction { as InitMethod target methods { build /ClassDef } }
+    matcher InitContributions(cls: Classes) -> contribution {
+        rule lazy_init when HasLazy == True and GenerateInit == True -> LazyInit weight 3
+    }
+    production LazyPlannedInitProduction(cls: Classes) -> composable {
+        root InitMethod = LazyInitShell
+        apply empty_params using EmptyParamsContributions
+        apply params from field: Fields where FieldOwner == ClassId using ParamContributions
+        apply empty_flags using EmptyFlagContributions
+        apply flags from field: PolicyFields where FieldOwner == ClassId using LazyFlags
+        apply empty_stores using EmptyStoresContributions
+        apply steps from step: InitializationFields where FieldOwner == ClassId using InitializationStepContributions
+    }
+}

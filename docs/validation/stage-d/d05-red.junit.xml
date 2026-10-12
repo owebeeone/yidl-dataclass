@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.622" timestamp="2026-10-12T23:27:14.345508+11:00" hostname="[host]"><testcase classname="tests.test_inheritance_annotations" name="test_class_cell_clone_does_not_evaluate_lazy_function_annotations" time="0.506"><failure message="AssertionError: assert ['annotation'] == []&#10;  &#10;  Left contains one more item: 'annotation'&#10;  Use -v to get more diff">@pytest.mark.skipif(sys.version_info[:2]!=(3,14),reason="lazy function annotations are a CPython 3.14 contract")
+    def test_class_cell_clone_does_not_evaluate_lazy_function_annotations():
+        events=[]
+        def mark():
+            events.append("annotation")
+            return int
+        class Declaration:
+            value:int=2
+            def own(self, argument:mark())-&gt;__class__:
+                return __class__
+        model=dataclass(Declaration)
+&gt;       assert events==[]
+E       AssertionError: assert ['annotation'] == []
+E         
+E         Left contains one more item: 'annotation'
+E         Use -v to get more diff
+
+tests/test_inheritance_annotations.py:18: AssertionError</failure></testcase><testcase classname="tests.test_inheritance_annotations" name="test_cloned_property_preserves_explicit_name_metadata" time="0.022"><failure message="AssertionError: assert 'label' == 'authored_name'&#10;  &#10;  - authored_name&#10;  + label">@pytest.mark.skipif(sys.version_info[:2]&lt;(3,13),reason="property name metadata starts in CPython 3.13")
+    def test_cloned_property_preserves_explicit_name_metadata():
+        class Declaration:
+            value:int=2
+            @property
+            def label(self):return __class__.__name__
+        Declaration.label.__name__="authored_name"
+        model=dataclass(Declaration)
+&gt;       assert model.label.__name__=="authored_name"
+E       AssertionError: assert 'label' == 'authored_name'
+E         
+E         - authored_name
+E         + label
+
+tests/test_inheritance_annotations.py:33: AssertionError</failure></testcase></testsuite></testsuites>

@@ -4,8 +4,13 @@ from dataclasses import replace, MISSING, InitVar
 import inspect
 import types
 import typing
-from .dataclass_markers import FieldDeclaration, ConstDeclaration, FieldPolicy
-from .field_kinds import ConstKind
+from .dataclass_markers import (
+    FieldDeclaration,
+    ConstDeclaration,
+    LazyDeclaration,
+    FieldPolicy,
+)
+from .field_kinds import ConstKind, LazyKind
 from .errors import DataclassDefinitionError
 
 _PRIMITIVES = (int, float, str, bytes, bool)
@@ -49,15 +54,21 @@ def normalize_policies(cls, fields, options, captures):
         )
     result = []
     for index, item in enumerate(fields):
-        declaration = inspect.getattr_static(cls, item.name, MISSING)
+        declaration = cls.__dict__.get(item.name, MISSING)
         policy = (
             declaration.policy
             if isinstance(declaration, FieldDeclaration)
-            else FieldPolicy()
+            else item.policy if item.inherited else FieldPolicy()
         )
         if isinstance(declaration, ConstDeclaration) and item.kind.label != "ordinary":
             raise DataclassDefinitionError(f"{item.name}: annotation kind conflict")
-        kind = ConstKind() if isinstance(declaration, ConstDeclaration) else item.kind
+        if isinstance(declaration, LazyDeclaration) and item.kind.label != "ordinary":
+            raise DataclassDefinitionError(f"{item.name}: annotation kind conflict")
+        kind = (
+            ConstKind()
+            if isinstance(declaration, ConstDeclaration)
+            else LazyKind() if isinstance(declaration, LazyDeclaration) else item.kind
+        )
         converter = policy.converter
         nullable = False
         if kind.label == "classvar":
@@ -99,7 +110,9 @@ def normalize_policies(cls, fields, options, captures):
         if policy.validator is not None:
             callback_contract(cls, item.name, "validator", policy.validator)
         has_pipeline = converter is not None or policy.validator is not None
-        has_accessor = kind.stored and (not mutable or has_pipeline)
+        has_accessor = kind.stored and (
+            kind.label == "lazy" or not mutable or has_pipeline
+        )
         if (
             options.frozen
             and kind.stored
@@ -114,12 +127,15 @@ def normalize_policies(cls, fields, options, captures):
             replace(
                 item,
                 kind=kind,
+                policy=policy,
                 mutable=mutable,
                 converter=converter,
                 validator=policy.validator,
                 nullable_converter=nullable,
                 store_name=store_name,
                 has_accessor=has_accessor,
+                ready_name=f"_y_dc_ready_{index}" if kind.label == "lazy" else "",
+                busy_name=f"_y_dc_busy_{index}" if kind.label == "lazy" else "",
             )
         )
         if converter is not None:
@@ -132,6 +148,8 @@ def normalize_policies(cls, fields, options, captures):
                 f"_y_dc_validation_message_{index}": f"{cls.__qualname__}.{item.name}: validator failed",
                 f"_y_dc_validation_rejected_{index}": f"{cls.__qualname__}.{item.name}: validator rejected value",
                 f"_y_dc_validation_contract_{index}": f"{cls.__qualname__}.{item.name}: validator must return None, True or False",
+                f"_y_dc_factory_message_{index}": f"{cls.__qualname__}.{item.name}: factory failed",
+                f"_y_dc_lazy_message_{index}": f"{cls.__qualname__}.{item.name}: lazy field busy or reentered",
                 f"_y_dc_frozen_message_{index}": f"{cls.__qualname__}.{item.name}: cannot replace/delete read-only field {item.name}",
             }
         )
@@ -151,6 +169,14 @@ def normalize_policies(cls, fields, options, captures):
                 "__reduce__",
                 "__reduce_ex__",
             ):
+                owned = base.__dict__.get("__yidl_generated_copy_methods__")
+                if (
+                    "__yidl_dataclass_definition__" in base.__dict__
+                    and type(owned) is types.MappingProxyType
+                    and name in owned
+                    and owned[name] is base.__dict__.get(name)
+                ):
+                    continue
                 if name in base.__dict__:
                     raise DataclassDefinitionError(
                         f"{cls.__qualname__}: policy interceptor {name} is unsupported"

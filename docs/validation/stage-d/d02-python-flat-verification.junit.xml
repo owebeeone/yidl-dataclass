@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="11" time="6.483" timestamp="2026-10-12T23:02:16.062161+11:00" hostname="[host]"><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[factory]" time="0.352"><failure message="yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry.value: converter failed">self = &lt;test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry object at 0x108397000&gt;
+
+&gt;   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+&lt;yidl-dataclass-model&gt;:85: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+role = 'factory'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+        with pytest.raises(error_type) as caught:instance.value
+        assert caught.value is original if role=="cancellation" else caught.value.__cause__ is original
+&gt;       assert instance.value==2
+               ^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry object at 0x108397000&gt;
+
+&gt;   ???
+E   yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry.value: converter failed
+
+&lt;yidl-dataclass-model&gt;:89: FieldConversionError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[converter]" time="0.051"><failure message="assert False">role = 'converter'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+        with pytest.raises(error_type) as caught:instance.value
+&gt;       assert caught.value is original if role=="cancellation" else caught.value.__cause__ is original
+E       assert False
+
+tests/test_lazy_failures.py:23: AssertionError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[validator]" time="0.062"><failure message="yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry.value: converter failed">self = &lt;test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry object at 0x108087400&gt;
+
+&gt;   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+&lt;yidl-dataclass-model&gt;:85: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+role = 'validator'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+&gt;       with pytest.raises(error_type) as caught:instance.value
+                                                 ^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry object at 0x108087400&gt;
+
+&gt;   ???
+E   yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry.value: converter failed
+
+&lt;yidl-dataclass-model&gt;:89: FieldConversionError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[cancellation]" time="0.037"><failure message="yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry.value: converter failed">self = &lt;test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry object at 0x107518580&gt;
+
+&gt;   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+&lt;yidl-dataclass-model&gt;:85: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+role = 'cancellation'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+        with pytest.raises(error_type) as caught:instance.value
+        assert caught.value is original if role=="cancellation" else caught.value.__cause__ is original
+&gt;       assert instance.value==2
+               ^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry object at 0x107518580&gt;
+
+&gt;   ???
+E   yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry.value: converter failed
+
+&lt;yidl-dataclass-model&gt;:89: FieldConversionError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_opaque_recursion_busy_guard_clears_after_failure" time="0.044" /><testcase classname="tests.test_lazy_failures" name="test_concurrent_access_and_set_delete_while_busy_rejected" time="0.060" /><testcase classname="tests.test_lazy_failures" name="test_lazy_named_cycle_and_unavailable_optional_provider_rejected" time="0.001" /><testcase classname="tests.test_lazy_retention" name="test_failed_terminal_preserves_provider_and_successful_prerequisite_cache" time="0.408" /><testcase classname="tests.test_lazy_retention" name="test_seeded_nonresettable_consumers_release_without_factory_evaluation" time="0.027"><failure message="ValueError: contribution 'Check': failed to target 'checks'">self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...tive_engine_handle=None, _native_template_cache=None, _native_state_handle=None, _native_occurrence_by_build_prefix={})
+requests = (BindingRequest(resource=ComposableResource(composable=BasicComposable(tree=&lt;ast.Module object at 0x10829d990&gt;, origin...er[1]', 'GetterBody[1]', 'GetterRelease[0]', 'ReleaseCheck[0]'), owner_match=None, allow_equivalent_demand_sites=True))
+
+    def _apply_batch_uncounted(
+        self,
+        requests: tuple[BindingRequest, ...],
+    ) -&gt; tuple[BindingCandidate, ...]:
+        native_candidates = self._try_apply_native_batch(requests)
+        if native_candidates is not None:
+            return native_candidates
+        applied: list[BindingCandidate] = []
+        candidate_count = 0
+        for request in requests:
+            try:
+                candidates = self._find_candidates(
+                    request.resource,
+                    DemandSelector(
+                        name=request.name,
+                        build_match=request.build_match,
+                        owner_match=request.owner_match,
+                    ),
+                )
+                candidate_count += len(candidates)
+                candidate = _select_batch_candidate(
+                    candidates,
+                    allow_equivalent_demand_sites=(
+                        request.allow_equivalent_demand_sites
+                    ),
+                )
+&gt;               self._apply_candidate(candidate, count_compatibility_kind=False)
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:521: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:973: in _apply_candidate
+    self._apply_external_value(candidate)
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1118: in _apply_external_value
+    self._queue_external_bind(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...tive_engine_handle=None, _native_template_cache=None, _native_state_handle=None, _native_occurrence_by_build_prefix={})
+owner = 'ReleaseCheck[0]', name = 'ready_path', value = '_y_dc_ready_1'
+
+    def _queue_external_bind(self, owner: str, name: str, value: object) -&gt; None:
+        owner_binds = self._pending_external_binds_by_owner.setdefault(owner, {})
+        if name in owner_binds:
+&gt;           raise ValueError(f"external binding `{name}` is already queued")
+E           ValueError: external binding `ready_path` is already queued
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:2515: ValueError
+
+The above exception was the direct cause of the following exception:
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...tive_engine_handle=None, _native_template_cache=None, _native_state_handle=None, _native_occurrence_by_build_prefix={})
+resource = ComposableResource(composable=BasicComposable(tree=&lt;ast.Module object at 0x10829d990&gt;, origin=CompileOrigin(file_name=... 'False', 'quit', 'BytesWarning', 'zip', 'exit', 'ImportWarning'})), build_name='ReleaseCheck', build_index=0, order=0)
+contribution = ContributionSpec(name='Check', source_name='ReleaseCheck', source_kind='resource', build_name='ReleaseCheck', index=Va...bindings=(BindingSpec(kind='external', name='ready_path', value=ValueRef(name='ReleaseReadyPath')),), diagnostic=False)
+stack = DataStack(value_dicts=({'ReleaseSiteId': 'Model.first.seed', 'ReleaseOwner': 'Model.first', 'ReleaseProviderPath': '_y... 'ReleaseSiteOwner': 'Model.first.seed', 'ReleaseReadyPath': '_y_dc_ready_1', 'ReleaseCheckIdentity': 0}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'Property': ('Root', 'ClassDef[0]', 'Property[1]'), 'LazyFunction': ('Root', 'ClassDef[0]', 'Property[1]', 'Getter[1]'), ...}
+binding_groups = (((BindingSpec(kind='external', name='ready_path', value=ValueRef(name='ReleaseReadyPath')),), DataStack(value_dicts=(....first.seed', 'ReleaseReadyPath': '_y_dc_ready_1', 'ReleaseCheckIdentity': 0}), parent=None), "contribution 'Check'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -&gt; AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+&gt;               scope.apply_batch(tuple(chained_requests))
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:609: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:488: in apply_batch
+    return self._apply_batch_uncounted(request_tuple)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...tive_engine_handle=None, _native_template_cache=None, _native_state_handle=None, _native_occurrence_by_build_prefix={})
+requests = (BindingRequest(resource=ComposableResource(composable=BasicComposable(tree=&lt;ast.Module object at 0x10829d990&gt;, origin...er[1]', 'GetterBody[1]', 'GetterRelease[0]', 'ReleaseCheck[0]'), owner_match=None, allow_equivalent_demand_sites=True))
+
+    def _apply_batch_uncounted(
+        self,
+        requests: tuple[BindingRequest, ...],
+    ) -&gt; tuple[BindingCandidate, ...]:
+        native_candidates = self._try_apply_native_batch(requests)
+        if native_candidates is not None:
+            return native_candidates
+        applied: list[BindingCandidate] = []
+        candidate_count = 0
+        for request in requests:
+            try:
+                candidates = self._find_candidates(
+                    request.resource,
+                    DemandSelector(
+                        name=request.name,
+                        build_match=request.build_match,
+                        owner_match=request.owner_match,
+                    ),
+                )
+                candidate_count += len(candidates)
+                candidate = _select_batch_candidate(
+                    candidates,
+                    allow_equivalent_demand_sites=(
+                        request.allow_equivalent_demand_sites
+                    ),
+                )
+                self._apply_candidate(candidate, count_compatibility_kind=False)
+            except ValueError as exc:
+                label = (
+                    f" {request.name!r}"
+                    if request.name is not None
+                    else f" for {type(request.resource).__name__}"
+                )
+&gt;               raise ValueError(f"failed to apply binding request{label}") from exc
+E               ValueError: failed to apply binding request 'ready_path'
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:528: ValueError
+
+The above exception was the direct cause of the following exception:
+
+    def test_seeded_nonresettable_consumers_release_without_factory_evaluation():
+        def forbidden(seed):raise AssertionError("seeded cache evaluated")
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_retention.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:198: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1354: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:1351: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:276: in _run_production
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:458: in _apply_contribution
+    applied = _apply_resource_to_target(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...tive_engine_handle=None, _native_template_cache=None, _native_state_handle=None, _native_occurrence_by_build_prefix={})
+resource = ComposableResource(composable=BasicComposable(tree=&lt;ast.Module object at 0x10829d990&gt;, origin=CompileOrigin(file_name=... 'False', 'quit', 'BytesWarning', 'zip', 'exit', 'ImportWarning'})), build_name='ReleaseCheck', build_index=0, order=0)
+contribution = ContributionSpec(name='Check', source_name='ReleaseCheck', source_kind='resource', build_name='ReleaseCheck', index=Va...bindings=(BindingSpec(kind='external', name='ready_path', value=ValueRef(name='ReleaseReadyPath')),), diagnostic=False)
+stack = DataStack(value_dicts=({'ReleaseSiteId': 'Model.first.seed', 'ReleaseOwner': 'Model.first', 'ReleaseProviderPath': '_y... 'ReleaseSiteOwner': 'Model.first.seed', 'ReleaseReadyPath': '_y_dc_ready_1', 'ReleaseCheckIdentity': 0}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'Property': ('Root', 'ClassDef[0]', 'Property[1]'), 'LazyFunction': ('Root', 'ClassDef[0]', 'Property[1]', 'Getter[1]'), ...}
+binding_groups = (((BindingSpec(kind='external', name='ready_path', value=ValueRef(name='ReleaseReadyPath')),), DataStack(value_dicts=(....first.seed', 'ReleaseReadyPath': '_y_dc_ready_1', 'ReleaseCheckIdentity': 0}), parent=None), "contribution 'Check'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -&gt; AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+                scope.apply_batch(tuple(chained_requests))
+            except ValueError as exc:
+&gt;               raise ValueError(
+                    f"contribution {contribution.name!r}: failed to target "
+                    f"{contribution.target.name!r}"
+                ) from exc
+E               ValueError: contribution 'Check': failed to target 'checks'
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:611: ValueError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy.py]" time="0.178"><failure message="yidl_dataclass.errors.FieldConversionError: render_case.&lt;locals&gt;.Lazy.cache: converter failed">self = &lt;&lt;run_path&gt;.render_case.&lt;locals&gt;.Lazy object at 0x108306030&gt;
+
+&gt;   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+&lt;yidl-dataclass-model&gt;:85: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1562/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:26: in render_case
+    assert first.cache==5
+           ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;&lt;run_path&gt;.render_case.&lt;locals&gt;.Lazy object at 0x108306030&gt;
+
+&gt;   ???
+E   yidl_dataclass.errors.FieldConversionError: render_case.&lt;locals&gt;.Lazy.cache: converter failed
+
+&lt;yidl-dataclass-model&gt;:89: FieldConversionError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy_retention.py]" time="4.672" /></testsuite></testsuites>

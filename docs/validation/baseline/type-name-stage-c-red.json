@@ -1,0 +1,17 @@
+{
+  "purpose": "Independent installed C constructor-name counterexample before D correction",
+  "stage_c_wheel_sha256": "602024966e2b034fb6e484283da06abebeea6aee4ec05f6d523d88ed33fe5d3a",
+  "python": "3.12.12",
+  "results": [
+    {
+      "backend": "native-rust",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"<yidl-dataclass-model>\", line 1, in __init__\nTypeError: 'int' object is not callable\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"owner-type-name-probe.py\", line 8, in <module>\n    x=Names()\n      ^^^^^^^\n  File \"<yidl-dataclass-model>\", line 1, in __init__\nyidl_dataclass.errors.FieldInitializationError: Names.owner: factory failed\n"
+    },
+    {
+      "backend": "python",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"<yidl-dataclass-model>\", line 364, in __init__\nTypeError: 'int' object is not callable\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"owner-type-name-probe.py\", line 8, in <module>\n    x=Names()\n      ^^^^^^^\n  File \"<yidl-dataclass-model>\", line 87, in __init__\nyidl_dataclass.errors.FieldInitializationError: Names.owner: factory failed\n"
+    }
+  ]
+}

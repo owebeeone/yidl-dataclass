@@ -1,0 +1,36 @@
+.......F                                                                 [100%]
+=================================== FAILURES ===================================
+____________________ test_canonical_case[dataclass_copy.py] ____________________
+
+case = 'dataclass_copy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1572/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_copy.py:12: in render_case
+    shallow=copy.copy(first);deep=copy.deepcopy(first)
+            ^^^^^^^^^^^^^^^^
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/copy.py:79: in copy
+    return copier(x)
+           ^^^^^^^^^
+<yidl-dataclass-model>:1: in __copy__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <support.copy_models.CopyModel object at 0x10884ea40>
+
+>   ???
+E   KeyError: 0
+
+<yidl-dataclass-model>:1: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_copy.py] - K...
+1 failed, 7 passed in 0.62s

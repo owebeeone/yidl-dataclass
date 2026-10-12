@@ -1,4 +1,4 @@
-class Inherited(*_y_dc_bases):
+class Inherited(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ('value',)
 
@@ -13,7 +13,7 @@ class Inherited(*_y_dc_bases):
     pass
     pass
 
-class Local(*_y_dc_bases):
+class Local(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ('value',)
 
@@ -28,7 +28,7 @@ class Local(*_y_dc_bases):
     pass
     pass
 
-class Automatic(*_y_dc_bases):
+class Automatic(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ('value',)
 
@@ -46,7 +46,7 @@ class Automatic(*_y_dc_bases):
     def __repr__(self):
         return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'
 
-class Unsafe(*_y_dc_bases):
+class Unsafe(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ('value',)
 
@@ -66,7 +66,7 @@ class Unsafe(*_y_dc_bases):
     def __repr__(self):
         return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'
 
-class Recursive(*_y_dc_bases):
+class Recursive(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ('value',)
 
@@ -89,7 +89,7 @@ class Recursive(*_y_dc_bases):
     def __repr__(self):
         return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'
 
-class Empty(*_y_dc_bases):
+class Empty(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ()
 
@@ -129,7 +129,7 @@ class Empty(*_y_dc_bases):
     def __repr__(self):
         return self.__class__.__qualname__ + '()'
 
-class HashOnly(*_y_dc_bases):
+class HashOnly(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ('value',)
 

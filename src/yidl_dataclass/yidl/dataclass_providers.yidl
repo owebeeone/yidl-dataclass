@@ -44,11 +44,11 @@ concept DataclassProviders extends factories.DataclassFactories {
             value_name__astichi_arg__ = factory_name__astichi_arg__(*astichi_hole(positional_arguments), **astichi_hole(keyword_arguments))
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
         astichi_hole(pipeline)
         astichi_export(value_name__astichi_arg__)
-    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, _y_dc_Exception, _y_dc_factory_error }
     contribution ProviderFactoryStep = ProviderFactoryStepProduction {
         as Candidate
         index ConstructorOrder
@@ -72,13 +72,13 @@ concept DataclassProviders extends factories.DataclassFactories {
                 value_name__astichi_arg__ = factory_name__astichi_arg__(*astichi_hole(positional_arguments), **astichi_hole(keyword_arguments))
             except _y_dc_ContextErrors:
                 raise
-            except Exception as _y_dc_factory_error:
+            except _y_dc_Exception as _y_dc_factory_error:
                 raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
         else:
             value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
         astichi_hole(pipeline)
         astichi_export(value_name__astichi_arg__)
-    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, _y_dc_Exception, _y_dc_factory_error }
     contribution ProviderInputFactoryStep = ProviderInputFactoryStepProduction {
         as Candidate
         index ConstructorOrder
@@ -102,11 +102,11 @@ concept DataclassProviders extends factories.DataclassFactories {
             value_name__astichi_arg__ = factory_name__astichi_arg__()
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
         astichi_hole(pipeline)
         astichi_export(value_name__astichi_arg__)
-    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, _y_dc_Exception, _y_dc_factory_error }
     contribution ProviderZeroFactoryStep = ProviderZeroFactoryStepProduction {
         as Candidate
         index ConstructorOrder
@@ -127,13 +127,13 @@ concept DataclassProviders extends factories.DataclassFactories {
                 value_name__astichi_arg__ = factory_name__astichi_arg__()
             except _y_dc_ContextErrors:
                 raise
-            except Exception as _y_dc_factory_error:
+            except _y_dc_Exception as _y_dc_factory_error:
                 raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
         else:
             value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
         astichi_hole(pipeline)
         astichi_export(value_name__astichi_arg__)
-    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, _y_dc_Exception, _y_dc_factory_error }
     contribution ProviderZeroInputFactoryStep = ProviderZeroInputFactoryStepProduction {
         as Candidate
         index ConstructorOrder

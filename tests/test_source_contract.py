@@ -8,9 +8,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_plain_canonical_has_direct_stores_and_plain_class():
-    tree = ast.parse(
-        (data_golden_dir(ROOT) / "dataclass_plain/generated_output.py").read_text()
-    )
+    import json
+    import sys
+
+    directory = data_golden_dir(ROOT) / "dataclass_plain"
+    manifest = json.loads((directory / "runtime_manifest.json").read_text())
+    filename = manifest["generated_output.py"][
+        f"py{sys.version_info.major}{sys.version_info.minor}"
+    ]
+    tree = ast.parse((directory / filename).read_text())
     declaration = next(node for node in tree.body if isinstance(node, ast.ClassDef))
     assert declaration.decorator_list == []
     method = next(
@@ -122,16 +128,25 @@ def test_policy_canonical_has_field_local_backing_and_direct_callback_calls():
     declarations = [node for node in tree.body if isinstance(node, ast.ClassDef)]
     assert all(not node.decorator_list for node in declarations)
     processed = declarations[0]
-    units = [
+    assignment = next(
         node
         for node in processed.body
-        if isinstance(node, ast.FunctionDef) and node.name == "units"
-    ]
-    assert len(units) == 3
-    getter = units[0]
+        if isinstance(node, ast.Assign)
+        and any(
+            isinstance(target, ast.Name) and target.id == "units"
+            for target in node.targets
+        )
+    )
+    assert isinstance(assignment.value, ast.Call)
+    assert assignment.value.func.id == "_y_dc_property"
+    accessor_names = [argument.id for argument in assignment.value.args]
+    methods = {
+        node.name: node for node in processed.body if isinstance(node, ast.FunctionDef)
+    }
+    getter, setter, deleter = [methods[name] for name in accessor_names]
+    assert all(not method.decorator_list for method in (getter, setter, deleter))
     assert isinstance(getter.body[0].value, ast.Attribute)
     assert getter.body[0].value.attr == "_y_dc_store_1"
-    setter = units[1]
     callbacks = [
         node.func.id
         for node in ast.walk(setter)
@@ -144,7 +159,10 @@ def test_policy_canonical_has_field_local_backing_and_direct_callback_calls():
         for node in ast.walk(setter)
     )
     stores = [node.targets[0] for node in setter.body if isinstance(node, ast.Assign)]
-    assert len(stores) == 1 and stores[0].attr == "_y_dc_store_1"
+    assert any(
+        isinstance(target, ast.Attribute) and target.attr == "_y_dc_store_1"
+        for target in stores
+    )
     init = next(
         node
         for node in processed.body
@@ -156,3 +174,31 @@ def test_policy_canonical_has_field_local_backing_and_direct_callback_calls():
         and isinstance(node.ctx, ast.Store)
         for node in ast.walk(init)
     )
+
+
+def test_descriptor_invokes_specialized_bodies_without_runtime_dispatch():
+    import dis
+    from yidl_dataclass import dataclass, const, lazy
+
+    @dataclass(repr=False)
+    class Direct:
+        property: int = const(default=1)
+        later: int = lazy(default_factory=lambda: 2, mutable=True)
+
+    for name in ("property", "later"):
+        descriptor = Direct.__dict__[name]
+        assert type(descriptor) is property
+        for body in (descriptor.fget, descriptor.fset, descriptor.fdel):
+            assert Direct.__dict__[body.__name__] is body
+            assert body.__globals__["_y_dc_property"] is property
+            assert not {"getattr", "setattr", "storage_fields", "_pipeline"} & {
+                instruction.argval
+                for instruction in dis.get_instructions(body)
+                if instruction.opname == "LOAD_GLOBAL"
+            }
+    getter = Direct.later.fget
+    assert {
+        item.argval
+        for item in dis.get_instructions(getter)
+        if item.opname == "LOAD_ATTR"
+    } >= {"_y_dc_ready_1", "_y_dc_store_1", "_y_dc_busy_1"}

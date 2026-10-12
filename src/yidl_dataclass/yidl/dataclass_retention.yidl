@@ -1,0 +1,65 @@
+module dataclass.retention
+import "dataclass_policies.yidl" as policies
+export concept DataclassRetention
+
+concept DataclassRetention extends policies.DataclassPolicies {
+    property ReleaseConstructor: bool = False
+    property ReleaseSiteId: str
+    property ReleaseOwner: str
+    property ReleaseProviderPath: str
+    property ReleaseIdentity: int
+    property ReleaseCheckId: str
+    property ReleaseSiteOwner: str
+    property ReleaseReadyPath: str
+    property ReleaseCheckIdentity: int
+    record DataclassReleaseSite { ReleaseSiteId ReleaseOwner ReleaseProviderPath ReleaseIdentity ReleaseConstructor }
+    record DataclassReleaseCheck { ReleaseCheckId ReleaseSiteOwner ReleaseReadyPath ReleaseCheckIdentity }
+    collection ReleaseSites: DataclassReleaseSite identity ReleaseSiteId many
+    collection ReleaseChecks: DataclassReleaseCheck identity ReleaseCheckId many
+    resource ReleaseProvider = template $[
+        _y_dc_release = True
+        astichi_hole(checks)
+        if _y_dc_release:
+            try:
+                del astichi_pass(self, outer_bind=True).astichi_ref(external=provider_path)._
+            except _y_dc_AttributeError:
+                pass
+    ]$ { keep _y_dc_release, _y_dc_AttributeError }
+    resource ReleaseCheck = template $[
+        if not astichi_pass(self, outer_bind=True).astichi_ref(external=check_ready_path):
+            _y_dc_release = False
+    ]$ { keep _y_dc_release }
+    contribution Check = ReleaseCheck {
+        as ReleaseCheck
+        index ReleaseCheckIdentity
+        order ReleaseCheckIdentity
+        target checks { build /Release }
+        external check_ready_path = ReleaseReadyPath
+    }
+    matcher ReleaseCheckContributions(check: ReleaseChecks, site: ReleaseSites) -> contribution { default -> Check }
+    production ReleaseProduction(site: ReleaseSites) -> composable {
+        root Release = ReleaseProvider { external provider_path = ReleaseProviderPath }
+        apply checks from check: ReleaseChecks where ReleaseSiteOwner == ReleaseSiteId using ReleaseCheckContributions
+    }
+    contribution GetterRelease = ReleaseProduction {
+        as GetterRelease
+        index ReleaseIdentity
+        order ReleaseIdentity
+        target release { build /Candidate }
+    }
+    contribution SetterRelease = ReleaseProduction {
+        as SetterRelease
+        index ReleaseIdentity
+        order ReleaseIdentity
+        target release { build /Setter }
+    }
+    contribution ConstructorRelease = ReleaseProduction {
+        as ConstructorRelease
+        index ReleaseIdentity
+        order ReleaseIdentity
+        target release { build /Candidate }
+    }
+    matcher DirectGetterReleaseContributions(site: ReleaseSites, field: PolicyFields, cls: Classes) -> contribution { default -> GetterRelease }
+    matcher DirectSetterReleaseContributions(site: ReleaseSites, field: PolicyFields, cls: Classes) -> contribution { default -> SetterRelease }
+    matcher DirectConstructorReleaseContributions(site: ReleaseSites, step: InitializationFields, cls: Classes) -> contribution { default -> ConstructorRelease }
+}

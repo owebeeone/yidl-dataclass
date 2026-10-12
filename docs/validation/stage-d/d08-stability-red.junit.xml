@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="1.398" timestamp="2026-10-12T23:43:57.306410+11:00" hostname="[host]"><testcase classname="tests.test_generation_stability" name="test_dictionary_lazy_source_stable_across_hash_seeds" time="1.375" /></testsuite></testsuites>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="11" time="3.562" timestamp="2026-10-12T23:10:13.629356+11:00" hostname="[host]"><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[factory]" time="0.469" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[converter]" time="0.249" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[validator]" time="0.258" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[cancellation]" time="0.266" /><testcase classname="tests.test_lazy_failures" name="test_opaque_recursion_busy_guard_clears_after_failure" time="0.241" /><testcase classname="tests.test_lazy_failures" name="test_concurrent_access_and_set_delete_while_busy_rejected" time="0.207" /><testcase classname="tests.test_lazy_failures" name="test_lazy_named_cycle_and_unavailable_optional_provider_rejected" time="0.002" /><testcase classname="tests.test_lazy_retention" name="test_failed_terminal_preserves_provider_and_successful_prerequisite_cache" time="0.467" /><testcase classname="tests.test_lazy_retention" name="test_seeded_nonresettable_consumers_release_without_factory_evaluation" time="0.597" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy.py]" time="0.154"><failure message="NameError: name 'total__astichi_scoped_2' is not defined">case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1565/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:13: in render_case
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:201: in decorate
+    exec(
+&lt;yidl-dataclass-model&gt;:64: in &lt;module&gt;
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   ???
+E   NameError: name 'total__astichi_scoped_2' is not defined
+
+&lt;yidl-dataclass-model&gt;:55: NameError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy_retention.py]" time="0.502"><failure message="NameError: name 'once__astichi_scoped_2' is not defined">case = 'dataclass_lazy_retention.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1565/test_canonical_case_dataclass_1')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy_retention.py:21: in render_case
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:201: in decorate
+    exec(
+&lt;yidl-dataclass-model&gt;:64: in &lt;module&gt;
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   ???
+E   NameError: name 'once__astichi_scoped_2' is not defined
+
+&lt;yidl-dataclass-model&gt;:55: NameError</failure></testcase></testsuite></testsuites>

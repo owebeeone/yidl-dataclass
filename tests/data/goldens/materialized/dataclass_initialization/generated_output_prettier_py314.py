@@ -1,4 +1,4 @@
-class Order(*_y_dc_bases):
+class Order(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("summary", "total", "units")
 
@@ -8,14 +8,17 @@ class Order(*_y_dc_bases):
         pass
         pass
         self.units = _y_dc_value_2
-        _y_dc_value_3 = type(self).rate
+        _y_dc_value_3 = _y_dc_type(self).rate
         try:
             _y_dc_value_1 = _y_dc_factory_1(
-                _y_dc_arg_default_1_0, _y_dc_value_2, rate=_y_dc_value_3, cls=type(self)
+                _y_dc_arg_default_1_0,
+                _y_dc_value_2,
+                rate=_y_dc_value_3,
+                cls=_y_dc_type(self),
             )
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(
                 "render_case.<locals>.Order.total: factory failed"
             ) from _y_dc_factory_error
@@ -26,7 +29,7 @@ class Order(*_y_dc_bases):
             _y_dc_value_0 = _y_dc_factory_0(total=_y_dc_value_1, units=_y_dc_value_2)
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(
                 "render_case.<locals>.Order.summary: factory failed"
             ) from _y_dc_factory_error
@@ -74,3 +77,14 @@ class Order(*_y_dc_bases):
             )
             + ")"
         )
+
+    pass
+    pass
+    pass
+    pass
+    pass
+
+    def __replace__(self, **changes):
+        return _y_dc_replace(self, **changes)
+
+    pass

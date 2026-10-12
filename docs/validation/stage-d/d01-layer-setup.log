@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 75, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 54, in main
+    rendered = render_dataclass_base_source()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 30, in render_dataclass_base_source
+    concept = compile_yidl_files(sources, "dataclass/dataclass_base.yidl").concepts[
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 224, in compile_yidl_files
+    return compiler.compile(entry_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 249, in compile
+    imports = self._compile_imports(resolved_path, tree)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 285, in _compile_imports
+    aliases[alias] = self.compile(imported_path)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 249, in compile
+    imports = self._compile_imports(resolved_path, tree)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 285, in _compile_imports
+    aliases[alias] = self.compile(imported_path)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 264, in compile
+    ).compile(concept_tree)
+      ^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 441, in compile
+    contribution = self._compile_contribution(member)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 1358, in _compile_contribution
+    source_name, source_kind = self._contribution_source(
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 1670, in _contribution_source
+    raise YidlSymbolError(f"{context} references undefined source {name!r}")
+yidl.concept_parser.YidlSymbolError: contribution 'LazyEmptyPos' source references undefined source 'EmptyPositionalArguments'

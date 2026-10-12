@@ -1,4 +1,4 @@
-class Quote(*_y_dc_bases):
+class Quote(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("sku", "price", "currency", "tags", "note", "cache", "audit")
 
@@ -38,7 +38,7 @@ class Quote(*_y_dc_bases):
                 _y_dc_value_5 = _y_dc_factory_5()
             except _y_dc_ContextErrors:
                 raise
-            except Exception as _y_dc_factory_error:
+            except _y_dc_Exception as _y_dc_factory_error:
                 raise _y_dc_FieldInitializationError(
                     "models.<locals>.Quote.cache: factory failed"
                 ) from _y_dc_factory_error
@@ -164,8 +164,19 @@ class Quote(*_y_dc_bases):
             + ")"
         )
 
+    pass
+    pass
+    pass
+    pass
+    pass
 
-class Removed(*_y_dc_bases):
+    def __replace__(self, **changes):
+        return _y_dc_replace(self, **changes)
+
+    pass
+
+
+class Removed(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("sku", "price", "currency", "tags", "note")
 
@@ -296,8 +307,19 @@ class Removed(*_y_dc_bases):
             + ")"
         )
 
+    pass
+    pass
+    pass
+    pass
+    pass
 
-class Excluded(*_y_dc_bases):
+    def __replace__(self, **changes):
+        return _y_dc_replace(self, **changes)
+
+    pass
+
+
+class Excluded(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("visible", "hidden")
 
@@ -350,8 +372,19 @@ class Excluded(*_y_dc_bases):
             + ")"
         )
 
+    pass
+    pass
+    pass
+    pass
+    pass
 
-class Unhashable(*_y_dc_bases):
+    def __replace__(self, **changes):
+        return _y_dc_replace(self, **changes)
+
+    pass
+
+
+class Unhashable(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("value",)
 
@@ -381,3 +414,14 @@ class Unhashable(*_y_dc_bases):
             + ", ".join(("value" + "=" + repr(self.value),))
             + ")"
         )
+
+    pass
+    pass
+    pass
+    pass
+    pass
+
+    def __replace__(self, **changes):
+        return _y_dc_replace(self, **changes)
+
+    pass

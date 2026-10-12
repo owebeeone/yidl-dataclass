@@ -1,0 +1,26 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_property_field_does_not_shadow_later_descriptor_creation _________
+
+    def test_property_field_does_not_shadow_later_descriptor_creation():
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_builtin_field_names.py:6: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:226: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:208: in decorate
+    exec(
+<yidl-dataclass-model>:21: in <module>
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   TypeError: 'property' object is not callable
+
+<yidl-dataclass-model>:56: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_builtin_field_names.py::test_property_field_does_not_shadow_later_descriptor_creation
+1 failed in 1.07s

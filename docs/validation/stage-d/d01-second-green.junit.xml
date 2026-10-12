@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="8" time="0.433" timestamp="2026-10-12T22:49:10.888950+11:00" hostname="[host]"><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[factory]" time="0.214"><failure message="yidl_dataclass.errors.DataclassDefinitionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry: factory cycle value -&gt; value">role = 'factory'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(value=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return str(value) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:155: in harvest
+    steps, calls, planned = plan_initialization(
+src/yidl_dataclass/provider_plan.py:157: in plan_initialization
+    check_cycle(item.name)
+src/yidl_dataclass/provider_plan.py:152: in check_cycle
+    check_cycle(provider)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'value'
+
+    def check_cycle(name):
+        if name in active:
+            path = active[active.index(name) :] + [name]
+&gt;           raise DataclassDefinitionError(
+                f"{cls.__qualname__}: factory cycle {' -&gt; '.join(path)}"
+            )
+E           yidl_dataclass.errors.DataclassDefinitionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry: factory cycle value -&gt; value
+
+src/yidl_dataclass/provider_plan.py:145: DataclassDefinitionError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[converter]" time="0.002"><failure message="TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'">role = 'converter'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(value=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return str(value) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:191: in decorate
+    add_initialization_facts(generated, builder, definition, declaration, captures)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x10c20adb0&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa...ryCall(field_name='value', arguments=(), dependencies=()),), planned_init=True, policy_class=True, generation_schema=1)
+declaration = &lt;class 'test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry'&gt;
+captures = {'__name__': 'test_lazy_failures', '_y_dc_annotation_0': &lt;class 'int'&gt;, '_y_dc_factory_0': &lt;function test_lazy_failure...10c4ef240&gt;, '_y_dc_converter_0': &lt;function test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.fail at 0x10c4ef2e0&gt;, ...}
+
+    def add_initialization_facts(generated, builder, definition, declaration, captures):
+        captures.update(
+            _y_dc_ContextErrors=(
+                DataclassDefinitionError,
+                FieldInitializationError,
+                FieldConversionError,
+                FieldValidationError,
+                LazyInitializationError,
+            ),
+            _y_dc_FieldInitializationError=FieldInitializationError,
+        )
+        if not definition.planned_init:
+            return
+        by_name = {item.name: item for item in definition.fields}
+        values = {
+            item.name: f"_y_dc_value_{index}"
+            for index, item in enumerate(definition.fields)
+        }
+        calls = {call.field_name: call for call in definition.factory_calls}
+        for step in definition.initialization:
+            item = by_name[step.field_name]
+            builder.add(
+                generated.InitializationFieldsCollection,
+&gt;               generated.DataclassInitializationField(
+                    field_id=f"Model.{item.name}",
+                    field_owner="Model",
+                    field_name=item.name,
+                    constructor_order=step.order,
+                    value_name=values[item.name],
+                    factory_name=item.factory_name,
+                    default_name=item.default_name,
+                    candidate_input=step.input,
+                    candidate_lazy=step.lazy,
+                    materialize_lazy=step.materialize,
+                    candidate_ready_name=item.ready_name,
+                    candidate_factory=step.factory,
+                    has_factory_arguments=(
+                        bool(calls[item.name].arguments) if item.name in calls else False
+                    ),
+                    candidate_default=step.default,
+                    candidate_fallback=step.fallback,
+                    class_provider=step.class_provider,
+                    install_value=step.install,
+                    store_name=item.store_name or item.name,
+                    factory_message=f"{declaration.__qualname__}.{item.name}: factory failed",
+                ),
+            )
+E           TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'
+
+src/yidl_dataclass/factory_generation.py:35: TypeError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[validator]" time="0.001"><failure message="TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'">role = 'validator'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(value=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return str(value) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:191: in decorate
+    add_initialization_facts(generated, builder, definition, declaration, captures)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x10c4d67b0&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa...ryCall(field_name='value', arguments=(), dependencies=()),), planned_init=True, policy_class=True, generation_schema=1)
+declaration = &lt;class 'test_lazy_failures.test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry'&gt;
+captures = {'__name__': 'test_lazy_failures', '_y_dc_annotation_0': &lt;class 'int'&gt;, '_y_dc_factory_0': &lt;function test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.&lt;lambda&gt; at 0x10c4ef380&gt;, '_y_dc_converter_0': &lt;class 'int'&gt;, ...}
+
+    def add_initialization_facts(generated, builder, definition, declaration, captures):
+        captures.update(
+            _y_dc_ContextErrors=(
+                DataclassDefinitionError,
+                FieldInitializationError,
+                FieldConversionError,
+                FieldValidationError,
+                LazyInitializationError,
+            ),
+            _y_dc_FieldInitializationError=FieldInitializationError,
+        )
+        if not definition.planned_init:
+            return
+        by_name = {item.name: item for item in definition.fields}
+        values = {
+            item.name: f"_y_dc_value_{index}"
+            for index, item in enumerate(definition.fields)
+        }
+        calls = {call.field_name: call for call in definition.factory_calls}
+        for step in definition.initialization:
+            item = by_name[step.field_name]
+            builder.add(
+                generated.InitializationFieldsCollection,
+&gt;               generated.DataclassInitializationField(
+                    field_id=f"Model.{item.name}",
+                    field_owner="Model",
+                    field_name=item.name,
+                    constructor_order=step.order,
+                    value_name=values[item.name],
+                    factory_name=item.factory_name,
+                    default_name=item.default_name,
+                    candidate_input=step.input,
+                    candidate_lazy=step.lazy,
+                    materialize_lazy=step.materialize,
+                    candidate_ready_name=item.ready_name,
+                    candidate_factory=step.factory,
+                    has_factory_arguments=(
+                        bool(calls[item.name].arguments) if item.name in calls else False
+                    ),
+                    candidate_default=step.default,
+                    candidate_fallback=step.fallback,
+                    class_provider=step.class_provider,
+                    install_value=step.install,
+                    store_name=item.store_name or item.name,
+                    factory_message=f"{declaration.__qualname__}.{item.name}: factory failed",
+                ),
+            )
+E           TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'
+
+src/yidl_dataclass/factory_generation.py:35: TypeError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[cancellation]" time="0.000"><failure message="yidl_dataclass.errors.DataclassDefinitionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry: factory cycle value -&gt; value">role = 'cancellation'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(value=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return str(value) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:155: in harvest
+    steps, calls, planned = plan_initialization(
+src/yidl_dataclass/provider_plan.py:157: in plan_initialization
+    check_cycle(item.name)
+src/yidl_dataclass/provider_plan.py:152: in check_cycle
+    check_cycle(provider)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'value'
+
+    def check_cycle(name):
+        if name in active:
+            path = active[active.index(name) :] + [name]
+&gt;           raise DataclassDefinitionError(
+                f"{cls.__qualname__}: factory cycle {' -&gt; '.join(path)}"
+            )
+E           yidl_dataclass.errors.DataclassDefinitionError: test_lazy_failure_is_unready_and_retries.&lt;locals&gt;.Retry: factory cycle value -&gt; value
+
+src/yidl_dataclass/provider_plan.py:145: DataclassDefinitionError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_opaque_recursion_busy_guard_clears_after_failure" time="0.001"><failure message="TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'">def test_opaque_recursion_busy_guard_clears_after_failure():
+        repeat=[True]
+        def factory(self):
+            return self.value if repeat[0] else 3
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:191: in decorate
+    add_initialization_facts(generated, builder, definition, declaration, captures)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x10c5b3860&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa...'', instance=True, owner_class=False),), dependencies=()),), planned_init=True, policy_class=True, generation_schema=1)
+declaration = &lt;class 'test_lazy_failures.test_opaque_recursion_busy_guard_clears_after_failure.&lt;locals&gt;.Recursive'&gt;
+captures = {'__name__': 'test_lazy_failures', '_y_dc_annotation_0': &lt;class 'int'&gt;, '_y_dc_factory_0': &lt;function test_opaque_recur...on_message_0': 'test_opaque_recursion_busy_guard_clears_after_failure.&lt;locals&gt;.Recursive.value: converter failed', ...}
+
+    def add_initialization_facts(generated, builder, definition, declaration, captures):
+        captures.update(
+            _y_dc_ContextErrors=(
+                DataclassDefinitionError,
+                FieldInitializationError,
+                FieldConversionError,
+                FieldValidationError,
+                LazyInitializationError,
+            ),
+            _y_dc_FieldInitializationError=FieldInitializationError,
+        )
+        if not definition.planned_init:
+            return
+        by_name = {item.name: item for item in definition.fields}
+        values = {
+            item.name: f"_y_dc_value_{index}"
+            for index, item in enumerate(definition.fields)
+        }
+        calls = {call.field_name: call for call in definition.factory_calls}
+        for step in definition.initialization:
+            item = by_name[step.field_name]
+            builder.add(
+                generated.InitializationFieldsCollection,
+&gt;               generated.DataclassInitializationField(
+                    field_id=f"Model.{item.name}",
+                    field_owner="Model",
+                    field_name=item.name,
+                    constructor_order=step.order,
+                    value_name=values[item.name],
+                    factory_name=item.factory_name,
+                    default_name=item.default_name,
+                    candidate_input=step.input,
+                    candidate_lazy=step.lazy,
+                    materialize_lazy=step.materialize,
+                    candidate_ready_name=item.ready_name,
+                    candidate_factory=step.factory,
+                    has_factory_arguments=(
+                        bool(calls[item.name].arguments) if item.name in calls else False
+                    ),
+                    candidate_default=step.default,
+                    candidate_fallback=step.fallback,
+                    class_provider=step.class_provider,
+                    install_value=step.install,
+                    store_name=item.store_name or item.name,
+                    factory_message=f"{declaration.__qualname__}.{item.name}: factory failed",
+                ),
+            )
+E           TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'
+
+src/yidl_dataclass/factory_generation.py:35: TypeError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_concurrent_access_and_set_delete_while_busy_rejected" time="0.001"><failure message="TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'">def test_concurrent_access_and_set_delete_while_busy_rejected():
+        entered=threading.Event(); release=threading.Event(); results=[]
+        def factory():
+            entered.set()
+            assert release.wait(5)
+            return 7
+&gt;       @dataclass(repr=False)
+         ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:191: in decorate
+    add_initialization_facts(generated, builder, definition, declaration, captures)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x10c5b18b0&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa...ryCall(field_name='value', arguments=(), dependencies=()),), planned_init=True, policy_class=True, generation_schema=1)
+declaration = &lt;class 'test_lazy_failures.test_concurrent_access_and_set_delete_while_busy_rejected.&lt;locals&gt;.Busy'&gt;
+captures = {'__name__': 'test_lazy_failures', '_y_dc_annotation_0': &lt;class 'int'&gt;, '_y_dc_factory_0': &lt;function test_concurrent_a...ion_message_0': 'test_concurrent_access_and_set_delete_while_busy_rejected.&lt;locals&gt;.Busy.value: converter failed', ...}
+
+    def add_initialization_facts(generated, builder, definition, declaration, captures):
+        captures.update(
+            _y_dc_ContextErrors=(
+                DataclassDefinitionError,
+                FieldInitializationError,
+                FieldConversionError,
+                FieldValidationError,
+                LazyInitializationError,
+            ),
+            _y_dc_FieldInitializationError=FieldInitializationError,
+        )
+        if not definition.planned_init:
+            return
+        by_name = {item.name: item for item in definition.fields}
+        values = {
+            item.name: f"_y_dc_value_{index}"
+            for index, item in enumerate(definition.fields)
+        }
+        calls = {call.field_name: call for call in definition.factory_calls}
+        for step in definition.initialization:
+            item = by_name[step.field_name]
+            builder.add(
+                generated.InitializationFieldsCollection,
+&gt;               generated.DataclassInitializationField(
+                    field_id=f"Model.{item.name}",
+                    field_owner="Model",
+                    field_name=item.name,
+                    constructor_order=step.order,
+                    value_name=values[item.name],
+                    factory_name=item.factory_name,
+                    default_name=item.default_name,
+                    candidate_input=step.input,
+                    candidate_lazy=step.lazy,
+                    materialize_lazy=step.materialize,
+                    candidate_ready_name=item.ready_name,
+                    candidate_factory=step.factory,
+                    has_factory_arguments=(
+                        bool(calls[item.name].arguments) if item.name in calls else False
+                    ),
+                    candidate_default=step.default,
+                    candidate_fallback=step.fallback,
+                    class_provider=step.class_provider,
+                    install_value=step.install,
+                    store_name=item.store_name or item.name,
+                    factory_message=f"{declaration.__qualname__}.{item.name}: factory failed",
+                ),
+            )
+E           TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'
+
+src/yidl_dataclass/factory_generation.py:35: TypeError</failure></testcase><testcase classname="tests.test_lazy_failures" name="test_lazy_named_cycle_and_unavailable_optional_provider_rejected" time="0.001" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy.py]" time="0.003"><failure message="TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'">case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1547/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:13: in render_case
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:191: in decorate
+    add_initialization_facts(generated, builder, definition, declaration, captures)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+generated = &lt;module 'yidl_dataclass._generated_dataclass_base' from '[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py'&gt;
+builder = &lt;yidl_dataclass._generated_dataclass_base._GeneratedContainerBuilder object at 0x10c5b3710&gt;
+definition = DataclassDefinition(options=DataclassOptions(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=Fa...ance=False, owner_class=False),), dependencies=('units',))), planned_init=True, policy_class=True, generation_schema=1)
+declaration = &lt;class '&lt;run_path&gt;.render_case.&lt;locals&gt;.Lazy'&gt;
+captures = {'__name__': '&lt;run_path&gt;', '_y_dc_annotation_0': &lt;class 'int'&gt;, '_y_dc_default_0': 2, '_y_dc_annotation_1': &lt;class 'int'&gt;, ...}
+
+    def add_initialization_facts(generated, builder, definition, declaration, captures):
+        captures.update(
+            _y_dc_ContextErrors=(
+                DataclassDefinitionError,
+                FieldInitializationError,
+                FieldConversionError,
+                FieldValidationError,
+                LazyInitializationError,
+            ),
+            _y_dc_FieldInitializationError=FieldInitializationError,
+        )
+        if not definition.planned_init:
+            return
+        by_name = {item.name: item for item in definition.fields}
+        values = {
+            item.name: f"_y_dc_value_{index}"
+            for index, item in enumerate(definition.fields)
+        }
+        calls = {call.field_name: call for call in definition.factory_calls}
+        for step in definition.initialization:
+            item = by_name[step.field_name]
+            builder.add(
+                generated.InitializationFieldsCollection,
+&gt;               generated.DataclassInitializationField(
+                    field_id=f"Model.{item.name}",
+                    field_owner="Model",
+                    field_name=item.name,
+                    constructor_order=step.order,
+                    value_name=values[item.name],
+                    factory_name=item.factory_name,
+                    default_name=item.default_name,
+                    candidate_input=step.input,
+                    candidate_lazy=step.lazy,
+                    materialize_lazy=step.materialize,
+                    candidate_ready_name=item.ready_name,
+                    candidate_factory=step.factory,
+                    has_factory_arguments=(
+                        bool(calls[item.name].arguments) if item.name in calls else False
+                    ),
+                    candidate_default=step.default,
+                    candidate_fallback=step.fallback,
+                    class_provider=step.class_provider,
+                    install_value=step.install,
+                    store_name=item.store_name or item.name,
+                    factory_message=f"{declaration.__qualname__}.{item.name}: factory failed",
+                ),
+            )
+E           TypeError: DataclassInitializationField.__init__() got an unexpected keyword argument 'candidate_lazy'
+
+src/yidl_dataclass/factory_generation.py:35: TypeError</failure></testcase></testsuite></testsuites>

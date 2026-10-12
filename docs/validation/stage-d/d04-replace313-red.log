@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_copy_replace_version_method_and_local_override ______________
+
+    def test_copy_replace_version_method_and_local_override():
+        @dataclass
+        class Model:value:int=2
+        if sys.version_info[:2]==(3,12):assert "__replace__" not in Model.__dict__
+        else:
+>           assert "__replace__" in Model.__dict__
+E           assert '__replace__' in mappingproxy({'__module__': 'test_copy_helpers', '__firstlineno__': 56, '__annotations__': {'value': <class 'int'>}, '...__(self):\n        return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'\n"})
+E            +  where mappingproxy({'__module__': 'test_copy_helpers', '__firstlineno__': 56, '__annotations__': {'value': <class 'int'>}, '...__(self):\n        return self.__class__.__qualname__ + '(' + ', '.join(('value' + '=' + repr(self.value),)) + ')'\n"}) = <class 'test_copy_helpers.test_copy_replace_version_method_and_local_override.<locals>.Model'>.__dict__
+
+tests/test_copy_helpers.py:60: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_copy_helpers.py::test_copy_replace_version_method_and_local_override
+1 failed in 0.49s

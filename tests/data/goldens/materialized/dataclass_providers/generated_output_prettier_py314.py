@@ -1,4 +1,4 @@
-class Configuration(*_y_dc_bases):
+class Configuration(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("total", "management", "tag", "box")
 
@@ -7,12 +7,12 @@ class Configuration(*_y_dc_bases):
         _y_dc_value_1 = seed
         pass
         pass
-        _y_dc_value_2 = type(self).scale
+        _y_dc_value_2 = _y_dc_type(self).scale
         try:
             _y_dc_value_0 = _y_dc_factory_0(seed=_y_dc_value_1, scale=_y_dc_value_2)
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(
                 "render_case.<locals>.Configuration.total: factory failed"
             ) from _y_dc_factory_error
@@ -23,7 +23,7 @@ class Configuration(*_y_dc_bases):
             _y_dc_value_3 = _y_dc_factory_3(total=_y_dc_value_0)
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(
                 "render_case.<locals>.Configuration.management: factory failed"
             ) from _y_dc_factory_error
@@ -31,10 +31,10 @@ class Configuration(*_y_dc_bases):
         pass
         self.management = _y_dc_value_3
         try:
-            _y_dc_value_4 = _y_dc_factory_4(self=self, cls=type(self))
+            _y_dc_value_4 = _y_dc_factory_4(self=self, cls=_y_dc_type(self))
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(
                 "render_case.<locals>.Configuration.tag: factory failed"
             ) from _y_dc_factory_error
@@ -45,7 +45,7 @@ class Configuration(*_y_dc_bases):
             _y_dc_value_5 = _y_dc_factory_5(total=_y_dc_value_0)
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(
                 "render_case.<locals>.Configuration.box: factory failed"
             ) from _y_dc_factory_error
@@ -88,8 +88,19 @@ class Configuration(*_y_dc_bases):
             + ")"
         )
 
+    pass
+    pass
+    pass
+    pass
+    pass
 
-class StandardProvider(*_y_dc_bases):
+    def __replace__(self, **changes):
+        return _y_dc_replace(self, **changes)
+
+    pass
+
+
+class StandardProvider(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("answer",)
 
@@ -100,7 +111,7 @@ class StandardProvider(*_y_dc_bases):
                 _y_dc_value_0 = _y_dc_factory_0()
             except _y_dc_ContextErrors:
                 raise
-            except Exception as _y_dc_factory_error:
+            except _y_dc_Exception as _y_dc_factory_error:
                 raise _y_dc_FieldInitializationError(
                     "render_case.<locals>.StandardProvider.seed: factory failed"
                 ) from _y_dc_factory_error
@@ -112,7 +123,7 @@ class StandardProvider(*_y_dc_bases):
             _y_dc_value_1 = _y_dc_factory_1(seed=_y_dc_value_0)
         except _y_dc_ContextErrors:
             raise
-        except Exception as _y_dc_factory_error:
+        except _y_dc_Exception as _y_dc_factory_error:
             raise _y_dc_FieldInitializationError(
                 "render_case.<locals>.StandardProvider.answer: factory failed"
             ) from _y_dc_factory_error
@@ -142,3 +153,14 @@ class StandardProvider(*_y_dc_bases):
             + ", ".join(("answer" + "=" + repr(self.answer),))
             + ")"
         )
+
+    pass
+    pass
+    pass
+    pass
+    pass
+
+    def __replace__(self, **changes):
+        return _y_dc_replace(self, **changes)
+
+    pass

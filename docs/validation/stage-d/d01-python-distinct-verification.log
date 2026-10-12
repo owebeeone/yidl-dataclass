@@ -1,0 +1,192 @@
+FFFF...F                                                                 [100%]
+=================================== FAILURES ===================================
+______________ test_lazy_failure_is_unready_and_retries[factory] _______________
+
+self = <test_lazy_failures.test_lazy_failure_is_unready_and_retries.<locals>.Retry object at 0x109715cc0>
+
+>   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+<yidl-dataclass-model>:46: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+role = 'factory'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+        with pytest.raises(error_type) as caught:instance.value
+        assert caught.value is original if role=="cancellation" else caught.value.__cause__ is original
+>       assert instance.value==2
+               ^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_lazy_failures.test_lazy_failure_is_unready_and_retries.<locals>.Retry object at 0x109715cc0>
+
+>   ???
+E   yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.<locals>.Retry.value: converter failed
+
+<yidl-dataclass-model>:50: FieldConversionError
+_____________ test_lazy_failure_is_unready_and_retries[converter] ______________
+
+role = 'converter'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+        with pytest.raises(error_type) as caught:instance.value
+>       assert caught.value is original if role=="cancellation" else caught.value.__cause__ is original
+E       assert False
+
+tests/test_lazy_failures.py:23: AssertionError
+_____________ test_lazy_failure_is_unready_and_retries[validator] ______________
+
+self = <test_lazy_failures.test_lazy_failure_is_unready_and_retries.<locals>.Retry object at 0x109288800>
+
+>   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+<yidl-dataclass-model>:46: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+role = 'validator'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+>       with pytest.raises(error_type) as caught:instance.value
+                                                 ^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_lazy_failures.test_lazy_failure_is_unready_and_retries.<locals>.Retry object at 0x109288800>
+
+>   ???
+E   yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.<locals>.Retry.value: converter failed
+
+<yidl-dataclass-model>:50: FieldConversionError
+____________ test_lazy_failure_is_unready_and_retries[cancellation] ____________
+
+self = <test_lazy_failures.test_lazy_failure_is_unready_and_retries.<locals>.Retry object at 0x103761bc0>
+
+>   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+<yidl-dataclass-model>:46: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+role = 'cancellation'
+
+    @pytest.mark.parametrize("role",("factory","converter","validator","cancellation"))
+    def test_lazy_failure_is_unready_and_retries(role):
+        original=KeyboardInterrupt("cancel") if role=="cancellation" else ValueError("failed")
+        failed=[False]
+        def fail(candidate=2):
+            if not failed[0]:
+                failed[0]=True
+                raise original
+            return int(candidate) if role!="validator" else True
+        factory=fail if role in ("factory","cancellation") else lambda:"2"
+        @dataclass(repr=False)
+        class Retry:
+            value:int=lazy(default_factory=factory,converter=fail if role=="converter" else int,validator=fail if role=="validator" else None)
+        instance=Retry()
+        error_type={"factory":FieldInitializationError,"converter":FieldConversionError,"validator":FieldValidationError,"cancellation":KeyboardInterrupt}[role]
+        with pytest.raises(error_type) as caught:instance.value
+        assert caught.value is original if role=="cancellation" else caught.value.__cause__ is original
+>       assert instance.value==2
+               ^^^^^^^^^^^^^^
+
+tests/test_lazy_failures.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_lazy_failures.test_lazy_failure_is_unready_and_retries.<locals>.Retry object at 0x103761bc0>
+
+>   ???
+E   yidl_dataclass.errors.FieldConversionError: test_lazy_failure_is_unready_and_retries.<locals>.Retry.value: converter failed
+
+<yidl-dataclass-model>:50: FieldConversionError
+____________________ test_canonical_case[dataclass_lazy.py] ____________________
+
+self = <<run_path>.render_case.<locals>.Lazy object at 0x10a4d7df0>
+
+>   ???
+E   UnboundLocalError: cannot access local variable '_y_dc_lazy_value__astichi_scoped_1' where it is not associated with a value
+
+<yidl-dataclass-model>:46: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1557/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:26: in render_case
+    assert first.cache==5
+           ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <<run_path>.render_case.<locals>.Lazy object at 0x10a4d7df0>
+
+>   ???
+E   yidl_dataclass.errors.FieldConversionError: render_case.<locals>.Lazy.cache: converter failed
+
+<yidl-dataclass-model>:50: FieldConversionError
+=========================== short test summary info ============================
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[factory]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[converter]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[validator]
+FAILED tests/test_lazy_failures.py::test_lazy_failure_is_unready_and_retries[cancellation]
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_lazy.py] - y...
+5 failed, 3 passed in 1.23s

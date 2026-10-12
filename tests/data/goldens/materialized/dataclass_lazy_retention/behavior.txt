@@ -1,0 +1,1 @@
+terminal-release=all-ready; reset-lifetime=True; eager-cut=True; derived-only=True; public-provider=False

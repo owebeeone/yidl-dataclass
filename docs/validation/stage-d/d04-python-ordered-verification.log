@@ -1,0 +1,19 @@
+
+==================================== ERRORS ====================================
+_________________ ERROR collecting tests/test_copy_helpers.py __________________
+tests/test_copy_helpers.py:7: in <module>
+    from support import copy_models
+tests/support/copy_models.py:13: in <module>
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:208: in decorate
+    exec(
+<yidl-dataclass-model>:66: in <module>
+    ???
+<yidl-dataclass-model>:74: in CopyModel
+    ???
+E   NameError: name 'readonly__astichi_scoped_2' is not defined
+=========================== short test summary info ============================
+ERROR tests/test_copy_helpers.py - NameError: name 'readonly__astichi_scoped_...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.91s

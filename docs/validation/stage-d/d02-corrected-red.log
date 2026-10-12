@@ -1,0 +1,75 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+__ test_failed_terminal_preserves_provider_and_successful_prerequisite_cache ___
+
+    def test_failed_terminal_preserves_provider_and_successful_prerequisite_cache():
+        calls=[];fail=[True]
+        def make_second(seed,first):
+            calls.append("second")
+            if fail[0]:raise ValueError("retry")
+            return seed+first
+        @dataclass(repr=False)
+        class Retry:
+            seed:int=initvar()
+            first:int=lazy(default_factory=lambda seed:calls.append("first") or seed,mutable=False)
+            second:int=lazy(default_factory=make_second,mutable=False)
+        instance=Retry(3)
+        provider=storage_fields(Retry)[0].provider_name
+        with pytest.raises(FieldInitializationError):instance.second
+>       assert calls==["first","second"] and hasattr(instance,provider)
+E       AssertionError: assert ([] == ['first', 'second']
+E         
+E         Right contains 2 more items, first extra item: 'first'
+E         Use -v to get more diff)
+
+tests/test_lazy_retention.py:20: AssertionError
+____ test_seeded_nonresettable_consumers_release_without_factory_evaluation ____
+
+    def test_seeded_nonresettable_consumers_release_without_factory_evaluation():
+        def forbidden(seed):raise AssertionError("seeded cache evaluated")
+        @dataclass(repr=False)
+        class Seeded:
+            seed:int=initvar()
+            first:int=lazy(default_factory=forbidden,init=True,mutable=False)
+            second:int=lazy(default_factory=forbidden,init=True,mutable=False)
+        instance=Seeded(3,4,5)
+>       assert storage_fields(Seeded)[0].retained is True
+E       AssertionError: assert False is True
+E        +  where False = StorageField(name='seed', field=Field(name='seed',type=<class 'int'>,default=<dataclasses._MISSING_TYPE object at 0x10...converter=False, store_name='seed', has_accessor=False, dependencies=(), ready_name='', busy_name='', provider_name='').retained
+
+tests/test_lazy_retention.py:34: AssertionError
+_______________ test_canonical_case[dataclass_lazy_retention.py] _______________
+
+case = 'dataclass_lazy_retention.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1553/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        class Seed:
+            def __init__(self,value):self.value=value
+        @dataclass(repr=False)
+        class Terminals:
+            seed:object=initvar()
+            first:int=lazy(default_factory=lambda seed:seed.value,mutable=False)
+            second:int=lazy(default_factory=lambda seed:seed.value+1,mutable=False)
+        seed=Seed(5); ref=weakref.ref(seed); terminals=Terminals(seed);del seed
+>       gc.collect();assert ref() is not None
+                            ^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+tests/data/gold_src/dataclass_lazy_retention.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_lazy_retention.py::test_failed_terminal_preserves_provider_and_successful_prerequisite_cache
+FAILED tests/test_lazy_retention.py::test_seeded_nonresettable_consumers_release_without_factory_evaluation
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_lazy_retention.py]
+3 failed in 0.53s

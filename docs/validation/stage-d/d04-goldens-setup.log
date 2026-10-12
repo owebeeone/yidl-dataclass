@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "[consumer-root]/tests/support/refresh_goldens.py", line 64, in <module>
+    main()
+  File "[consumer-root]/tests/support/refresh_goldens.py", line 38, in main
+    source_path, runpy.run_path(str(source_path))["render_case"]()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/tests/data/gold_src/dataclass_copy.py", line 18, in render_case
+    unready=pickle.loads(pickle.dumps(first))
+                         ^^^^^^^^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded

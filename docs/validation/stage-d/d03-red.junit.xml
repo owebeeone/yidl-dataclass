@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="11" skipped="0" tests="12" time="0.862" timestamp="2026-10-12T23:01:07.901887+11:00" hostname="[host]"><testcase classname="tests.test_inheritance_failures" name="test_frozen_mixing_rejected[False]" time="0.275"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">frozen = False
+
+    @pytest.mark.parametrize("frozen",(False,True))
+    def test_frozen_mixing_rejected(frozen):
+        @dataclass(frozen=frozen)
+        class Base:value:int=2
+        class Child(Base):pass
+&gt;       with pytest.raises(DataclassDefinitionError,match="frozen.*inheritance"):dataclass(Child,frozen=not frozen)
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_frozen_mixing_rejected.&lt;locals&gt;.Child'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_frozen_mixing_rejected[True]" time="0.047"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">frozen = True
+
+    @pytest.mark.parametrize("frozen",(False,True))
+    def test_frozen_mixing_rejected(frozen):
+        @dataclass(frozen=frozen)
+        class Base:value:int=2
+        class Child(Base):pass
+&gt;       with pytest.raises(DataclassDefinitionError,match="frozen.*inheritance"):dataclass(Child,frozen=not frozen)
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_frozen_mixing_rejected.&lt;locals&gt;.Child'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_inherited_incompatible_shape_rejected[family]" time="0.042"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">change = 'family'
+
+    @pytest.mark.parametrize("change",("family","mutability","layout"))
+    def test_inherited_incompatible_shape_rejected(change):
+        class Original:
+            value:int=lazy(default_factory=lambda:2,mutable=False) if change=="family" else field(default=2,mutable=False) if change=="mutability" else field(default=2,converter=int)
+        Base=dataclass(Original)
+        class Child(Base):value:int=2
+&gt;       with pytest.raises(DataclassDefinitionError,match="incompatible.*value"):dataclass(Child)
+                                                                                 ^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_inherited_incompatible_shape_rejected.&lt;locals&gt;.Child'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_inherited_incompatible_shape_rejected[mutability]" time="0.028"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">change = 'mutability'
+
+    @pytest.mark.parametrize("change",("family","mutability","layout"))
+    def test_inherited_incompatible_shape_rejected(change):
+        class Original:
+            value:int=lazy(default_factory=lambda:2,mutable=False) if change=="family" else field(default=2,mutable=False) if change=="mutability" else field(default=2,converter=int)
+        Base=dataclass(Original)
+        class Child(Base):value:int=2
+&gt;       with pytest.raises(DataclassDefinitionError,match="incompatible.*value"):dataclass(Child)
+                                                                                 ^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_inherited_incompatible_shape_rejected.&lt;locals&gt;.Child'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_inherited_incompatible_shape_rejected[layout]" time="0.055"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">change = 'layout'
+
+    @pytest.mark.parametrize("change",("family","mutability","layout"))
+    def test_inherited_incompatible_shape_rejected(change):
+        class Original:
+            value:int=lazy(default_factory=lambda:2,mutable=False) if change=="family" else field(default=2,mutable=False) if change=="mutability" else field(default=2,converter=int)
+        Base=dataclass(Original)
+        class Child(Base):value:int=2
+&gt;       with pytest.raises(DataclassDefinitionError,match="incompatible.*value"):dataclass(Child)
+                                                                                 ^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_inherited_incompatible_shape_rejected.&lt;locals&gt;.Child'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_multiple_models_and_std_model_bases_rejected" time="0.016"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">def test_multiple_models_and_std_model_bases_rejected():
+        @dataclass(slots=False)
+        class One:value:int=2
+        @dataclass(slots=False)
+        class Two:other:int=3
+        class Many(One,Two):pass
+&gt;       with pytest.raises(DataclassDefinitionError,match="multiple.*model"):dataclass(Many,slots=False)
+                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_multiple_models_and_std_model_bases_rejected.&lt;locals&gt;.Many'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_merged_provider_graph_revalidated" time="0.009"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">def test_merged_provider_graph_revalidated():
+        @dataclass
+        class Base:first:int=2
+        class Cycle(Base):
+            first:int=field(init=False,default_factory=lambda second:second)
+            second:int=field(init=False,default_factory=lambda first:first)
+&gt;       with pytest.raises(DataclassDefinitionError,match="cycle.*first.*second.*first"):dataclass(Cycle)
+                                                                                         ^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_merged_provider_graph_revalidated.&lt;locals&gt;.Cycle'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_custom_metaclass_and_required_subclass_keyword_rejected" time="0.020"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">def test_custom_metaclass_and_required_subclass_keyword_rejected():
+        class Meta(type):pass
+        class Custom(metaclass=Meta):value:int=2
+&gt;       with pytest.raises(DataclassDefinitionError,match="metaclass"):dataclass(Custom)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_inheritance_failures.py:53: Failed</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_abcmeta_and_abstract_property_slot_resolution" time="0.013" /><testcase classname="tests.test_inheritance_failures" name="test_abcmeta_without_abc_base_preserved" time="0.010"><failure message="AssertionError: assert (&lt;class 'type'&gt; is &lt;class 'abc.ABCMeta'&gt;)&#10; +  where &lt;class 'type'&gt; = type(&lt;class 'test_inheritance_failures.test_abcmeta_without_abc_base_preserved.&lt;locals&gt;.Declaration'&gt;)&#10; +  and   &lt;class 'abc.ABCMeta'&gt; = abc.ABCMeta">def test_abcmeta_without_abc_base_preserved():
+        class Declaration(metaclass=abc.ABCMeta):value:int=2
+        model=dataclass(Declaration)
+&gt;       assert type(model) is abc.ABCMeta and model().value==2
+E       AssertionError: assert (&lt;class 'type'&gt; is &lt;class 'abc.ABCMeta'&gt;)
+E        +  where &lt;class 'type'&gt; = type(&lt;class 'test_inheritance_failures.test_abcmeta_without_abc_base_preserved.&lt;locals&gt;.Declaration'&gt;)
+E        +  and   &lt;class 'abc.ABCMeta'&gt; = abc.ABCMeta
+
+tests/test_inheritance_failures.py:76: AssertionError</failure></testcase><testcase classname="tests.test_inheritance_failures" name="test_string_pseudo_annotations_use_defining_module_without_eval" time="0.034"><failure message="NotImplementedError: generated model inheritance belongs to Stage D">def test_string_pseudo_annotations_use_defining_module_without_eval():
+        module=types.ModuleType("dataclass_test_defining_module")
+        module.__dict__.update(InitVar=std.InitVar,ClassVar=ClassVar,field=field)
+        sys.modules[module.__name__]=module
+        try:
+            exec('class Declaration:\n    seed: "InitVar[int]" = 3\n    shared: "ClassVar[int]" = 5\n    result: "unevaluated()" = field(init=False, default_factory=lambda seed:seed+1)\n',module.__dict__)
+            base=dataclass(module.Declaration)
+            class Child(base):label:str="ok"
+&gt;           model=dataclass(Child)
+                  ^^^^^^^^^^^^^^^^
+
+tests/test_inheritance_failures.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:216: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_inheritance_failures.test_string_pseudo_annotations_use_defining_module_without_eval.&lt;locals&gt;.Child'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if any(
+            "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+        ):
+&gt;           raise NotImplementedError("generated model inheritance belongs to Stage D")
+E           NotImplementedError: generated model inheritance belongs to Stage D
+
+src/yidl_dataclass/dataclass_harvester.py:41: NotImplementedError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_inheritance_helpers.py]" time="0.027"><failure message="AssertionError">case = 'dataclass_inheritance_helpers.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1561/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        events=[]
+        class Named:
+            def __set_name__(self,owner,name):events.append((owner.__name__,name))
+        class Mixin:
+            __slots__=()
+            def greet(self):return "mixin"
+            def __init_subclass__(cls):events.append((cls.__name__,"subclass"))
+        class BaseDeclaration(Mixin):
+            "base documentation"
+            units:int=2
+            token:int=const(default=3)
+            named=Named()
+            def greet(self):return super().greet()+"/base"
+            @classmethod
+            def owner(cls):return __class__.__name__,cls.__name__
+            @staticmethod
+            def declared():return __class__.__name__
+            @property
+            def title(self):return __class__.__name__
+        original_cell=BaseDeclaration.greet.__closure__[0]
+        Base=dataclass(BaseDeclaration)
+        assert original_cell.cell_contents is BaseDeclaration
+&gt;       assert Base.greet.__closure__[0] is not original_cell
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+tests/data/gold_src/dataclass_inheritance_helpers.py:29: AssertionError</failure></testcase></testsuite></testsuites>

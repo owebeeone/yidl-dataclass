@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.910" timestamp="2026-10-12T23:29:49.030524+11:00" hostname="[host]"><testcase classname="" name="tests.test_copy_helpers" time="0.000"><error message="collection failure">tests/test_copy_helpers.py:7: in &lt;module&gt;
+    from support import copy_models
+tests/support/copy_models.py:13: in &lt;module&gt;
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:208: in decorate
+    exec(
+&lt;yidl-dataclass-model&gt;:66: in &lt;module&gt;
+    ???
+&lt;yidl-dataclass-model&gt;:74: in CopyModel
+    ???
+E   NameError: name 'readonly__astichi_scoped_2' is not defined</error></testcase></testsuite></testsuites>

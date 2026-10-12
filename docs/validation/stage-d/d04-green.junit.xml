@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="8" time="0.645" timestamp="2026-10-12T23:26:26.643164+11:00" hostname="[host]"><testcase classname="tests.test_copy_helpers" name="test_active_lazy_copy_and_pickle_rejected[copy]" time="0.008" /><testcase classname="tests.test_copy_helpers" name="test_active_lazy_copy_and_pickle_rejected[deepcopy]" time="0.012" /><testcase classname="tests.test_copy_helpers" name="test_active_lazy_copy_and_pickle_rejected[dumps]" time="0.017" /><testcase classname="tests.test_copy_helpers" name="test_state_rejects_invalid_schema_without_callbacks" time="0.008" /><testcase classname="tests.test_copy_helpers" name="test_package_and_std_replace_hidden_provider_rules" time="0.031" /><testcase classname="tests.test_copy_helpers" name="test_required_provider_is_not_replayed_from_retained_state" time="0.018" /><testcase classname="tests.test_copy_helpers" name="test_copy_replace_version_method_and_local_override" time="0.025" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_copy.py]" time="0.017"><failure message="RecursionError: maximum recursion depth exceeded while pickling an object">case = 'dataclass_copy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1573/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        EVENTS.clear()
+        first=CopyModel([1]);first.values.append([2]);first.management.append("work");first.loop=first
+        provider=storage_fields(CopyModel)[0].provider_name
+        shallow=copy.copy(first);deep=copy.deepcopy(first)
+        assert EVENTS==[]
+        assert shallow.values is first.values and shallow.management is first.management
+        assert shallow.loop is first and deep.loop is deep
+        assert deep.values==first.values and deep.values is not first.values and deep.values[0] is not first.values[0]
+        assert getattr(shallow,provider) is getattr(first,provider) and getattr(deep,provider) is not getattr(first,provider)
+&gt;       unready=pickle.loads(pickle.dumps(first))
+                             ^^^^^^^^^^^^^^^^^^^
+E       RecursionError: maximum recursion depth exceeded while pickling an object
+
+tests/data/gold_src/dataclass_copy.py:18: RecursionError</failure></testcase></testsuite></testsuites>

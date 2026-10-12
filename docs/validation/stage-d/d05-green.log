@@ -1,0 +1,22 @@
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+____________ test_cloned_property_preserves_explicit_name_metadata _____________
+
+    @pytest.mark.skipif(sys.version_info[:2]<(3,13),reason="property name metadata starts in CPython 3.13")
+    def test_cloned_property_preserves_explicit_name_metadata():
+        class Declaration:
+            value:int=2
+            @property
+            def label(self):return __class__.__name__
+        Declaration.label.__name__="authored_name"
+        model=dataclass(Declaration)
+>       assert model.label.__name__=="authored_name"
+E       AssertionError: assert 'label' == 'authored_name'
+E         
+E         - authored_name
+E         + label
+
+tests/test_inheritance_annotations.py:33: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_inheritance_annotations.py::test_cloned_property_preserves_explicit_name_metadata
+1 failed, 1 passed in 0.31s

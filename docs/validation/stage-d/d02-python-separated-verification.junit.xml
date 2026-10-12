@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="11" time="7.927" timestamp="2026-10-12T23:07:57.530172+11:00" hostname="[host]"><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[factory]" time="0.426" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[converter]" time="0.058" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[validator]" time="0.090" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[cancellation]" time="0.078" /><testcase classname="tests.test_lazy_failures" name="test_opaque_recursion_busy_guard_clears_after_failure" time="0.064" /><testcase classname="tests.test_lazy_failures" name="test_concurrent_access_and_set_delete_while_busy_rejected" time="0.048" /><testcase classname="tests.test_lazy_failures" name="test_lazy_named_cycle_and_unavailable_optional_provider_rejected" time="0.019" /><testcase classname="tests.test_lazy_retention" name="test_failed_terminal_preserves_provider_and_successful_prerequisite_cache" time="0.454" /><testcase classname="tests.test_lazy_retention" name="test_seeded_nonresettable_consumers_release_without_factory_evaluation" time="0.653" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy.py]" time="0.251"><failure message="yidl_dataclass.errors.FieldConversionError: render_case.&lt;locals&gt;.Lazy.cache: converter failed">self = &lt;&lt;run_path&gt;.render_case.&lt;locals&gt;.Lazy object at 0x109f6ee30&gt;
+value = '40'
+
+&gt;   ???
+E   UnboundLocalError: cannot access local variable 'value__astichi_scoped_1' where it is not associated with a value
+
+&lt;yidl-dataclass-model&gt;:48: UnboundLocalError
+
+The above exception was the direct cause of the following exception:
+
+case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1564/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:31: in render_case
+    first.cache="40"
+    ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;&lt;run_path&gt;.render_case.&lt;locals&gt;.Lazy object at 0x109f6ee30&gt;
+value = '40'
+
+&gt;   ???
+E   yidl_dataclass.errors.FieldConversionError: render_case.&lt;locals&gt;.Lazy.cache: converter failed
+
+&lt;yidl-dataclass-model&gt;:52: FieldConversionError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy_retention.py]" time="5.590" /></testsuite></testsuites>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="0.306" timestamp="2026-10-12T23:34:49.361610+11:00" hostname="[host]"><testcase classname="tests.test_inheritance_annotations" name="test_class_cell_clone_does_not_evaluate_lazy_function_annotations" time="0.264" /><testcase classname="tests.test_inheritance_annotations" name="test_cloned_property_preserves_explicit_name_metadata" time="0.005"><failure message="AssertionError: assert 'label' == 'authored_name'&#10;  &#10;  - authored_name&#10;  + label">@pytest.mark.skipif(sys.version_info[:2]&lt;(3,13),reason="property name metadata starts in CPython 3.13")
+    def test_cloned_property_preserves_explicit_name_metadata():
+        class Declaration:
+            value:int=2
+            @property
+            def label(self):return __class__.__name__
+        Declaration.label.__name__="authored_name"
+        model=dataclass(Declaration)
+&gt;       assert model.label.__name__=="authored_name"
+E       AssertionError: assert 'label' == 'authored_name'
+E         
+E         - authored_name
+E         + label
+
+tests/test_inheritance_annotations.py:33: AssertionError</failure></testcase></testsuite></testsuites>

@@ -3,6 +3,19 @@ import "dataclass_providers.yidl" as providers
 export concept DataclassPolicies
 
 concept DataclassPolicies extends providers.DataclassProviders {
+    property LazySetterProcessedName: str = ""
+    property LazyProcessedName: str = ""
+    property LazyValueName: str = "_y_dc_lazy_value"
+    property LazyGetterName: str = ""
+    property LazySetterName: str = ""
+    property LazyDeleterName: str = ""
+    property IsLazy: bool = False
+    property ReadyName: str = ""
+    property BusyName: str = ""
+    property LazyMessage: str = ""
+    property GetterFactoryMessage: str = ""
+    property GetterFactoryName: str = ""
+    property GetterHasArguments: bool = False
     property AccessorOrder: int
     property BackingName: str
     property WritableAccessor: bool = False
@@ -12,47 +25,61 @@ concept DataclassPolicies extends providers.DataclassProviders {
         FieldOwner
         FieldName
         AccessorOrder
+        IsLazy
+        LazyGetterName
+        LazyValueName
+        LazyProcessedName
+        LazySetterProcessedName
+        LazySetterName
+        LazyDeleterName
+        ReadyName
+        BusyName
+        LazyMessage
+        GetterFactoryName
+        GetterFactoryMessage
+        GetterHasArguments
         BackingName
         WritableAccessor
         FrozenMessage
     }
     collection PolicyFields: DataclassPolicyField identity FieldId many
     resource PolicyClassShell = template $[
-        class class_name__astichi_arg__(*astichi_ref(external=bases_name)):
+        class class_name__astichi_arg__(*astichi_ref(external=bases_name), metaclass=_y_dc_metaclass):
             locals().update(astichi_ref(external=namespace_name))
             astichi_hole(slots)
             astichi_hole(methods)
             astichi_hole(comparison_methods)
             astichi_hole(repr_method)
             astichi_hole(properties)
-    ]$ { keep locals }
+    ]$ { keep locals, _y_dc_metaclass }
     resource PropertyShell = template $[
-        @property
         def field_name__astichi_arg__(self):
             return self.astichi_ref(external=backing_name)
+        astichi_export(field_name__astichi_arg__)
         astichi_hole(setter)
         astichi_hole(deleter)
-    ]$ { keep property, self }
+        public_name__astichi_arg__ = _y_dc_property(astichi_pass(getter_name__astichi_arg__, outer_bind=True), astichi_pass(setter_name__astichi_arg__, outer_bind=True), astichi_pass(deleter_name__astichi_arg__, outer_bind=True))
+    ]$ { keep _y_dc_property, self }
     resource WritableSetter = template $[
-        @property_name__astichi_arg__.setter
         def field_name__astichi_arg__(self, value):
             astichi_hole(pipeline)
-            self.astichi_ref(external=backing_name)._ = value
+            self.astichi_ref(external=backing_name)._ = astichi_pass(processed_name__astichi_arg__, outer_bind=True)
+        astichi_export(field_name__astichi_arg__)
     ]$ { keep self, value }
     resource WritableDeleter = template $[
-        @property_name__astichi_arg__.deleter
         def field_name__astichi_arg__(self):
             del self.astichi_ref(external=backing_name)._
+        astichi_export(field_name__astichi_arg__)
     ]$ { keep self }
     resource ReadonlySetter = template $[
-        @property_name__astichi_arg__.setter
         def field_name__astichi_arg__(self, value):
             raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+        astichi_export(field_name__astichi_arg__)
     ]$ { keep self, value, _y_dc_FrozenInstanceError }
     resource ReadonlyDeleter = template $[
-        @property_name__astichi_arg__.deleter
         def field_name__astichi_arg__(self):
             raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+        astichi_export(field_name__astichi_arg__)
     ]$ { keep self, _y_dc_FrozenInstanceError }
     contribution PolicyClass = PolicyClassProduction {
         as ClassDef
@@ -81,24 +108,21 @@ concept DataclassPolicies extends providers.DataclassProviders {
         as Deleter
         index AccessorOrder
         target deleter { build /Property }
-        ident field_name = FieldName
-        ident property_name = FieldName
+        ident field_name = LazyDeleterName
         external backing_name = BackingName
     }
     contribution RejectSet = ReadonlySetter {
         as Setter
         index AccessorOrder
         target setter { build /Property }
-        ident field_name = FieldName
-        ident property_name = FieldName
+        ident field_name = LazySetterName
         ident frozen_message = FrozenMessage
     }
     contribution RejectDelete = ReadonlyDeleter {
         as Deleter
         index AccessorOrder
         target deleter { build /Property }
-        ident field_name = FieldName
-        ident property_name = FieldName
+        ident field_name = LazyDeleterName
         ident frozen_message = FrozenMessage
     }
     matcher SetterContributions(field: PolicyFields, cls: Classes) -> contribution {
@@ -119,15 +143,19 @@ concept DataclassPolicies extends providers.DataclassProviders {
     }
     production SetterProduction(field: PolicyFields, cls: Classes) -> composable {
         root Setter = WritableSetter {
-            ident field_name = FieldName
-            ident property_name = FieldName
+            ident field_name = LazySetterName
+            ident processed_name = LazySetterProcessedName
             external backing_name = BackingName
         }
-        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == False using SetterPipelineContributions
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == False and GetterSite == False using SetterPipelineContributions
     }
     production PropertyProduction(field: PolicyFields, cls: Classes) -> composable {
         root Property = PropertyShell {
-            ident field_name = FieldName
+            ident field_name = LazyGetterName
+            ident public_name = FieldName
+            ident getter_name = LazyGetterName
+            ident setter_name = LazySetterName
+            ident deleter_name = LazyDeleterName
             external backing_name = BackingName
         }
         apply setter using SetterContributions

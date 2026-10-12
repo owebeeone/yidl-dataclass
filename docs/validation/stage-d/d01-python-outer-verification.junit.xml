@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="8" time="2.356" timestamp="2026-10-12T22:54:31.444669+11:00" hostname="[host]"><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[factory]" time="0.600" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[converter]" time="0.294" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[validator]" time="0.261" /><testcase classname="tests.test_lazy_failures" name="test_lazy_failure_is_unready_and_retries[cancellation]" time="0.304" /><testcase classname="tests.test_lazy_failures" name="test_opaque_recursion_busy_guard_clears_after_failure" time="0.255" /><testcase classname="tests.test_lazy_failures" name="test_concurrent_access_and_set_delete_while_busy_rejected" time="0.237" /><testcase classname="tests.test_lazy_failures" name="test_lazy_named_cycle_and_unavailable_optional_provider_rejected" time="0.010" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_lazy.py]" time="0.216"><failure message="NameError: name 'total__astichi_scoped_1' is not defined">case = 'dataclass_lazy.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1554/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_lazy.py:13: in render_case
+    @dataclass(repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:199: in decorate
+    exec(
+&lt;yidl-dataclass-model&gt;:64: in &lt;module&gt;
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   ???
+E   NameError: name 'total__astichi_scoped_1' is not defined
+
+&lt;yidl-dataclass-model&gt;:55: NameError</failure></testcase></testsuite></testsuites>

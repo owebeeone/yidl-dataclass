@@ -1,0 +1,202 @@
+module dataclass.copy
+import "dataclass_lazy_init.yidl" as lazy_init
+export concept DataclassCopy
+
+concept DataclassCopy extends lazy_init.DataclassLazyInit {
+    property CpyClassId: str
+    property GenerateStorageCopy: bool = False
+    property GenerateReplace: bool = False
+    property HasStorageDictionary: bool = False
+    property CpySlotId: str
+    property CpySlotOwner: str
+    property CpySlotPath: str
+    property CpySlotIndex: int
+    property CpyIsBusy: bool = False
+    property CpyIsSlot: bool = True
+    record DataclassCopyClass { CpyClassId GenerateStorageCopy GenerateReplace HasStorageDictionary }
+    record DataclassStateSlot { CpySlotId CpySlotOwner CpySlotPath CpySlotIndex CpyIsBusy CpyIsSlot }
+    collection CopyClasses: DataclassCopyClass identity CpyClassId many
+    collection StateSlots: DataclassStateSlot identity CpySlotId many
+    resource CompleteClassShell = template $[
+        class class_name__astichi_arg__(*astichi_ref(external=bases_name), metaclass=_y_dc_metaclass):
+            locals().update(astichi_ref(external=namespace_name))
+            astichi_hole(slots)
+            astichi_hole(methods)
+            astichi_hole(comparison_methods)
+            astichi_hole(repr_method)
+            astichi_hole(copy_methods)
+            astichi_hole(properties)
+    ]$ { keep locals, _y_dc_metaclass }
+    resource CopyBundleShell = code $[
+        astichi_hole(getstate)
+        astichi_hole(setstate)
+        astichi_hole(copy)
+        astichi_hole(deepcopy)
+        astichi_hole(reduce)
+        astichi_hole(replace)
+    ]$
+    resource GetState = template $[
+        def __getstate__(self):
+            _y_dc_state_values = {}
+            astichi_hole(guards)
+            astichi_hole(reads)
+            return (1, _y_dc_state_values, None)
+    ]$ { keep __getstate__, self, _y_dc_state_values }
+    resource GetDictionaryState = template $[
+        def __getstate__(self):
+            _y_dc_state_values = {}
+            astichi_hole(guards)
+            astichi_hole(reads)
+            return (1, _y_dc_state_values, self.__dict__.copy())
+    ]$ { keep __getstate__, self, _y_dc_state_values }
+    resource SetState = template $[
+        def __setstate__(self, state):
+            if type(state) is not tuple or len(state) != 3 or type(state[0]) is not int or state[0] != 1 or type(state[1]) is not dict or state[2] is not None:
+                raise ValueError("unsupported dataclass state schema")
+            _y_dc_state_values = state[1]
+            astichi_hole(restores)
+    ]$ { keep __setstate__, self, state, _y_dc_state_values, type, tuple, len, int, dict, ValueError }
+    resource SetDictionaryState = template $[
+        def __setstate__(self, state):
+            if type(state) is not tuple or len(state) != 3 or type(state[0]) is not int or state[0] != 1 or type(state[1]) is not dict or type(state[2]) is not dict:
+                raise ValueError("unsupported dataclass state schema")
+            _y_dc_state_values = state[1]
+            self.__dict__.clear()
+            self.__dict__.update(state[2])
+            astichi_hole(restores)
+    ]$ { keep __setstate__, self, state, _y_dc_state_values, type, tuple, len, int, dict, ValueError }
+    resource StateRead = template $[
+        try:
+            astichi_pass(_y_dc_state_values, outer_bind=True)[astichi_bind_external(read_index)] = astichi_pass(self, outer_bind=True).astichi_ref(external=read_path)
+        except AttributeError:
+            pass
+    ]$ { keep AttributeError }
+    resource StateRestore = template $[
+        if astichi_bind_external(restore_index) in astichi_pass(_y_dc_state_values, outer_bind=True):
+            astichi_pass(self, outer_bind=True).astichi_ref(external=restore_path)._ = astichi_pass(_y_dc_state_values, outer_bind=True)[astichi_bind_external(restore_index)]
+        else:
+            try:
+                del astichi_pass(self, outer_bind=True).astichi_ref(external=restore_path)._
+            except AttributeError:
+                pass
+    ]$ { keep AttributeError }
+    resource BusyCopyGuard = template $[
+        if astichi_pass(self, outer_bind=True).astichi_ref(external=copy_busy_path):
+            raise _y_dc_LazyInitializationError(_y_dc_copy_busy_message)
+    ]$ { keep _y_dc_LazyInitializationError, _y_dc_copy_busy_message }
+    resource ShallowCopy = template $[
+        def __copy__(self):
+            _y_dc_clone = object.__new__(type(self))
+            _y_dc_clone.__setstate__(self.__getstate__())
+            return _y_dc_clone
+    ]$ { keep __copy__, self, object, type, _y_dc_clone }
+    resource DeepCopy = template $[
+        def __deepcopy__(self, memo):
+            _y_dc_state = self.__getstate__()
+            _y_dc_clone = object.__new__(type(self))
+            memo[id(self)] = _y_dc_clone
+            _y_dc_clone.__setstate__(_y_dc_deepcopy(_y_dc_state, memo))
+            return _y_dc_clone
+    ]$ { keep __deepcopy__, self, memo, id, object, type, _y_dc_clone, _y_dc_state, _y_dc_deepcopy }
+    resource Reduce = template $[
+        def __reduce_ex__(self, protocol):
+            return (_y_dc_restore, (type(self),), self.__getstate__())
+    ]$ { keep __reduce_ex__, self, protocol, type, _y_dc_restore }
+    resource Replace = template $[
+        def __replace__(self, **changes):
+            return _y_dc_replace(self, **changes)
+    ]$ { keep __replace__, self, changes, _y_dc_replace }
+    contribution CompleteClass = CompleteClassProduction { as ClassDef index ClassOrder order ClassOrder target classes { build /Root } }
+    matcher ClassContributions(cls: Classes) -> contribution { rule helpers when HasHelperMethods == True -> CompleteClass weight 3 }
+    contribution EmptyProperties = EmptyStatement { as EmptyProperties target properties { build /ClassDef } }
+    matcher EmptyPropertyContributions(cls: Classes) -> contribution { default -> EmptyProperties }
+    contribution CopyBundle = CopyBundleProduction { as CopyBundle target copy_methods { build /ClassDef } }
+    matcher CopyBundleContributions(cpy: CopyClasses, cls: Classes) -> contribution { default -> CopyBundle }
+    production CompleteClassProduction(cls: Classes) -> composable {
+        root ClassDef = CompleteClassShell {
+            ident class_name = ClassName
+            external bases_name = BasesName
+            external namespace_name = NamespaceName
+        }
+        apply slots using SlotsContributions
+        apply init using InitContributions
+        apply comparison from cmp: ComparisonClasses where CmpClassId == ClassId using ComparisonBundleContributions
+        apply repr from method: MethodClasses where ReprClassId == ClassId using ReprMethodContributions
+        apply empty_properties using EmptyPropertyContributions
+        apply properties from field: PolicyFields where FieldOwner == ClassId using PropertyContributions
+        apply copy from cpy: CopyClasses where CpyClassId == ClassId using CopyBundleContributions
+    }
+    contribution GetStateContribution = GetStateProduction { as GetState target getstate { build /CopyBundle } }
+    contribution GetDictionaryStateContribution = GetDictionaryStateProduction { as GetState target getstate { build /CopyBundle } }
+    contribution SetStateContribution = SetStateProduction { as SetState target setstate { build /CopyBundle } }
+    contribution SetDictionaryStateContribution = SetDictionaryStateProduction { as SetState target setstate { build /CopyBundle } }
+    contribution ShallowCopyContribution = ShallowCopy { as ShallowCopy target copy { build /CopyBundle } }
+    contribution DeepCopyContribution = DeepCopy { as DeepCopy target deepcopy { build /CopyBundle } }
+    contribution ReduceContribution = Reduce { as Reduce target reduce { build /CopyBundle } }
+    contribution ReplaceContribution = Replace { as Replace target replace { build /CopyBundle } }
+    contribution NoGetState = EmptyStatement { as GetState target getstate { build /CopyBundle } }
+    contribution NoSetState = EmptyStatement { as SetState target setstate { build /CopyBundle } }
+    contribution NoShallowCopy = EmptyStatement { as ShallowCopy target copy { build /CopyBundle } }
+    contribution NoDeepCopy = EmptyStatement { as DeepCopy target deepcopy { build /CopyBundle } }
+    contribution NoReduce = EmptyStatement { as Reduce target reduce { build /CopyBundle } }
+    contribution NoReplace = EmptyStatement { as Replace target replace { build /CopyBundle } }
+    matcher GetStates(cpy: CopyClasses) -> contribution {
+        default -> NoGetState
+        rule slotted when GenerateStorageCopy == True and HasStorageDictionary == False -> GetStateContribution
+        rule dictionary when GenerateStorageCopy == True and HasStorageDictionary == True -> GetDictionaryStateContribution
+    }
+    matcher SetStates(cpy: CopyClasses) -> contribution {
+        default -> NoSetState
+        rule slotted when GenerateStorageCopy == True and HasStorageDictionary == False -> SetStateContribution
+        rule dictionary when GenerateStorageCopy == True and HasStorageDictionary == True -> SetDictionaryStateContribution
+    }
+    matcher ShallowCopies(cpy: CopyClasses) -> contribution { default -> NoShallowCopy rule enabled when GenerateStorageCopy == True -> ShallowCopyContribution }
+    matcher DeepCopies(cpy: CopyClasses) -> contribution { default -> NoDeepCopy rule enabled when GenerateStorageCopy == True -> DeepCopyContribution }
+    matcher Reductions(cpy: CopyClasses) -> contribution { default -> NoReduce rule enabled when GenerateStorageCopy == True -> ReduceContribution }
+    matcher Replacements(cpy: CopyClasses) -> contribution { default -> NoReplace rule enabled when GenerateReplace == True -> ReplaceContribution }
+    contribution SlotRead = StateRead { as SlotRead index CpySlotIndex order CpySlotIndex target reads { build /GetState } external read_path = CpySlotPath external read_index = CpySlotIndex }
+    contribution SlotRestore = StateRestore { as SlotRestore index CpySlotIndex order CpySlotIndex target restores { build /SetState } external restore_path = CpySlotPath external restore_index = CpySlotIndex }
+    contribution BusyGuard = BusyCopyGuard { as BusyGuard index CpySlotIndex order CpySlotIndex target guards { build /GetState } external copy_busy_path = CpySlotPath }
+    contribution EmptyReads = EmptyStatement { as EmptyReads target reads { build /GetState } }
+    contribution EmptyGuards = EmptyStatement { as EmptyGuards target guards { build /GetState } }
+    contribution EmptyRestores = EmptyStatement { as EmptyRestores target restores { build /SetState } }
+    matcher SlotReads(slot: StateSlots, cpy: CopyClasses) -> contribution { rule included when CpyIsSlot == True -> SlotRead }
+    matcher SlotRestores(slot: StateSlots, cpy: CopyClasses) -> contribution { rule included when CpyIsSlot == True -> SlotRestore }
+    matcher BusyGuards(slot: StateSlots, cpy: CopyClasses) -> contribution { rule busy when CpyIsBusy == True -> BusyGuard }
+    matcher EmptyReadContributions(cpy: CopyClasses) -> contribution { default -> EmptyReads }
+    matcher EmptyGuardContributions(cpy: CopyClasses) -> contribution { default -> EmptyGuards }
+    matcher EmptyRestoreContributions(cpy: CopyClasses) -> contribution { default -> EmptyRestores }
+    production GetStateProduction(cpy: CopyClasses) -> composable {
+        root GetState = GetState
+        apply empty_reads using EmptyReadContributions
+        apply empty_guards using EmptyGuardContributions
+        apply guards from slot: StateSlots where CpySlotOwner == CpyClassId using BusyGuards
+        apply reads from slot: StateSlots where CpySlotOwner == CpyClassId using SlotReads
+    }
+    production GetDictionaryStateProduction(cpy: CopyClasses) -> composable {
+        root GetState = GetDictionaryState
+        apply empty_reads using EmptyReadContributions
+        apply empty_guards using EmptyGuardContributions
+        apply guards from slot: StateSlots where CpySlotOwner == CpyClassId using BusyGuards
+        apply reads from slot: StateSlots where CpySlotOwner == CpyClassId using SlotReads
+    }
+    production SetStateProduction(cpy: CopyClasses) -> composable {
+        root SetState = SetState
+        apply empty_restores using EmptyRestoreContributions
+        apply restores from slot: StateSlots where CpySlotOwner == CpyClassId using SlotRestores
+    }
+    production SetDictionaryStateProduction(cpy: CopyClasses) -> composable {
+        root SetState = SetDictionaryState
+        apply empty_restores using EmptyRestoreContributions
+        apply restores from slot: StateSlots where CpySlotOwner == CpyClassId using SlotRestores
+    }
+    production CopyBundleProduction(cpy: CopyClasses) -> composable {
+        root CopyBundle = CopyBundleShell
+        apply getstate using GetStates
+        apply setstate using SetStates
+        apply copy using ShallowCopies
+        apply deepcopy using DeepCopies
+        apply reduce using Reductions
+        apply replace using Replacements
+    }
+}

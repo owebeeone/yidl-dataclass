@@ -1,0 +1,352 @@
+{
+  "purpose": "Owner independent isolated stopped D wheel subset, no source checkout imports; full installed corpus and final integration gates remain G",
+  "wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+  "wheel_bytes": 75974,
+  "raw_archive": "external:consumer-verification/stage-d-owner-installed",
+  "runs": [
+    {
+      "minor": "3.12",
+      "backend": "native-rust",
+      "wheel_name": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+      "wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-dataclass": "0.1.0.dev0"
+      },
+      "cases": [
+        {
+          "case": "extensions",
+          "source_sha256": "126f484b1caaa3eb7696e533ae9b8d6081c195e0d7c8f260df62e54803d4c01e",
+          "exit_code": 0,
+          "elapsed_seconds": 0.7120817503891885,
+          "raw_sha256": "e0291d31927b18896880301fc7f90081cb2052755859898f2e760649de38c82d",
+          "raw_name": "3.12-native-rust-extensions.raw",
+          "stdout_tail": "{\"backend\": \"native-rust\", \"hidden_provider_helpers\": \"pass\", \"lazy_copy_and_retention_release\": \"pass\", \"python\": \"3.12.12\", \"replace_reconstruction\": \"pass\", \"retry_mutable_reset_retention\": \"pass\", \"scope\": \"Stage D bounded extension subset; full installed/Undoable/perf gates separate\"}\n",
+          "source_path": "docs/validation/stage-d/owner_installed_probe.py"
+        },
+        {
+          "case": "property-name",
+          "source_sha256": "a4d063c6b5f81dd00b87d01873f2f1e140285a4e5264a8fffe11a250ec729db7",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5090381251648068,
+          "raw_sha256": "fe5ef83da7f52b06d17651ae0fc38e02dbc265abd33c6b336936e582037f2468",
+          "raw_name": "3.12-native-rust-property-name.raw",
+          "stdout_tail": "property field name and second descriptor: pass\n",
+          "source_path": "docs/validation/baseline/owner-property-name-probe.py"
+        },
+        {
+          "case": "type-name",
+          "source_sha256": "5c522eaffd4035e253104bafbdf161779c95e8dede2be1ea1ec39ee101cf9239",
+          "exit_code": 0,
+          "elapsed_seconds": 0.4883924168534577,
+          "raw_sha256": "58dbae358a14310069b347f2f00930b48137d85c15fea727560bcbc909dd72ad",
+          "raw_name": "3.12-native-rust-type-name.raw",
+          "stdout_tail": "type field with class provider: pass\n",
+          "source_path": "docs/validation/baseline/owner-type-name-probe.py"
+        },
+        {
+          "case": "exception-name",
+          "source_sha256": "55fadc073d09d86131f94cecf25ffc79763708358a60991103c914605c348f26",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5566527503542602,
+          "raw_sha256": "387c7a2b46ad1d120e201e8a5ad74eb5893b208c39e28f3cae724bb3e7502320",
+          "raw_name": "3.12-native-rust-exception-name.raw",
+          "stdout_tail": "Exception field preserves factory cause: pass\n",
+          "source_path": "docs/validation/baseline/owner-exception-name-probe.py"
+        }
+      ]
+    },
+    {
+      "minor": "3.12",
+      "backend": "python",
+      "wheel_name": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+      "wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-dataclass": "0.1.0.dev0"
+      },
+      "cases": [
+        {
+          "case": "extensions",
+          "source_sha256": "126f484b1caaa3eb7696e533ae9b8d6081c195e0d7c8f260df62e54803d4c01e",
+          "exit_code": 0,
+          "elapsed_seconds": 1.8081654170528054,
+          "raw_sha256": "4637c945b835bcf2531fcc23bd0f9a27733b86b3e2aeb454dd1e345b8e53a2eb",
+          "raw_name": "3.12-python-extensions.raw",
+          "stdout_tail": "{\"backend\": \"python\", \"hidden_provider_helpers\": \"pass\", \"lazy_copy_and_retention_release\": \"pass\", \"python\": \"3.12.12\", \"replace_reconstruction\": \"pass\", \"retry_mutable_reset_retention\": \"pass\", \"scope\": \"Stage D bounded extension subset; full installed/Undoable/perf gates separate\"}\n",
+          "source_path": "docs/validation/stage-d/owner_installed_probe.py"
+        },
+        {
+          "case": "property-name",
+          "source_sha256": "a4d063c6b5f81dd00b87d01873f2f1e140285a4e5264a8fffe11a250ec729db7",
+          "exit_code": 0,
+          "elapsed_seconds": 1.0429639159701765,
+          "raw_sha256": "fe5ef83da7f52b06d17651ae0fc38e02dbc265abd33c6b336936e582037f2468",
+          "raw_name": "3.12-python-property-name.raw",
+          "stdout_tail": "property field name and second descriptor: pass\n",
+          "source_path": "docs/validation/baseline/owner-property-name-probe.py"
+        },
+        {
+          "case": "type-name",
+          "source_sha256": "5c522eaffd4035e253104bafbdf161779c95e8dede2be1ea1ec39ee101cf9239",
+          "exit_code": 0,
+          "elapsed_seconds": 0.46414516726508737,
+          "raw_sha256": "58dbae358a14310069b347f2f00930b48137d85c15fea727560bcbc909dd72ad",
+          "raw_name": "3.12-python-type-name.raw",
+          "stdout_tail": "type field with class provider: pass\n",
+          "source_path": "docs/validation/baseline/owner-type-name-probe.py"
+        },
+        {
+          "case": "exception-name",
+          "source_sha256": "55fadc073d09d86131f94cecf25ffc79763708358a60991103c914605c348f26",
+          "exit_code": 0,
+          "elapsed_seconds": 0.37071266723796725,
+          "raw_sha256": "387c7a2b46ad1d120e201e8a5ad74eb5893b208c39e28f3cae724bb3e7502320",
+          "raw_name": "3.12-python-exception-name.raw",
+          "stdout_tail": "Exception field preserves factory cause: pass\n",
+          "source_path": "docs/validation/baseline/owner-exception-name-probe.py"
+        }
+      ]
+    },
+    {
+      "minor": "3.13",
+      "backend": "native-rust",
+      "wheel_name": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+      "wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-dataclass": "0.1.0.dev0"
+      },
+      "cases": [
+        {
+          "case": "extensions",
+          "source_sha256": "126f484b1caaa3eb7696e533ae9b8d6081c195e0d7c8f260df62e54803d4c01e",
+          "exit_code": 0,
+          "elapsed_seconds": 0.7192066670395434,
+          "raw_sha256": "af5f4650b5d27c48440d1a85c8b9f4fbebfec224da785da9b056760a472f3eb5",
+          "raw_name": "3.13-native-rust-extensions.raw",
+          "stdout_tail": "{\"backend\": \"native-rust\", \"hidden_provider_helpers\": \"pass\", \"lazy_copy_and_retention_release\": \"pass\", \"python\": \"3.13.12\", \"replace_reconstruction\": \"pass\", \"retry_mutable_reset_retention\": \"pass\", \"scope\": \"Stage D bounded extension subset; full installed/Undoable/perf gates separate\"}\n",
+          "source_path": "docs/validation/stage-d/owner_installed_probe.py"
+        },
+        {
+          "case": "property-name",
+          "source_sha256": "a4d063c6b5f81dd00b87d01873f2f1e140285a4e5264a8fffe11a250ec729db7",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5457917498424649,
+          "raw_sha256": "fe5ef83da7f52b06d17651ae0fc38e02dbc265abd33c6b336936e582037f2468",
+          "raw_name": "3.13-native-rust-property-name.raw",
+          "stdout_tail": "property field name and second descriptor: pass\n",
+          "source_path": "docs/validation/baseline/owner-property-name-probe.py"
+        },
+        {
+          "case": "type-name",
+          "source_sha256": "5c522eaffd4035e253104bafbdf161779c95e8dede2be1ea1ec39ee101cf9239",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5110368342138827,
+          "raw_sha256": "58dbae358a14310069b347f2f00930b48137d85c15fea727560bcbc909dd72ad",
+          "raw_name": "3.13-native-rust-type-name.raw",
+          "stdout_tail": "type field with class provider: pass\n",
+          "source_path": "docs/validation/baseline/owner-type-name-probe.py"
+        },
+        {
+          "case": "exception-name",
+          "source_sha256": "55fadc073d09d86131f94cecf25ffc79763708358a60991103c914605c348f26",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5912134172394872,
+          "raw_sha256": "387c7a2b46ad1d120e201e8a5ad74eb5893b208c39e28f3cae724bb3e7502320",
+          "raw_name": "3.13-native-rust-exception-name.raw",
+          "stdout_tail": "Exception field preserves factory cause: pass\n",
+          "source_path": "docs/validation/baseline/owner-exception-name-probe.py"
+        }
+      ]
+    },
+    {
+      "minor": "3.13",
+      "backend": "python",
+      "wheel_name": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+      "wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-dataclass": "0.1.0.dev0"
+      },
+      "cases": [
+        {
+          "case": "extensions",
+          "source_sha256": "126f484b1caaa3eb7696e533ae9b8d6081c195e0d7c8f260df62e54803d4c01e",
+          "exit_code": 0,
+          "elapsed_seconds": 2.0906359162181616,
+          "raw_sha256": "0389892f9c1727e084aee7bed7fbea38cefafa3772de59dc58cd5602a0b7a346",
+          "raw_name": "3.13-python-extensions.raw",
+          "stdout_tail": "{\"backend\": \"python\", \"hidden_provider_helpers\": \"pass\", \"lazy_copy_and_retention_release\": \"pass\", \"python\": \"3.13.12\", \"replace_reconstruction\": \"pass\", \"retry_mutable_reset_retention\": \"pass\", \"scope\": \"Stage D bounded extension subset; full installed/Undoable/perf gates separate\"}\n",
+          "source_path": "docs/validation/stage-d/owner_installed_probe.py"
+        },
+        {
+          "case": "property-name",
+          "source_sha256": "a4d063c6b5f81dd00b87d01873f2f1e140285a4e5264a8fffe11a250ec729db7",
+          "exit_code": 0,
+          "elapsed_seconds": 1.1361853326670825,
+          "raw_sha256": "fe5ef83da7f52b06d17651ae0fc38e02dbc265abd33c6b336936e582037f2468",
+          "raw_name": "3.13-python-property-name.raw",
+          "stdout_tail": "property field name and second descriptor: pass\n",
+          "source_path": "docs/validation/baseline/owner-property-name-probe.py"
+        },
+        {
+          "case": "type-name",
+          "source_sha256": "5c522eaffd4035e253104bafbdf161779c95e8dede2be1ea1ec39ee101cf9239",
+          "exit_code": 0,
+          "elapsed_seconds": 0.458663540892303,
+          "raw_sha256": "58dbae358a14310069b347f2f00930b48137d85c15fea727560bcbc909dd72ad",
+          "raw_name": "3.13-python-type-name.raw",
+          "stdout_tail": "type field with class provider: pass\n",
+          "source_path": "docs/validation/baseline/owner-type-name-probe.py"
+        },
+        {
+          "case": "exception-name",
+          "source_sha256": "55fadc073d09d86131f94cecf25ffc79763708358a60991103c914605c348f26",
+          "exit_code": 0,
+          "elapsed_seconds": 0.4417830412276089,
+          "raw_sha256": "387c7a2b46ad1d120e201e8a5ad74eb5893b208c39e28f3cae724bb3e7502320",
+          "raw_name": "3.13-python-exception-name.raw",
+          "stdout_tail": "Exception field preserves factory cause: pass\n",
+          "source_path": "docs/validation/baseline/owner-exception-name-probe.py"
+        }
+      ]
+    },
+    {
+      "minor": "3.14",
+      "backend": "native-rust",
+      "wheel_name": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+      "wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-dataclass": "0.1.0.dev0"
+      },
+      "cases": [
+        {
+          "case": "extensions",
+          "source_sha256": "126f484b1caaa3eb7696e533ae9b8d6081c195e0d7c8f260df62e54803d4c01e",
+          "exit_code": 0,
+          "elapsed_seconds": 0.792054083198309,
+          "raw_sha256": "3b648f4b4d015c4e05924eb8b4ab7ae508bbbc7c11a2c23d3ec829d1bf154b3b",
+          "raw_name": "3.14-native-rust-extensions.raw",
+          "stdout_tail": "{\"backend\": \"native-rust\", \"hidden_provider_helpers\": \"pass\", \"lazy_copy_and_retention_release\": \"pass\", \"python\": \"3.14.3\", \"replace_reconstruction\": \"pass\", \"retry_mutable_reset_retention\": \"pass\", \"scope\": \"Stage D bounded extension subset; full installed/Undoable/perf gates separate\"}\n",
+          "source_path": "docs/validation/stage-d/owner_installed_probe.py"
+        },
+        {
+          "case": "property-name",
+          "source_sha256": "a4d063c6b5f81dd00b87d01873f2f1e140285a4e5264a8fffe11a250ec729db7",
+          "exit_code": 0,
+          "elapsed_seconds": 0.6261693341657519,
+          "raw_sha256": "fe5ef83da7f52b06d17651ae0fc38e02dbc265abd33c6b336936e582037f2468",
+          "raw_name": "3.14-native-rust-property-name.raw",
+          "stdout_tail": "property field name and second descriptor: pass\n",
+          "source_path": "docs/validation/baseline/owner-property-name-probe.py"
+        },
+        {
+          "case": "type-name",
+          "source_sha256": "5c522eaffd4035e253104bafbdf161779c95e8dede2be1ea1ec39ee101cf9239",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5736714582890272,
+          "raw_sha256": "58dbae358a14310069b347f2f00930b48137d85c15fea727560bcbc909dd72ad",
+          "raw_name": "3.14-native-rust-type-name.raw",
+          "stdout_tail": "type field with class provider: pass\n",
+          "source_path": "docs/validation/baseline/owner-type-name-probe.py"
+        },
+        {
+          "case": "exception-name",
+          "source_sha256": "55fadc073d09d86131f94cecf25ffc79763708358a60991103c914605c348f26",
+          "exit_code": 0,
+          "elapsed_seconds": 0.6501230420544744,
+          "raw_sha256": "387c7a2b46ad1d120e201e8a5ad74eb5893b208c39e28f3cae724bb3e7502320",
+          "raw_name": "3.14-native-rust-exception-name.raw",
+          "stdout_tail": "Exception field preserves factory cause: pass\n",
+          "source_path": "docs/validation/baseline/owner-exception-name-probe.py"
+        }
+      ]
+    },
+    {
+      "minor": "3.14",
+      "backend": "python",
+      "wheel_name": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+      "wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-dataclass": "0.1.0.dev0"
+      },
+      "cases": [
+        {
+          "case": "extensions",
+          "source_sha256": "126f484b1caaa3eb7696e533ae9b8d6081c195e0d7c8f260df62e54803d4c01e",
+          "exit_code": 0,
+          "elapsed_seconds": 2.123387749772519,
+          "raw_sha256": "beb02609be6b73154a8781df5315668e4f0fd05b037ea3d605130fa062a73642",
+          "raw_name": "3.14-python-extensions.raw",
+          "stdout_tail": "{\"backend\": \"python\", \"hidden_provider_helpers\": \"pass\", \"lazy_copy_and_retention_release\": \"pass\", \"python\": \"3.14.3\", \"replace_reconstruction\": \"pass\", \"retry_mutable_reset_retention\": \"pass\", \"scope\": \"Stage D bounded extension subset; full installed/Undoable/perf gates separate\"}\n",
+          "source_path": "docs/validation/stage-d/owner_installed_probe.py"
+        },
+        {
+          "case": "property-name",
+          "source_sha256": "a4d063c6b5f81dd00b87d01873f2f1e140285a4e5264a8fffe11a250ec729db7",
+          "exit_code": 0,
+          "elapsed_seconds": 1.137087416369468,
+          "raw_sha256": "fe5ef83da7f52b06d17651ae0fc38e02dbc265abd33c6b336936e582037f2468",
+          "raw_name": "3.14-python-property-name.raw",
+          "stdout_tail": "property field name and second descriptor: pass\n",
+          "source_path": "docs/validation/baseline/owner-property-name-probe.py"
+        },
+        {
+          "case": "type-name",
+          "source_sha256": "5c522eaffd4035e253104bafbdf161779c95e8dede2be1ea1ec39ee101cf9239",
+          "exit_code": 0,
+          "elapsed_seconds": 0.44168912479653955,
+          "raw_sha256": "58dbae358a14310069b347f2f00930b48137d85c15fea727560bcbc909dd72ad",
+          "raw_name": "3.14-python-type-name.raw",
+          "stdout_tail": "type field with class provider: pass\n",
+          "source_path": "docs/validation/baseline/owner-type-name-probe.py"
+        },
+        {
+          "case": "exception-name",
+          "source_sha256": "55fadc073d09d86131f94cecf25ffc79763708358a60991103c914605c348f26",
+          "exit_code": 0,
+          "elapsed_seconds": 0.4460344580002129,
+          "raw_sha256": "387c7a2b46ad1d120e201e8a5ad74eb5893b208c39e28f3cae724bb3e7502320",
+          "raw_name": "3.14-python-exception-name.raw",
+          "stdout_tail": "Exception field preserves factory cause: pass\n",
+          "source_path": "docs/validation/baseline/owner-exception-name-probe.py"
+        }
+      ]
+    }
+  ],
+  "installed_regeneration": [
+    {
+      "python": "3.12.12",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "command": [
+        "external:venv-3.12/bin/python",
+        "-I",
+        "-m",
+        "yidl_dataclass.regenerate_dataclass_base"
+      ],
+      "output": ""
+    },
+    {
+      "python": "3.12.12",
+      "backend": "python",
+      "exit_code": 0,
+      "command": [
+        "external:venv-3.12/bin/python",
+        "-I",
+        "-m",
+        "yidl_dataclass.regenerate_dataclass_base"
+      ],
+      "output": ""
+    }
+  ]
+}

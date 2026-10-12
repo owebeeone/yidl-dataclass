@@ -1,0 +1,88 @@
+.FFF                                                                     [100%]
+=================================== FAILURES ===================================
+_____ test_type_parameter_does_not_shadow_class_provider_or_classvar_read ______
+
+    def test_type_parameter_does_not_shadow_class_provider_or_classvar_read():
+        from typing import ClassVar
+        from yidl_dataclass import field
+    
+        @dataclass(repr=False)
+        class Names:
+            type: int = 2
+            shared: ClassVar[int] = 4
+            owner: object = field(init=False, default_factory=lambda cls: cls, repr=False, compare=False)
+            value: int = field(init=False, default_factory=lambda shared: shared)
+    
+>       instance = Names()
+                   ^^^^^^^
+
+tests/test_builtin_field_names.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_builtin_field_names.test_type_parameter_does_not_shadow_class_provider_or_classvar_read.<locals>.Names object at 0x10bd3c780>
+type = 2
+
+>   ???
+E   TypeError: 'int' object is not callable
+
+<yidl-dataclass-model>:1: TypeError
+__________ test_exception_parameter_preserves_factory_error_and_cause __________
+
+    def failed():
+>       raise original
+E       ValueError: factory
+
+tests/test_builtin_field_names.py:43: ValueError
+
+During handling of the above exception, another exception occurred:
+
+    def test_exception_parameter_preserves_factory_error_and_cause():
+        import pytest
+        from yidl_dataclass import field, FieldInitializationError
+    
+        original = ValueError("factory")
+    
+        def failed():
+            raise original
+    
+        @dataclass(repr=False)
+        class Names:
+            Exception: int = 0
+            value: int = field(init=False, default_factory=failed)
+    
+        with pytest.raises(FieldInitializationError) as caught:
+>           Names()
+
+tests/test_builtin_field_names.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_builtin_field_names.test_exception_parameter_preserves_factory_error_and_cause.<locals>.Names object at 0x1056ee9e0>
+Exception = 0
+
+>   ???
+E   TypeError: catching classes that do not inherit from BaseException is not allowed
+
+<yidl-dataclass-model>:1: TypeError
+_______ test_typeerror_parameter_preserves_validator_contract_diagnostic _______
+
+    def test_typeerror_parameter_preserves_validator_contract_diagnostic():
+        import pytest
+        from yidl_dataclass import field
+    
+        @dataclass(repr=False)
+        class Names:
+            TypeError: int = 0
+            value: int = field(default=2, validator=lambda value: object())
+    
+>       with pytest.raises(TypeError, match="validator must return"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'validator must return'
+E         Actual message: "'int' object is not callable"
+
+tests/test_builtin_field_names.py:64: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_builtin_field_names.py::test_type_parameter_does_not_shadow_class_provider_or_classvar_read
+FAILED tests/test_builtin_field_names.py::test_exception_parameter_preserves_factory_error_and_cause
+FAILED tests/test_builtin_field_names.py::test_typeerror_parameter_preserves_validator_contract_diagnostic
+3 failed, 1 passed in 0.50s

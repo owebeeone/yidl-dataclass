@@ -35,6 +35,8 @@ class InitializationStep:
     fallback: bool = False
     class_provider: bool = False
     install: bool = True
+    lazy: bool = False
+    materialize: bool = False
 
 
 def resolve_factory(cls, item, providers, captures, index):
@@ -220,6 +222,13 @@ def plan_initialization(cls, fields, options, generate_init, captures):
                 fallback=fallback,
                 class_provider=item.kind.label == "classvar",
                 install=item.kind.stored and not fallback,
+                lazy=item.kind.label == "lazy",
+                materialize=item.kind.label == "lazy"
+                and any(
+                    item.name in call.dependencies
+                    and by_name[call.field_name].kind.label != "lazy"
+                    for call in calls
+                ),
             )
         )
     return (
