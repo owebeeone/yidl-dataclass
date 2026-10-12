@@ -1,0 +1,30 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_canonical_case[dataclass_plain.py] ____________________
+
+case = 'dataclass_plain.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1442/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+>       sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        @dataclass(eq=False, repr=False)
+        class Inventory:
+            count: int
+            label: str = "stock"
+            reserve: int = 2
+    
+>       assert Inventory.__slots__ == ("count", "label", "reserve")
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: type object 'Inventory' has no attribute '__slots__'. Did you mean: '__class__'?
+
+tests/data/gold_src/dataclass_plain.py:13: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_plain.py] - ...
+1 failed in 0.04s

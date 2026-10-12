@@ -1,0 +1,1 @@
+(4, 10, 3, 7, "(first: int, *, later: int, optional: str = 'default') -> None", ('first',), (2, 6, 'default'))

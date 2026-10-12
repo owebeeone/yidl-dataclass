@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.140" timestamp="2026-10-12T20:02:06.544594+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_plain.py]" time="0.113"><failure message="NameError: name 'astichi_ref' is not defined">case = 'dataclass_plain.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1443/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+&gt;       sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_plain.py:7: in render_case
+    @dataclass(eq=False, repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:27: in decorate
+    exec(compile(tree, "&lt;yidl-dataclass-model&gt;", "exec"), captures)
+&lt;yidl-dataclass-model&gt;:1: in &lt;module&gt;
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+&gt;   ???
+E   NameError: name 'astichi_ref' is not defined
+
+&lt;yidl-dataclass-model&gt;:1: NameError</failure></testcase></testsuite></testsuites>

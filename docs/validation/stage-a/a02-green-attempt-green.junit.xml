@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="20" time="0.197" timestamp="2026-10-12T20:07:43.719081+11:00" hostname="[host]"><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[init]" time="0.000" /><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[repr]" time="0.000" /><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[compare]" time="0.000" /><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[kw_only]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[init]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[repr]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[eq]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[order]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[unsafe_hash]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[frozen]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[match_args]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[kw_only]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[slots]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[weakref_slot]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[convert]" time="0.000" /><testcase classname="tests.test_markers" name="test_imported_field_is_not_mutated_or_shared" time="0.144" /><testcase classname="tests.test_markers" name="test_unsupported_minor_fails_before_generation" time="0.000" /><testcase classname="tests.test_markers" name="test_field_doc_rejected_on_older_minors" time="0.000" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_metadata.py]" time="0.011"><failure message="ValueError: expression must have Store context but has Load instead">case = 'dataclass_metadata.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1447/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+&gt;       sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_metadata.py:35: in render_case
+    actual = declarations(dataclass, field)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/data/gold_src/dataclass_metadata.py:9: in declarations
+    @decorator(eq=False, repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = &lt;class '&lt;run_path&gt;.declarations.&lt;locals&gt;.Catalog'&gt;
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+        definition, annotations, captures = harvest(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {name: value for name, value in declaration.__dict__.items() if name not in (*names, "__dict__", "__weakref__", "__classcell__")}
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {item.name: item.field for item in definition.fields}
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(item.name for item in definition.fields if item.is_instance and item.field.init and not item.field.kw_only)
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (not item.is_instance or not options.slots):
+                namespace[item.name] = item.field.default
+        captures.update(_y_dc_namespace=namespace, _y_dc_bases=declaration.__bases__, _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY)
+        builder = generated.new_builder()
+        builder.add(generated.ClassesCollection, generated.DataclassClass(class_id="Model", class_name=declaration.__name__, namespace_name="_y_dc_namespace", bases_name="_y_dc_bases", slot_names=definition.slot_names, use_slots=options.slots, generate_init=definition.generate_init))
+        for index, item in enumerate(definition.fields):
+            if not item.is_instance:
+                continue
+            metadata = item.field
+            install_default = not metadata.init and metadata.default is not std.MISSING and options.slots
+            install_factory = not metadata.init and metadata.default_factory is not std.MISSING
+            builder.add(generated.FieldsCollection, generated.DataclassField(field_id=f"Model.{item.name}", field_owner="Model", field_name=item.name, field_order=index, annotation_name=item.annotation_name, default_name=item.default_name, factory_name=item.factory_name, has_default=metadata.default is not std.MISSING, has_factory=metadata.default_factory is not std.MISSING, include_param=metadata.init, param_order=item.parameter_order, kw_only=metadata.kw_only, install_default=install_default, install_factory=install_factory))
+        composable = generated.build_DataclassModule(builder.freeze())
+        source = composable.emit_commented()
+        tree = composable.to_executable_ast()
+&gt;       exec(compile(tree, "&lt;yidl-dataclass-model&gt;", "exec", dont_inherit=True), captures)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: expression must have Store context but has Load instead
+
+src/yidl_dataclass/dataclass.py:41: ValueError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_plain.py]" time="0.004"><failure message="AssertionError: generated_output.py&#10;assert 'class Invent...e = reserve\n' == 'class Invent...e = reserve\n'&#10;  &#10;  Skipping 252 identical leading characters in diff, use -v to show&#10;    :&#10;  +         pass&#10;            self.count = count&#10;            self.label = label&#10;            self.reserve = reserve">case = 'dataclass_plain.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1447/test_canonical_case_dataclass_1')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+&gt;           assert actual == (expected / name).read_text(), name
+E           AssertionError: generated_output.py
+E           assert 'class Invent...e = reserve\n' == 'class Invent...e = reserve\n'
+E             
+E             Skipping 252 identical leading characters in diff, use -v to show
+E               :
+E             +         pass
+E                       self.count = count
+E                       self.label = label
+E                       self.reserve = reserve
+
+tests/test_yidl_goldens.py:16: AssertionError</failure></testcase></testsuite></testsuites>

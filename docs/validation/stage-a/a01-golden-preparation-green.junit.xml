@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.140" timestamp="2026-10-12T20:03:12.783305+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_plain.py]" time="0.110"><failure message="FileNotFoundError: [Errno 2] No such file or directory: '[consumer-root]/tests/data/goldens/materialized/dataclass_plain/generated_output.py'">case = 'dataclass_plain.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1444/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+&gt;           assert actual == (expected / name).read_text(), name
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('[consumer-root]/tests/data/goldens/materialized/dataclass_plain/generated_output.py')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '[consumer-root]/tests/data/goldens/materialized/dataclass_plain/generated_output.py'
+
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1013: FileNotFoundError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,4 @@
+slots=count,label,reserve; instance-dict=False
+(count: int, label: str = 'stock', reserve: int = 2) -> None
+first=4,stock,2; second=8,custom,5; third=0,stock,9
+replacement-bases=SharedSlot; declaration-base=False; inherited=12; units=6

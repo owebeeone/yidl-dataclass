@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="11" time="0.510" timestamp="2026-10-12T20:09:46.143752+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_layout.py]" time="0.194"><failure message="RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable">case = 'dataclass_layout.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1450/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+&gt;       sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_layout.py:58: in render_case
+    actual = layouts(dataclass, field)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/data/gold_src/dataclass_layout.py:13: in layouts
+    @decorator(eq=False, repr=False, slots=False)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:38: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:270: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:267: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1014: in build
+    self._reject_python_materialize_fallback("scope.build")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...7e3c70&gt;, ('Root', 'ClassDef[0]', 'InitMethod'): &lt;_astichi_native_engine.NativeOccurrenceHandle object at 0x1077f1030&gt;})
+operation = 'scope.build'
+
+    def _reject_python_materialize_fallback(self, operation: str) -&gt; None:
+        from astichi.lower_engine.self_native_gates import (
+            native_materialize_no_python_fallback_enabled,
+        )
+    
+        if not native_materialize_no_python_fallback_enabled():
+            return
+        if select_effective_lower_engine().selected_engine == "python":
+            return
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_state_handle is None
+        ):
+            return
+&gt;       raise RuntimeError(
+            f"{operation} requires native materialization but the native "
+            "materializer did not produce a composable"
+        )
+E       RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:997: RuntimeError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_metadata.py]" time="0.040" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_plain.py]" time="0.025" /><testcase classname="tests.test_failures" name="test_unslotted_base_rejected_for_slots" time="0.016" /><testcase classname="tests.test_failures" name="test_manual_slots_rejected" time="0.014" /><testcase classname="tests.test_failures" name="test_invalid_default_order_rejected" time="0.018" /><testcase classname="tests.test_failures" name="test_multiple_kw_only_fences_rejected" time="0.012" /><testcase classname="tests.test_failures" name="test_reserved_field_rejected" time="0.029" /><testcase classname="tests.test_failures" name="test_unhashable_default_rejected" time="0.017" /><testcase classname="tests.test_failures" name="test_post_init_rejected_even_with_init_suppressed" time="0.009" /><testcase classname="tests.test_failures" name="test_weakref_requires_slots" time="0.014" /></testsuite></testsuites>

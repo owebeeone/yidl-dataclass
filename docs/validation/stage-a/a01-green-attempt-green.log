@@ -1,0 +1,30 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_canonical_case[dataclass_plain.py] ____________________
+
+case = 'dataclass_plain.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1443/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+>       sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_plain.py:7: in render_case
+    @dataclass(eq=False, repr=False)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:27: in decorate
+    exec(compile(tree, "<yidl-dataclass-model>", "exec"), captures)
+<yidl-dataclass-model>:1: in <module>
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: name 'astichi_ref' is not defined
+
+<yidl-dataclass-model>:1: NameError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_plain.py] - ...
+1 failed in 0.15s

@@ -1,0 +1,284 @@
+module dataclass.core
+export concept DataclassCore
+
+concept DataclassCore {
+    property ClassId: str
+    property ClassName: str
+    property ClassOrder: int = 0
+    property NamespaceName: str
+    property BasesName: str
+    property SlotNames: object = ()
+    property UseSlots: bool = True
+    property GenerateInit: bool = True
+    property FieldId: str
+    property FieldOwner: str
+    property FieldName: str
+    property FieldOrder: int
+    property AnnotationName: str
+    property DefaultName: str = ""
+    property HasDefault: bool = False
+    property IncludeParam: bool = True
+    property FactoryName: str = ""
+    property HasFactory: bool = False
+    property KwOnly: bool = False
+    property ParamOrder: int = 0
+    property InstallDefault: bool = False
+    property InstallFactory: bool = False
+
+    record DataclassClass {
+        ClassId
+        ClassName
+        ClassOrder
+        NamespaceName
+        BasesName
+        SlotNames
+        UseSlots
+        GenerateInit
+    }
+    record DataclassField {
+        FieldId
+        FieldOwner
+        FieldName
+        FieldOrder
+        AnnotationName
+        DefaultName
+        HasDefault
+        IncludeParam
+        FactoryName
+        HasFactory
+        KwOnly
+        ParamOrder
+        InstallDefault
+        InstallFactory
+    }
+    collection Classes: DataclassClass identity ClassId many
+    collection Fields: DataclassField identity FieldId many
+
+    resource ModuleRoot = code $[
+        astichi_hole(classes)
+    ]$
+    resource ClassShell = template $[
+        class class_name__astichi_arg__(*astichi_ref(external=bases_name)):
+            locals().update(astichi_ref(external=namespace_name))
+            astichi_hole(slots)
+            astichi_hole(methods)
+    ]$ {
+        keep locals
+    }
+    resource EmptyStatement = template `pass`
+    resource Slots = template $[
+        __slots__ = astichi_bind_external(slot_names)
+    ]$
+    resource InitShell = template $[
+        def __init__(self, params__astichi_param_hole__) -> None:
+            astichi_hole(stores)
+    ]$ {
+        keep self, __init__
+    }
+    resource EmptyParams = template $[
+        def astichi_params():
+            pass
+    ]$
+    resource RequiredParam = template $[
+        def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__):
+            pass
+    ]$
+    resource DefaultParam = template $[
+        def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__ = default_name__astichi_arg__):
+            pass
+    ]$
+    resource InputStore = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = astichi_pass(param_name__astichi_arg__, outer_bind=True)
+    ]$
+
+    resource RequiredKwParam = template $[
+        def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__):
+            pass
+    ]$
+    resource DefaultKwParam = template $[
+        def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__ = default_name__astichi_arg__):
+            pass
+    ]$
+    resource FactoryParam = template $[
+        def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__ = _y_dc_factory_sentinel):
+            pass
+    ]$ { keep _y_dc_factory_sentinel }
+    resource FactoryKwParam = template $[
+        def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__ = _y_dc_factory_sentinel):
+            pass
+    ]$ { keep _y_dc_factory_sentinel }
+    resource FactoryInputStore = template $[
+        if astichi_pass(param_name__astichi_arg__, outer_bind=True) is _y_dc_factory_sentinel:
+            param_name__astichi_arg__ = factory_name__astichi_arg__()
+        astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = astichi_pass(param_name__astichi_arg__, outer_bind=True)
+    ]$ { keep _y_dc_factory_sentinel }
+    resource DefaultStore = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = default_name__astichi_arg__
+    ]$
+    resource FactoryStore = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = factory_name__astichi_arg__()
+    ]$
+
+    contribution ClassContribution = ClassProduction {
+        as ClassDef
+        index ClassOrder
+        order ClassOrder
+        target classes { build /Root }
+    }
+    contribution SlotsContribution = Slots {
+        target slots { build /ClassDef }
+        external slot_names = SlotNames
+    }
+    contribution InitContribution = InitProduction {
+        as InitMethod
+        target methods { build /ClassDef }
+    }
+    contribution RequiredParamContribution = RequiredParam {
+        as Parameter
+        index ParamOrder
+        order ParamOrder
+        target params { build /InitMethod }
+        ident param_name = FieldName
+        ident annotation_name = AnnotationName
+    }
+    contribution DefaultParamContribution = DefaultParam {
+        as Parameter
+        index ParamOrder
+        order ParamOrder
+        target params { build /InitMethod }
+        ident param_name = FieldName
+        ident annotation_name = AnnotationName
+        ident default_name = DefaultName
+    }
+    contribution InputStoreContribution = InputStore {
+        as Store
+        index FieldOrder
+        order FieldOrder
+        target stores { build /InitMethod }
+        ident param_name = FieldName
+        external slot_name = FieldName
+    }
+    contribution RequiredKwParamContribution = RequiredKwParam {
+        as Parameter
+        index ParamOrder
+        order ParamOrder
+        target params { build /InitMethod }
+        ident param_name = FieldName
+        ident annotation_name = AnnotationName
+    }
+    contribution DefaultKwParamContribution = DefaultKwParam {
+        as Parameter
+        index ParamOrder
+        order ParamOrder
+        target params { build /InitMethod }
+        ident param_name = FieldName
+        ident annotation_name = AnnotationName
+        ident default_name = DefaultName
+    }
+    contribution FactoryParamContribution = FactoryParam {
+        as Parameter
+        index ParamOrder
+        order ParamOrder
+        target params { build /InitMethod }
+        ident param_name = FieldName
+        ident annotation_name = AnnotationName
+    }
+    contribution FactoryKwParamContribution = FactoryKwParam {
+        as Parameter
+        index ParamOrder
+        order ParamOrder
+        target params { build /InitMethod }
+        ident param_name = FieldName
+        ident annotation_name = AnnotationName
+    }
+    contribution FactoryInputStoreContribution = FactoryInputStore {
+        as Store
+        index FieldOrder
+        order FieldOrder
+        target stores { build /InitMethod }
+        external slot_name = FieldName
+        ident param_name = FieldName
+        ident factory_name = FactoryName
+    }
+    contribution DefaultStoreContribution = DefaultStore {
+        as Store
+        index FieldOrder
+        order FieldOrder
+        target stores { build /InitMethod }
+        external slot_name = FieldName
+        ident default_name = DefaultName
+    }
+    contribution FactoryStoreContribution = FactoryStore {
+        as Store
+        index FieldOrder
+        order FieldOrder
+        target stores { build /InitMethod }
+        external slot_name = FieldName
+        ident factory_name = FactoryName
+    }
+    contribution EmptySlotsContribution = EmptyStatement {
+        target slots { build /ClassDef }
+    }
+    contribution EmptyMethodsContribution = EmptyStatement {
+        target methods { build /ClassDef }
+    }
+    contribution EmptyStoresContribution = EmptyStatement {
+        as InitializationStart
+        target stores { build /InitMethod }
+    }
+    contribution EmptyParamsContribution = EmptyParams {
+        as ParameterStart
+        target params { build /InitMethod }
+    }
+    matcher EmptyParamsContributions(cls: Classes) -> contribution {
+        default -> EmptyParamsContribution
+    }
+    matcher EmptyStoresContributions(cls: Classes) -> contribution {
+        default -> EmptyStoresContribution
+    }
+    matcher ClassContributions(cls: Classes) -> contribution {
+        default -> ClassContribution
+    }
+    matcher SlotsContributions(cls: Classes) -> contribution {
+        default -> EmptySlotsContribution
+        rule enabled when UseSlots == True -> SlotsContribution
+    }
+    matcher InitContributions(cls: Classes) -> contribution {
+        default -> EmptyMethodsContribution
+        rule enabled when GenerateInit == True -> InitContribution
+    }
+    matcher ParamContributions(field: Fields, cls: Classes) -> contribution {
+        rule required when IncludeParam == True and KwOnly == False and HasDefault == False and HasFactory == False -> RequiredParamContribution
+        rule defaulted when IncludeParam == True and KwOnly == False and HasDefault == True -> DefaultParamContribution
+        rule factory when IncludeParam == True and KwOnly == False and HasFactory == True -> FactoryParamContribution
+        rule required_kw when IncludeParam == True and KwOnly == True and HasDefault == False and HasFactory == False -> RequiredKwParamContribution
+        rule defaulted_kw when IncludeParam == True and KwOnly == True and HasDefault == True -> DefaultKwParamContribution
+        rule factory_kw when IncludeParam == True and KwOnly == True and HasFactory == True -> FactoryKwParamContribution
+    }
+    matcher StoreContributions(field: Fields, cls: Classes) -> contribution {
+        rule input when IncludeParam == True and HasFactory == False -> InputStoreContribution
+        rule factory_input when IncludeParam == True and HasFactory == True -> FactoryInputStoreContribution
+        rule default_value when InstallDefault == True -> DefaultStoreContribution
+        rule factory_value when InstallFactory == True -> FactoryStoreContribution
+    }
+    production CoreModule -> composable {
+        root Root = ModuleRoot
+        apply classes from cls: Classes using ClassContributions
+    }
+    production ClassProduction(cls: Classes) -> composable {
+        root ClassDef = ClassShell {
+            ident class_name = ClassName
+            external bases_name = BasesName
+            external namespace_name = NamespaceName
+        }
+        apply slots using SlotsContributions
+        apply init using InitContributions
+    }
+    production InitProduction(cls: Classes) -> composable {
+        root InitMethod = InitShell
+        apply empty_params using EmptyParamsContributions
+        apply params from field: Fields where FieldOwner == ClassId using ParamContributions
+        apply empty_stores using EmptyStoresContributions
+        apply stores from field: Fields where FieldOwner == ClassId using StoreContributions
+    }
+}

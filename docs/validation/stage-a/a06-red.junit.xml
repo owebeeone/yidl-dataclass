@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.238" timestamp="2026-10-12T20:24:06.989997+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_metadata.py]" time="0.134"><failure message="yidl_dataclass.errors.DataclassDefinitionError: kind: hash=True requires compare=True">case = 'dataclass_metadata.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1460/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+&gt;       sources = run_multi_source_case(source_path, runpy.run_path(str(source_path))["render_case"]())
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_metadata.py:37: in render_case
+    actual = declarations(dataclass, field)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/data/gold_src/dataclass_metadata.py:9: in declarations
+    @decorator(eq=False, repr=False, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:46: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:69: in harvest
+    items = adapter.fields_for(cls, annotations, kw_only=options.kw_only)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class '&lt;run_path&gt;.declarations.&lt;locals&gt;.Catalog'&gt;
+annotations = {'count': &lt;class 'int'&gt;, 'label': &lt;class 'str'&gt;, 'retired': &lt;class 'int'&gt;, 'tags': &lt;class 'list'&gt;, ...}
+kw_only = False
+
+    def fields_for(
+        cls: type, annotations: dict[str, Any], *, kw_only: bool
+    ) -&gt; tuple[std.Field[Any], ...]:
+        attributes = {"__module__": cls.__module__}
+        for name in annotations:
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            if value is not std.MISSING:
+                attributes[name] = (
+                    copy.copy(value) if isinstance(value, std.Field) else value
+                )
+        harvest = type(cls.__name__, (), attributes)
+        result = []
+        fence_seen = False
+        for name, annotation in annotations.items():
+            if annotation is std.KW_ONLY or (
+                isinstance(annotation, str)
+                and std._is_type(
+                    annotation,
+                    harvest,
+                    std,
+                    std.KW_ONLY,
+                    lambda a, module: a is module.KW_ONLY,
+                )
+            ):
+                if fence_seen:
+                    raise DataclassDefinitionError("KW_ONLY specified more than once")
+                kw_only = True
+                fence_seen = True
+                continue
+            try:
+                item = std._get_field(harvest, name, annotation, kw_only)
+            except (TypeError, ValueError) as error:
+                raise DataclassDefinitionError(
+                    f"{cls.__qualname__}.{name}: {error}"
+                ) from error
+            for option in ("init", "repr", "compare"):
+                require_bool(f"{name}.{option}", getattr(item, option))
+            if item.hash is not None:
+                require_bool(f"{name}.hash", item.hash)
+            if item.kw_only is not std.MISSING:
+                require_bool(f"{name}.kw_only", item.kw_only)
+            if item.hash is True and item.compare is False:
+&gt;               raise DataclassDefinitionError(f"{name}: hash=True requires compare=True")
+E               yidl_dataclass.errors.DataclassDefinitionError: kind: hash=True requires compare=True
+
+src/yidl_dataclass/stdlib_adapter.py:77: DataclassDefinitionError</failure></testcase></testsuite></testsuites>

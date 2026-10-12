@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="18" skipped="0" tests="20" time="0.370" timestamp="2026-10-12T20:05:10.340426+11:00" hostname="[host]"><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[init]" time="0.001"><failure message="Failed: DID NOT RAISE TypeError">option = 'init'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "compare", "kw_only"))
+    def test_field_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:10: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[repr]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'repr'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "compare", "kw_only"))
+    def test_field_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:10: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[compare]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'compare'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "compare", "kw_only"))
+    def test_field_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:10: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[kw_only]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'kw_only'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "compare", "kw_only"))
+    def test_field_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:10: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[init]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'init'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[repr]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'repr'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[eq]" time="0.001"><failure message="Failed: DID NOT RAISE TypeError">option = 'eq'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[order]" time="0.001"><failure message="Failed: DID NOT RAISE TypeError">option = 'order'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[unsafe_hash]" time="0.001"><failure message="Failed: DID NOT RAISE TypeError">option = 'unsafe_hash'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[frozen]" time="0.001"><failure message="Failed: DID NOT RAISE TypeError">option = 'frozen'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[match_args]" time="0.001"><failure message="Failed: DID NOT RAISE TypeError">option = 'match_args'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[kw_only]" time="0.001"><failure message="Failed: DID NOT RAISE TypeError">option = 'kw_only'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[slots]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'slots'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[weakref_slot]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'weakref_slot'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[convert]" time="0.000"><failure message="Failed: DID NOT RAISE TypeError">option = 'convert'
+
+    @pytest.mark.parametrize("option", ("init", "repr", "eq", "order", "unsafe_hash", "frozen", "match_args", "kw_only", "slots", "weakref_slot", "convert"))
+    def test_decorator_flags_are_strict_booleans(option):
+&gt;       with pytest.raises(TypeError, match=option):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_markers.py:16: Failed</failure></testcase><testcase classname="tests.test_markers" name="test_imported_field_is_not_mutated_or_shared" time="0.211"><failure message="AttributeError: type object 'One' has no attribute '__dataclass_fields__'">def test_imported_field_is_not_mutated_or_shared():
+        declaration = std.field(default=2, metadata={"label": "same"})
+        class One:
+            value: int = declaration
+        class Two:
+            other: int = declaration
+        first = dataclass(One, eq=False, repr=False)
+        second = dataclass(Two, eq=False, repr=False)
+        assert declaration.name is None and declaration.type is None
+&gt;       assert first.__dataclass_fields__["value"] is not second.__dataclass_fields__["other"]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: type object 'One' has no attribute '__dataclass_fields__'
+
+tests/test_markers.py:29: AttributeError</failure></testcase><testcase classname="tests.test_markers" name="test_unsupported_minor_fails_before_generation" time="0.003"><failure message="RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x108efbcb0&gt;
+
+    def test_unsupported_minor_fails_before_generation(monkeypatch):
+        monkeypatch.setattr(sys, "version_info", (3, 15, 0))
+        with pytest.raises(TypeError, match="3.12.*3.14"):
+&gt;           dataclass(type("Future", (), {}), eq=False, repr=False)
+
+tests/test_markers.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:31: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:24: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:222: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:219: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:1014: in build
+    self._reject_python_materialize_fallback("scope.build")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...f9a1f0&gt;, ('Root', 'ClassDef[0]', 'InitMethod'): &lt;_astichi_native_engine.NativeOccurrenceHandle object at 0x108f9b030&gt;})
+operation = 'scope.build'
+
+    def _reject_python_materialize_fallback(self, operation: str) -&gt; None:
+        from astichi.lower_engine.self_native_gates import (
+            native_materialize_no_python_fallback_enabled,
+        )
+    
+        if not native_materialize_no_python_fallback_enabled():
+            return
+        if select_effective_lower_engine().selected_engine == "python":
+            return
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_state_handle is None
+        ):
+            return
+&gt;       raise RuntimeError(
+            f"{operation} requires native materialization but the native "
+            "materializer did not produce a composable"
+        )
+E       RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:997: RuntimeError</failure></testcase><testcase classname="tests.test_markers" name="test_field_doc_rejected_on_older_minors" time="0.000" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_metadata.py]" time="0.009"><failure message="AssertionError">case = 'dataclass_metadata.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1446/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+&gt;       sources = runpy.run_path(str(data_gold_src_dir(ROOT) / case))["render_case"]()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        actual = declarations(dataclass, field)
+        reference = declarations(std.dataclass, std.field)
+&gt;       assert std.is_dataclass(actual)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+tests/data/gold_src/dataclass_metadata.py:37: AssertionError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_plain.py]" time="0.005" /></testsuite></testsuites>

@@ -1,0 +1,119 @@
+..................sF........FFFFF..                                      [100%]
+=================================== FAILURES ===================================
+_ test_factory_objects_are_not_formatted_compared_or_called_during_generation __
+
+    def test_factory_objects_are_not_formatted_compared_or_called_during_generation():
+        class Factory:
+            def __repr__(self):
+                raise AssertionError("factory repr executed")
+            def __eq__(self, other):
+                raise AssertionError("factory equality executed")
+            def __call__(self):
+                raise AssertionError("factory executed")
+        factory = Factory()
+        class Record:
+            value: object = field(default_factory=factory)
+>       dataclass(Record, eq=False, repr=False)
+
+tests/test_markers.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:50: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:16: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:67: in harvest
+    if generate_init and factory not in _ZERO_ARG_BUILTINS and inspect.signature(factory).parameters:
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AssertionError('factory repr executed') raised in repr()] Factory object at 0x10b0bfb30>
+other = <class 'list'>
+
+    def __eq__(self, other):
+>       raise AssertionError("factory equality executed")
+E       AssertionError: factory equality executed
+
+tests/test_markers.py:58: AssertionError
+________________________ test_decorator_requires_class _________________________
+
+    def test_decorator_requires_class():
+        with pytest.raises(TypeError, match="class"):
+>           plain(42)
+
+tests/test_failures.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_failures.py:8: in plain
+    return dataclass(cls, eq=False, repr=False, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:50: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:16: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = 42
+options = DataclassOptions(init=True, repr=False, eq=False, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(cls: type, options: DataclassOptions):
+        adapter.ensure_supported_runtime()
+>       if "__slots__" in cls.__dict__:
+                          ^^^^^^^^^^^^
+E       AttributeError: 'int' object has no attribute '__dict__'. Did you mean: '__dir__'?
+
+src/yidl_dataclass/dataclass_harvester.py:17: AttributeError
+______________________ test_unannotated_field_is_rejected ______________________
+
+    def test_unannotated_field_is_rejected():
+        class Invalid:
+            value = field(default=3)
+>       with pytest.raises(TypeError, match="annotation"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:78: Failed
+_____________________ test_descriptor_default_is_rejected ______________________
+
+    def test_descriptor_default_is_rejected():
+        class Invalid:
+            value: int = property(lambda self: 3)
+>       with pytest.raises(TypeError, match="descriptor"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:85: Failed
+______________ test_reserved_storage_names_are_rejected[__dict__] ______________
+
+name = '__dict__'
+
+    @pytest.mark.parametrize("name", ("__dict__", "__weakref__", "self", "cls"))
+    def test_reserved_storage_names_are_rejected(name):
+        declaration = type("Invalid", (), {"__annotations__": {name: int}})
+>       with pytest.raises(TypeError, match="reserved"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:92: Failed
+____________ test_reserved_storage_names_are_rejected[__weakref__] _____________
+
+name = '__weakref__'
+
+    @pytest.mark.parametrize("name", ("__dict__", "__weakref__", "self", "cls"))
+    def test_reserved_storage_names_are_rejected(name):
+        declaration = type("Invalid", (), {"__annotations__": {name: int}})
+>       with pytest.raises(TypeError, match="reserved"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:92: Failed
+=========================== short test summary info ============================
+FAILED tests/test_markers.py::test_factory_objects_are_not_formatted_compared_or_called_during_generation
+FAILED tests/test_failures.py::test_decorator_requires_class - AttributeError...
+FAILED tests/test_failures.py::test_unannotated_field_is_rejected - Failed: D...
+FAILED tests/test_failures.py::test_descriptor_default_is_rejected - Failed: ...
+FAILED tests/test_failures.py::test_reserved_storage_names_are_rejected[__dict__]
+FAILED tests/test_failures.py::test_reserved_storage_names_are_rejected[__weakref__]
+6 failed, 28 passed, 1 skipped in 0.37s

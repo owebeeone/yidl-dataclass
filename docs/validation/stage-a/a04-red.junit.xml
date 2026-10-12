@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="1" tests="35" time="0.367" timestamp="2026-10-12T20:13:04.875713+11:00" hostname="[host]"><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[init]" time="0.000" /><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[repr]" time="0.000" /><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[compare]" time="0.000" /><testcase classname="tests.test_markers" name="test_field_flags_are_strict_booleans[kw_only]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[init]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[repr]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[eq]" time="0.001" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[order]" time="0.001" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[unsafe_hash]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[frozen]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[match_args]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[kw_only]" time="0.000" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[slots]" time="0.001" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[weakref_slot]" time="0.001" /><testcase classname="tests.test_markers" name="test_decorator_flags_are_strict_booleans[convert]" time="0.001" /><testcase classname="tests.test_markers" name="test_imported_field_is_not_mutated_or_shared" time="0.264" /><testcase classname="tests.test_markers" name="test_unsupported_minor_fails_before_generation" time="0.000" /><testcase classname="tests.test_markers" name="test_field_doc_rejected_on_older_minors" time="0.000" /><testcase classname="tests.test_markers" name="test_field_doc_is_carried_by_real_std_field" time="0.000"><skipped type="pytest.skip" message="Field.doc is a Python3.14 surface">[consumer-root]/tests/test_markers.py:46: Field.doc is a Python3.14 surface</skipped></testcase><testcase classname="tests.test_markers" name="test_factory_objects_are_not_formatted_compared_or_called_during_generation" time="0.000"><failure message="AssertionError: factory equality executed">def test_factory_objects_are_not_formatted_compared_or_called_during_generation():
+        class Factory:
+            def __repr__(self):
+                raise AssertionError("factory repr executed")
+            def __eq__(self, other):
+                raise AssertionError("factory equality executed")
+            def __call__(self):
+                raise AssertionError("factory executed")
+        factory = Factory()
+        class Record:
+            value: object = field(default_factory=factory)
+&gt;       dataclass(Record, eq=False, repr=False)
+
+tests/test_markers.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:50: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:16: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:67: in harvest
+    if generate_init and factory not in _ZERO_ARG_BUILTINS and inspect.signature(factory).parameters:
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;[AssertionError('factory repr executed') raised in repr()] Factory object at 0x10b0bfb30&gt;
+other = &lt;class 'list'&gt;
+
+    def __eq__(self, other):
+&gt;       raise AssertionError("factory equality executed")
+E       AssertionError: factory equality executed
+
+tests/test_markers.py:58: AssertionError</failure></testcase><testcase classname="tests.test_failures" name="test_unslotted_base_rejected_for_slots" time="0.001" /><testcase classname="tests.test_failures" name="test_manual_slots_rejected" time="0.001" /><testcase classname="tests.test_failures" name="test_invalid_default_order_rejected" time="0.001" /><testcase classname="tests.test_failures" name="test_multiple_kw_only_fences_rejected" time="0.001" /><testcase classname="tests.test_failures" name="test_reserved_field_rejected" time="0.001" /><testcase classname="tests.test_failures" name="test_unhashable_default_rejected" time="0.000" /><testcase classname="tests.test_failures" name="test_post_init_rejected_even_with_init_suppressed" time="0.000" /><testcase classname="tests.test_failures" name="test_weakref_requires_slots" time="0.000" /><testcase classname="tests.test_failures" name="test_decorator_requires_class" time="0.000"><failure message="AttributeError: 'int' object has no attribute '__dict__'. Did you mean: '__dir__'?">def test_decorator_requires_class():
+        with pytest.raises(TypeError, match="class"):
+&gt;           plain(42)
+
+tests/test_failures.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_failures.py:8: in plain
+    return dataclass(cls, eq=False, repr=False, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:50: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:16: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = 42
+options = DataclassOptions(init=True, repr=False, eq=False, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(cls: type, options: DataclassOptions):
+        adapter.ensure_supported_runtime()
+&gt;       if "__slots__" in cls.__dict__:
+                          ^^^^^^^^^^^^
+E       AttributeError: 'int' object has no attribute '__dict__'. Did you mean: '__dir__'?
+
+src/yidl_dataclass/dataclass_harvester.py:17: AttributeError</failure></testcase><testcase classname="tests.test_failures" name="test_unannotated_field_is_rejected" time="0.005"><failure message="Failed: DID NOT RAISE TypeError">def test_unannotated_field_is_rejected():
+        class Invalid:
+            value = field(default=3)
+&gt;       with pytest.raises(TypeError, match="annotation"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:78: Failed</failure></testcase><testcase classname="tests.test_failures" name="test_descriptor_default_is_rejected" time="0.004"><failure message="Failed: DID NOT RAISE TypeError">def test_descriptor_default_is_rejected():
+        class Invalid:
+            value: int = property(lambda self: 3)
+&gt;       with pytest.raises(TypeError, match="descriptor"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:85: Failed</failure></testcase><testcase classname="tests.test_failures" name="test_reserved_storage_names_are_rejected[__dict__]" time="0.005"><failure message="Failed: DID NOT RAISE TypeError">name = '__dict__'
+
+    @pytest.mark.parametrize("name", ("__dict__", "__weakref__", "self", "cls"))
+    def test_reserved_storage_names_are_rejected(name):
+        declaration = type("Invalid", (), {"__annotations__": {name: int}})
+&gt;       with pytest.raises(TypeError, match="reserved"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:92: Failed</failure></testcase><testcase classname="tests.test_failures" name="test_reserved_storage_names_are_rejected[__weakref__]" time="0.004"><failure message="Failed: DID NOT RAISE TypeError">name = '__weakref__'
+
+    @pytest.mark.parametrize("name", ("__dict__", "__weakref__", "self", "cls"))
+    def test_reserved_storage_names_are_rejected(name):
+        declaration = type("Invalid", (), {"__annotations__": {name: int}})
+&gt;       with pytest.raises(TypeError, match="reserved"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE TypeError
+
+tests/test_failures.py:92: Failed</failure></testcase><testcase classname="tests.test_failures" name="test_reserved_storage_names_are_rejected[self]" time="0.001" /><testcase classname="tests.test_failures" name="test_reserved_storage_names_are_rejected[cls]" time="0.000" /></testsuite></testsuites>
