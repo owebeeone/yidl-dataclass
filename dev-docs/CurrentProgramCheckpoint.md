@@ -61,6 +61,12 @@ H preparation freeze: `f49b9ec6de476271e7193c99b38af196fed3b49a`.
 Serial native benchmark measurement began at `2026-10-12T15:46:20.378291Z`
 with Python 3.12 process 1. Full validated process sets and final reviews remain
 pending; intermediate rows are preserved observations, not acceptance results.
+The original H v1 process was controlled-interrupted at
+`2026-10-12T15:57:57.981879Z` after its cold-calibration startup cost was observed.
+`ColdSamplingAmendment.md` explicitly replaces only cold accumulated20ms sampling
+with individual fresh-worker intervals, retaining ordinary calibration and all
+other gates. V1 evidence/source are archived separately. The sole drafter is
+preparing H2 with genuine focused tests; product and dependency bytes unchanged.
 
 ## Requirements review history and authority
 

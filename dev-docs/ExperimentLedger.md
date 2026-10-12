@@ -341,3 +341,16 @@ failed attempts. Definition digest is
 Product and original dependencies remain unchanged. Approximately 12h09m since
 GO is wall elapsed, including historical detour, intervention, verification and
 preparation; it is not timed generator cost or measured active coding time.
+
+## Cold sampling correction — 2026-10-12T15:57:57.981879Z
+
+The owner controlled-interrupted the first v1 parent after 697.603588 seconds.
+Its journal retains 2,757 first-worker observations and all completed aggregate
+rows; this is not a successful full process sample. The self-imposed accumulated
+20ms cold method selected40/80 stdlib workers per batch, multiplying external
+startup/provenance cost across the planned matrix. `ColdSamplingAmendment.md`
+records the bounded cold-only correction and its necessity/provenance. Ordinary
+20ms calibration, sample/process counts and performance thresholds stay intact.
+No failed threshold, product bug or missing compiler facility was inferred.
+V1 source/raw observations remain distinct from the planned H2 dataset; the
+original experiment start and cumulative cost/time are unchanged.

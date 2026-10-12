@@ -1,0 +1,60 @@
+{
+  "scope": "Interrupted v1 attempted observations; excluded from revised complete-set performance aggregation",
+  "original_source_commit": "f49b9ec6de476271e7193c99b38af196fed3b49a",
+  "original_definition_canonical_sha256": "668c864ea59b976a950557ab9d608e351eae9b0aa7e3ef84e2c59f5046191983",
+  "raw_archive": "external:yidl-dataclass-performance-v1-raw",
+  "files": [
+    {
+      "path": "docs/validation/perf/v1-interrupted/owner-executions.jsonl.gz",
+      "raw_sha256": "d0b3d7556d5357cfa3bae1347b2f9944019a8df4039e15a4e0e77125f96dc1e6",
+      "raw_bytes": 1473,
+      "sanitized_uncompressed_sha256": "c6f8b3bfcf67d4c1e5df143788caea1b8413dd61a597330e44334b3d1ba6292e",
+      "compressed_sha256": "6a29b381e31d8127e301e8631f9c707807afc955a66280a8d3231a341670d2bb",
+      "compressed_bytes": 598,
+      "encoding": "gzip UTF-8; explicitly path-sanitized derivative, not verbatim original"
+    },
+    {
+      "path": "docs/validation/perf/v1-interrupted/owner-interruption-observation.json.gz",
+      "raw_sha256": "b554121ca82a3a1b41019861327e51a07a5783eb6b63b853f0908eea5d5d04fd",
+      "raw_bytes": 2153,
+      "sanitized_uncompressed_sha256": "b554121ca82a3a1b41019861327e51a07a5783eb6b63b853f0908eea5d5d04fd",
+      "compressed_sha256": "1900c155d4bce36fb3c9e1b1648428af22f45ee802289913cd52705c7da1fc90",
+      "compressed_bytes": 873,
+      "encoding": "gzip UTF-8; explicitly path-sanitized derivative, not verbatim original"
+    },
+    {
+      "path": "docs/validation/perf/v1-interrupted/primary-3.12-process-01.journal.jsonl.gz",
+      "raw_sha256": "ef8b95a711d9ebd2b579a0635daeee5b4a6716872da189b0494df6a22b3c364c",
+      "raw_bytes": 17761277,
+      "sanitized_uncompressed_sha256": "ef8b95a711d9ebd2b579a0635daeee5b4a6716872da189b0494df6a22b3c364c",
+      "compressed_sha256": "fe07f123790c1b9a6a411acf8d2fddc11701f7240cc309a514431449fd2e146c",
+      "compressed_bytes": 214506,
+      "encoding": "gzip UTF-8; explicitly path-sanitized derivative, not verbatim original"
+    },
+    {
+      "path": "docs/validation/perf/v1-interrupted/primary-3.12-process-01.stderr.gz",
+      "raw_sha256": "da3e60a55c9dcf669ae4dd56f7972e074a26773bd76c59448f95550dd6dd3f0d",
+      "raw_bytes": 2474,
+      "sanitized_uncompressed_sha256": "29ba9f26c913daf44dd25b7e035561f9e735d3645a014a3cb9c0abad6c813295",
+      "compressed_sha256": "7bf0863eb35da23bd20e34c114e138797a3022c4de8c20ae4bdbba060ce06c79",
+      "compressed_bytes": 572,
+      "encoding": "gzip UTF-8; explicitly path-sanitized derivative, not verbatim original"
+    },
+    {
+      "path": "docs/validation/perf/v1-interrupted/primary-3.12-process-01.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicitly path-sanitized derivative, not verbatim original"
+    }
+  ],
+  "frozen_source_archive": {
+    "path": "docs/validation/perf/v1-interrupted/frozen-source-and-definition.tar.gz",
+    "uncompressed_tar_sha256": "5ca8ade9504fc8cad47ec8c31483575764b825fab45676a725f65ebb4e662afa",
+    "compressed_sha256": "d1b814d6506a7dab05cf5b03ea67536d91cad70406d6b17f8f205597f72f9884",
+    "note": "Exact Git archive of frozen v1 harness, prep evidence and artifact tuple; repository-relative tar members."
+  },
+  "all_failed_attempts": "Original controlled interruption stderr/journal retained; not a successful sample or numerical verdict."
+}
