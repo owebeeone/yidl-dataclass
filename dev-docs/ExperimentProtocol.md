@@ -26,6 +26,9 @@ review rounds, remediation and any redesign explicitly.
    Lifecycle's repository layout and composable, inheritable YIDL module approach,
    using matching to select field facilities. Require specialized generated access
    and factory wiring rather than Undoable's generic runtime dispatch pattern.
+   Put equality and ordering generation in a separate reusable YIDL module with
+   explicit field-selection and access-expression inputs, suitable for future
+   Lifecycle and Undoable composition.
 4. Implement through observable failing tests followed by passing behavior. Prefer
    canonical examples/goldens for successful generated code and end-to-end use;
    use narrow tests for failures and mechanics that those examples cannot express.
@@ -53,6 +56,8 @@ intentional differences, particularly slots by default and replacing post-init
 initialization with dependency resolution. Do not treat those as standard parity.
 
 Publish generated examples that make the storage and access paths inspectable.
+Include a canonical example of the comparison module composed by another minimal
+class generator, demonstrating reuse without dataclass-specific storage coupling.
 Exercise independent installation and an example built using only the public
 documentation. Report remaining limitations instead of inferring correctness from
 a test count alone.

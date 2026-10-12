@@ -46,6 +46,31 @@ accessor dispatch is not the default design. A field with assignment conversion
 or validation may require a property and must be benchmarked separately from an
 ordinary read-write slot.
 
+## Reusable comparison generation
+
+Keep generators for field-by-field equality and ordering in a separate YIDL file
+or module that can be composed into other generated class families. The goal is
+to reuse this facility in YIDL Lifecycle and YIDL Undoable, rather than coupling
+the comparison templates to dataclass storage or decorator machinery.
+
+The consuming generator supplies the ordered comparison fields and generated
+expressions for reading each operand's field values. Dataclass composition uses
+its selected fields and specialized access paths; Lifecycle or Undoable can
+supply their own access expressions and explicitly chosen view semantics. Resolve
+this adaptation during generation, without adding generic runtime field lookup.
+
+For dataclasses, retain the agreed standard comparison semantics and field
+exclusion flags. Reuse must not silently compare private caches, initialization
+providers, transaction metadata or different state views. Consumer-specific type
+compatibility and field selection rules belong in the explicit generation
+contract. The detailed design should identify which related generation pieces,
+such as hashing, can share this boundary while preserving equality/hash consistency.
+
+Demonstrate composition with an independently defined minimal class generator,
+using canonical generated output and behavior checks. Actual integration into
+Lifecycle and Undoable is a future consumer task; this experiment must make the
+comparison facility reusable without requiring changes to those libraries now.
+
 ## Factories and initialization providers
 
 Factory parameter names identify field providers. Parameters receive instance
