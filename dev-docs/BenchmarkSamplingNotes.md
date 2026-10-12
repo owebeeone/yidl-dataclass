@@ -58,3 +58,14 @@ New accounting tests first fail on missing memory aggregation/count validation
 and inspection-boundary output, then pass; earlier prototype checks added after
 drafting remain verification. The full inventory and frozen-artifact measurement
 are still pending, including the Undoable seam.
+
+The external Undoable seam preparation now includes full managed-setter cases
+for equal integers, reflected opaque incoming equality, and alternating node,
+tuple-node and mapping-node values at both model sizes. Original consumer
+baseline setup passes on all three minors; integrated-wheel setup and all timing
+remain pending. Initial preparation incorrectly tried to store an unsupported
+opaque stable value. That setup failure was corrected to use a stable integer
+old value and an opaque incoming operand whose equality skips storage; this is
+benchmark preparation, not a product defect or strict test-first claim. A direct
+handwritten structural comparison on original facade getters is explicitly a
+benchmark reference only, with no independent correctness-oracle claim.

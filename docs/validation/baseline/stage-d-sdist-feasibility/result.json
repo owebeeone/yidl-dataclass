@@ -1,0 +1,11 @@
+{
+  "boundary": "Owner pre-G feasibility only at verified D runtime; no final packaged corpus or public authoring claim",
+  "sdist_sha256": "5412c2e8cfdb006961f1378bd96ae847bc696d136838c78f47a65ab3536877be",
+  "rebuilt_wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+  "original_wheel_sha256": "845b55e814a7b56be4cda0964393962fbcf977898eae068bb1c489ebd1ff0942",
+  "package_files_identical": true,
+  "package_file_count": 33,
+  "yidl_resource_count": 12,
+  "py_typed_generated_base_regeneration_and_shared_authority": "present",
+  "dependencies_rebuilt": false
+}
