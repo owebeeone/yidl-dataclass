@@ -1,7 +1,7 @@
 # YIDL Dataclass checkpoint
 
 Status: P1 Python compiler prerequisite is verified and committed at Astichi
-`4a62b093498dae7b6d346306eae23e5925aaa004`; P2 native restoration is next. Product Stage A remains
+`4a62b093498dae7b6d346306eae23e5925aaa004`. P2 native core has 13 passing working-tree tests; broader native graph/hygiene failures are under read-only architectural classification before bridge code. P2 is not accepted. Product Stage A remains
 paused until P1–P4 pass. Detailed-design dual GO and TDD-plan GO remain historical
 gates, not proof of the missing facility.
 GO/start was 2026-10-12T03:36:48Z; implementation preparation starts

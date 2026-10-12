@@ -46,6 +46,8 @@ separate measurement stages.
 
 | 2026-10-12T06:21Z / preliminary portability and P2 envelope | All nine installed Python producer/consumer pairs pass. Native baseline probes confirm surrogate literal substitution and UTF-8 metadata rejection; accepted unsupported-native-combination clauses permit precise rejection rather than sidecars. P2 resumes with path diagnostics before registration. Latest eight-actor observations estimate approximately $20.00 Standard API-equivalent USD, about 2h45m from GO; actual billing unavailable. Product work remains behind compiler prerequisites. |
 
+| 2026-10-12T06:59Z / P2 graph-lowering pause | Working native core reaches 13 passing tests with actual parser counters. Four-backend corpus first reports 120 failed/52 passed; corrected phase-boundary attempt reports 78 failed/94 passed, including further validator-oracle tripwire errors. Counts are not all compiler behavioral REDs. Genuine staged-builder/native operation and hygiene gaps trigger read-only architectural classification before bridge code; no aggregate P2 acceptance. Latest eight-actor observations estimate approximately $23.52 Standard API-equivalent USD, about 3h23m from GO; actual billing unavailable. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated
