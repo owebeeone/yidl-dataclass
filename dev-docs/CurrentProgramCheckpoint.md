@@ -24,6 +24,7 @@ Stage D full source suites pass on both original backends across three minors,
 with 198 cases per run and only version-specific skips. Independent owner
 installed probes and regeneration pass. Next action: sole drafter Stages E/F,
 real Undoable shared comparison integration and native write-comparison context.
+Stage D source checkpoint: `23833598e4c7e78d073f20cf152c731fa5bb7bbe`.
 SDK changes remain
 outside scope. Literal nested BoolOp generation is an implementation choice,
 replaced by verified authored flat short-circuit/lifetime cleanup without changing

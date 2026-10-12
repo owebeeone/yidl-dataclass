@@ -79,6 +79,11 @@ and already-passing determinism observations are honestly labeled verification,
 not fabricated test-first evidence. The Stage B sequencing deviation remains.
 No strict-all-features-first or uninterrupted successful one-shot claim is made.
 
+The comprehensive staged whitespace check flags preserved pytest log/JUnit
+trailing spaces. Those historical outputs are not rewritten to erase evidence.
+The owning source/tests/README/pyproject/developer-document whitespace check
+passes. No claim that the complete evidence tree is whitespace-clean is made.
+
 At the latest owner/drafter observations around 2026-10-12T13:12Z, twelve disjoint
 actors total $57.8898954 Standard API-equivalent USD, about 9h36m from original
 GO. Input is 298,176,409 tokens including 292,456,576 repeated cached input;
