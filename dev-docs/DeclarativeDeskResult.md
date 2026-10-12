@@ -38,6 +38,15 @@ been changed to accommodate this run.
 | Authored YIDL generation assets | Typed contribution facts, inherited modules and matching assemble Python operations | Core, policies, providers, lazy/retention/copy and neutral comparison modules use the original supported composition route. This surface has an SDK/capture seam distinct from model declarations. |
 | Explicit callbacks | Arbitrary Python functions/callables | Split off as imperative: their bodies are sequences of effects, not inspected declarative descriptions. Signature checks do not prove purity or correct intent. |
 
+The declaration unit is the assembled class/field description presented to the
+decorator, not arbitrary Python class-body execution. Default expressions,
+annotation evaluation, descriptors, class hooks and callable introspection can
+already execute Python while assembling/inspecting that description. These are
+additional imperative assembly seams; they do not earn declarative gap credit
+or an effect-free pre-ship guarantee merely because the resulting metadata can
+be inspected. The documented repeated subclass hooks and class-cell handling
+make that distinction concrete.
+
 For the first three surfaces, programs-as-data and nontrivial expansion have
 concrete evidence: immutable harvested definitions, planned factory calls and
 steps, authored YIDL resources, and materialized generated-source goldens. They
@@ -148,8 +157,12 @@ make two independent semantic oracles. Neutral comparison reuse is a real second
 consumer, not proof of all extension semantics.
 
 Dataclass callbacks are visible escapes (`default_factory`, `converter`,
-`validator`, and explicit instance injection), and **leaky**: Python bodies may
-mutate external state or the model. Field pipelines install only after success;
+`validator`, and explicit instance injection). Normal use can be **leaky**:
+Python bodies may mutate external state or the model. The escape accepts
+unrestricted Python and is also **global-capable** (for example, imports and
+mutation of engine/module globals); no sandbox or containment enforcement removes
+that capability. Consequently no R4 containment-floor pass is claimed. Field
+pipelines install only after success;
 `tests/test_pipelines.py` covers failures, cause preservation, contract errors and
 BaseException atomicity. This does not roll back arbitrary callback side effects,
 constitute an ownership fence, or guarantee transactional construction. Private
