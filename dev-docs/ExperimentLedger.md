@@ -67,6 +67,14 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+At 2026-10-12T11:18:26Z the owner preserved an Undoable pre-integration wheel
+for later write-path comparison. An unnecessary packaging-only Lifecycle wheel
+build breached the recorded dependency no-rebuild boundary. No new source edit
+occurred; its artifact digest equals the already available original wheel. The
+new build is excluded and the original wheel remains the reference. This process
+lapse is retained in `../docs/validation/baseline/undoable-before-integration.json`
+and final compliance assessment. It does not authorize any dependency work.
+
 At approximately 2026-10-12T11:10Z, twelve disjoint actor observations estimate
 $47.369159 Standard API-equivalent USD, about 7h33m after the original GO.
 Cumulative input is 240,052,815 tokens, including 235,106,048 repeated cached

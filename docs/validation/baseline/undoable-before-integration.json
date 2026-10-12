@@ -1,0 +1,18 @@
+{
+  "recorded_utc": "2026-10-12T11:18:26Z",
+  "undoable_revision": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+  "wheel": "yidl_undoable-0.1.0-py3-none-any.whl",
+  "sha256": "e63818caa79b4c361d8c6203f572f79d4bb098f6ece09a3bf6b149e6206e5620",
+  "bytes": 37767,
+  "storage": "external:undoable-baseline-wheels",
+  "purpose": "Preserve the pre-integration consumer write path for later benchmark and regression comparison.",
+  "lifecycle_original_wheel_sha256": "6f9f21c60f1fc360ee41e68f4de0289836f1f00a5e1f2c116be6cb4f3473cb4f",
+  "scope_lapse": {
+    "action": "Owner unnecessarily invoked a packaging-only Lifecycle wheel build.",
+    "boundary": "TaskBoundary.md excludes dependency rebuilds.",
+    "source_changes": "No new tracked source changes; existing unrelated documentation changes remain.",
+    "artifact": "The newly built wheel has the same digest as the existing original wheel.",
+    "disposition": "New build is excluded from verification; use the already available original wheel. No dependency rebuild is a prerequisite."
+  },
+  "performance_result": null
+}
