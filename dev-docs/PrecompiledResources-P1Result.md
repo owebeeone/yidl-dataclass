@@ -20,6 +20,7 @@ Astichi's working tree is clean after the scoped GWZ commit.
 | Existing source matrix on available 3.15.0a5 | 2547 passed, 192 skipped, 21.52s; new artifact positives explicitly excluded, all three artifact APIs reject this minor |
 | Strict owning documentation build | Passed |
 | Owner downstream YIDL regression | 299 passed, 2 skipped, 40.11s |
+| Owner preliminary Python portability | All nine producer/consumer pairs pass; generic slotted class, preserved identifiers, external values and zero fresh source compilation |
 | Owner installed candidate probes, all three supported minors | Origin/version verified; zero fresh source-string compilations during load/bind/materialization; independent ASTs/engines and invalid-shape rejection |
 
 The 3.13/3.14 full suites report 814 legacy provenance-unpickle warnings each;
@@ -44,3 +45,10 @@ Candidate Astichi 1.1.4.dev0 is unpublished. Its existing native binary has no
 `native.compiled_template_artifact.v1` capability and the artifact profile rejects
 native selection. P2 must add full native IR restoration and structural payloads,
 then P3/P4 must verify YIDL and portable installed behavior before Stage A resumes.
+
+The preliminary Python portability probes are preserved as
+`docs/validation/prerequisites/p1-portability-export.py` and
+`docs/validation/prerequisites/p1-portability-load.py`. Export once per supported
+minor and load each artifact on every supported minor using isolated installed
+interpreters. `p1-python-portability.json` records all nine observations. This is
+not the full mixed-backend P4 matrix.

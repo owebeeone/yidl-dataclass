@@ -44,6 +44,8 @@ separate measurement stages.
 | Astichi `4a62b093498dae7b6d346306eae23e5925aaa004` | Owner verifies source/evidence/raw hashes, installed three-minor source-compile tripwire/ownership probes and downstream YIDL regression, then commits scoped P1. Native support and product work remain outstanding. |
 | P1 verification usage checkpoint | Latest eight-actor observations estimate approximately $18.73 Standard API-equivalent USD, about 2h31m after GO at the latest owner sample. Includes design, reviews and prerequisite work; actual billing unavailable. Approximately 90.1M cumulative input tokens include 88.1M repeated cached input; 506,474 output tokens include reasoning. These are request counters, not unique source volume or completed-product cost. |
 
+| 2026-10-12T06:21Z / preliminary portability and P2 envelope | All nine installed Python producer/consumer pairs pass. Native baseline probes confirm surrogate literal substitution and UTF-8 metadata rejection; accepted unsupported-native-combination clauses permit precise rejection rather than sidecars. P2 resumes with path diagnostics before registration. Latest eight-actor observations estimate approximately $20.00 Standard API-equivalent USD, about 2h45m from GO; actual billing unavailable. Product work remains behind compiler prerequisites. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated

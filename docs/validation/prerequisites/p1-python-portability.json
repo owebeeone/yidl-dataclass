@@ -1,0 +1,89 @@
+{
+  "astichi_revision": "4a62b093498dae7b6d346306eae23e5925aaa004",
+  "observed_utc": "2026-10-12T06:15:14.617153+00:00",
+  "results": [
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.12",
+      "consumer_python": "3.12.12",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.12",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.13",
+      "consumer_python": "3.13.12",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.12",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.14",
+      "consumer_python": "3.14.3",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.12",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.12",
+      "consumer_python": "3.12.12",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.13",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.13",
+      "consumer_python": "3.13.12",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.13",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.14",
+      "consumer_python": "3.14.3",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.13",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.12",
+      "consumer_python": "3.12.12",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.14",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.13",
+      "consumer_python": "3.13.12",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.14",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    },
+    {
+      "artifact_sha256": "9793af2660f52cea8b9a67c2eb910768b9a02d62607a28e8883b2d9e8b712a0b",
+      "consumer_minor": "3.14",
+      "consumer_python": "3.14.3",
+      "generic_class_execution": "pass",
+      "producer_minor": "3.14",
+      "protected_source_compilations": 0,
+      "slotted": "pass"
+    }
+  ],
+  "scope": "preliminary P1 Python-to-Python portability; not full P4 native/mixed-backend matrix",
+  "wheel_sha256": "d54c731829ed1de8bcbb7ef5e1bef92e0145bc074fc4721c64398efca690b885"
+}
