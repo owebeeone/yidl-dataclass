@@ -1,0 +1,187 @@
+{
+  "recorded_utc": "2026-10-12T03:33:35.216892+00:00",
+  "scope": "Requirements review only, excludes earlier preparation and future design/implementation",
+  "method": "Delta from last cumulative observation before start; independent reviewer baselines. Reasoning tokens are contained in output, not added again. Cost unavailable pending pricing verification.",
+  "actors": [
+    {
+      "actor": "lane-owner",
+      "phase": "requirements-review",
+      "start_utc": "2026-10-12T03:18:04Z",
+      "actor_started_utc": null,
+      "actor_completed_utc": 1791775654,
+      "baseline": {
+        "input_tokens": 73814350,
+        "cached_input_tokens": 71876480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 283663,
+        "reasoning_output_tokens": 134968,
+        "total_tokens": 74098013
+      },
+      "observed_utc": "2026-10-12T03:33:00.494Z",
+      "cumulative": {
+        "input_tokens": 78755029,
+        "cached_input_tokens": 76755840,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 306848,
+        "reasoning_output_tokens": 142821,
+        "total_tokens": 79061877
+      },
+      "delta": {
+        "input_tokens": 4940679,
+        "cached_input_tokens": 4879360,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 23185,
+        "reasoning_output_tokens": 7853,
+        "total_tokens": 4963864
+      },
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "actual_billed_usd": null,
+      "estimated_usd": null
+    },
+    {
+      "actor": "/root/dataclass_spec_consistency",
+      "phase": "requirements-review",
+      "start_utc": "2026-10-12T03:18:04Z",
+      "actor_started_utc": "2026-10-12T03:18:38.479Z",
+      "actor_completed_utc": 1791775350,
+      "baseline": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 0
+      },
+      "observed_utc": "2026-10-12T03:22:30.677Z",
+      "cumulative": {
+        "input_tokens": 840992,
+        "cached_input_tokens": 755072,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9078,
+        "reasoning_output_tokens": 2190,
+        "total_tokens": 850070
+      },
+      "delta": {
+        "input_tokens": 840992,
+        "cached_input_tokens": 755072,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9078,
+        "reasoning_output_tokens": 2190,
+        "total_tokens": 850070
+      },
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "actual_billed_usd": null,
+      "estimated_usd": null
+    },
+    {
+      "actor": "/root/dataclass_spec_safety_2",
+      "phase": "requirements-review",
+      "start_utc": "2026-10-12T03:18:04Z",
+      "actor_started_utc": "2026-10-12T03:25:10.758Z",
+      "actor_completed_utc": 1791775688,
+      "baseline": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 0
+      },
+      "observed_utc": "2026-10-12T03:28:08.888Z",
+      "cumulative": {
+        "input_tokens": 583440,
+        "cached_input_tokens": 528384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7320,
+        "reasoning_output_tokens": 1215,
+        "total_tokens": 590760
+      },
+      "delta": {
+        "input_tokens": 583440,
+        "cached_input_tokens": 528384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7320,
+        "reasoning_output_tokens": 1215,
+        "total_tokens": 590760
+      },
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "actual_billed_usd": null,
+      "estimated_usd": null
+    },
+    {
+      "actor": "/root/dataclass_spec_safety",
+      "phase": "requirements-review",
+      "start_utc": "2026-10-12T03:18:04Z",
+      "actor_started_utc": "2026-10-12T03:18:43.234Z",
+      "actor_completed_utc": 1791775337,
+      "baseline": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 0
+      },
+      "observed_utc": "2026-10-12T03:22:17.097Z",
+      "cumulative": {
+        "input_tokens": 744983,
+        "cached_input_tokens": 682880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8210,
+        "reasoning_output_tokens": 2315,
+        "total_tokens": 753193
+      },
+      "delta": {
+        "input_tokens": 744983,
+        "cached_input_tokens": 682880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8210,
+        "reasoning_output_tokens": 2315,
+        "total_tokens": 753193
+      },
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "actual_billed_usd": null,
+      "estimated_usd": null
+    },
+    {
+      "actor": "/root/dataclass_spec_consistency_2",
+      "phase": "requirements-review",
+      "start_utc": "2026-10-12T03:18:04Z",
+      "actor_started_utc": "2026-10-12T03:25:05.340Z",
+      "actor_completed_utc": 1791775695,
+      "baseline": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 0
+      },
+      "observed_utc": "2026-10-12T03:28:15.384Z",
+      "cumulative": {
+        "input_tokens": 800065,
+        "cached_input_tokens": 724864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8033,
+        "reasoning_output_tokens": 983,
+        "total_tokens": 808098
+      },
+      "delta": {
+        "input_tokens": 800065,
+        "cached_input_tokens": 724864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8033,
+        "reasoning_output_tokens": 983,
+        "total_tokens": 808098
+      },
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "actual_billed_usd": null,
+      "estimated_usd": null
+    }
+  ]
+}

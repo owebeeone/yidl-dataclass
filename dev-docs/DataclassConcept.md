@@ -71,17 +71,31 @@ with canonical generated output and behavior checks. Plan an extension of its
 decorator with dataclass-style `eq` and `order` options, and applicable per-field
 comparison selection. Dataclass fields use the standard boolean `compare` flag.
 Undoable already has `managed(compare="value"|"identity")` for transaction write
-detection; it must retain that independent meaning. Do not overload or reinterpret
-the shared Lifecycle marker's setting.
+detection. Preserve existing declarations and their write behavior through an
+explicit compatibility adapter, without changing Lifecycle's shared markers.
 
-For Undoable, provide `compare_fields` on the decorator as a mapping from field
-names to boolean inclusion overrides. It selects fields for generated equality
-and ordering only. Eligible ordinary, const, static/lazy, managed and binding
-fields default to included. Initialization-only providers, class variables,
-transient fields and local storage are excluded; reject attempts to include them,
-unknown names and nonboolean overrides at decoration. The adapter supplies this
-logical selection separately from the managed assignment policy to the shared
-comparison generator. No change to Lifecycle's existing marker API is required.
+New Undoable field declarations use boolean `compare=True|False` to select
+participation in generated equality and ordering, and a separate `write_compare`
+option for the managed assignment policy (`"value"` by default or `"identity"`).
+These options belong on the field declaration. Class-wide generation options are
+booleans; there must be no decorator map or list naming fields to select them.
+The operator's locality requirement rules out the previous decorator mapping.
+
+Eligible ordinary, const, static/lazy, managed and binding fields default to
+logical inclusion. Initialization-only providers, class variables, transient
+fields and local storage are excluded; reject attempts to include them. Validate
+logical inclusion as a boolean and write policy against its permitted strings.
+The Undoable adapter supplies logical inclusion separately from assignment policy
+to the reusable generation layer and existing transaction machinery.
+
+For compatibility, an existing managed declaration with `compare="value"` or
+`compare="identity"` keeps that write policy and default logical inclusion. New
+code independently expresses both controls with boolean `compare` and
+`write_compare`. Reject specifying the legacy string control together with an
+explicit `write_compare`, rather than silently choosing precedence. Supporting
+these legacy strings is an Undoable compatibility rule, not permission to admit
+arbitrary truthy/nonboolean logical flags or reinterpret Lifecycle's markers.
+Whether and how to warn on the legacy spelling is a detailed-design decision.
 
 The Undoable generation defaults are `eq=False, order=False`; these differ from
 the standard dataclass equality default to preserve existing node-identity
@@ -102,10 +116,12 @@ For example, the following proposed API independently expresses an identity
 assignment policy and exclusion from logical comparison:
 
 ```python
-@undoable(eq=True, order=True, compare_fields={"cache": False})
+@undoable(eq=True, order=True)
 class Model:
     value: int = managed(default=0)
-    cache: tuple[str, ...] = managed(default=(), compare="identity")
+    cache: tuple[str, ...] = managed(
+        default=(), compare=False, write_compare="identity"
+    )
 ```
 
 This is a design requirement, not currently implemented syntax. Both transaction
@@ -120,6 +136,27 @@ and working facades compare, cross-view/type compatibility and hash behavior for
 values that change as history moves. This amendment authorizes planning that
 integration, not an immediate runtime edit during requirements discussion.
 Lifecycle remains a prospective consumer of the same module.
+
+## Declarative locality and evaluation
+
+Field-specific behavior must be declared on that field. Removing a field
+declaration removes its comparison policy with it, without a stale selector in
+another configuration block. Legitimate dependent-factory references may still
+need an explicit missing-provider diagnostic; locality does not erase dependencies.
+
+Use the Declarative API Evaluator internally version 3 (the source filename is
+`DeclarativeApiEvaluatorV2.md`) as the evaluation reference. Its B.1 locality
+dimension measures dependency scope, rather than literal line distance; E6
+edit-proportionality is also relevant to the remove-one-field example. Greater
+locality scores represent broader engine resolution, not automatically a better
+or worse authoring layout. Do not call a decorator mapping nondeclarative solely
+because it is less local.
+
+Record the operator's stronger authoring requirement: keep each policy with its
+subject and avoid redundant field-name configuration. Evaluate declarative
+properties separately from correctness. Evidence and evaluation mode must be
+explicit; missing measurements are unscored. See
+[Declarative evaluation reference](DeclarativeEvaluation.md).
 
 ## Factories and initialization providers
 

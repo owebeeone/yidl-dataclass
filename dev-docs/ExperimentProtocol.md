@@ -64,6 +64,12 @@ Cover the decorator defaults/omitted-option table and both transaction assignmen
 policies independently from logical field inclusion, with structural generation
 enabled and disabled. Golden examples must fulfill the inspection and contrast
 requirements in [Golden examples amendment](GoldenExamplesAmendment.md).
+Verify field-local comparison declarations, preservation of legacy managed write
+policies, and rejection of conflicting old/new write-policy spellings. Include a
+field-removal generation example: its policy disappears with the declaration,
+without a detached selector. Required provider references still diagnose missing
+dependencies. Evaluate declarative qualities separately from correctness using
+the mode/evidence rules summarized in [Declarative evaluation](DeclarativeEvaluation.md).
 Exercise independent installation and an example built using only the public
 documentation. Report remaining limitations instead of inferring correctness from
 a test count alone.

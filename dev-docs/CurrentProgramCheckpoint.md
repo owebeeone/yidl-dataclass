@@ -1,6 +1,7 @@
 # YIDL Dataclass checkpoint
 
-Status: round 1 NO-GO; consolidated correction prepared for independent round 2. Implementation
+Status: requirements accepted by the operator after dual round-2 GO and a
+subsequent operator-approved locality amendment without re-review. Implementation
 has not started. This checkpoint governs this member's experiment preparation.
 
 ## Object and authority
@@ -53,6 +54,24 @@ defaults. Fresh Consistency/Surface and Safety reviewers replace the original tw
 because the comparison interface changed. Round 2 prompts will name the exact
 commit and inherit every prior finding on their axis.
 
-Next action: review the corrected committed requirements, verify original
-counterexamples, file reports and merge verdicts. Detailed design and TDD planning
-remain subsequent gates; this work does not start implementation.
+## Round 2 and operator acceptance
+
+Both fresh reviewers returned GO on
+`0ceb048a98f9e4464366fc1abfb0827888e8fc54`, independently closing the original
+findings at the requirements gate. See their verbatim `-ReviewConsistency-2.md`
+and `-ReviewSafety-2.md` reports. No new architectural root cause was reported.
+
+The operator rejected the decorator field-name mapping and directed a field-local
+comparison flag, a separate transaction write policy and preservation of legacy
+declarations. The operator explicitly accepted that spec amendment without another
+review. `DataclassSpec-OperatorAmendment.md` records the override and evidence
+boundary. The two GO reports do not review the final amended bytes.
+
+The final requirements object adds `DeclarativeEvaluation.md` to the concept,
+protocol and golden amendment. The owner records its exact committed revision in
+the review result. Acceptance covers suitability as a brief for detailed design
+only, not a completed design, implementation, release or performance result.
+
+Next action: detailed design and compatibility/extension matrix, then a separately
+reviewed design and TDD plan. No implementation has begun and no new reviewer
+dispatch is required for the accepted locality amendment.

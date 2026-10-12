@@ -17,6 +17,13 @@ or autonomous implementation. The original Undoable experiment remains separate.
 | `8c116f51310343b18e4ebae27ea6a91517f828e4` | Review-scope checkpoint; both reviewers verify pinned tuple at start/end. |
 | Round 1 | Both NO-GO, independently finding the same P2 namespace collision; one additional P3 defaults finding from Consistency. |
 | Round 1 remediation | One corrected documentation object, incorporating the operator's golden-example addition; fresh reviewers required for changed interface. |
+| `0ceb048a98f9e4464366fc1abfb0827888e8fc54` | Both fresh round-2 reviewers GO; original findings independently closed on that draft. |
+| Operator locality correction | Decorator mapping rejected; field-local logical comparison and separately named write policy specified. Operator explicitly accepts this amendment without another review round. |
+
+The round-2 GO reports apply to their exact historical object. The subsequent
+locality amendment is operator-accepted rather than independently re-reviewed.
+See `DataclassSpec-OperatorAmendment.md` for the explicit override and remaining
+regression obligations. No architectural root cause was reported in either round.
 
 ## Measurement limits
 
