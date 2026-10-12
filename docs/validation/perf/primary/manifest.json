@@ -725,18 +725,19 @@
     },
     {
       "path": "docs/validation/perf/primary/comparisons.csv",
-      "sha256": "60bfc1ac369e33390811b725e485c9efec4a5b66c409c008f53191e646f5a66d",
-      "bytes": 38442
+      "sha256": "9385dfa73294e554da8e082b0a5227f9a4fcd532b63d269e490d2d3d8b6ef45a",
+      "bytes": 38225
     },
     {
       "path": "docs/validation/perf/primary/memory.csv",
-      "sha256": "18f4a7b6fb8bfcb32be7d7b6d5e45648ed5b8b86d75642b590c661bffc86d6bd",
-      "bytes": 5447
+      "sha256": "b3ff1b12206e6e9d487c98ad7b75ea533c62b3c0f1b63552b6d0afb50b93aaac",
+      "bytes": 5350
     },
     {
       "path": "docs/validation/perf/primary/owner-independent-audit.json",
       "sha256": "b05a8633cab6f307c0d7d4ed868cb8259000adec0d45c5690a5fb7551c89bd6d",
       "bytes": 3067
     }
-  ]
+  ],
+  "derived_table_format": "Generated CSV uses LF line endings; numerical cells unchanged. Initial CRLF derivative retained in prior Git checkpoint."
 }
