@@ -1,0 +1,48 @@
+{
+  "stage": "E/F affected",
+  "manifest_sha256": "1e0674ab9aa6ceba547c1ca8efe6a0fbaa6886862bf184b5e98d39144a8bfc94",
+  "owned_files": 260,
+  "increment_records": 6,
+  "artifact_references": 12,
+  "distinct_raw_hashes": 12,
+  "junit_files": 6,
+  "junit": {
+    "docs/validation/stage-ef/ef01-dataclass-native-rust-312-verification.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-ef/ef01-dataclass-native-rust-313-verification.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-ef/ef01-dataclass-native-rust-314-verification.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-ef/ef01-dataclass-python-312-verification.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-ef/ef01-dataclass-python-313-verification.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-ef/ef01-dataclass-python-314-verification.junit.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "scope": "integrity/source-path audit; behavioral verdicts remain separately assessed"
+}

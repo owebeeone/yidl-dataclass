@@ -2,7 +2,7 @@
 
 Status: autonomous Dataclass run authorized; operator has excluded SDK changes.
 Compiler detour stopped and preserved; consumer-only Stages A–D are verified and
-Stages E/F are next. Final product acceptance remains outstanding. The original
+Stages E/F are also verified. G/H and final product acceptance remain outstanding. The original
 Undoable experiment and this experiment's earlier requirements preparation remain
 separate measurement stages.
 
@@ -67,7 +67,23 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
-Latest observations around 2026-10-12T13:44Z across twelve disjoint actors
+At 2026-10-12T14:16Z E/F is owner-verified: Undoable full source/regeneration
+matrix passes 340 tests in each of six original-backend/minor combinations;
+Dataclass product remains unchanged from D with eight affected checks per run.
+Independent evidence/raw/JUnit audits and six installed owner probes pass;
+installed regeneration matches on both backends. `Dataclass-StageEFResult.md`
+records manifest and wheel identities. G/H and final reviews remain. E's
+post-implementation removal case, F setup/oracle corrections and the genuine
+rich multi-view/hash-name failures stay explicitly distinguished.
+
+Latest twelve-actor observations estimate $64.6097148 Standard API-equivalent
+USD, about 10h39m from original GO. Input totals 331,221,935 tokens including
+324,934,272 repeated cached input; output totals 1,677,907 including 922,579
+reasoning tokens. Actual billing remains unavailable. SDK detour and operator
+interventions remain included; no uninterrupted successful one-shot or strict
+all-features-first TDD claim is made.
+
+Historical observations around 2026-10-12T13:44Z across twelve disjoint actors
 estimate $60.9429478 Standard API-equivalent USD, about 10h07m from original GO.
 Input is 314,637,200 tokens including 308,613,760 repeated cached input; output
 is 1,601,183 tokens including 883,878 reasoning tokens. Actual billing remains

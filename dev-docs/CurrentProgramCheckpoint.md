@@ -15,16 +15,22 @@ now implemented and owner-verified; see `Dataclass-StageAResult.md`,
 `Dataclass-StageBResult.md`, `Dataclass-StageCResult.md` and
 `Dataclass-StageDResult.md`. Stage C has 156
 passed/one version-specific skip in all six source runs and six independent
-installed extension probes. Stages E–H remain.
+installed extension probes. Stages G/H and final reviews remain.
 The Stage B post-GREEN verification sequencing deviation and Stage C's broader
 post-GREEN verification are explicitly recorded;
 no strict test-first or final acceptance claim is made. Consumer-only amendment
 acceptance remains `382d389172f38e33de8a00af350b1b6b21d46f5b`.
 Stage D full source suites pass on both original backends across three minors,
 with 198 cases per run and only version-specific skips. Independent owner
-installed probes and regeneration pass. Next action: sole drafter Stages E/F,
-real Undoable shared comparison integration and native write-comparison context.
+installed probes and regeneration pass. Next action: sole drafter Stage G,
+final installation/public-documentation gates after E/F owner verification.
 Stage D source checkpoint: `23833598e4c7e78d073f20cf152c731fa5bb7bbe`.
+Stages E/F are now implemented and owner-verified: Undoable passes 340 tests
+in each of six original-backend/minor combinations; independent installed
+probes and regeneration pass. Dataclass product/shared authority is unchanged.
+See `Dataclass-StageEFResult.md`. Undoable checkpoint:
+`bedec080d1d3531d7a250b9e4f729040c57645c7`. G/H and final implementation reviews remain.
+The earlier E/F-next statements below are historical checkpoint records.
 SDK changes remain
 outside scope. Literal nested BoolOp generation is an implementation choice,
 replaced by verified authored flat short-circuit/lifetime cleanup without changing

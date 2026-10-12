@@ -8,13 +8,13 @@
     },
     {
       "external_name": "yidl-dataclass-owner-perf-coverage-test.py",
-      "sha256": "f9c2d3cb348c5cc116b4cbdddb8e8dd300b50e64708e9ad9dd42512a2b4fdcc3",
-      "bytes": 2183
+      "sha256": "e0d4a2f67791aa3b9c2b48159e3907e4065d0f9258cd06ca905d28861dcfd791",
+      "bytes": 2779
     },
     {
       "external_name": "yidl-dataclass-owner-perf-coverage.py",
-      "sha256": "5066a2c31be2a1d1552a594c20a8e0a87c3991ee13cc9485dfb9b89287743d8c",
-      "bytes": 2222
+      "sha256": "0f73f2f17a8ebcaf337ea3ae7f32d08d27d5c2683da40efb1efc6968d88c0f49",
+      "bytes": 2769
     },
     {
       "external_name": "yidl-dataclass-owner-perf-extensions-smoke.py",
@@ -38,13 +38,13 @@
     },
     {
       "external_name": "yidl-dataclass-owner-perf-summary-test.py",
-      "sha256": "25ba0e95c3f5c328aa1f360c5cd6c31eef3e13e31c22adc41d93f4d12c93ec13",
-      "bytes": 4943
+      "sha256": "ce505c3effa70bb2388d19723072a3c7a4d40757812252c48b360b7bc7fc7674",
+      "bytes": 6022
     },
     {
       "external_name": "yidl-dataclass-owner-perf-summary.py",
-      "sha256": "dc772459338341152907a5feac42f4e588f6e3151a3109ce6ecd62c1000427f6",
-      "bytes": 6968
+      "sha256": "5636a4b3c220a9b0384eabf4d0fe367525029a767915da7e211c6e7b27f4ca22",
+      "bytes": 7009
     },
     {
       "external_name": "yidl-dataclass-owner-perf-support-test.py",

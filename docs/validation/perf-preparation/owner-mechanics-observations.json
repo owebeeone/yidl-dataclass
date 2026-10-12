@@ -35,6 +35,51 @@
       "label": "owner-perf-calibration-record-corrected-verification",
       "exit_code": 0,
       "output": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "label": "owner-perf-undoable-pairs-red",
+      "exit_code": 1,
+      "output": ".......F..\n======================================================================\nFAIL: test_undoable_pairs_report_explicit_references_without_targets (__main__.Completeness.test_undoable_pairs_report_explicit_references_without_targets)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-summary-test.py\", line 39, in test_undoable_pairs_report_explicit_references_without_targets\n    self.assertEqual(len(result['comparisons']),1)\nAssertionError: 0 != 1\n\n----------------------------------------------------------------------\nRan 10 tests in 0.118s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "label": "owner-perf-undoable-pairs-green",
+      "exit_code": 0,
+      "output": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.205s\n\nOK\n"
+    },
+    {
+      "label": "owner-perf-opaque-baseline-setup-attempt",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-undoable-smoke.py\", line 15, in <module>\n    case=seam.write_case(baseline,count,shape,harness.runner,integrated=False)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:prototype/yidl-dataclass-owner-perf-undoable.py\", line 102, in write_case\n    manager.initialize(parent, left_child, right_child)\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 161, in initialize\n    candidate = self._candidate(ids, initial=True)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 227, in _candidate\n    present = traverse(roots, frozen_fields, self, reject_cycles=True)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/graph.py\", line 49, in traverse\n    visit(node_id)\n  File \"external:verification-root/undoable-baseline-alias/graph.py\", line 42, in visit\n    for value in values_for(node_id).values():\n                 ^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 220, in frozen_fields\n    fields[name] = self._call(\n                   ^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 661, in _call\n    return call(self, context, function)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/callbacks.py\", line 60, in call\n    result = function()\n             ^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 222, in <lambda>\n    lambda: normalize(value, self, f\"{state.schema.name}.{name}\"),\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/values.py\", line 32, in normalize\n    raise FrozenValueError(\n_undoable_perf_baseline.errors.FrozenValueError: WriteParent.value: unsupported stable value Opaque; declare freeze\nWriteParent.value: stable value normalization\n"
+    },
+    {
+      "label": "owner-perf-opaque-baseline-identity-freeze-attempt",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-undoable-smoke.py\", line 15, in <module>\n    case=seam.write_case(baseline,count,shape,harness.runner,integrated=False)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:prototype/yidl-dataclass-owner-perf-undoable.py\", line 101, in write_case\n    manager.initialize(parent, left_child, right_child)\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 161, in initialize\n    candidate = self._candidate(ids, initial=True)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 227, in _candidate\n    present = traverse(roots, frozen_fields, self, reject_cycles=True)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/graph.py\", line 49, in traverse\n    visit(node_id)\n  File \"external:verification-root/undoable-baseline-alias/graph.py\", line 42, in visit\n    for value in values_for(node_id).values():\n                 ^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 220, in frozen_fields\n    fields[name] = self._call(\n                   ^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 661, in _call\n    return call(self, context, function)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/callbacks.py\", line 60, in call\n    result = function()\n             ^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/transaction_yidl.py\", line 222, in <lambda>\n    lambda: normalize(value, self, f\"{state.schema.name}.{name}\"),\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:verification-root/undoable-baseline-alias/values.py\", line 32, in normalize\n    raise FrozenValueError(\n_undoable_perf_baseline.errors.FrozenValueError: WriteParent.value: unsupported stable value Opaque; declare freeze\nWriteParent.value: stable value normalization\n"
+    },
+    {
+      "label": "owner-perf-baseline-setup-corrected-312",
+      "exit_code": 0,
+      "output": "{\"python\": \"3.12.12\", \"baseline_setup_checks\": [[3, \"integer_equal\"], [3, \"opaque_equal\"], [3, \"child_alternate\"], [3, \"tuple_child_alternate\"], [3, \"dict_child_alternate\"], [12, \"integer_equal\"], [12, \"opaque_equal\"], [12, \"child_alternate\"], [12, \"tuple_child_alternate\"], [12, \"dict_child_alternate\"]], \"scope\": \"external benchmark setup only; integrated wheel/timing pending\"}\n"
+    },
+    {
+      "label": "owner-perf-baseline-setup-corrected-313",
+      "exit_code": 0,
+      "output": "{\"python\": \"3.13.12\", \"baseline_setup_checks\": [[3, \"integer_equal\"], [3, \"opaque_equal\"], [3, \"child_alternate\"], [3, \"tuple_child_alternate\"], [3, \"dict_child_alternate\"], [12, \"integer_equal\"], [12, \"opaque_equal\"], [12, \"child_alternate\"], [12, \"tuple_child_alternate\"], [12, \"dict_child_alternate\"]], \"scope\": \"external benchmark setup only; integrated wheel/timing pending\"}\n"
+    },
+    {
+      "label": "owner-perf-baseline-setup-corrected-314",
+      "exit_code": 0,
+      "output": "{\"python\": \"3.14.3\", \"baseline_setup_checks\": [[3, \"integer_equal\"], [3, \"opaque_equal\"], [3, \"child_alternate\"], [3, \"tuple_child_alternate\"], [3, \"dict_child_alternate\"], [12, \"integer_equal\"], [12, \"opaque_equal\"], [12, \"child_alternate\"], [12, \"tuple_child_alternate\"], [12, \"dict_child_alternate\"]], \"scope\": \"external benchmark setup only; integrated wheel/timing pending\"}\n"
+    },
+    {
+      "label": "owner-perf-frozen-source-and-count-red",
+      "exit_code": 1,
+      "output": ".....EF.\n======================================================================\nERROR: test_nonpositive_calibration_count_rejects (__main__.Integrity.test_nonpositive_calibration_count_rejects)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-coverage-test.py\", line 39, in test_nonpositive_calibration_count_rejects\n    with self.assertRaisesRegex(ValueError,'operation'):module.validate(document,definition)\n                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"external:prototype/yidl-dataclass-owner-perf-coverage.py\", line 19, in validate\n    if not math.isclose(row['ns_per_op'],row['elapsed_ns']/row['operations'],rel_tol=1e-12):\n                                         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~\nZeroDivisionError: division by zero\n\n======================================================================\nFAIL: test_row_source_drift_rejects (__main__.Integrity.test_row_source_drift_rejects)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-coverage-test.py\", line 36, in test_row_source_drift_rejects\n    with self.assertRaisesRegex(ValueError,'source'):module.validate(document,definition)\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 8 tests in 0.001s\n\nFAILED (failures=1, errors=1)\n"
+    },
+    {
+      "label": "owner-perf-frozen-source-and-count-green",
+      "exit_code": 0,
+      "output": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.001s\n\nOK\n"
     }
   ]
 }
