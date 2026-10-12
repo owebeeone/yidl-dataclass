@@ -3,7 +3,8 @@
 Status: plan accepted at `f2514e1c993cb049417b7a10cdf2932bd68bd80f` after
 its Consistency review reported GO. The active consumer-only boundary follows
 `ScopeCorrection.md` and `ConsumerOnlyGenerationAmendment.md`; this amendment
-and the corresponding plan edits await independent review. Compiler P1–P4 and
+and corresponding plan edits were accepted at
+`382d389172f38e33de8a00af350b1b6b21d46f5b` after fresh dual GO. Compiler P1–P4 and
 SDK changes are removed from the sequence. The semantic design was
 accepted by both replacement reviewers at `de7cadd25c1d3fd5deac0d978043284fa130da1c`, with no
 findings. This plan specifies implementation of that design; it does not claim code, executed

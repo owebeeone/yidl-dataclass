@@ -3,7 +3,7 @@
 Status: autonomous experiment in progress following the operator GO at
 2026-10-12T03:36:48Z. Semantic design and TDD plan were accepted; the operator
 removed all SDK prerequisites through `ScopeCorrection.md`. The active consumer
-generation amendment awaits independent review before Dataclass Stage A.
+generation amendment is independently accepted; Dataclass Stage A is next.
 Astichi/YIDL SDK edits, builds, version increments and resource additions are
 outside this experiment; use original Astichi 1.1.3 / YIDL 0.1.0 APIs. `CurrentProgramCheckpoint.md` records the
 live boundary and `ExperimentLedger.md` records measurements. This protocol

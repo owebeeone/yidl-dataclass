@@ -60,6 +60,8 @@ separate measurement stages.
 
 | 2026-10-12T08:42:15.586264+00:00 / corrected-scope assessment | Independent owner and sole-drafter original-SDK probes identify no concrete blocker to consumer-only generation. Latest ten-actor samples estimate $32.98 Standard API-equivalent USD at about 5h01m from original GO; actual billing unavailable. This run has required a post-GO operator scope correction and must not be described as an uninterrupted successful one-shot. Consumer design/plan amendment is assigned; no product code exists yet. |
 
+| 2026-10-12T08:56:06.871213+00:00 / consumer amendment accepted | Fresh independent Consistency and Safety reviewers both GO with zero findings on `382d389172f38e33de8a00af350b1b6b21d46f5b`. Original-SDK source generation, consumer captures and build-only shared-resource reuse are accepted as the product route. SDK prototypes remain stopped/excluded. Product Stage A resumes next; full semantics, installed gates, benchmarks and final reviews remain ahead. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated

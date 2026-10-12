@@ -2,7 +2,8 @@
 
 Status: semantic design and TDD plan independently accepted; product
 implementation has not started. The operator-directed consumer-only generation
-amendment is awaiting independent review. Astichi/YIDL SDK changes are outside
+amendment is independently accepted at the
+[recorded boundary](dev-docs/ConsumerOnlyGenerationAmendment-ReviewResult.md). Astichi/YIDL SDK changes are outside
 scope; original Astichi 1.1.3 / YIDL 0.1.0 generation is the candidate baseline.
 
 A proposed YIDL-generated dataclass implementation with standard Python dataclass

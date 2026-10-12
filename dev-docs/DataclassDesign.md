@@ -3,7 +3,8 @@
 Status: the semantic design was accepted at
 `de7cadd25c1d3fd5deac0d978043284fa130da1c` after both replacement reviewers
 reported GO. The active generation boundary now follows the operator-directed
-`ScopeCorrection.md` and the pending `ConsumerOnlyGenerationAmendment.md` review.
+`ScopeCorrection.md` and `ConsumerOnlyGenerationAmendment.md`, accepted at
+`382d389172f38e33de8a00af350b1b6b21d46f5b` after fresh dual GO.
 Astichi/YIDL changes and compiler P1–P4 are outside scope; the earlier compiler
 designs/reports remain historical evidence. This document is an implementation
 contract, not an implementation or performance claim; the TDD plan is separate.
