@@ -81,10 +81,18 @@ review of the detailed design or TDD plan. Run the independent design and final
 implementation review gates autonomously. The waiver applies to the accepted
 locality amendment, not the remainder of the experiment's review workflow.
 
-Detailed design draft: `DataclassDesign.md`, ready for the dual Consistency/Surface
-and Safety review. It is not yet accepted. Required design tier: dual peer-blind
+Detailed design draft: `DataclassDesign.md`, reviewed at
+`9fd44d91943ca706c4c51a0669bd3e9d03260278` with dual NO-GO. It is not yet
+accepted. Required design tier: dual peer-blind
 review at this interface freeze. Prior requirements reviews do not accept this
 new design object. The TDD plan and implementation remain behind that gate.
 
-Next action: settle the exact design tuple, run independent design review, then
-create the separate TDD plan and implement only after the design is accepted.
+Cycle-1 findings are filed verbatim with `DataclassDesign-RemPlan.md`: one
+initializer-suppression contradiction, a stale README and a write-comparison
+adapter replacing opaque callback operands. All have bounded corrections; no
+architectural failure was reported. The merged design/README correction is ready
+for both original reviewers' independent re-verdicts.
+
+Next action: settle the corrected design and obtain both original reviewers'
+independent re-verdicts; then create the separate TDD plan and implement only after
+the design is accepted.

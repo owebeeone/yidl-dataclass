@@ -21,6 +21,10 @@ separate measurement stages.
 | `0ceb048a98f9e4464366fc1abfb0827888e8fc54` | Both fresh round-2 reviewers GO; original findings independently closed on that draft. |
 | Operator locality correction | Decorator mapping rejected; field-local logical comparison and separately named write policy specified. Operator explicitly accepts this amendment without another review round. |
 | 2026-10-12T03:36:48Z | Operator says GO for the full autonomous run, without requiring personal review of design/TDD planning. Recorded start: 14:36:48 Australia/Sydney. Detailed design and run measurements begin here; implementation begins only after its design/plan checkpoints. |
+| 2026-10-12T03:37:46.089Z | Sole design drafter starts. |
+| `9fd44d91943ca706c4c51a0669bd3e9d03260278` | Detailed design settled for independent review. |
+| 2026-10-12T03:49:46.792Z / 03:49:51.542Z | Independent Consistency/Surface and Safety design reviewers start. |
+| Design round 1 | Both NO-GO. Two distinct bounded P2s (initializer suppression and opaque callback operands) and one P3 stale README. One merged remediation assigned; no implementation or TDD plan started. |
 
 ## Autonomous scope and intervention rules
 

@@ -268,21 +268,60 @@ zero-argument builtins `list`, `dict`, `set`, `tuple`, `int`, `float`, `str`,
 with advice to wrap them in an introspectable function. Optional parameters that
 match a provider are dependencies and receive it.
 
-Build a deterministic dependency DAG over all named providers, including lazy,
-InitVar, local and ClassVar nodes. Reject any cycle at decoration even if explicit
-constructor inputs might bypass factories. Reject unavailable required providers
-and `init=False` required values without a default/factory. Topological ordering
-ties use declaration order. Constructor parameter order is independent: preserve
-reverse-MRO merged field order, then std positional/keyword-only partition, and
-reject non-default positional parameters following defaulted parameters.
+Resolve the initializer action before enforcing value availability. A local
+custom initializer suppresses generated init even with decorator `init=True`;
+decorator `init=False` also suppresses it and preserves the inherited initializer,
+if any. The extension restrictions in Section 6 still apply. Suppression means
+no generated candidate evaluation, factory calls or constructor dependency DAG;
+do not require an ordinary field to have a constructor source merely to decorate
+it. Class defaults and public storage declarations still receive normal setup.
 
-Initialize lazy busy/ready flags before evaluating candidates. Evaluate all
-eager fields and InitVars in DAG order; retain needed InitVars as each becomes
-available. An eager factory depending on a lazy field materializes it during
-construction, after that lazy node's providers are initialized. Inputs are never
-reprocessed when used as providers. Generated eager calls read processed local
-values; generated delayed calls directly read public field properties/slots and
-private retained InitVars. There is no runtime provider-name table lookup.
+When init is generated, build a deterministic dependency DAG over its actual
+candidate evaluations and named provider reads, including lazy, InitVar, local
+and ClassVar nodes. Reject any named cycle even if explicit constructor inputs
+might bypass factories. Require a source for policy fields, InitVars and local
+storage that generated initialization must establish, and for every provider
+actually consumed by a generated eager or delayed factory call. Sources are
+constructor inputs, defaults/factories, readable ClassVars and the dictionary
+fallback below. An ordinary `init=False` field without a source may remain absent
+if no generated consumer requires it. If one does, reject decoration with the
+model, consumer, unavailable provider and dependency path; do not assume later
+application assignment will satisfy generated construction or lazy reads. A
+matched optional factory parameter is still a bound provider and needs a source.
+
+| Ordinary field and initializer action | Required outcome |
+| --- | --- |
+| Local custom init assigns a required `init=False` field | Decorate successfully; preserve that initializer and its assignment |
+| Decorator `init=False`, required `init=False` field | Decorate successfully; field can be absent until application assignment |
+| Generated init, required `init=False` field, no consumer | Decorate successfully; no assignment to that field |
+| Generated factory consumes a source-free `init=False` provider | Decoration fails with the unavailable-provider diagnostic |
+| Generated init, dictionary-mode plain `init=False` simple default | Keep a class-default fallback; do not install an instance value |
+
+The last row applies only to writable ordinary fields without conversion or
+validation. Such a dictionary instance reads its class default until assigned;
+changing the class default changes reads on instances without an overriding
+instance attribute. For a generated factory needing that provider, read
+`self.name` into its processed provider local at evaluation time, without an
+instance write. A later lazy factory reads `self.name` again. In slot mode the
+same simple default is installed in the public instance slot. A dictionary-mode
+`init=False` default_factory does create an instance value when init is generated.
+With suppressed init, no factories execute: dictionary simple defaults remain
+class fallbacks, and slotted fields remain unset until an inherited/custom
+initializer or application code assigns them. These rules do not change
+`init=True` fields installed by generated construction.
+
+Topological ordering ties use declaration order. Constructor parameter order is
+independent: preserve reverse-MRO merged field order, then std positional/keyword-
+only partition, and reject non-default positional parameters following defaulted
+parameters. Initialize lazy busy/ready flags before evaluating generated
+candidates. Evaluate required eager candidates and InitVars in DAG order, skipping
+absent ordinary fields and treating dictionary fallbacks as reads only; retain
+needed InitVars as each becomes available. An eager factory depending on a lazy
+field materializes it during construction after its providers are initialized.
+Inputs are never reprocessed when used as providers. Generated eager calls read
+processed local values; generated delayed calls directly read public field
+properties/slots and private retained InitVars. No runtime provider-name table
+lookup is introduced.
 
 Factory dependencies describe initialization, not a reactive graph. A lazy field
 reads current provider values when first evaluated or after an allowed reset;
@@ -375,7 +414,13 @@ factories. Classes requiring extension initialization (frozen, policy fields,
 InitVars, local storage or named dependencies) reject `init=False` or a local
 custom `__init__`. For purely ordinary fields, `init=False` and local custom init
 follow std suppression semantics, including no generated initialization of
-default factories. Reject custom `__getattribute__`, `__setattr__` and
+default factories and no availability requirement for their absent ordinary
+fields. Resolve this suppression before the Section 5 availability checks;
+retaining metadata is not a request to generate initialization. A plain required
+`field(init=False)` is valid with a custom initializer, with decorator init=False,
+or without a generated consumer; its absence has normal AttributeError behavior.
+Dictionary-mode simple defaults follow Section 5's class fallback rule, including
+subsequent class-default changes. Reject custom `__getattribute__`, `__setattr__` and
 `__delattr__` on policy classes, including inherited interceptors, since they
 would defeat the generated access contract.
 
@@ -471,20 +516,100 @@ Preserve transaction node identity as well as the spelling of the write policy.
 The present value-write path compares exposed values with `old == value`; after
 structural generation that can accidentally equate distinct child nodes. Add an
 Undoable-owned `write_detection.py` boundary used only by value-write detection:
-project RuntimeFacade leaves to immutable manager/node identity tokens before
-built-in container equality. Recurse over the exact supported built-in tuple,
-list, dict, set, frozenset and mapping-proxy shapes, preserving shared-reference
-identity through a per-call memo; do not call freeze/thaw during projection.
-Same-reference built-in containers keep their native equality shortcut. Cyclic
-managed container graphs remain unsupported with a diagnostic rather than an
-unbounded projection. Ordinary noncontainer leaves retain their existing equality
-callback. User-defined equality that itself invokes facade equality is opaque
-user behavior, not a transaction engine callback rewritten by this adapter.
-The identity-write branch remains `old is value`. Projection tokens never become
-public comparison operands or stored history values. Test equal-valued distinct
-child nodes and nested child edges under both write policies. Engine membership,
-history and graph identity continue to use node IDs/state identity, never logical
-facade equality.
+paired traversal of original operands, never rebuilt containers, substituted
+payloads or identity tokens. Its procedure is `write_equal(left, right)` with an
+internal container-element context and an active recursion-pair stack:
+
+1. In container-element context, `left is right` succeeds before invoking any
+   equality method, including an opaque/nonreflexive leaf. This is native
+   container identity-or-equality behavior. At the top level an opaque object's
+   self equality is still invoked; do not add a blanket identity shortcut.
+2. For two exact lists, or two exact tuples, use native same-container identity
+   success, check lengths and visit element pairs in index order, applying the
+   container-element rule and short-circuiting at the first false result. Do not
+   traverse a list against a tuple, a container subclass or an opaque object.
+3. For two exact dictionaries, preserve same-container identity success, check
+   lengths, iterate left entries in native order, and perform one native lookup
+   of each original left key in the original right dict (`get` with a private
+   absence sentinel). A miss returns false; key hashing/equality exceptions
+   propagate. Compare the original value pair in container-element context.
+   Do not clone keys or values or implement a separate key matcher. This keeps
+   key lookup direction and native hashing/identity behavior.
+4. Exact set/frozenset combinations delegate to their original native equality,
+   preserving hash-table lookup, identity shortcuts and comparison dispatch.
+   Structural handles, including native hashable containers containing them,
+   cannot be supported keys/elements because those handles are unhashable.
+   Nested sets reached as list/tuple/dict values retain this same rule; opaque
+   hashable objects are not opened to search for handles.
+5. A MappingProxyType can wrap a user mapping, so its exact type alone does not
+   authorize descent. Use a bounded CPython adapter on exact proxies only:
+   `gc.get_referents(proxy)` must expose exactly one original backing mapping.
+   Descend only when that referent is an exact dict. The adapter never calls
+   `.copy()`, `.items()` or another mapping method on a user mapping, does not
+   inspect any user object's referents, and returns the original backing object,
+   not a reconstructed payload: the returned reference must be pointer-identical
+   to the original backing dict in the adapter corpus. Contract-test this CPython
+   shape on every supported minor. An unexpected referent count fails closed
+   with UndoableDefinitionError before equality and fails the release gate; a
+   single non-exact-dict referent stays opaque as specified below. No guessed
+   fallback or ctypes/C-layout access. It needs no retained proxy registry or provenance
+   mutation and works on previously escaped/input proxies as well as engine reads.
+   With two dict-backed proxies, traverse backing-right/backing-left: left proxy
+   forwarding first meets the right proxy, whose reflected forwarding determines
+   this order. With dict-backed proxy on the left and exact dict on the right,
+   traverse backing-left/right. With exact dict on the left and dict-backed proxy
+   on the right, traverse backing-right/left: native dict equality defers to the
+   proxy's reflected forwarding. A proxy wrapping a user mapping, including a dict
+   subclass, is opaque and keeps its original callback/forwarding boundary; never
+   substitute its mapping for a callback argument. If either side of a mixed
+   comparison is opaque, do not unwrap the other operand. No freeze/thaw is called.
+6. All remaining boundaries use original operands and historical rich-equality
+   dispatch. If neither operand resolves to an engine-generated facade equality
+   method, delegate directly to `bool(left == right)`. Otherwise perform the
+   Python rich-equality slot procedure below with the engine-generated slot
+   replaced by its pre-generation identity slot. Never invoke the newly generated
+   facade equality as an accidental fallback of write detection. Explicit
+   user-owned equality methods remain opaque callbacks.
+
+The historical dispatch procedure looks up `__eq__` descriptors on each operand's
+type MRO, bypassing instance attributes. Engine-generated logical equality
+descriptors have a recorded historical replacement, `RuntimeFacade.__eq__`;
+inherited engine descriptors use that same replacement. A user subclass's own
+descriptor is retained. If the right type is a strict subtype of the left type,
+try its bound descriptor first with the original left operand. Then try the left
+descriptor with the original right operand; then the right descriptor unless
+already tried. Bind descriptors using their normal descriptor protocol; a missing
+method or exact NotImplemented continues dispatch. Convert the first implemented
+result to bool once. If all return NotImplemented, use operand identity. This
+preserves reflected-subclass priority, descriptor callbacks and NotImplemented
+fallback. The historical RuntimeFacade slot returns False against a nonfacade,
+rather than NotImplemented: a facade-left/opaque-right comparison must not start
+calling the opaque method unless native subtype priority requires it. Two ordinary
+engine facade leaves retain state identity across views, even if their logical
+fields are equal. An opaque callback that deliberately compares facades internally
+owns those comparisons; do not inspect or rewrite it.
+
+Only active traversal pairs are tracked, not cached equality results: revisiting
+an active pair raises the existing managed-container cycle diagnostic; shared
+acyclic subobjects are compared again where native comparison would do so.
+Identity shortcuts can avoid entering a graph at all. Native/opaque boundaries
+that are delegated retain their native exception behavior. The entire procedure,
+including original key lookup, descriptor calls and result truth conversion,
+runs inside the existing manager `_call` comparison ownership fence. The
+identity-write branch stays exactly `old is value` without traversal, callbacks
+or extra truth conversion. Detector state is per call, discarded on success or
+failure, and never enters history.
+
+For the Safety regression, let `inner = [child_facade]` and let an opaque
+`AcceptOriginal(inner).__eq__` accept only `other is inner`. Comparing
+`(AcceptOriginal(inner),)` with `(inner,)` descends once, then delegates the
+original opaque/list pair. The callback gets exactly `inner`. Reversing the outer
+operands delegates the original list/opaque pair; the list's NotImplemented lets
+the opaque callback receive that same original `inner`. Both return true without
+visiting its child or substituting its contents. Test equal-valued distinct child
+nodes and nested child edges separately under both write policies. Engine
+membership, history and graph identity continue to use node IDs/state identity,
+never logical facade equality.
 
 Legacy `managed(compare="value"|"identity")` preserves that write policy and
 logical inclusion=True. Reject a legacy string plus any explicit write_compare,
@@ -595,6 +720,11 @@ red/green steps. This design specifies gates, not an implementation sequence:
    defaults, repr recursion, empty/selected fields, exact classes, tuple versus
    conjunction equality (identity/NaN and observable equality callbacks), all
    ordering/hash actions, inheritance, weakrefs, matching and supported helpers.
+   Include ordinary required init=False fields with custom init, suppressed init
+   followed by explicit assignment, generated init without a consumer, and dict
+   init=False simple-default fallback with an empty instance dictionary and a
+   later class-default update. Verify an actual generated factory consuming an
+   unavailable provider still diagnoses rather than silently omitting it.
    Pin intentional differences in the matrix, not blanket parity skips.
 3. Canonical extension examples pair source with behavioral output: plain,
    converted, const and frozen mutable caches; independent/dependent factories;
@@ -617,6 +747,19 @@ red/green steps. This design specifies gates, not an implementation sequence:
    Verify that equal-valued distinct child-node edges still record replacement
    under value policy and that nested native containers preserve node identity;
    cover hash-container restrictions and unchanged SnapshotNode behavior.
+   Add the AcceptOriginal narrow detector case and an integration case with
+   staged opaque working values/custom freeze, in both operand directions, for
+   legacy/new value-policy spellings with structural generation enabled/disabled.
+   Assert callback operand identity and unchanged write/no-write outcomes. Cover
+   opaque top-level nonreflexive self equality versus native container identity
+   shortcuts, reflected strict-subclass priority, NotImplemented and nonboolean
+   callback results, facade-left/opaque-right historical False without an extra
+   opaque callback, the reverse direction, exact versus subclass containers,
+   nested dict/set shapes and key-lookup exceptions, native-dict versus opaque
+   mapping proxies (including escaped input proxies, exact original opaque
+   callback operands and forwarding direction), the version-bounded proxy adapter,
+   same-node cross-view identity, shared acyclic branches and entered
+   cyclic pairs. Require these regressions inside the existing ownership fence.
    Include legacy strings, explicit conflicts, inherited declarations and a
    field-removal generation pair. Keep original experiment results untouched.
 6. Install freshly built wheels in isolated environments on each supported
@@ -677,3 +820,11 @@ Version checks used the primary CPython implementations for
 [3.14](https://github.com/python/cpython/blob/3.14/Lib/dataclasses.py), plus the
 [3.14 public documentation](https://docs.python.org/3.14/library/dataclasses.html).
 The versioned differential corpus remains necessary for any compatibility claim.
+
+The mapping-proxy boundary uses the documented
+[GC referent inspection API](https://docs.python.org/3.14/library/gc.html#gc.get_referents)
+and the CPython exact proxy's single-mapping traversal and equality forwarding in
+[descrobject.c](https://github.com/python/cpython/blob/3.14/Objects/descrobject.c).
+A read-only CPython 3.12.12 probe observed one original dict referent and the
+forwarding directions stated above. This inspection supports the proposed bounded
+adapter; the three-minor adapter and dispatch regressions remain unexecuted.
