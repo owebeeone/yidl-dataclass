@@ -67,6 +67,16 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+At 2026-10-12T14:58Z Stage G package/installation gates are owner-verified.
+All 18 installed suites and six owner final public-example smokes pass; wheel
+and sdist inventories/hashes are independently checked, with runtime/resources
+unchanged from verified D/EF. Cold public-only author and H/final reviews remain.
+Eight canonical/two seam source/oracle snapshots are frozen before authoring.
+Latest twelve-actor observations estimate $67.5929676 Standard API-equivalent
+USD, about 11h22m from GO; actual billing unavailable. Input 346,714,543 includes
+340,224,000 cached tokens; output 1,782,759 includes 984,904 reasoning tokens.
+No timing measurement or final completion is claimed.
+
 At 2026-10-12T14:16Z E/F is owner-verified: Undoable full source/regeneration
 matrix passes 340 tests in each of six original-backend/minor combinations;
 Dataclass product remains unchanged from D with eight affected checks per run.

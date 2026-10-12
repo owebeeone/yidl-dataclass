@@ -1,0 +1,196 @@
+{
+  "absolute_path_or_hostname_matches": 0,
+  "artifact_references": 66,
+  "cold_public_author_attempt": "pending owner",
+  "distinct_raw_hashes": 62,
+  "final_artifact_smoke_runs": 6,
+  "final_runtime_payload_unchanged_from_installed_corpus": true,
+  "increments": 40,
+  "installed_runs": 18,
+  "installed_suites": [
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "minor": "312",
+      "passed": 341,
+      "path": "docs/validation/stage-g/undoable-native-rust-312.junit.xml",
+      "skipped": 0,
+      "tests": 341
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "minor": "313",
+      "passed": 341,
+      "path": "docs/validation/stage-g/undoable-native-rust-313.junit.xml",
+      "skipped": 0,
+      "tests": 341
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "minor": "314",
+      "passed": 341,
+      "path": "docs/validation/stage-g/undoable-native-rust-314.junit.xml",
+      "skipped": 0,
+      "tests": 341
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "minor": "313",
+      "passed": 334,
+      "path": "docs/validation/stage-g/undoable-native-rust-313-without-authority.junit.xml",
+      "skipped": 0,
+      "tests": 334
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "minor": "312",
+      "passed": 334,
+      "path": "docs/validation/stage-g/undoable-native-rust-312-without-authority.junit.xml",
+      "skipped": 0,
+      "tests": 334
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "minor": "314",
+      "passed": 334,
+      "path": "docs/validation/stage-g/undoable-native-rust-314-without-authority.junit.xml",
+      "skipped": 0,
+      "tests": 334
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "minor": "312",
+      "passed": 341,
+      "path": "docs/validation/stage-g/undoable-python-312.junit.xml",
+      "skipped": 0,
+      "tests": 341
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "minor": "313",
+      "passed": 341,
+      "path": "docs/validation/stage-g/undoable-python-313.junit.xml",
+      "skipped": 0,
+      "tests": 341
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "minor": "314",
+      "passed": 341,
+      "path": "docs/validation/stage-g/undoable-python-314.junit.xml",
+      "skipped": 0,
+      "tests": 341
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "minor": "312",
+      "passed": 334,
+      "path": "docs/validation/stage-g/undoable-python-312-without-authority.junit.xml",
+      "skipped": 0,
+      "tests": 334
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "minor": "313",
+      "passed": 334,
+      "path": "docs/validation/stage-g/undoable-python-313-without-authority.junit.xml",
+      "skipped": 0,
+      "tests": 334
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "minor": "314",
+      "passed": 334,
+      "path": "docs/validation/stage-g/undoable-python-314-without-authority.junit.xml",
+      "skipped": 0,
+      "tests": 334
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "minor": "313",
+      "passed": 195,
+      "path": "docs/validation/stage-g/dataclass-native-rust-313.junit.xml",
+      "skipped": 2,
+      "tests": 197
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "minor": "312",
+      "passed": 194,
+      "path": "docs/validation/stage-g/dataclass-native-rust-312.junit.xml",
+      "skipped": 3,
+      "tests": 197
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "minor": "314",
+      "passed": 196,
+      "path": "docs/validation/stage-g/dataclass-native-rust-314.junit.xml",
+      "skipped": 1,
+      "tests": 197
+    },
+    {
+      "backend": "python",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "minor": "312",
+      "passed": 194,
+      "path": "docs/validation/stage-g/dataclass-python-312.junit.xml",
+      "skipped": 3,
+      "tests": 197
+    },
+    {
+      "backend": "python",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "minor": "313",
+      "passed": 195,
+      "path": "docs/validation/stage-g/dataclass-python-313.junit.xml",
+      "skipped": 2,
+      "tests": 197
+    },
+    {
+      "backend": "python",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "minor": "314",
+      "passed": 196,
+      "path": "docs/validation/stage-g/dataclass-python-314.junit.xml",
+      "skipped": 1,
+      "tests": 197
+    }
+  ],
+  "junit_files": 26,
+  "runtime_source_unchanged_from_d": true,
+  "sdk_or_lifecycle_changes_or_builds": false,
+  "source_only_gate_runs": 6
+}

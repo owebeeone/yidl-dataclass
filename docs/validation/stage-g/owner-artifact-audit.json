@@ -1,0 +1,20 @@
+{
+  "scope": "Independent owner final wheel/sdist byte and package inventory verification; runtime proof against own verified D/EF artifacts",
+  "tuple_sha256": "e94b6d2991ecf4d15f94b949d1fd8d6a4e290a4ec97829b30129d1d3e41f4434",
+  "consumers": [
+    {
+      "consumer": "dataclass",
+      "wheel_sha256": "50e7a1b17f68de56d88441ee47df8d2b0a4377981dd236e591d2a8eff8ff5f1b",
+      "sdist_sha256": "c6d34f4714d30c45940be9aafac3f5bfb1d1dbda8f60f85093eaee22637b145e",
+      "package_inventory_verified": true,
+      "runtime_and_resources_unchanged_from_verified_pre_g_wheel": true
+    },
+    {
+      "consumer": "undoable",
+      "wheel_sha256": "346dcf928dd4bf52362195e1a351b0b716fe03a77ffc7a97b8a5e69310b4281d",
+      "sdist_sha256": "a929ca442ef844799de84082550d4a34835b2b08891dace78020e212ef09d660",
+      "package_inventory_verified": true,
+      "runtime_and_resources_unchanged_from_verified_pre_g_wheel": true
+    }
+  ]
+}

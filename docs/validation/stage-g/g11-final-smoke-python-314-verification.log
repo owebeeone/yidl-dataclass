@@ -1,0 +1,5 @@
+ordinary-slots; independent-factories; field-local-comparison; standard-helpers
+document ('first',)
+final-wheel-regeneration-examples-public-resources=PASS
+
+{"backend": "python", "final_artifact_smoke": true, "python_minor": "314", "runtime_payload_unchanged_from_installed_corpus": true}

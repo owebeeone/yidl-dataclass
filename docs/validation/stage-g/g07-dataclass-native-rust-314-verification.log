@@ -1,0 +1,5 @@
+INSTALLED_GATE {"backend": "native-rust", "dataclass_absent": false, "origins": {"astichi": "lib/python3.14/site-packages/astichi/__init__.py", "yidl": "lib/python3.14/site-packages/yidl/__init__.py", "yidl_dataclass": "lib/python3.14/site-packages/yidl_dataclass/__init__.py"}, "python": "3.14.3"}
+.....................................................................................................s...............................................................................................
+196 passed, 1 skipped in 221.57s (0:03:41)
+
+

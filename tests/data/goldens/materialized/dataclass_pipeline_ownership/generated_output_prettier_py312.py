@@ -252,6 +252,49 @@ class Owned(*_y_dc_bases, metaclass=_y_dc_metaclass):
     value = _y_dc_property(_y_dc_get_0, _y_dc_set_0, _y_dc_del_0)
 
 
+class Different(*_y_dc_bases, metaclass=_y_dc_metaclass):
+    locals().update(_y_dc_namespace)
+    __slots__ = ("quantity",)
+
+    def __init__(self, quantity: _y_dc_annotation_0 = _y_dc_factory_sentinel) -> None:
+        pass
+        if quantity is _y_dc_factory_sentinel:
+            try:
+                _y_dc_value_0 = _y_dc_factory_0()
+            except _y_dc_ContextErrors:
+                raise
+            except _y_dc_Exception as _y_dc_factory_error:
+                raise _y_dc_FieldInitializationError(
+                    "render_case.<locals>.Different.quantity: factory failed"
+                ) from _y_dc_factory_error
+        else:
+            _y_dc_value_0 = quantity
+        pass
+        pass
+        self.quantity = _y_dc_value_0
+
+    def __eq__(self, other):
+        pass
+        if other.__class__ is not self.__class__:
+            return NotImplemented
+        return (self.quantity if True else None,) == (other.quantity if True else None,)
+
+    pass
+    pass
+    pass
+    pass
+    __hash__ = None
+
+    @_y_dc_recursive_repr
+    def __repr__(self):
+        return (
+            self.__class__.__qualname__
+            + "("
+            + ", ".join(("quantity" + "=" + repr(self.quantity),))
+            + ")"
+        )
+
+
 class Removed(*_y_dc_bases, metaclass=_y_dc_metaclass):
     locals().update(_y_dc_namespace)
     __slots__ = ("value",)

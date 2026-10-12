@@ -1,0 +1,484 @@
+{
+  "scope": "Canonical sources/designer goldens and oracle selection frozen before held-out public-only author; no calibrated score or independent-oracle claim for designer extensions",
+  "intent_sha256": "f5e07ac95a0a4da9340345d5b3dca817796e3d2aa601071e73bce3a0998f32b8",
+  "canonical": [
+    {
+      "id": "dataclass_plain",
+      "source": {
+        "path": "tests/data/gold_src/dataclass_plain.py",
+        "sha256": "7a2d9e1262cab697d419d558685c09f2f42a9cb5497487d55182c00a9c05cb19"
+      },
+      "oracle": "standard dataclasses differential for supported subset",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/behavior.txt",
+          "sha256": "45c414dae8a55242ad0a8413d89136d82a20d4faf01ac6335951277a8c990c40"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/bindings.py",
+          "sha256": "7a2d9e1262cab697d419d558685c09f2f42a9cb5497487d55182c00a9c05cb19"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/generated_output_prettier_py312.py",
+          "sha256": "6d831663930b1a1bc076fe26efa7cf8ad182e2b105100239c2f86798391416a4"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/generated_output_prettier_py313.py",
+          "sha256": "1834a4d5b294bb3b8f57c3fc79f19d787c35fbde7ffec7765eec89d7e0451d45"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/generated_output_prettier_py314.py",
+          "sha256": "1834a4d5b294bb3b8f57c3fc79f19d787c35fbde7ffec7765eec89d7e0451d45"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/generated_output_py312.py",
+          "sha256": "33793f5ad72eb9ded524b04e71343bbd4b1f77a6ed790fffd941b878c545c877"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/generated_output_py313.py",
+          "sha256": "b545dc289af1f39b1a7b36c69700ffb587d53871121395c2de3401e661d74f81"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/generated_output_py314.py",
+          "sha256": "b545dc289af1f39b1a7b36c69700ffb587d53871121395c2de3401e661d74f81"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_plain/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    },
+    {
+      "id": "dataclass_initialization",
+      "source": {
+        "path": "tests/data/gold_src/dataclass_initialization.py",
+        "sha256": "2979512334299daedbd1d9e83bcf8da92a04147f6f28e6b60665b068cc9aa72a"
+      },
+      "oracle": "declared extension contract and explicit callback observations; no independent std dependency-factory oracle",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/behavior.txt",
+          "sha256": "c9d1d441efc1974034f8d61ec73ffb4ce770d9e3bbe076c15d11c6e9443f847a"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/bindings.py",
+          "sha256": "2979512334299daedbd1d9e83bcf8da92a04147f6f28e6b60665b068cc9aa72a"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/generated_output_prettier_py312.py",
+          "sha256": "2a119945b44474fcd59100d589461295a2d3ac0fed6219e76cb3ee53c3149486"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/generated_output_prettier_py313.py",
+          "sha256": "93e019ec8e53a98b49f8b1283897c4a51acc1d52425a2b5482cec65d57f24a29"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/generated_output_prettier_py314.py",
+          "sha256": "93e019ec8e53a98b49f8b1283897c4a51acc1d52425a2b5482cec65d57f24a29"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/generated_output_py312.py",
+          "sha256": "0b15004220f98302a9e5a937696c47230741d2ab333bfeae165bc681a5618b83"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/generated_output_py313.py",
+          "sha256": "cf1558ea945a200c7e681430174a1e72626a84a1051481061f644d82e8fc8883"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/generated_output_py314.py",
+          "sha256": "cf1558ea945a200c7e681430174a1e72626a84a1051481061f644d82e8fc8883"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_initialization/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    },
+    {
+      "id": "dataclass_policies",
+      "source": {
+        "path": "tests/data/gold_src/dataclass_policies.py",
+        "sha256": "64331f418587a0ecddf40a78e7d256939867110966cac86c715c03017de94592"
+      },
+      "oracle": "stdlib differential for common fields; declared extension contract for pipelines and exceptions",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/behavior.txt",
+          "sha256": "12e086c6b73ab285315f770f8185e9bb2e93e319561fbda264c4bc6029357c1e"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/bindings.py",
+          "sha256": "64331f418587a0ecddf40a78e7d256939867110966cac86c715c03017de94592"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/generated_output_prettier_py312.py",
+          "sha256": "57245160fca76e124f2657538c947c7a5da0113974ee44690851018eecf1e27d"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/generated_output_prettier_py313.py",
+          "sha256": "0ebd5a904420c03cc753565e2021cb8e1f8bc86bffe81f557698673c16a69fb0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/generated_output_prettier_py314.py",
+          "sha256": "0ebd5a904420c03cc753565e2021cb8e1f8bc86bffe81f557698673c16a69fb0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/generated_output_py312.py",
+          "sha256": "d40f81e3b3d70b42a7fe813daadcb61a3578e8cbfc7edfd74238120f9549d0e8"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/generated_output_py313.py",
+          "sha256": "c1288527a2a078076fb6c24f4ca63c5344004096df0efcd9622949bfc33a038f"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/generated_output_py314.py",
+          "sha256": "c1288527a2a078076fb6c24f4ca63c5344004096df0efcd9622949bfc33a038f"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_policies/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    },
+    {
+      "id": "dataclass_lazy",
+      "source": {
+        "path": "tests/data/gold_src/dataclass_lazy.py",
+        "sha256": "51d36ed0a16133f92a5ac8640f17103f66afdeb40dd797c665c2a16bd29d9502"
+      },
+      "oracle": "declared extension contract and callback/lifetime observations",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/behavior.txt",
+          "sha256": "2f2fbf49d6b861694ecb92e2e08075a9a14c6e12fd442a2a0438bb6ae566dcf5"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/bindings.py",
+          "sha256": "51d36ed0a16133f92a5ac8640f17103f66afdeb40dd797c665c2a16bd29d9502"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/generated_output_prettier_py312.py",
+          "sha256": "171294cd2d1b380f0d841b422c5ce0da5d7f4633de635788be572e94d7f45047"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/generated_output_prettier_py313.py",
+          "sha256": "1b9b0e59df589972fd86f3c084e15177cc1ce15fd0101836ada994de28dccca3"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/generated_output_prettier_py314.py",
+          "sha256": "1b9b0e59df589972fd86f3c084e15177cc1ce15fd0101836ada994de28dccca3"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/generated_output_py312.py",
+          "sha256": "94cb0e74d4ff1679e3edd7c350d0180664d1b64877a1ddf34227404defa3cbe5"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/generated_output_py313.py",
+          "sha256": "633a8bc2090054f723e6d36b033119f1cb53025aadfa07b04193e1af982b561c"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/generated_output_py314.py",
+          "sha256": "633a8bc2090054f723e6d36b033119f1cb53025aadfa07b04193e1af982b561c"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_lazy/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    },
+    {
+      "id": "dataclass_inheritance_helpers",
+      "source": {
+        "path": "tests/data/gold_src/dataclass_inheritance_helpers.py",
+        "sha256": "76a45b8a66fd4e58e35ca81f976b5c78bdb4b9dc46447166f608c1723dabf788"
+      },
+      "oracle": "stdlib helper/inheritance differential where compatible; extension copy/lazy contract separately",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/behavior.txt",
+          "sha256": "ac50ab0cb5afdea21070502080f85a9bc66d7be00cbd221dd9d32919b8307481"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/bindings.py",
+          "sha256": "76a45b8a66fd4e58e35ca81f976b5c78bdb4b9dc46447166f608c1723dabf788"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_prettier_py312.py",
+          "sha256": "eb1256f7406b81a583dfb64047bc1821576e60afc0f332f11f90c29767f48aa3"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_prettier_py313.py",
+          "sha256": "6ea786c7d47e338b784f2e76113e20be0259e0c45543fce2fab27f2f4fbd0c7c"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_prettier_py314.py",
+          "sha256": "6ea786c7d47e338b784f2e76113e20be0259e0c45543fce2fab27f2f4fbd0c7c"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_py312.py",
+          "sha256": "bd3c7c0b1a614958afe8116877f8892e7b3df8bce5f58dd506d0a6e805df7cc1"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_py313.py",
+          "sha256": "262ecca8a483904b59834fbd54741b4bfd216581a572c8c7818c5aafa3fe1f6d"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_py314.py",
+          "sha256": "262ecca8a483904b59834fbd54741b4bfd216581a572c8c7818c5aafa3fe1f6d"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    },
+    {
+      "id": "dataclass_comparisons",
+      "source": {
+        "path": "tests/data/gold_src/dataclass_comparisons.py",
+        "sha256": "4634f8afb9d5c6031260d005bccf70b913ee3ac2c165b4e4895eb97804851b37"
+      },
+      "oracle": "standard dataclasses differential, including version-specific callback behavior",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/behavior.txt",
+          "sha256": "41cb2d9cd5d381127415ecdf9409ed03ebd8d8617279c755b7911232b6092886"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/bindings.py",
+          "sha256": "4634f8afb9d5c6031260d005bccf70b913ee3ac2c165b4e4895eb97804851b37"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/generated_output_prettier_py312.py",
+          "sha256": "9feb203406d5af31b983f02627efc2ac0d5b86bceda17dd9e3c9a57cb79418bc"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/generated_output_prettier_py313.py",
+          "sha256": "9749361e8b88d907c15c2ee077ce4446b5e0fb8430be15e1860ce119131a359c"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/generated_output_prettier_py314.py",
+          "sha256": "9749361e8b88d907c15c2ee077ce4446b5e0fb8430be15e1860ce119131a359c"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/generated_output_py312.py",
+          "sha256": "f7878f8b9eefe5e92481bf07740a9cb22d3e0c64bee28dbec10ab1341d6c7ad2"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/generated_output_py313.py",
+          "sha256": "8b9ed6536eeb9e55f64ae523d7326fe8e8b36c68d23e80b6aff27f8b4e6d74d9"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/generated_output_py314.py",
+          "sha256": "8b9ed6536eeb9e55f64ae523d7326fe8e8b36c68d23e80b6aff27f8b4e6d74d9"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_comparisons/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    },
+    {
+      "id": "dataclass_field_removal",
+      "source": {
+        "path": "tests/data/gold_src/dataclass_field_removal.py",
+        "sha256": "326076361898db64f09d8942ddc508ddd8596237bceb563a605699fa50812547"
+      },
+      "oracle": "before/after declarative edit and std supported-subset differential; missing-provider mutant diagnostic separately",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/behavior.txt",
+          "sha256": "a2372b0f1af72d021c196e1a547a528d9a594316da3a86727df5d023d875db05"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/bindings.py",
+          "sha256": "326076361898db64f09d8942ddc508ddd8596237bceb563a605699fa50812547"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/generated_output_prettier_py312.py",
+          "sha256": "ccd560d4ecd49e8f540a4933bd958dd568c7e2818e55796d9702e8ab6ca35b32"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/generated_output_prettier_py313.py",
+          "sha256": "5cd2fe275959676d7ea38e31c0832d19590018cc108d25e31ca21867a308afe9"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/generated_output_prettier_py314.py",
+          "sha256": "5cd2fe275959676d7ea38e31c0832d19590018cc108d25e31ca21867a308afe9"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/generated_output_py312.py",
+          "sha256": "ee3f3faee8322b94c6733e74870d3edb20ad7a16c17b30b7ed69d45aeb314380"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/generated_output_py313.py",
+          "sha256": "f3a63676babd68e2fec7e86a125ca60f5622b95e4a85e4b0c8ab0ef5786b839d"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/generated_output_py314.py",
+          "sha256": "f3a63676babd68e2fec7e86a125ca60f5622b95e4a85e4b0c8ab0ef5786b839d"
+        },
+        {
+          "path": "tests/data/goldens/materialized/dataclass_field_removal/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    },
+    {
+      "id": "comparison_neutral",
+      "source": {
+        "path": "tests/data/gold_src/comparison_neutral.py",
+        "sha256": "ceb11a66d269272ca869414ec5cd7fb6c54f90e120e83d47ad1e1adda84a32f7"
+      },
+      "oracle": "independent expected value comparisons plus shared source/provenance checks",
+      "golden_files": [
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/behavior.txt",
+          "sha256": "266b521aabb0f7df4cd7c7d1a25071152db42f11494bc744d107c1424624736c"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/bindings.py",
+          "sha256": "ceb11a66d269272ca869414ec5cd7fb6c54f90e120e83d47ad1e1adda84a32f7"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/decorator.py",
+          "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/decorator_prettier.py",
+          "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/generated_output_prettier_py312.py",
+          "sha256": "e664f4ada8bc797e280b9a3780c7f3fda86a942b4e496f34050802b793b26078"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/generated_output_prettier_py313.py",
+          "sha256": "682eb99afd38b3aa3199bad8f258756e3aab4942d9a6182511dacc8798195de8"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/generated_output_prettier_py314.py",
+          "sha256": "682eb99afd38b3aa3199bad8f258756e3aab4942d9a6182511dacc8798195de8"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/generated_output_py312.py",
+          "sha256": "d4a6771d9a568f9c9bef3323a0648dafd6a5263d048f6776e22edad74fcf08c6"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/generated_output_py313.py",
+          "sha256": "f4f3d088eee5de9f6b16a2677f7ed0334014fa462786f04263b99f41e6083bf7"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/generated_output_py314.py",
+          "sha256": "f4f3d088eee5de9f6b16a2677f7ed0334014fa462786f04263b99f41e6083bf7"
+        },
+        {
+          "path": "tests/data/goldens/materialized/comparison_neutral/runtime_manifest.json",
+          "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+        }
+      ]
+    }
+  ],
+  "undoable_seam": [
+    {
+      "owning_member": "yidl_undoable",
+      "source": {
+        "path": "tests/data/gold_src/21_undoable_comparisons.py",
+        "sha256": "685d9108c1fa3d534b01d49922ea6f14d912d786349d6002b0af228220457948"
+      },
+      "golden_files": [
+        {
+          "path": "tests/data/golden/21_undoable_comparisons.py312.generated.py",
+          "sha256": "2b0b843c6497e1aa72291ecc588baee5ee7e3c33de3ebb37e76ecf229e31ad98"
+        },
+        {
+          "path": "tests/data/golden/21_undoable_comparisons.py313.generated.py",
+          "sha256": "c882968128646c03ec6c050ba91a8dc6e20bd674b75063e0afa163a390d4941d"
+        },
+        {
+          "path": "tests/data/golden/21_undoable_comparisons.py314.generated.py",
+          "sha256": "c882968128646c03ec6c050ba91a8dc6e20bd674b75063e0afa163a390d4941d"
+        }
+      ]
+    },
+    {
+      "owning_member": "yidl_undoable",
+      "source": {
+        "path": "tests/data/gold_src/23_undoable_write_compatibility.py",
+        "sha256": "3a28df65521af20709ace9f7e1ff94c3fe403d6344c457c969e7a852d020ee8c"
+      },
+      "golden_files": [
+        {
+          "path": "tests/data/golden/23_undoable_write_compatibility.py312.generated.py",
+          "sha256": "a797acc75fbecc3964ffce06c506b3205b86e15238e97e457b27d07adde8a390"
+        },
+        {
+          "path": "tests/data/golden/23_undoable_write_compatibility.py313.generated.py",
+          "sha256": "507c3056e14279e4ae4ef380f94ff74ecee748bae72796b9f6aa6b59d6abc24c"
+        },
+        {
+          "path": "tests/data/golden/23_undoable_write_compatibility.py314.generated.py",
+          "sha256": "507c3056e14279e4ae4ef380f94ff74ecee748bae72796b9f6aa6b59d6abc24c"
+        }
+      ]
+    }
+  ],
+  "held_out_author_attempt": "not started",
+  "final_artifact_tuple_sha256": "e94b6d2991ecf4d15f94b949d1fd8d6a4e290a4ec97829b30129d1d3e41f4434"
+}

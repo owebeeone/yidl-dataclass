@@ -2,6 +2,7 @@
 
 import ast
 from pathlib import Path
+from importlib.resources import files
 from yidl.testing.versioned_test_harness import data_golden_dir
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,7 +33,7 @@ def test_plain_canonical_has_direct_stores_and_plain_class():
 
 
 def test_source_policy_resources_and_decorator_use_sdk_composition():
-    package = ROOT / "src/yidl_dataclass"
+    package = files("yidl_dataclass")
     source = (package / "dataclass.py").read_text()
     assert "build_DataclassModule" in source and ".to_executable_ast()" in source
     tree = ast.parse(source)
@@ -80,14 +81,16 @@ def test_comparison_resources_generate_direct_specialized_plain_methods():
         assert all(
             isinstance(node.func, ast.Name) and node.func.id == "hash" for node in calls
         )
-    source = (ROOT / "src/yidl_dataclass/yidl/shared/comparison.yidl").read_text()
+    source = files("yidl_dataclass").joinpath("yidl/shared/comparison.yidl").read_text()
     assert (
         "EqPreludeContributions" in source and "matcher EqStepContributions" in source
     )
     assert not any(
         name in source for name in ("dataclass", "RuntimeFacade", "ContextVar")
     )
-    adapter = (ROOT / "src/yidl_dataclass/yidl/dataclass_comparison.yidl").read_text()
+    adapter = (
+        files("yidl_dataclass").joinpath("yidl/dataclass_comparison.yidl").read_text()
+    )
     assert "comparison.ComparisonCore" in adapter and "ComparisonMethods" in adapter
 
 

@@ -1,0 +1,350 @@
+{
+  "stage": "G public/package checkpoint",
+  "manifest_sha256": "47a42d991de23328a28af92b741c76d048e5694cb63c096945975192677459fd",
+  "owned_files": 336,
+  "increment_records": 40,
+  "artifact_references": 48,
+  "distinct_raw_hashes": 44,
+  "junit_files": 8,
+  "junit": {
+    "docs/validation/stage-g/g01-distribution-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-g/g01-distribution-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-g/g09-source-only-python-313-verification.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-g/g09-source-only-native-rust-312-verification.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-g/g09-source-only-native-rust-313-verification.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-g/g09-source-only-python-312-verification.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-g/g09-source-only-python-314-verification.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-g/g09-source-only-native-rust-314-verification.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "installed_results": [
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "312",
+      "path": "docs/validation/stage-g/undoable-native-rust-312.junit.xml",
+      "raw_sha256": "0470cd090be3b90d4d4eb9a116986554c8fcb355ec372e5d3bb357301548e2ec",
+      "sha256": "25c6b25e96bde134863ebe0dec15638d200161529fc32646986de942e67cdd9b",
+      "counts": {
+        "tests": 341,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "313",
+      "path": "docs/validation/stage-g/undoable-native-rust-313.junit.xml",
+      "raw_sha256": "b00184e9ab1b60db12c49dc998b3bc027b323106c224977f56d8cd24300680cc",
+      "sha256": "9cac7f55be609042941d0d5bd0ef6e68cdcb9f99302c658948cb94b16e639031",
+      "counts": {
+        "tests": 341,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "314",
+      "path": "docs/validation/stage-g/undoable-native-rust-314.junit.xml",
+      "raw_sha256": "ab1a4531758f44f0851772f2e4ba8df8fc51143d32704ad437635649d2f3ee91",
+      "sha256": "161bb48ec422eaaf78c061dc83a8bd7abcfa92538b4db0ca347cbad6e95b57e5",
+      "counts": {
+        "tests": 341,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "exit_code": 0,
+      "minor": "313",
+      "path": "docs/validation/stage-g/undoable-native-rust-313-without-authority.junit.xml",
+      "raw_sha256": "199331c1528f587dcf693e64d4ef8d4f6559b6e3baa83eef812efc3a48aea8a6",
+      "sha256": "fe3ddd38c3b78149f1ca14398ea8cb332bd848d6fcb28364c17313b8727aa40d",
+      "counts": {
+        "tests": 334,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "exit_code": 0,
+      "minor": "312",
+      "path": "docs/validation/stage-g/undoable-native-rust-312-without-authority.junit.xml",
+      "raw_sha256": "2612726a8dbdc4431ef698219f6ed32ba7d6a08c0f75a4db4fe189d8e18523b8",
+      "sha256": "8883dc8933491bc0aaefa17ecb8102242ce6bf59bc996ea6cf3450a98c792763",
+      "counts": {
+        "tests": 334,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "exit_code": 0,
+      "minor": "314",
+      "path": "docs/validation/stage-g/undoable-native-rust-314-without-authority.junit.xml",
+      "raw_sha256": "d87cc506d0bbc6d06a25bb26914520fdb8cc592b697883a9d7ffe7a743f9b66b",
+      "sha256": "7a54113bf0e10be9346f699b0534d3770ef67ecc028109a2b300ff614e87effe",
+      "counts": {
+        "tests": 334,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "312",
+      "path": "docs/validation/stage-g/undoable-python-312.junit.xml",
+      "raw_sha256": "97d92b4bc35c156367eb536c0bf869b86250ae7f777084f6a16030648f6da988",
+      "sha256": "37437120fae30aaef9e424ef5f5f7cbc4c4082d6aa7459bd6d99db1bb8b9bbaa",
+      "counts": {
+        "tests": 341,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "313",
+      "path": "docs/validation/stage-g/undoable-python-313.junit.xml",
+      "raw_sha256": "8b63038e0081c63c2d11881ebcb1108d4ffbadba280bddd38fb048fde8a5d02c",
+      "sha256": "05edf472e55adbfe637ea8fe0b46b3a056a87ff917c8cceff58dd3ff128db0b1",
+      "counts": {
+        "tests": 341,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "314",
+      "path": "docs/validation/stage-g/undoable-python-314.junit.xml",
+      "raw_sha256": "59cbef601976d8f1ca0b8136ab6640a8675bcb6401fbf185a24eb3ef69a86afa",
+      "sha256": "e756be667186fb77a44a25a57658ccbfda809949e231afbea7553f3a636714c6",
+      "counts": {
+        "tests": 341,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "exit_code": 0,
+      "minor": "312",
+      "path": "docs/validation/stage-g/undoable-python-312-without-authority.junit.xml",
+      "raw_sha256": "0b61eb6769ec8e98c512b4561985af15a3dfbf09f1fc7ca7fb7fbae8e7913ca6",
+      "sha256": "4c1d448b3f1fbadb5a1bf0cbc02fd6773a2e20c648f5667b62295c4052066ccf",
+      "counts": {
+        "tests": 334,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "exit_code": 0,
+      "minor": "313",
+      "path": "docs/validation/stage-g/undoable-python-313-without-authority.junit.xml",
+      "raw_sha256": "3464869d276e8e5a84fb78b0766945085525881b0b27c4385d45e6bb88a6d993",
+      "sha256": "f3551d741b431c52c9e8cfac27a3a002ff9dd88084a633db5d595d9cc4ce5d43",
+      "counts": {
+        "tests": 334,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "undoable",
+      "dataclass_absent": true,
+      "exit_code": 0,
+      "minor": "314",
+      "path": "docs/validation/stage-g/undoable-python-314-without-authority.junit.xml",
+      "raw_sha256": "44ce5ef7b704f2ad1d7b7460177da907fdd478f3ea8e02b727936d33a0d39c5e",
+      "sha256": "bee0848e55a423017bbb26a30296a46e3f49fb0b841b828f524e09ab339a7a40",
+      "counts": {
+        "tests": 334,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "313",
+      "path": "docs/validation/stage-g/dataclass-native-rust-313.junit.xml",
+      "raw_sha256": "110cda83a61a4ad0865c5ab70a1b3904a898663045b46577b440310d637440bb",
+      "sha256": "c6a31b028c6a8538a8a00749355168ac530dd549a89a85dee744974e1f95b754",
+      "counts": {
+        "tests": 197,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "312",
+      "path": "docs/validation/stage-g/dataclass-native-rust-312.junit.xml",
+      "raw_sha256": "68ac88e0a693e8a7f8797559c5eef934f5da54fe287b4816ba2918dca0f2d423",
+      "sha256": "750ce5d683653d7d8fd938fbae53764e35fc5064556b1cf63862ed5ffa940828",
+      "counts": {
+        "tests": 197,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 3
+      }
+    },
+    {
+      "backend": "native-rust",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "314",
+      "path": "docs/validation/stage-g/dataclass-native-rust-314.junit.xml",
+      "raw_sha256": "8e6ec7b6d3f3a0776eb854c8f4fb40589251e3cd9b2064136602e41aecc6ba60",
+      "sha256": "2c683adf653fb423085eb30f9fc4f0ea7d373606ef4184a9dbc3cd6f0ef7ad51",
+      "counts": {
+        "tests": 197,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 1
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "312",
+      "path": "docs/validation/stage-g/dataclass-python-312.junit.xml",
+      "raw_sha256": "fee4fb1bda0cba8489e3152dacb10e11d2de01a0231195ac479ce06ad623671e",
+      "sha256": "16d0d0f84e27fc182f3debee32e6b0a2428011af351ffd8e58740e677693299f",
+      "counts": {
+        "tests": 197,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 3
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "313",
+      "path": "docs/validation/stage-g/dataclass-python-313.junit.xml",
+      "raw_sha256": "2edc82378ecb8fd7d95a1fa6d7347ace183d075b08e392465a63cd8f96489f30",
+      "sha256": "07ca7454377ca6ea840268592fd2d2b584a2bf8a3bd614b3cc03884068280c2d",
+      "counts": {
+        "tests": 197,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      }
+    },
+    {
+      "backend": "python",
+      "consumer": "dataclass",
+      "dataclass_absent": false,
+      "exit_code": 0,
+      "minor": "314",
+      "path": "docs/validation/stage-g/dataclass-python-314.junit.xml",
+      "raw_sha256": "47e5bbd118877dec79e84070977e9768f58cca2c01df349cfa7279fb5308ef04",
+      "sha256": "1b9faca0a9a4793a99cac9de4f95c2d82fc8dbf9bbfc0fdf0fc345b93b31983f",
+      "counts": {
+        "tests": 197,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 1
+      }
+    }
+  ],
+  "scope": "integrity/source-path audit; behavioral verdicts remain separately assessed"
+}

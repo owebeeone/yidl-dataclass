@@ -28,6 +28,7 @@ VERSIONED = {
     "dataclass_inheritance_helpers",
     "dataclass_copy",
     "dataclass_dictionary_copy",
+    "dataclass_field_removal",
 }
 
 

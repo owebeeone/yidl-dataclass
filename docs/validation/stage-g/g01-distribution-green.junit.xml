@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.856" timestamp="2026-10-13T01:25:11.969073+11:00" hostname="[host]"><testcase classname="tests.test_distribution_contract" name="test_wheel_and_sdist_include_public_documentation_and_example" time="0.826" /></testsuite></testsuites>

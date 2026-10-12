@@ -1,0 +1,5 @@
+INSTALLED_GATE {"backend": "python", "dataclass_absent": false, "origins": {"astichi": "lib/python3.14/site-packages/astichi/__init__.py", "yidl": "lib/python3.14/site-packages/yidl/__init__.py", "yidl_dataclass": "lib/python3.14/site-packages/yidl_dataclass/__init__.py"}, "python": "3.14.3"}
+.....................................................................................................s...............................................................................................
+196 passed, 1 skipped in 258.56s (0:04:18)
+
+

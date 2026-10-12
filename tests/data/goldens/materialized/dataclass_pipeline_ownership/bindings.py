@@ -21,23 +21,32 @@ def render_case():
             events.append((self.offset, value))
             return int(value) + self.offset
 
-    default = Hostile()
+    first_default, second_default = Hostile(), Hostile()
 
-    def declare(converter):
+    def declare(converter, default):
         class Owned:
             value: int = field(default="2", converter=converter)
             untouched: object = field(default=default, repr=False, compare=False)
 
         return dataclass(Owned)
 
-    first, second = declare(Convert(1)), declare(Convert(10))
+    first = declare(Convert(1), first_default)
+    second = declare(Convert(10), second_default)
     assert events == []
     assert generated_source(first) == generated_source(second)
     a, b = first(), second()
     assert (a.value, b.value) == (3, 12)
     a.value = "4"
     assert (a.value, b.value) == (5, 12)
-    assert a.untouched is default and b.untouched is default
+    assert a.untouched is first_default and b.untouched is second_default
+    assert first is not second
+
+    @dataclass
+    class Different:
+        quantity: int = field(default_factory=lambda: 7)
+
+    assert Different().quantity == 7
+    assert "quantity" in generated_source(Different)
 
     @dataclass
     class Removed:
@@ -63,9 +72,11 @@ def render_case():
         + "\n"
         + generated_source(second)
         + "\n"
+        + generated_source(Different)
+        + "\n"
         + generated_source(Removed)
         + "\n"
         + generated_source(Fallback),
         "behavior.txt": str(events)
-        + "\nnamespace-owned=True; stable-shape=True; no-repr-generation=True; policy-deleted=True; dictionary-fallback=9; absent-unset=True\n",
+        + "\nnamespace-owned=True; distinct-defaults=True; distinct-final-classes=True; differing-field-name=True; stable-shape=True; no-repr-generation=True; policy-deleted=True; dictionary-fallback=9; absent-unset=True\n",
     }

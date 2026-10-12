@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.598" timestamp="2026-10-13T01:22:08.790755+11:00" hostname="[host]"><testcase classname="tests.test_distribution_contract" name="test_wheel_and_sdist_include_public_documentation_and_example" time="0.577"><failure message="AssertionError: README.md&#10;assert ('yidl_dataclass/documentation/' + 'README.md') in {'yidl_dataclass-0.1.0.dev0.dist-info/METADATA', 'yidl_dataclass-0.1.0.dev0.dist-info/RECORD', 'yidl_dataclass-0.1.0.d...1.0.dev0.dist-info/entry_points.txt', 'yidl_dataclass/__init__.py', 'yidl_dataclass/_generated_dataclass_base.py', ...}">tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1626/test_wheel_and_sdist_include_p0')
+
+    def test_wheel_and_sdist_include_public_documentation_and_example(tmp_path):
+        subprocess.run(
+            [sys.executable, "-m", "hatchling", "build", "-d", str(tmp_path)],
+            cwd=ROOT, capture_output=True, check=True,
+        )
+        with zipfile.ZipFile(next(tmp_path.glob("*.whl"))) as wheel:
+            names = set(wheel.namelist())
+            for name in ("README.md", "API.md", "Generation.md", "first_use.py"):
+&gt;               assert "yidl_dataclass/documentation/" + name in names, name
+E               AssertionError: README.md
+E               assert ('yidl_dataclass/documentation/' + 'README.md') in {'yidl_dataclass-0.1.0.dev0.dist-info/METADATA', 'yidl_dataclass-0.1.0.dev0.dist-info/RECORD', 'yidl_dataclass-0.1.0.d...1.0.dev0.dist-info/entry_points.txt', 'yidl_dataclass/__init__.py', 'yidl_dataclass/_generated_dataclass_base.py', ...}
+
+tests/test_distribution_contract.py:20: AssertionError</failure></testcase></testsuite></testsuites>

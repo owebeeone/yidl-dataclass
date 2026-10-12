@@ -44,6 +44,11 @@ do not authorize SDK work against the operator's correction.
 Active scope/provenance: `TaskBoundary.md`. Reference-only dependency
 observations: `OutsideScopeFindings.md`; they do not authorize implementation.
 
+Stage G package/installation gates are now owner-verified; see
+`Dataclass-StageGResult.md`. Final wheels preserve D/EF runtime/resource bytes,
+18 installed suites and six owner public-resource smokes pass. Cold public-only
+authoring is next; H measurements and final Code/State review remain.
+
 ## Requirements review history and authority
 
 The review object is the committed README, `dev-docs/DataclassConcept.md` and

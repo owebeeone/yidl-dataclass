@@ -2,5 +2,5 @@
   "intent_file": "docs/validation/declarative/intents-v1.json",
   "sha256": "f5e07ac95a0a4da9340345d5b3dca817796e3d2aa601071e73bce3a0998f32b8",
   "author_attempt": "not started",
-  "source_oracle_freeze": "pending settled product tuple"
+  "source_oracle_freeze": "docs/validation/declarative/source-oracle-freeze.json"
 }
