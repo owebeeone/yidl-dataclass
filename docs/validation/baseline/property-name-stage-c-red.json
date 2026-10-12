@@ -1,0 +1,22 @@
+{
+  "purpose": "Independent owner-installed C regression before focused D correction; unchanged probe to rerun after stopped D wheel",
+  "stage_c_wheel_sha256": "602024966e2b034fb6e484283da06abebeea6aee4ec05f6d523d88ed33fe5d3a",
+  "probe_sha256": "a4d063c6b5f81dd00b87d01873f2f1e140285a4e5264a8fffe11a250ec729db7",
+  "raw_archive": "external:consumer-verification/owner-property-name-red",
+  "results": [
+    {
+      "backend": "native-rust",
+      "python": "3.12.12",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"owner-property-name-probe.py\", line 4, in <module>\n    @dataclass\n     ^^^^^^^^^\n  File \"external:consumer-verification/venv-3.12/lib/python3.12/site-packages/yidl_dataclass/dataclass.py\", line 213, in dataclass\n    return decorate if cls is None else decorate(cls)\n                                        ^^^^^^^^^^^^^\n  File \"external:consumer-verification/venv-3.12/lib/python3.12/site-packages/yidl_dataclass/dataclass.py\", line 198, in decorate\n    exec(\n  File \"<yidl-dataclass-model>\", line 1, in <module>\n  File \"<yidl-dataclass-model>\", line 1, in Names\nTypeError: 'property' object is not callable\n",
+      "raw_sha256": "7bca6d4a81941f37aeeca1774946c6372a83aa169283e0231e338c1285902c91"
+    },
+    {
+      "backend": "python",
+      "python": "3.12.12",
+      "exit_code": 1,
+      "output": "Traceback (most recent call last):\n  File \"owner-property-name-probe.py\", line 4, in <module>\n    @dataclass\n     ^^^^^^^^^\n  File \"external:consumer-verification/venv-3.12/lib/python3.12/site-packages/yidl_dataclass/dataclass.py\", line 213, in dataclass\n    return decorate if cls is None else decorate(cls)\n                                        ^^^^^^^^^^^^^\n  File \"external:consumer-verification/venv-3.12/lib/python3.12/site-packages/yidl_dataclass/dataclass.py\", line 198, in decorate\n    exec(\n  File \"<yidl-dataclass-model>\", line 21, in <module>\n  File \"<yidl-dataclass-model>\", line 30, in Names\nTypeError: 'property' object is not callable\n",
+      "raw_sha256": "db1c25d0e871cf0f235ecacd97f3a1c1ac10ce72b81085bd152928707877a6d1"
+    }
+  ]
+}

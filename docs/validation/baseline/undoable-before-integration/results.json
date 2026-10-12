@@ -1,0 +1,181 @@
+{
+  "source_head": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+  "purpose": "Pre-integration Undoable complete source regression with installed original reference-only SDKs; paused helper docs unchanged",
+  "command": [
+    "external:venv-MINOR/bin/python",
+    "-I",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "tests",
+    "-q",
+    "--junitxml=external:consumer-verification/undoable-source-baseline/MINOR-BACKEND.junit.xml"
+  ],
+  "cwd": "owning Undoable repository root",
+  "raw_archive": "external:consumer-verification/undoable-source-baseline",
+  "runs": [
+    {
+      "minor": "3.12",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "elapsed_seconds": 8.32349112490192,
+      "source_head": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+      "log_sha256": "59059d5257aa569cb875f7059b2aee90412012af996c501d96e49e245ede2ecb",
+      "junit_sha256": "22ec07955896b717fcc9ef57e688ee0789eae27291781dc79af55aed3df9c505",
+      "artifacts": [
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.12-native-rust.log",
+          "raw_sha256": "59059d5257aa569cb875f7059b2aee90412012af996c501d96e49e245ede2ecb",
+          "sha256": "59059d5257aa569cb875f7059b2aee90412012af996c501d96e49e245ede2ecb"
+        },
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.12-native-rust.junit.xml",
+          "raw_sha256": "22ec07955896b717fcc9ef57e688ee0789eae27291781dc79af55aed3df9c505",
+          "sha256": "22ec07955896b717fcc9ef57e688ee0789eae27291781dc79af55aed3df9c505"
+        }
+      ],
+      "counts": {
+        "tests": 215,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "minor": "3.12",
+      "backend": "python",
+      "exit_code": 0,
+      "elapsed_seconds": 12.367575083393604,
+      "source_head": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+      "log_sha256": "633ccc198f05e19568e436ac8420e05465f7db03c76f48b7614ef1fc6001a167",
+      "junit_sha256": "88eb763f61539c603708b4247239ad49dba5999d865493e88614b49d02745bd9",
+      "artifacts": [
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.12-python.log",
+          "raw_sha256": "633ccc198f05e19568e436ac8420e05465f7db03c76f48b7614ef1fc6001a167",
+          "sha256": "633ccc198f05e19568e436ac8420e05465f7db03c76f48b7614ef1fc6001a167"
+        },
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.12-python.junit.xml",
+          "raw_sha256": "88eb763f61539c603708b4247239ad49dba5999d865493e88614b49d02745bd9",
+          "sha256": "88eb763f61539c603708b4247239ad49dba5999d865493e88614b49d02745bd9"
+        }
+      ],
+      "counts": {
+        "tests": 215,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "minor": "3.13",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "elapsed_seconds": 9.028055541217327,
+      "source_head": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+      "log_sha256": "6634b5bc17bde4eb1e01777b0df0b7edc38c10a3bae8dce02201e9cbeaefdb0e",
+      "junit_sha256": "dcdac29a70031085b480b16b28f4765aba09b6f1eec246bc4bab500ad02e8c40",
+      "artifacts": [
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.13-native-rust.log",
+          "raw_sha256": "6634b5bc17bde4eb1e01777b0df0b7edc38c10a3bae8dce02201e9cbeaefdb0e",
+          "sha256": "6634b5bc17bde4eb1e01777b0df0b7edc38c10a3bae8dce02201e9cbeaefdb0e"
+        },
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.13-native-rust.junit.xml",
+          "raw_sha256": "dcdac29a70031085b480b16b28f4765aba09b6f1eec246bc4bab500ad02e8c40",
+          "sha256": "dcdac29a70031085b480b16b28f4765aba09b6f1eec246bc4bab500ad02e8c40"
+        }
+      ],
+      "counts": {
+        "tests": 215,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "minor": "3.13",
+      "backend": "python",
+      "exit_code": 0,
+      "elapsed_seconds": 14.109188708011061,
+      "source_head": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+      "log_sha256": "003b85f5e8a1e6bb2fe106797fdf77a861a86f15ee0236fbe27ed3c1bb3126f2",
+      "junit_sha256": "c81605c8e2f11df1486a5452f841bec13e7f1ca15b2899143a39342203eb3aa9",
+      "artifacts": [
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.13-python.log",
+          "raw_sha256": "003b85f5e8a1e6bb2fe106797fdf77a861a86f15ee0236fbe27ed3c1bb3126f2",
+          "sha256": "003b85f5e8a1e6bb2fe106797fdf77a861a86f15ee0236fbe27ed3c1bb3126f2"
+        },
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.13-python.junit.xml",
+          "raw_sha256": "c81605c8e2f11df1486a5452f841bec13e7f1ca15b2899143a39342203eb3aa9",
+          "sha256": "c81605c8e2f11df1486a5452f841bec13e7f1ca15b2899143a39342203eb3aa9"
+        }
+      ],
+      "counts": {
+        "tests": 215,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "minor": "3.14",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "elapsed_seconds": 9.073854541871697,
+      "source_head": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+      "log_sha256": "2d1a3b65c932f5fd86ff1dec4e656321944c8a55f94a2310538c3f018e5d83cb",
+      "junit_sha256": "db713a3517bdaab1ff4ac407eb496b474ee1fea2a0d53e440d36ee4439465bee",
+      "artifacts": [
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.14-native-rust.log",
+          "raw_sha256": "2d1a3b65c932f5fd86ff1dec4e656321944c8a55f94a2310538c3f018e5d83cb",
+          "sha256": "2d1a3b65c932f5fd86ff1dec4e656321944c8a55f94a2310538c3f018e5d83cb"
+        },
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.14-native-rust.junit.xml",
+          "raw_sha256": "db713a3517bdaab1ff4ac407eb496b474ee1fea2a0d53e440d36ee4439465bee",
+          "sha256": "db713a3517bdaab1ff4ac407eb496b474ee1fea2a0d53e440d36ee4439465bee"
+        }
+      ],
+      "counts": {
+        "tests": 215,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "minor": "3.14",
+      "backend": "python",
+      "exit_code": 0,
+      "elapsed_seconds": 14.196380041074008,
+      "source_head": "f79e4ce6d985ed0a6463552e163baabf1a28942d",
+      "log_sha256": "bf56f0fee7767872bcd91de833867bca36cc1c62e6dfe2a47c816e7f1b495997",
+      "junit_sha256": "1ef256bbbfa1dbae42f87b881357582e70d5d1a656266f0ea21a62ab0579223d",
+      "artifacts": [
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.14-python.log",
+          "raw_sha256": "bf56f0fee7767872bcd91de833867bca36cc1c62e6dfe2a47c816e7f1b495997",
+          "sha256": "bf56f0fee7767872bcd91de833867bca36cc1c62e6dfe2a47c816e7f1b495997"
+        },
+        {
+          "path": "docs/validation/baseline/undoable-before-integration/3.14-python.junit.xml",
+          "raw_sha256": "1ef256bbbfa1dbae42f87b881357582e70d5d1a656266f0ea21a62ab0579223d",
+          "sha256": "1ef256bbbfa1dbae42f87b881357582e70d5d1a656266f0ea21a62ab0579223d"
+        }
+      ],
+      "counts": {
+        "tests": 215,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ]
+}

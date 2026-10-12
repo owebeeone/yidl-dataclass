@@ -1,0 +1,35 @@
+{
+  "purpose": "Independent installed original dependency and Undoable baseline wheel origins before integration",
+  "observations": [
+    {
+      "python": "3.12.12",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-lifecycle": "0.1.0",
+        "yidl-undoable": "0.1.0"
+      },
+      "installed_origins": "verified under interpreter prefix"
+    },
+    {
+      "python": "3.13.12",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-lifecycle": "0.1.0",
+        "yidl-undoable": "0.1.0"
+      },
+      "installed_origins": "verified under interpreter prefix"
+    },
+    {
+      "python": "3.14.3",
+      "versions": {
+        "astichi": "1.1.3",
+        "yidl": "0.1.0",
+        "yidl-lifecycle": "0.1.0",
+        "yidl-undoable": "0.1.0"
+      },
+      "installed_origins": "verified under interpreter prefix"
+    }
+  ]
+}

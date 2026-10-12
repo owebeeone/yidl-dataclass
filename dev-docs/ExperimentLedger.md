@@ -67,6 +67,15 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+At 2026-10-12T12:54Z the independent owner pre-integration Undoable source
+baseline at `f79e4ce6d985ed0a6463552e163baabf1a28942d` passes all six original
+SDK backend/minor runs, each with 215 tests and no failures/errors/skips.
+`docs/validation/baseline/undoable-before-integration/` preserves sanitized logs,
+JUnit, raw digests and installed-origin checks. Original Astichi 1.1.3, YIDL
+0.1.0 and existing Lifecycle wheel are used; no reference dependency rebuild is
+performed. Undoable source remains unchanged, including its paused helper work.
+This is the Stage E regression baseline, not integration acceptance.
+
 Latest observations at 2026-10-12T12:45Z across twelve disjoint actors estimate
 $55.0345382 Standard API-equivalent USD, about 9h09m after original GO. Input is
 280,452,538 tokens including 274,960,384 repeated cached input; output is
