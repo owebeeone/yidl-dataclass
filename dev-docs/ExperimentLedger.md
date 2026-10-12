@@ -1,7 +1,8 @@
 # YIDL Dataclass preparation and review ledger
 
 Status: autonomous Dataclass run authorized; operator has excluded SDK changes.
-Compiler detour stopped and preserved; consumer design correction precedes Stage A. The original
+Compiler detour stopped and preserved; consumer-only Stages A/B are verified and
+Stage C is active. Final product acceptance remains outstanding. The original
 Undoable experiment and this experiment's earlier requirements preparation remain
 separate measurement stages.
 
@@ -65,6 +66,18 @@ separate measurement stages.
 | 2026-10-12T09:00Z / product Stage A resumed | Sole drafter begins consumer-only product work after amendment acceptance, using separate original-SDK environments and behavioral slot/constructor RED rather than import/setup failures. Latest twelve-actor observations estimate approximately $35.37 Standard API-equivalent USD, about 5h23m from original GO; actual billing unavailable. This includes the preserved scope detour, operator correction and independent amendment review, not a completed-product cost. SDK source/build changes remain forbidden. |
 
 ## Autonomous scope and intervention rules
+
+At approximately 2026-10-12T11:10Z, twelve disjoint actor observations estimate
+$47.369159 Standard API-equivalent USD, about 7h33m after the original GO.
+Cumulative input is 240,052,815 tokens, including 235,106,048 repeated cached
+input. Output is 1,206,353 tokens, including 658,257 reasoning tokens. Actual
+billing is unavailable; these are incomplete-run counters including the SDK
+detour and intervention. Stage C named-factory checks have reached seven passes
+and hidden/local/provider-kind checks thirteen passes on both original backends;
+the stage is not accepted. Conversion/validation/frozen policies remain active.
+Owner is preparing benchmark accounting outside the repository while the sole
+drafter implements product code. No provisional benchmark is a product
+performance claim, and the Section 5 measurement gates remain unchanged.
 
 At 2026-10-12T10:53:08Z the operator requested status and an estimate without
 stopping work. Owner reported A/B implemented/verified, C in progress, D–H and
