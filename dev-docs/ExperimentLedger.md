@@ -329,3 +329,15 @@ document work, not just implementation or a finished-run cost. The held-out
 author actor contributes USD 0.249136 at its preserved phase-end observation.
 Owner/drafter counters are sampled during active work; later output is not yet
 included. Raw sanitized counters remain in `experiment/usage.jsonl`.
+
+## Performance measurement start — 2026-10-12T15:46:20.378291Z
+
+The owner-verified definition/source freeze is committed at
+`f49b9ec6de476271e7193c99b38af196fed3b49a`. Native measurement started serially
+with Python 3.12 process 1; no reviewer/other task agents are running CPU-heavy
+work alongside it. The full fifteen-process sequence preserves journals and
+failed attempts. Definition digest is
+`668c864ea59b976a950557ab9d608e351eae9b0aa7e3ef84e2c59f5046191983`.
+Product and original dependencies remain unchanged. Approximately 12h09m since
+GO is wall elapsed, including historical detour, intervention, verification and
+preparation; it is not timed generator cost or measured active coding time.

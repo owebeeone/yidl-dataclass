@@ -57,6 +57,10 @@ will inspect the settled implementation and measurement/evidence tuple.
 H preparation is now stopped and owner-verified; see
 `Dataclass-StageHPreparationResult.md`. The complete definition/source/provenance
 freeze is ready for serial measurement; all numerical gates remain unchanged.
+H preparation freeze: `f49b9ec6de476271e7193c99b38af196fed3b49a`.
+Serial native benchmark measurement began at `2026-10-12T15:46:20.378291Z`
+with Python 3.12 process 1. Full validated process sets and final reviews remain
+pending; intermediate rows are preserved observations, not acceptance results.
 
 ## Requirements review history and authority
 
