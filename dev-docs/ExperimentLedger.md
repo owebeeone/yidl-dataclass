@@ -48,6 +48,8 @@ separate measurement stages.
 
 | 2026-10-12T06:59Z / P2 graph-lowering pause | Working native core reaches 13 passing tests with actual parser counters. Four-backend corpus first reports 120 failed/52 passed; corrected phase-boundary attempt reports 78 failed/94 passed, including further validator-oracle tripwire errors. Counts are not all compiler behavioral REDs. Genuine staged-builder/native operation and hygiene gaps trigger read-only architectural classification before bridge code; no aggregate P2 acceptance. Latest eight-actor observations estimate approximately $23.52 Standard API-equivalent USD, about 3h23m from GO; actual billing unavailable. |
 
+| 2026-10-12T07:37Z / native lowering design accepted | Fresh Consistency and Safety reviewers both GO with no findings on `1f1bc534b460753e8cd91230e5349ea802c90b5c`. Both classify the prior sufficiency assumption as architectural; the addendum requires retained-shell/native hygiene lowering and pre-expansion without changing APIs/artifact v1. Prototype code remains unaccepted. P2 TDD resumes. Latest ten-actor observations estimate approximately $27.06 Standard API-equivalent USD, about four hours after GO; actual billing unavailable. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated
