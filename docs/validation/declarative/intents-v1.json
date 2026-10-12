@@ -1,0 +1,81 @@
+{
+  "id": "dataclass-intents-v1",
+  "freeze_purpose": "Intent/oracle selection before public-doc-only author attempt; no numeric grade or calibrated authoring claim. Canonical sources freeze at settled product tuple separately.",
+  "canonical": [
+    {
+      "id": "dataclass_plain",
+      "intent": "Required/default/factory fields with direct writable slots, kw-only selection, field metadata, weakrefs and pattern matching.",
+      "oracle": "standard dataclasses differential for supported subset",
+      "source": "tests/data/gold_src/dataclass_plain.py"
+    },
+    {
+      "id": "dataclass_initialization",
+      "intent": "Named eager factory dependencies resolve processed constructor inputs, defaults and construction-only providers without post-init.",
+      "oracle": "declared extension contract and explicit callback observations; no independent std dependency-factory oracle",
+      "source": "tests/data/gold_src/dataclass_initialization.py"
+    },
+    {
+      "id": "dataclass_policies",
+      "intent": "Contrast ordinary, converted, validated, const and frozen writable excluded management fields on the same declaration.",
+      "oracle": "stdlib differential for common fields; declared extension contract for pipelines and exceptions",
+      "source": "tests/data/gold_src/dataclass_policies.py"
+    },
+    {
+      "id": "dataclass_lazy",
+      "intent": "Lazy first/cached/reset reads preserve retry and private construction-provider lifetime while ordinary fields remain eager.",
+      "oracle": "declared extension contract and callback/lifetime observations",
+      "source": "tests/data/gold_src/dataclass_lazy.py"
+    },
+    {
+      "id": "dataclass_inheritance_helpers",
+      "intent": "Reuse inherited storage with same-shape overrides; preserve super/descriptor behavior and supported inspection/copy/replacement outcomes.",
+      "oracle": "stdlib helper/inheritance differential where compatible; extension copy/lazy contract separately",
+      "source": "tests/data/gold_src/dataclass_inheritance_helpers.py"
+    },
+    {
+      "id": "dataclass_comparisons",
+      "intent": "Generate field-selected exact-class equality, ordering, hashing and representation with supported-minor semantics.",
+      "oracle": "standard dataclasses differential, including version-specific callback behavior",
+      "source": "tests/data/gold_src/dataclass_comparisons.py"
+    },
+    {
+      "id": "dataclass_field_removal",
+      "intent": "Deleting a declaration deletes its field policy, storage and generated operands without another name-map edit.",
+      "oracle": "before/after declarative edit and std supported-subset differential; missing-provider mutant diagnostic separately",
+      "source": "tests/data/gold_src/dataclass_field_removal.py"
+    },
+    {
+      "id": "comparison_neutral",
+      "intent": "Reuse the shared authored comparison YIDL module for an independent non-dataclass class whose operands use supplied nested read paths.",
+      "oracle": "independent expected value comparisons plus shared source/provenance checks",
+      "source": "tests/data/gold_src/comparison_neutral.py"
+    }
+  ],
+  "held_out": [
+    {
+      "id": "readonly_dependent_quote",
+      "intent": "Declare a quote with quantity converted from 2.8 to integer 2, unit_price 5, a readonly dependent total 10, and writable excluded cache. Changing only cache must preserve equality/hash where applicable. Show construction, first/cached lazy receipt, replacement with quantity 3, and public field inspection. The lazy receipt uses a hidden locale initialization provider and returns locale plus total.",
+      "oracle": "declared extension values plus standard comparable field-selection/helper behavior"
+    },
+    {
+      "id": "optional_nullable_conversion",
+      "intent": "Declare a nullable optional integer field with conversion enabled so None remains None and 4.8 becomes 4. Also declare a field whose explicit conversion disable overrides the class default. Show both construction and assignment.",
+      "oracle": "explicit extension input/result contract; standard ordinary-field behavior for disabled conversion"
+    },
+    {
+      "id": "inherited_keyword_only_override",
+      "intent": "Declare a generated base and child with a same-shape keyword-only field override. Show inherited field order, constructor keyword requirement, reused storage, and zero-argument super behavior.",
+      "oracle": "standard dataclasses differential for the shared inherited field/keyword behavior"
+    },
+    {
+      "id": "removable_management_cache",
+      "intent": "Show a model with a writable excluded cache and a version with that cache declaration removed. Remove the cache by deleting its declaration only; keep class-wide options unchanged and show that logical comparison behavior remains the same.",
+      "oracle": "declaration edit/source inspection and standard comparable field selection"
+    }
+  ],
+  "undoable_seam": [
+    "undoable_comparisons",
+    "undoable_write_compatibility"
+  ],
+  "calibration": "Six known anchors, three calibration-heldout anchors and few-shot envelope are unavailable; overall grade/frontier/k80/Part E remain unscored."
+}
