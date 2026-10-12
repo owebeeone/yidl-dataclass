@@ -1,0 +1,30 @@
+............................................s........................... [ 88%]
+..F......                                                                [100%]
+=================================== FAILURES ===================================
+_____ test_constant_expression_carrier_has_identical_direct_hash_bytecode ______
+
+    def test_constant_expression_carrier_has_identical_direct_hash_bytecode():
+        import dis
+        from yidl_dataclass import dataclass
+    
+        @dataclass(unsafe_hash=True, repr=False)
+        class Direct:
+            first: int
+            second: int
+    
+        def reference(self):
+            return hash((self.first, self.second))
+    
+        def instructions(function):
+            return [(item.opname, item.argval) for item in dis.get_instructions(function)]
+    
+>       assert instructions(Direct.__hash__) == instructions(reference)
+E       AssertionError: assert [('RESUME', 0...second'), ...] == [('RESUME', 0...second'), ...]
+E         
+E         At index 4 diff: ('LOAD_FAST', 'self') != ('LOAD_FAST_BORROW', 'self')
+E         Use -v to get more diff
+
+tests/test_source_contract.py:103: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_source_contract.py::test_constant_expression_carrier_has_identical_direct_hash_bytecode
+1 failed, 79 passed, 1 skipped in 9.77s

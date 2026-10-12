@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.312" timestamp="2026-10-12T20:55:05.713498+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_comparisons.py]" time="0.196"><failure message="AttributeError: module 'dataclasses' has no attribute '_recursive_repr'. Did you mean: 'recursive_repr'?">case = 'dataclass_comparisons.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1469/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+&gt;       sources = run_multi_source_case(source_path, runpy.run_path(str(source_path))["render_case"]())
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_comparisons.py:57: in render_case
+    actual = models(dataclass, field)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/data/gold_src/dataclass_comparisons.py:8: in models
+    @decorator(order=True, unsafe_hash=True, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = &lt;class '&lt;run_path&gt;.models.&lt;locals&gt;.Quote'&gt;
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        actions = resolve_methods(declaration, options)
+        definition, annotations, captures = harvest(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.is_instance and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                not item.is_instance or not options.slots
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+&gt;           _y_dc_recursive_repr=std._recursive_repr,
+                                 ^^^^^^^^^^^^^^^^^^^
+        )
+E       AttributeError: module 'dataclasses' has no attribute '_recursive_repr'. Did you mean: 'recursive_repr'?
+
+src/yidl_dataclass/dataclass.py:78: AttributeError</failure></testcase></testsuite></testsuites>

@@ -1,7 +1,8 @@
 # YIDL Dataclass
 
-Status: Stage A product checkpoint is ready for owner verification; semantic
-design and TDD plan are independently accepted. Stages B–H remain outstanding. The operator-directed consumer-only generation
+Status: Stage A is owner-verified; Stage B comparison/method checkpoint is ready
+for owner verification. Semantic design and TDD plan are independently accepted.
+Stages C–H remain outstanding. The operator-directed consumer-only generation
 amendment is independently accepted at the
 [recorded boundary](dev-docs/ConsumerOnlyGenerationAmendment-ReviewResult.md). Astichi/YIDL SDK changes are outside
 scope; original Astichi 1.1.3 / YIDL 0.1.0 generation is the candidate baseline.
@@ -32,8 +33,11 @@ independent review rounds and the operator-accepted field-locality amendment.
 reference and the distinction between locality, authoring layout and correctness.
 
 The current candidate implements ordinary-field constructors/storage and standard
-inspection/data helpers on CPython 3.12–3.14. During this staged checkpoint, explicitly
-use `eq=False, repr=False`; comparison/repr/hash generation arrives in Stage B.
+inspection/data helpers, repr, equality, ordering and hashing on CPython 3.12–3.14.
+Equality follows each minor: tuple comparison on 3.12 and ordered field comparisons
+with the self shortcut on 3.13/3.14. Repr omits excluded fields and handles recursion.
+Field-local `compare`/`hash` flags select direct generated operands;
+`hash=True, compare=False` is rejected to preserve equal-object hash consistency.
 Frozen/policy fields, named factories, InitVars and extension kinds remain later
 stages and currently raise `NotImplementedError` when selected. This is an
 unreleased partial implementation, not the completed compatibility matrix.
@@ -41,7 +45,7 @@ unreleased partial implementation, not the completed compatibility matrix.
 ```python
 from yidl_dataclass import dataclass, field, asdict, generated_source
 
-@dataclass(eq=False, repr=False)
+@dataclass
 class Inventory:
     count: int
     label: str = "stock"
@@ -66,5 +70,9 @@ For development, install the locked original SDK wheels and test dependencies in
 separate environments, then run `python -m pytest`. The regeneration command is
 `python -m yidl_dataclass.regenerate_dataclass_base` (check by default, `--write`
 to update). The [Stage A evidence](docs/validation/stage-a/README.md) records
-scope, exact RED/GREEN commands, failures and validation limits. No performance
-result is claimed at this checkpoint.
+scope, exact RED/GREEN commands, failures and validation limits. The
+[Stage B evidence](docs/validation/stage-b/README.md) includes the std differential
+callback matrix and independently inherited neutral comparison consumer.
+The authoritative `yidl/shared/comparison.yidl` is included in the consumer wheel;
+future Undoable integration will reuse it at build time. No performance result is
+claimed at this checkpoint.

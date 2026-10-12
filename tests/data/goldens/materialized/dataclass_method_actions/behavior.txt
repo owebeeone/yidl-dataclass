@@ -1,0 +1,1 @@
+{'inherited': ('base-repr', 'base-eq', 17), 'local': ('local-repr', 'local-eq', 19), 'automatic': ('custom-eq', True), 'unsafe': ('unsafe-eq', True), 'recursive': 'models.<locals>.Recursive(value=...)', 'empty': 'models.<locals>.Empty()', 'hash_only': (False, True), 'no_generated_ne': True}

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "tests/data/gold_src/comparison_neutral.py", line 27, in render_case
+    piece = capture["build_NeutralModule"](builder.freeze())
+            ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'build_NeutralModule'

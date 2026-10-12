@@ -62,6 +62,8 @@ concept DataclassCore {
             locals().update(astichi_ref(external=namespace_name))
             astichi_hole(slots)
             astichi_hole(methods)
+            astichi_hole(comparison_methods)
+            astichi_hole(repr_method)
     ]$ {
         keep locals
     }
@@ -109,7 +111,7 @@ concept DataclassCore {
     ]$ { keep _y_dc_factory_sentinel }
     resource FactoryInputStore = template $[
         if astichi_pass(param_name__astichi_arg__, outer_bind=True) is _y_dc_factory_sentinel:
-            param_name__astichi_arg__ = factory_name__astichi_arg__()
+            astichi_pass(param_name__astichi_arg__, outer_bind=True)._ = factory_name__astichi_arg__()
         astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = astichi_pass(param_name__astichi_arg__, outer_bind=True)
     ]$ { keep _y_dc_factory_sentinel }
     resource DefaultStore = template $[

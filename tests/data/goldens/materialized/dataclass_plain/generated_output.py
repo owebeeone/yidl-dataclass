@@ -7,6 +7,13 @@ class Inventory(*_y_dc_bases):
         self.count = count
         self.label = label
         self.reserve = reserve
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
 
 class Declaration(*_y_dc_bases):
     locals().update(_y_dc_namespace)
@@ -16,3 +23,10 @@ class Declaration(*_y_dc_bases):
         pass
         self.inherited = inherited
         self.units = units
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass

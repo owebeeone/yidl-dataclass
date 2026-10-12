@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.271" timestamp="2026-10-12T20:54:23.317575+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_comparisons.py]" time="0.191"><failure message="AssertionError">case = 'dataclass_comparisons.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1467/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+&gt;       sources = run_multi_source_case(source_path, runpy.run_path(str(source_path))["render_case"]())
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def render_case():
+        actual = models(dataclass, field)
+        reference = models(std.dataclass, std.field)
+&gt;       assert observation(actual) == observation(reference)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+tests/data/gold_src/dataclass_comparisons.py:59: AssertionError</failure></testcase></testsuite></testsuites>

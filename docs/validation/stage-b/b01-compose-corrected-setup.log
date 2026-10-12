@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 69, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 48, in main
+    rendered = render_dataclass_base_source()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 24, in render_dataclass_base_source
+    concept = compile_yidl_files(sources, "dataclass/dataclass_base.yidl").concepts[
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 224, in compile_yidl_files
+    return compiler.compile(entry_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 249, in compile
+    imports = self._compile_imports(resolved_path, tree)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 285, in _compile_imports
+    aliases[alias] = self.compile(imported_path)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 264, in compile
+    ).compile(concept_tree)
+      ^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 526, in compile
+    contribution_matchers = _merge_contribution_matchers(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 3344, in _merge_contribution_matchers
+    merged[name] = _combine_contribution_matchers(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 3378, in _combine_contribution_matchers
+    raise YidlSymbolError(f"{context}: duplicate default")
+yidl.concept_parser.YidlSymbolError: contribution matcher 'ClassContributions' extended by concept 'DataclassComparison': duplicate default

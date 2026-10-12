@@ -1,0 +1,42 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_ephemeral_intermediate_truth_result_lifetime_matches_std _________
+
+    def test_ephemeral_intermediate_truth_result_lifetime_matches_std():
+        def observe(decorator):
+            events = []
+            class Ephemeral:
+                def __init__(self, label):
+                    self.label = label
+                def __bool__(self):
+                    events.append(f"bool:{self.label}")
+                    return True
+                def __del__(self):
+                    events.append(f"release:{self.label}")
+            class Produces:
+                def __init__(self, label):
+                    self.label = label
+                def __eq__(self, other):
+                    events.append(f"eq:{self.label}")
+                    return Ephemeral(self.label)
+            @decorator(slots=True, repr=False)
+            class Triple:
+                first: object
+                second: object
+                third: object
+            left = Triple(Produces("first"), Produces("second"), Produces("final"))
+            right = Triple(object(), object(), object())
+            result = Triple.__eq__(left, right)
+            events.append("returned")
+            del result
+            return events
+>       assert observe(dataclass) == observe(std.dataclass)
+E       AssertionError: assert ['eq:first', ...q:final', ...] == ['eq:first', ...:second', ...]
+E         
+E         At index 2 diff: 'eq:second' != 'release:first'
+E         Use -v to get more diff
+
+tests/test_comparison_semantics.py:227: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_comparison_semantics.py::test_ephemeral_intermediate_truth_result_lifetime_matches_std
+1 failed in 0.22s

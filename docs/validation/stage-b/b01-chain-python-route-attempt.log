@@ -1,0 +1,100 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________________ test_canonical_case[dataclass_comparisons.py] _________________
+
+case = 'dataclass_comparisons.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1471/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+>       sources = run_multi_source_case(source_path, runpy.run_path(str(source_path))["render_case"]())
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_comparisons.py:57: in render_case
+    actual = models(dataclass, field)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/data/gold_src/dataclass_comparisons.py:8: in models
+    @decorator(order=True, unsafe_hash=True, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:146: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:558: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:555: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:276: in _run_production
+    _run_production_edges(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:438: in _apply_contribution
+    composable = _contribution_composable(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:672: in _contribution_composable
+    return concept.resources[contribution.source_name].to_generator()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/matcher_values.py:63: in to_generator
+    return self.template.to_generator()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/matcher_values.py:40: in to_generator
+    generator = astichi.compile(
+.venvs/py313/lib/python3.13/site-packages/astichi/frontend/api.py:210: in compile
+    _recognize_compile_markers(
+.venvs/py313/lib/python3.13/site-packages/astichi/frontend/api.py:279: in _recognize_compile_markers
+    validate_external_ref_surface(tree)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tree = <ast.Module object at 0x107ccc910>
+
+    def validate_external_ref_surface(tree: ast.AST) -> None:
+        """Reject bare statement-form ``astichi_ref(...)`` surfaces."""
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Expr):
+                continue
+            if _statement_form_ref(node.value) is None:
+                continue
+            lineno = getattr(node, "lineno", 0) or getattr(node.value, "lineno", 0) or 0
+>           raise ValueError(
+                "astichi_ref(...) at line "
+                f"{lineno} is value-form only and may not appear as a bare "
+                "statement; use it in a real expression or wrap the immediate "
+                "target position in `.astichi_v` / `._`"
+            )
+E           ValueError: astichi_ref(...) at line 127 is value-form only and may not appear as a bare statement; use it in a real expression or wrap the immediate target position in `.astichi_v` / `._`
+
+.venvs/py313/lib/python3.13/site-packages/astichi/lowering/external_ref.py:500: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_comparisons.py]
+1 failed in 0.35s

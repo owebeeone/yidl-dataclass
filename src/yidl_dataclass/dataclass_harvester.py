@@ -36,10 +36,6 @@ def harvest(
         )
     if options.frozen or options.convert:
         raise NotImplementedError("policy generation belongs to Stage C")
-    if options.eq or options.repr or options.order or options.unsafe_hash:
-        raise NotImplementedError(
-            "comparison/repr/hash generation belongs to Stage B; Stage A requires eq=False, repr=False"
-        )
     annotations = adapter.annotations_for(cls)
     for name in (*annotations, *cls.__dict__):
         if name.startswith("_y_dc_"):

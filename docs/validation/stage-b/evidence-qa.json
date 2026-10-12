@@ -1,0 +1,14 @@
+{
+  "absolute_path_or_hostname_matches": 0,
+  "artifact_references": 104,
+  "final_full_runs": 6,
+  "final_tests_per_run": 87,
+  "increments": 65,
+  "junit_files": 39,
+  "owned_sdk_changes": false,
+  "owned_text_hygiene_files": 203,
+  "passed_per_run": 86,
+  "raw_hashes_verified": 104,
+  "sanitized_hashes_verified": 104,
+  "skipped_per_run": 1
+}

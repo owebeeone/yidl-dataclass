@@ -18,6 +18,15 @@ def render_dataclass_base_source() -> str:
         for item in sorted(directory.iterdir(), key=lambda item: item.name)
         if item.name.endswith(".yidl")
     }
+    shared = directory.joinpath("shared")
+    if shared.is_dir():
+        sources.update(
+            {
+                f"shared/{item.name}": item.read_text()
+                for item in shared.iterdir()
+                if item.name.endswith(".yidl")
+            }
+        )
     concept = compile_yidl_files(sources, "dataclass/dataclass_base.yidl").concepts[
         "DataclassBase"
     ]

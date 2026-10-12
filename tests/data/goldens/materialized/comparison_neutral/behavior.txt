@@ -1,0 +1,1 @@
+neutral-slots=payload; dataclass-metadata=False; nested-eq=True; nested-order=True; nested-hash=True

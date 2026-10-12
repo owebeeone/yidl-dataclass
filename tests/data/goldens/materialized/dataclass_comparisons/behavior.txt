@@ -1,0 +1,1 @@
+{'repr': "models.<locals>.Quote(sku='item', price=100, currency='AUD', tags=(), note='first')", 'eq': (True, False, False), 'order': (True, True, True, True), 'hash': (True, True), 'exact': True, 'excluded': (True, False, True, 'models.<locals>.Excluded(visible=1)'), 'unhashable': True, 'deleted': True}

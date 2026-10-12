@@ -1,0 +1,545 @@
+module shared.comparison
+export concept ComparisonCore
+
+concept ComparisonCore {
+    property CmpClassId: str
+    property CmpClassOrder: int = 0
+    property CmpEq: bool = False
+    property CmpOrder: bool = False
+    property CmpHash: bool = False
+    property CmpHashNone: bool = False
+    property UseTupleEquality: bool = True
+    property HasCompareOperands: bool = False
+    property HasHashOperands: bool = False
+    property CmpOperandId: str
+    property CmpOwner: str
+    property CmpOperandOrder: int
+    property CmpReadPath: str
+    property CmpCompare: bool = True
+    property CmpHashIncluded: bool = True
+    property CmpLast: bool = False
+
+    record ComparisonClass {
+        CmpClassId
+        CmpClassOrder
+        CmpEq
+        CmpOrder
+        CmpHash
+        CmpHashNone
+        UseTupleEquality
+        HasCompareOperands
+        HasHashOperands
+    }
+    record ComparisonOperand {
+        CmpOperandId
+        CmpOwner
+        CmpOperandOrder
+        CmpReadPath
+        CmpCompare
+        CmpHashIncluded
+        CmpLast
+    }
+    collection ComparisonClasses: ComparisonClass identity CmpClassId many
+    collection ComparisonOperands: ComparisonOperand identity CmpOperandId many
+
+    resource MethodsShell = code $[
+        astichi_hole(eq_method)
+        astichi_hole(order_methods)
+        astichi_hole(hash_method)
+    ]$
+    resource ComparisonPass = template `pass`
+    resource ExactClassGuard = template $[
+        if astichi_pass(other, outer_bind=True).__class__ is not astichi_pass(self, outer_bind=True).__class__:
+            return NotImplemented
+    ]$ { keep NotImplemented }
+    resource SelfIdentityShortcut = template $[
+        if astichi_pass(self, outer_bind=True) is astichi_pass(other, outer_bind=True):
+            return True
+    ]$
+    resource TupleEqShell = template $[
+        def __eq__(self, other):
+            astichi_hole(eq_prelude)
+            astichi_hole(eq_guard)
+            return (*astichi_hole(eq_left),) == (*astichi_hole(eq_right),)
+    ]$ { keep self, other, __eq__ }
+    resource ChainEqShell = template $[
+        def __eq__(self, other):
+            astichi_hole(eq_prelude)
+            astichi_hole(identity_shortcut)
+            astichi_hole(eq_guard)
+            astichi_hole(eq_steps)
+    ]$ { keep self, other, __eq__ }
+    resource EmptyTupleEqShell = template $[
+        def __eq__(self, other):
+            astichi_hole(eq_prelude)
+            astichi_hole(eq_guard)
+            return True
+    ]$ { keep self, other, __eq__ }
+    resource EmptyChainEqShell = template $[
+        def __eq__(self, other):
+            astichi_hole(eq_prelude)
+            astichi_hole(identity_shortcut)
+            astichi_hole(eq_guard)
+            return True
+    ]$ { keep self, other, __eq__ }
+    resource EqIntermediateStep = template $[
+        _y_cmp_result = astichi_pass(self, outer_bind=True).astichi_ref(external=step_path) == astichi_pass(other, outer_bind=True).astichi_ref(external=step_path)
+        try:
+            if not _y_cmp_result:
+                return _y_cmp_result
+        finally:
+            del _y_cmp_result
+    ]$ { keep _y_cmp_result }
+    resource EqFinalStep = template $[
+        return astichi_pass(self, outer_bind=True).astichi_ref(external=step_path) == astichi_pass(other, outer_bind=True).astichi_ref(external=step_path)
+    ]$
+    resource HashShell = template $[
+        def __hash__(self):
+            return hash((*astichi_hole(hash_values),))
+    ]$ { keep self, __hash__, hash }
+    resource EmptyHashShell = template $[
+        def __hash__(self):
+            return hash(())
+    ]$ { keep self, __hash__, hash }
+    resource HashNone = template `__hash__ = None`
+
+    resource EqLeftRead = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=eq_left_path) if True else None
+    ]$
+    resource EqRightRead = template $[
+        astichi_pass(other, outer_bind=True).astichi_ref(external=eq_right_path) if True else None
+    ]$
+    resource HashValueRead = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=hash_path) if True else None
+    ]$
+    resource LtShell = template $[
+        def __lt__(self, other):
+            astichi_hole(order_guard)
+            return (*astichi_hole(lt_left),) < (*astichi_hole(lt_right),)
+    ]$ { keep self, other, __lt__ }
+    resource EmptyLtShell = template $[
+        def __lt__(self, other):
+            astichi_hole(order_guard)
+            return () < ()
+    ]$ { keep self, other, __lt__ }
+    resource LtLeftRead = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=lt_left_path) if True else None
+    ]$
+    resource LtRightRead = template $[
+        astichi_pass(other, outer_bind=True).astichi_ref(external=lt_right_path) if True else None
+    ]$
+    resource LeShell = template $[
+        def __le__(self, other):
+            astichi_hole(order_guard)
+            return (*astichi_hole(le_left),) <= (*astichi_hole(le_right),)
+    ]$ { keep self, other, __le__ }
+    resource EmptyLeShell = template $[
+        def __le__(self, other):
+            astichi_hole(order_guard)
+            return () <= ()
+    ]$ { keep self, other, __le__ }
+    resource LeLeftRead = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=le_left_path) if True else None
+    ]$
+    resource LeRightRead = template $[
+        astichi_pass(other, outer_bind=True).astichi_ref(external=le_right_path) if True else None
+    ]$
+    resource GtShell = template $[
+        def __gt__(self, other):
+            astichi_hole(order_guard)
+            return (*astichi_hole(gt_left),) > (*astichi_hole(gt_right),)
+    ]$ { keep self, other, __gt__ }
+    resource EmptyGtShell = template $[
+        def __gt__(self, other):
+            astichi_hole(order_guard)
+            return () > ()
+    ]$ { keep self, other, __gt__ }
+    resource GtLeftRead = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=gt_left_path) if True else None
+    ]$
+    resource GtRightRead = template $[
+        astichi_pass(other, outer_bind=True).astichi_ref(external=gt_right_path) if True else None
+    ]$
+    resource GeShell = template $[
+        def __ge__(self, other):
+            astichi_hole(order_guard)
+            return (*astichi_hole(ge_left),) >= (*astichi_hole(ge_right),)
+    ]$ { keep self, other, __ge__ }
+    resource EmptyGeShell = template $[
+        def __ge__(self, other):
+            astichi_hole(order_guard)
+            return () >= ()
+    ]$ { keep self, other, __ge__ }
+    resource GeLeftRead = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=ge_left_path) if True else None
+    ]$
+    resource GeRightRead = template $[
+        astichi_pass(other, outer_bind=True).astichi_ref(external=ge_right_path) if True else None
+    ]$
+
+    contribution EmptyEq = ComparisonPass {
+        target eq_method { build /ComparisonMethods }
+    }
+    contribution NoLt = ComparisonPass {
+        as NoLt
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution NoLe = ComparisonPass {
+        as NoLe
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution NoGt = ComparisonPass {
+        as NoGt
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution NoGe = ComparisonPass {
+        as NoGe
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution EmptyHash = ComparisonPass {
+        target hash_method { build /ComparisonMethods }
+    }
+    contribution NoEqPrelude = ComparisonPass {
+        target eq_prelude { build /EqMethod }
+    }
+    contribution EqGuard = ExactClassGuard {
+        target eq_guard { build /EqMethod }
+    }
+    contribution EqIdentity = SelfIdentityShortcut {
+        target identity_shortcut { build /EqMethod }
+    }
+    matcher EqPreludeContributions(cmp: ComparisonClasses) -> contribution {
+        default -> NoEqPrelude
+    }
+    matcher EqGuardContributions(cmp: ComparisonClasses) -> contribution {
+        default -> EqGuard
+    }
+    matcher EqIdentityContributions(cmp: ComparisonClasses) -> contribution {
+        default -> EqIdentity
+    }
+    contribution TupleEqMethod = TupleEqProduction {
+        as EqMethod
+        target eq_method { build /ComparisonMethods }
+    }
+    contribution ChainEqMethod = ChainEqProduction {
+        as EqMethod
+        target eq_method { build /ComparisonMethods }
+    }
+    contribution EmptyTupleEqMethod = EmptyTupleEqProduction {
+        as EqMethod
+        target eq_method { build /ComparisonMethods }
+    }
+    contribution EmptyChainEqMethod = EmptyChainEqProduction {
+        as EqMethod
+        target eq_method { build /ComparisonMethods }
+    }
+    matcher EqMethodContributions(cmp: ComparisonClasses) -> contribution {
+        default -> EmptyEq
+        rule tuple when CmpEq == True and UseTupleEquality == True and HasCompareOperands == True -> TupleEqMethod
+        rule chain when CmpEq == True and UseTupleEquality == False and HasCompareOperands == True -> ChainEqMethod
+        rule empty_tuple when CmpEq == True and UseTupleEquality == True and HasCompareOperands == False -> EmptyTupleEqMethod
+        rule empty_chain when CmpEq == True and UseTupleEquality == False and HasCompareOperands == False -> EmptyChainEqMethod
+    }
+    contribution EqLeftValue = EqLeftRead {
+        as EqLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_left { build /EqMethod }
+        external eq_left_path = CmpReadPath
+    }
+    matcher EqLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> EqLeftValue
+    }
+    contribution EqRightValue = EqRightRead {
+        as EqRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_right { build /EqMethod }
+        external eq_right_path = CmpReadPath
+    }
+    matcher EqRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> EqRightValue
+    }
+    contribution HashValueValue = HashValueRead {
+        as HashValueValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target hash_values { build /HashMethod }
+        external hash_path = CmpReadPath
+    }
+    matcher HashValueContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpHashIncluded == True -> HashValueValue
+    }
+    contribution IntermediateEqStep = EqIntermediateStep {
+        as EqStep
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_steps { build /EqMethod }
+        external step_path = CmpReadPath
+    }
+    contribution FinalEqStep = EqFinalStep {
+        as EqStep
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_steps { build /EqMethod }
+        external step_path = CmpReadPath
+    }
+    matcher EqStepContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule intermediate when CmpCompare == True and CmpLast == False -> IntermediateEqStep
+        rule final when CmpCompare == True and CmpLast == True -> FinalEqStep
+    }
+    contribution LtMethod = LtProduction {
+        as LtMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution EmptyLtMethod = EmptyLtProduction {
+        as LtMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution LtGuard = ExactClassGuard {
+        target order_guard { build /LtMethod }
+    }
+    matcher LtGuardContributions(cmp: ComparisonClasses) -> contribution {
+        default -> LtGuard
+    }
+    matcher LtMethodContributions(cmp: ComparisonClasses) -> contribution {
+        default -> NoLt
+        rule populated when CmpOrder == True and HasCompareOperands == True -> LtMethod
+        rule empty when CmpOrder == True and HasCompareOperands == False -> EmptyLtMethod
+    }
+    contribution LtLeftValue = LtLeftRead {
+        as LtLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target lt_left { build /LtMethod }
+        external lt_left_path = CmpReadPath
+    }
+    matcher LtLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> LtLeftValue
+    }
+    contribution LtRightValue = LtRightRead {
+        as LtRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target lt_right { build /LtMethod }
+        external lt_right_path = CmpReadPath
+    }
+    matcher LtRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> LtRightValue
+    }
+    contribution LeMethod = LeProduction {
+        as LeMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution EmptyLeMethod = EmptyLeProduction {
+        as LeMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution LeGuard = ExactClassGuard {
+        target order_guard { build /LeMethod }
+    }
+    matcher LeGuardContributions(cmp: ComparisonClasses) -> contribution {
+        default -> LeGuard
+    }
+    matcher LeMethodContributions(cmp: ComparisonClasses) -> contribution {
+        default -> NoLe
+        rule populated when CmpOrder == True and HasCompareOperands == True -> LeMethod
+        rule empty when CmpOrder == True and HasCompareOperands == False -> EmptyLeMethod
+    }
+    contribution LeLeftValue = LeLeftRead {
+        as LeLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target le_left { build /LeMethod }
+        external le_left_path = CmpReadPath
+    }
+    matcher LeLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> LeLeftValue
+    }
+    contribution LeRightValue = LeRightRead {
+        as LeRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target le_right { build /LeMethod }
+        external le_right_path = CmpReadPath
+    }
+    matcher LeRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> LeRightValue
+    }
+    contribution GtMethod = GtProduction {
+        as GtMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution EmptyGtMethod = EmptyGtProduction {
+        as GtMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution GtGuard = ExactClassGuard {
+        target order_guard { build /GtMethod }
+    }
+    matcher GtGuardContributions(cmp: ComparisonClasses) -> contribution {
+        default -> GtGuard
+    }
+    matcher GtMethodContributions(cmp: ComparisonClasses) -> contribution {
+        default -> NoGt
+        rule populated when CmpOrder == True and HasCompareOperands == True -> GtMethod
+        rule empty when CmpOrder == True and HasCompareOperands == False -> EmptyGtMethod
+    }
+    contribution GtLeftValue = GtLeftRead {
+        as GtLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target gt_left { build /GtMethod }
+        external gt_left_path = CmpReadPath
+    }
+    matcher GtLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> GtLeftValue
+    }
+    contribution GtRightValue = GtRightRead {
+        as GtRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target gt_right { build /GtMethod }
+        external gt_right_path = CmpReadPath
+    }
+    matcher GtRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> GtRightValue
+    }
+    contribution GeMethod = GeProduction {
+        as GeMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution EmptyGeMethod = EmptyGeProduction {
+        as GeMethod
+        target order_methods { build /ComparisonMethods }
+    }
+    contribution GeGuard = ExactClassGuard {
+        target order_guard { build /GeMethod }
+    }
+    matcher GeGuardContributions(cmp: ComparisonClasses) -> contribution {
+        default -> GeGuard
+    }
+    matcher GeMethodContributions(cmp: ComparisonClasses) -> contribution {
+        default -> NoGe
+        rule populated when CmpOrder == True and HasCompareOperands == True -> GeMethod
+        rule empty when CmpOrder == True and HasCompareOperands == False -> EmptyGeMethod
+    }
+    contribution GeLeftValue = GeLeftRead {
+        as GeLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target ge_left { build /GeMethod }
+        external ge_left_path = CmpReadPath
+    }
+    matcher GeLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> GeLeftValue
+    }
+    contribution GeRightValue = GeRightRead {
+        as GeRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target ge_right { build /GeMethod }
+        external ge_right_path = CmpReadPath
+    }
+    matcher GeRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule included when CmpCompare == True -> GeRightValue
+    }
+    contribution HashMethod = HashProduction {
+        as HashMethod
+        target hash_method { build /ComparisonMethods }
+    }
+    contribution EmptyHashMethod = EmptyHashProduction {
+        as HashMethod
+        target hash_method { build /ComparisonMethods }
+    }
+    contribution SetHashNone = HashNone {
+        target hash_method { build /ComparisonMethods }
+    }
+    matcher HashMethodContributions(cmp: ComparisonClasses) -> contribution {
+        default -> EmptyHash
+        rule generated when CmpHash == True and HasHashOperands == True -> HashMethod
+        rule generated_empty when CmpHash == True and HasHashOperands == False -> EmptyHashMethod
+        rule disabled when CmpHashNone == True -> SetHashNone
+    }
+    production ComparisonMethods(cmp: ComparisonClasses) -> composable {
+        root ComparisonMethods = MethodsShell
+        apply eq using EqMethodContributions
+        apply lt using LtMethodContributions
+        apply le using LeMethodContributions
+        apply gt using GtMethodContributions
+        apply ge using GeMethodContributions
+        apply hash using HashMethodContributions
+    }
+    production TupleEqProduction(cmp: ComparisonClasses) -> composable {
+        root EqMethod = TupleEqShell
+        apply prelude using EqPreludeContributions
+        apply guard using EqGuardContributions
+        apply left from operand: ComparisonOperands where CmpOwner == CmpClassId using EqLeftContributions
+        apply right from operand: ComparisonOperands where CmpOwner == CmpClassId using EqRightContributions
+    }
+    production ChainEqProduction(cmp: ComparisonClasses) -> composable {
+        root EqMethod = ChainEqShell
+        apply prelude using EqPreludeContributions
+        apply identity using EqIdentityContributions
+        apply guard using EqGuardContributions
+        apply steps from operand: ComparisonOperands where CmpOwner == CmpClassId using EqStepContributions
+    }
+    production EmptyTupleEqProduction(cmp: ComparisonClasses) -> composable {
+        root EqMethod = EmptyTupleEqShell
+        apply prelude using EqPreludeContributions
+        apply guard using EqGuardContributions
+    }
+    production EmptyChainEqProduction(cmp: ComparisonClasses) -> composable {
+        root EqMethod = EmptyChainEqShell
+        apply prelude using EqPreludeContributions
+        apply identity using EqIdentityContributions
+        apply guard using EqGuardContributions
+    }
+    production LtProduction(cmp: ComparisonClasses) -> composable {
+        root LtMethod = LtShell
+        apply guard using LtGuardContributions
+        apply left from operand: ComparisonOperands where CmpOwner == CmpClassId using LtLeftContributions
+        apply right from operand: ComparisonOperands where CmpOwner == CmpClassId using LtRightContributions
+    }
+    production EmptyLtProduction(cmp: ComparisonClasses) -> composable {
+        root LtMethod = EmptyLtShell
+        apply guard using LtGuardContributions
+    }
+    production LeProduction(cmp: ComparisonClasses) -> composable {
+        root LeMethod = LeShell
+        apply guard using LeGuardContributions
+        apply left from operand: ComparisonOperands where CmpOwner == CmpClassId using LeLeftContributions
+        apply right from operand: ComparisonOperands where CmpOwner == CmpClassId using LeRightContributions
+    }
+    production EmptyLeProduction(cmp: ComparisonClasses) -> composable {
+        root LeMethod = EmptyLeShell
+        apply guard using LeGuardContributions
+    }
+    production GtProduction(cmp: ComparisonClasses) -> composable {
+        root GtMethod = GtShell
+        apply guard using GtGuardContributions
+        apply left from operand: ComparisonOperands where CmpOwner == CmpClassId using GtLeftContributions
+        apply right from operand: ComparisonOperands where CmpOwner == CmpClassId using GtRightContributions
+    }
+    production EmptyGtProduction(cmp: ComparisonClasses) -> composable {
+        root GtMethod = EmptyGtShell
+        apply guard using GtGuardContributions
+    }
+    production GeProduction(cmp: ComparisonClasses) -> composable {
+        root GeMethod = GeShell
+        apply guard using GeGuardContributions
+        apply left from operand: ComparisonOperands where CmpOwner == CmpClassId using GeLeftContributions
+        apply right from operand: ComparisonOperands where CmpOwner == CmpClassId using GeRightContributions
+    }
+    production EmptyGeProduction(cmp: ComparisonClasses) -> composable {
+        root GeMethod = EmptyGeShell
+        apply guard using GeGuardContributions
+    }
+    production HashProduction(cmp: ComparisonClasses) -> composable {
+        root HashMethod = HashShell
+        apply values from operand: ComparisonOperands where CmpOwner == CmpClassId using HashValueContributions
+    }
+    production EmptyHashProduction(cmp: ComparisonClasses) -> composable {
+        root HashMethod = EmptyHashShell
+    }
+}

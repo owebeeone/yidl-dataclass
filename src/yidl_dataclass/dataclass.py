@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 import dataclasses as std
+import sys
+from .method_actions import resolve_methods
 from .dataclass_definition import DataclassOptions
 from .dataclass_harvester import harvest
 from .dataclass_markers import require_bool
-from .stdlib_adapter import params_for
+from .stdlib_adapter import params_for, recursive_repr_decorator
 
 
 def dataclass(
@@ -44,12 +46,14 @@ def dataclass(
         from . import _generated_dataclass_base as generated
 
         definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
         names = {item.name for item in definition.fields}
         namespace = {
             name: value
             for name, value in declaration.__dict__.items()
             if name not in (*names, "__dict__", "__weakref__", "__classcell__")
         }
+        namespace["__qualname__"] = declaration.__qualname__
         namespace["__annotations__"] = annotations
         namespace["__dataclass_fields__"] = {
             item.name: item.field for item in definition.fields
@@ -71,6 +75,7 @@ def dataclass(
             _y_dc_namespace=namespace,
             _y_dc_bases=declaration.__bases__,
             _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
         )
         builder = generated.new_builder()
         builder.add(
@@ -85,10 +90,72 @@ def dataclass(
                 generate_init=definition.generate_init,
             ),
         )
+        logical = tuple(
+            item
+            for item in definition.fields
+            if item.is_instance and item.field.compare
+        )
+        hashed = tuple(
+            item
+            for item in definition.fields
+            if item.is_instance
+            and (
+                item.field.hash is True
+                or (item.field.hash is None and item.field.compare)
+            )
+        )
+        hashed_names = {item.name for item in hashed}
+        last_compare_name = logical[-1].name if logical else None
+        hash_selection = actions.hash.lower()
+        builder.add(
+            generated.ComparisonClassesCollection,
+            generated.ComparisonClass(
+                cmp_class_id="Model",
+                cmp_eq=actions.eq,
+                cmp_order=actions.order,
+                cmp_hash=hash_selection.generate,
+                cmp_hash_none=hash_selection.disable,
+                use_tuple_equality=sys.version_info[:2] == (3, 12),
+                has_compare_operands=bool(logical),
+                has_hash_operands=bool(hashed),
+            ),
+        )
+        builder.add(
+            generated.MethodClassesCollection,
+            generated.DataclassMethodClass(
+                repr_class_id="Model",
+                generate_repr=actions.repr,
+                has_repr_fields=any(
+                    item.is_instance and item.field.repr for item in definition.fields
+                ),
+            ),
+        )
         for index, item in enumerate(definition.fields):
             if not item.is_instance:
                 continue
             metadata = item.field
+            builder.add(
+                generated.ComparisonOperandsCollection,
+                generated.ComparisonOperand(
+                    cmp_operand_id=f"Model.{item.name}",
+                    cmp_owner="Model",
+                    cmp_operand_order=index,
+                    cmp_read_path=item.name,
+                    cmp_compare=metadata.compare,
+                    cmp_hash_included=item.name in hashed_names,
+                    cmp_last=item.name == last_compare_name,
+                ),
+            )
+            builder.add(
+                generated.ReprFieldsCollection,
+                generated.DataclassReprField(
+                    field_id=f"Model.{item.name}",
+                    field_owner="Model",
+                    field_name=item.name,
+                    field_order=index,
+                    include_repr=metadata.repr,
+                ),
+            )
             install_default = (
                 not metadata.init
                 and metadata.default is not std.MISSING

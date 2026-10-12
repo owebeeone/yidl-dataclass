@@ -1,0 +1,61 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________________ test_canonical_case[dataclass_comparisons.py] _________________
+
+case = 'dataclass_comparisons.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1466/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+>       sources = run_multi_source_case(source_path, runpy.run_path(str(source_path))["render_case"]())
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_comparisons.py:57: in render_case
+    actual = models(dataclass, field)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/data/gold_src/dataclass_comparisons.py:8: in models
+    @decorator(order=True, unsafe_hash=True, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:46: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class '<run_path>.models.<locals>.Quote'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=True, unsafe_hash=True, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        if options.eq or options.repr or options.order or options.unsafe_hash:
+>           raise NotImplementedError(
+                "comparison/repr/hash generation belongs to Stage B; Stage A requires eq=False, repr=False"
+            )
+E           NotImplementedError: comparison/repr/hash generation belongs to Stage B; Stage A requires eq=False, repr=False
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_comparisons.py]
+1 failed in 0.23s

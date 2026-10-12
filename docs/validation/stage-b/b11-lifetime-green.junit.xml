@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.169" timestamp="2026-10-12T21:21:08.581841+11:00" hostname="[host]"><testcase classname="tests.test_comparison_semantics" name="test_ephemeral_intermediate_truth_result_lifetime_matches_std" time="0.155" /></testsuite></testsuites>

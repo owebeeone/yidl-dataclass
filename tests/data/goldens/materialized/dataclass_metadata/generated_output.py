@@ -11,3 +11,10 @@ class Catalog(*_y_dc_bases):
             tags = _y_dc_factory_3()
         self.tags = tags
         self.limit = limit
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass

@@ -10,15 +10,18 @@ for inspection and a separate verified backup exists. No detour was published.
 The original installed Astichi 1.1.3 / YIDL 0.1.0 route passes focused generation
 checks for slots, equality, frozen hashing, direct field reference specialization
 and existing resource caching with both backend selections. This establishes
-core feasibility only, not the full requested product. Product Stage A is now
-implemented and owner-verified; see `Dataclass-StageAResult.md`. Its source tests
-pass on three supported minors and owner installed probes pass on all three
-under both original SDK backend selections. Stages B–H remain outstanding.
-Consumer-only design/plan amendment is accepted at
-`382d389172f38e33de8a00af350b1b6b21d46f5b` after fresh dual GO with no findings.
-Next action: Stage B comparison/repr/hash and the neutral shared YIDL resource,
-sole drafter with genuine RED/GREEN against original installed SDKs. No SDK
-source, build, packaging or capability changes are authorized.
+core feasibility only, not the full requested product. Product Stages A and B are
+now implemented and owner-verified; see `Dataclass-StageAResult.md` and
+`Dataclass-StageBResult.md`. Stage B has 86 passed/one skip in all six source runs
+and six independent installed std differential probes. Stages C–H remain.
+The Stage B post-GREEN verification sequencing deviation is explicitly recorded;
+no strict test-first or final acceptance claim is made. Consumer-only amendment
+acceptance remains `382d389172f38e33de8a00af350b1b6b21d46f5b`.
+Next action: Stage C provider graph and field policies, sole drafter with genuine
+preimplementation RED/GREEN against original installed SDKs. SDK changes remain
+outside scope. Literal nested BoolOp generation is an implementation choice,
+replaced by verified authored flat short-circuit/lifetime cleanup without changing
+public semantics; no new dependency prerequisite is inferred.
 
 GO/start remains 2026-10-12T03:36:48Z. The detour's time, tokens and estimated
 cost remain part of the experiment record; no retrospective success claim or

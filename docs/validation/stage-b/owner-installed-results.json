@@ -1,0 +1,244 @@
+{
+  "verified_utc": "2026-10-12T10:28:45Z",
+  "wheel": {
+    "file": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+    "sha256": "bcd46c87e0b1207edb87882ec0434e52873ba88fb3d8c67bec5f0fde4cb0e580",
+    "bytes": 29244
+  },
+  "comparison_authority_sha256": "2f7e6df989b0714d8764de84d8a6f6b03f39c3ad7f57dba5e55f5131b8354eef",
+  "installed_regeneration": {
+    "python": "pass",
+    "native_rust": "pass",
+    "python_minor": "3.12"
+  },
+  "results": [
+    {
+      "python_minor": "3.12",
+      "backend": "python",
+      "exit_code": 0,
+      "result": {
+        "backend": "python",
+        "observations": {
+          "equality": true,
+          "hash": -3550055125485641700,
+          "less": true,
+          "methods": [
+            "__eq__",
+            "__lt__",
+            "__le__",
+            "__gt__",
+            "__ge__",
+            "__hash__"
+          ],
+          "recursive_repr": "Recursive(value=...)",
+          "repr": "Model(first=1, second=2)",
+          "self_calls": 0,
+          "self_equal": true,
+          "shared_operand_calls": 0,
+          "shared_operand_equal": true,
+          "signature": [
+            "first",
+            "second",
+            "cache"
+          ],
+          "truth_error_release_with_retained_exception": [
+            "release"
+          ]
+        },
+        "python": "3.12.12",
+        "scope": "Stage B ordinary methods only; frozen/policies/extended inheritance deferred",
+        "stdlib_differential": "pass"
+      }
+    },
+    {
+      "python_minor": "3.12",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "result": {
+        "backend": "native-rust",
+        "observations": {
+          "equality": true,
+          "hash": -3550055125485641700,
+          "less": true,
+          "methods": [
+            "__eq__",
+            "__lt__",
+            "__le__",
+            "__gt__",
+            "__ge__",
+            "__hash__"
+          ],
+          "recursive_repr": "Recursive(value=...)",
+          "repr": "Model(first=1, second=2)",
+          "self_calls": 0,
+          "self_equal": true,
+          "shared_operand_calls": 0,
+          "shared_operand_equal": true,
+          "signature": [
+            "first",
+            "second",
+            "cache"
+          ],
+          "truth_error_release_with_retained_exception": [
+            "release"
+          ]
+        },
+        "python": "3.12.12",
+        "scope": "Stage B ordinary methods only; frozen/policies/extended inheritance deferred",
+        "stdlib_differential": "pass"
+      }
+    },
+    {
+      "python_minor": "3.13",
+      "backend": "python",
+      "exit_code": 0,
+      "result": {
+        "backend": "python",
+        "observations": {
+          "equality": true,
+          "hash": -3550055125485641700,
+          "less": true,
+          "methods": [
+            "__eq__",
+            "__lt__",
+            "__le__",
+            "__gt__",
+            "__ge__",
+            "__hash__"
+          ],
+          "recursive_repr": "Recursive(value=...)",
+          "repr": "Model(first=1, second=2)",
+          "self_calls": 0,
+          "self_equal": true,
+          "shared_operand_calls": 1,
+          "shared_operand_equal": false,
+          "signature": [
+            "first",
+            "second",
+            "cache"
+          ],
+          "truth_error_release_with_retained_exception": [
+            "release"
+          ]
+        },
+        "python": "3.13.12",
+        "scope": "Stage B ordinary methods only; frozen/policies/extended inheritance deferred",
+        "stdlib_differential": "pass"
+      }
+    },
+    {
+      "python_minor": "3.13",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "result": {
+        "backend": "native-rust",
+        "observations": {
+          "equality": true,
+          "hash": -3550055125485641700,
+          "less": true,
+          "methods": [
+            "__eq__",
+            "__lt__",
+            "__le__",
+            "__gt__",
+            "__ge__",
+            "__hash__"
+          ],
+          "recursive_repr": "Recursive(value=...)",
+          "repr": "Model(first=1, second=2)",
+          "self_calls": 0,
+          "self_equal": true,
+          "shared_operand_calls": 1,
+          "shared_operand_equal": false,
+          "signature": [
+            "first",
+            "second",
+            "cache"
+          ],
+          "truth_error_release_with_retained_exception": [
+            "release"
+          ]
+        },
+        "python": "3.13.12",
+        "scope": "Stage B ordinary methods only; frozen/policies/extended inheritance deferred",
+        "stdlib_differential": "pass"
+      }
+    },
+    {
+      "python_minor": "3.14",
+      "backend": "python",
+      "exit_code": 0,
+      "result": {
+        "backend": "python",
+        "observations": {
+          "equality": true,
+          "hash": -3550055125485641700,
+          "less": true,
+          "methods": [
+            "__eq__",
+            "__lt__",
+            "__le__",
+            "__gt__",
+            "__ge__",
+            "__hash__"
+          ],
+          "recursive_repr": "Recursive(value=...)",
+          "repr": "Model(first=1, second=2)",
+          "self_calls": 0,
+          "self_equal": true,
+          "shared_operand_calls": 1,
+          "shared_operand_equal": false,
+          "signature": [
+            "first",
+            "second",
+            "cache"
+          ],
+          "truth_error_release_with_retained_exception": [
+            "release"
+          ]
+        },
+        "python": "3.14.3",
+        "scope": "Stage B ordinary methods only; frozen/policies/extended inheritance deferred",
+        "stdlib_differential": "pass"
+      }
+    },
+    {
+      "python_minor": "3.14",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "result": {
+        "backend": "native-rust",
+        "observations": {
+          "equality": true,
+          "hash": -3550055125485641700,
+          "less": true,
+          "methods": [
+            "__eq__",
+            "__lt__",
+            "__le__",
+            "__gt__",
+            "__ge__",
+            "__hash__"
+          ],
+          "recursive_repr": "Recursive(value=...)",
+          "repr": "Model(first=1, second=2)",
+          "self_calls": 0,
+          "self_equal": true,
+          "shared_operand_calls": 1,
+          "shared_operand_equal": false,
+          "signature": [
+            "first",
+            "second",
+            "cache"
+          ],
+          "truth_error_release_with_retained_exception": [
+            "release"
+          ]
+        },
+        "python": "3.14.3",
+        "scope": "Stage B ordinary methods only; frozen/policies/extended inheritance deferred",
+        "stdlib_differential": "pass"
+      }
+    }
+  ]
+}

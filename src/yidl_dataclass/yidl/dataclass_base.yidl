@@ -1,6 +1,6 @@
 module dataclass.base
-import "dataclass_core.yidl" as core
+import "dataclass_comparison.yidl" as comparison
 export concept DataclassBase
-concept DataclassBase extends core.DataclassCore {
+concept DataclassBase extends comparison.DataclassComparison {
     assembly DataclassModule = CoreModule
 }

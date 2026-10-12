@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.573" timestamp="2026-10-12T20:57:15.249571+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_comparisons.py]" time="0.405"><failure message="ValueError: materialize: external binding for `term_path` was not supplied; call composable.bind(term_path=...) before materializing.; hint: use `composable.bind(...)` to supply `astichi_bind_external` values">case = 'dataclass_comparisons.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1472/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+&gt;       sources = run_multi_source_case(source_path, runpy.run_path(str(source_path))["render_case"]())
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_comparisons.py:57: in render_case
+    actual = models(dataclass, field)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/data/gold_src/dataclass_comparisons.py:8: in models
+    @decorator(order=True, unsafe_hash=True, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:147: in decorate
+    source = composable.emit_commented()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/astichi/model/basic.py:188: in emit_commented
+    return emit_commented_composable(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/astichi/materialize/api.py:3641: in emit_commented_composable
+    materialized = materialize_composable(
+.venvs/py313/lib/python3.13/site-packages/astichi/perf_counters.py:83: in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+composable = BasicComposable(tree=&lt;ast.Module object at 0x10a441450&gt;, origin=CompileOrigin(file_name='&lt;astichi-build&gt;', line_number...ion', 'LookupError', 'SystemExit', 'AssertionError', 'OSError', '__hash__', 'hex', 'ChildProcessError', '__import__'}))
+comment_policy = &lt;astichi.materialize.api._CommentedSourcePolicy object at 0x109a95160&gt;
+
+    @counted_perf_call("materialize_composable")
+    def materialize_composable(
+        composable: BasicComposable,
+        *,
+        comment_policy: _CommentMaterializationPolicy = _EXECUTABLE_COMMENT_POLICY,
+    ) -&gt; BasicComposable:
+        """Materialize a composable: validate completeness and apply final hygiene.
+    
+        The pipeline (see
+        `AstichiApiDesignV1-CompositionUnification.md §4`):
+    
+        1. **Gate** (runs before hygiene): reject any composable that is not
+           fully well-formed — unresolved mandatory holes, unsupplied
+           bind-externals, unmatched `@astichi_insert` block shells, or
+           unmatched expression-form `astichi_insert` calls. Per §2.5,
+           hygiene must never run on an out-of-place tree.
+        2. clone the tree and recognize markers;
+        3. assign scope identity and rename scope collisions (hygiene);
+        4. realize expression-insert wrappers;
+        5. flatten block-level `astichi_hole`/`astichi_insert` shell pairs;
+        6. strip residual metadata markers;
+        7. re-recognize markers and re-extract ports.
+        """
+        if composable._already_materialized:
+            return composable
+    
+        arg_bindings = dict(composable.arg_bindings)
+        tree = clone_ast(composable._tree_for_emit_or_materialize())
+        _normalize_defaulted_block_holes(tree)
+        gate_markers = recognize_markers(tree)
+        gate_provisional = BasicComposable(
+            tree=tree,
+            origin=composable.origin,
+            markers=gate_markers,
+            bound_externals=composable.bound_externals,
+            arg_bindings=composable.arg_bindings,
+            keep_names=composable.keep_names,
+        )
+        gate_classification = analyze_names(
+            gate_provisional,
+            mode="permissive",
+            preserved_names=composable.keep_names,
+        )
+        gate_demand_ports = extract_demand_ports(gate_markers, gate_classification)
+        gate_facts = _collect_materialize_gate_facts(
+            tree,
+            resolved_arg_names=frozenset(arg_bindings),
+        )
+        satisfied_holes = gate_facts.satisfied_holes
+        satisfied_param_holes = gate_facts.satisfied_param_holes
+        required_holes = gate_facts.required_holes
+        mandatory_holes = [
+            port
+            for port in gate_demand_ports
+            if (
+                (
+                    port.is_additive_hole_demand()
+                    and port.name in required_holes
+                    and port.name not in satisfied_holes
+                )
+                or (
+                    port.is_parameter_hole_demand()
+                    and port.name not in satisfied_param_holes
+                )
+            )
+        ]
+        if mandatory_holes:
+            names = ", ".join(port.name for port in mandatory_holes)
+            raise ValueError(
+                format_astichi_error(
+                    "materialize",
+                    f"mandatory holes remain unresolved: {names}",
+                    hint="wire each hole with `builder` edges or fill `astichi_hole` targets before materialize",
+                )
+            )
+        mandatory_binds = [
+            port for port in gate_demand_ports if port.is_external_bind_demand()
+        ]
+        if mandatory_binds:
+            if len(mandatory_binds) == 1:
+                name = mandatory_binds[0].name
+&gt;               raise ValueError(
+                    format_astichi_error(
+                        "materialize",
+                        f"external binding for `{name}` was not supplied; "
+                        f"call composable.bind({name}=...) before materializing.",
+                        hint="use `composable.bind(...)` to supply `astichi_bind_external` values",
+                    )
+                )
+E               ValueError: materialize: external binding for `term_path` was not supplied; call composable.bind(term_path=...) before materializing.; hint: use `composable.bind(...)` to supply `astichi_bind_external` values
+
+.venvs/py313/lib/python3.13/site-packages/astichi/materialize/api.py:3400: ValueError</failure></testcase></testsuite></testsuites>

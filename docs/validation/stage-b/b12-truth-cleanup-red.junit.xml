@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.192" timestamp="2026-10-12T21:22:27.803642+11:00" hostname="[host]"><testcase classname="tests.test_comparison_semantics" name="test_invalid_truth_result_is_released_with_retained_exception_traceback" time="0.159"><failure message="AssertionError: assert (('eq', 'inva...ack-cleared')) == (('eq', 'inva...ack-cleared'))&#10;  &#10;  At index 0 diff: ('eq', 'invalid-bool', 'caught-with-traceback') != ('eq', 'invalid-bool', 'release', 'caught-with-traceback')&#10;  Use -v to get more diff">def test_invalid_truth_result_is_released_with_retained_exception_traceback():
+        def observe(decorator):
+            events = []
+            class InvalidTruth:
+                def __bool__(self):
+                    events.append("invalid-bool")
+                    return 1
+                def __del__(self):
+                    events.append("release")
+            class Produces:
+                def __eq__(self, other):
+                    events.append("eq")
+                    return InvalidTruth()
+            @decorator(slots=True, repr=False)
+            class Pair:
+                first: object
+                second: object
+            left, right = Pair(Produces(), 2), Pair(object(), 3)
+            caught = None
+            try:
+                Pair.__eq__(left, right)
+            except TypeError as exc:
+                caught = exc
+            assert caught is not None
+            events.append("caught-with-traceback")
+            before = tuple(events)
+            caught.__traceback__ = None
+            events.append("traceback-cleared")
+            return before, tuple(events)
+&gt;       assert observe(dataclass) == observe(std.dataclass)
+E       AssertionError: assert (('eq', 'inva...ack-cleared')) == (('eq', 'inva...ack-cleared'))
+E         
+E         At index 0 diff: ('eq', 'invalid-bool', 'caught-with-traceback') != ('eq', 'invalid-bool', 'release', 'caught-with-traceback')
+E         Use -v to get more diff
+
+tests/test_comparison_semantics.py:267: AssertionError</failure></testcase></testsuite></testsuites>

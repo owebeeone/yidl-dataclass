@@ -379,8 +379,13 @@ repr protection; selected lazy reads materialize normally.
 
 If eq is generated, different exact classes return NotImplemented. On 3.12 emit
 tuple equality of the selected operands, preserving its evaluation and element
-identity behavior. On 3.13/3.14 emit the std self-identity shortcut and the ordered
-`and` chain of field equalities. Thus self comparison on those minors need not
+identity behavior. On 3.13/3.14 preserve the std self-identity shortcut and ordered
+short-circuit field equalities. Stage B implements the `and` transitions with
+authored flat prefix statements: truth-test each nonfinal raw result once, return
+it unchanged when false-y, and delete its private temporary in finally before
+the next read or exceptional exit. Return the final raw result directly. This
+verified source arrangement replaces literal BoolOp nesting as an implementation
+choice; `Dataclass-StageBResult.md` records the existing-route and lifetime proof. Thus self comparison on those minors need not
 materialize lazy fields, and a mismatch can avoid later reads. Ordering on all
 supported minors uses selected operand tuples with the requested operator,
 including tuple evaluation/identity behavior. Empty tuples and an empty equality

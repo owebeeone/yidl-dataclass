@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.439" timestamp="2026-10-12T21:03:33.526383+11:00" hostname="[host]"><testcase classname="tests.test_comparison_semantics" name="test_equality_callback_read_truth_and_raw_result_match_std[false]" time="0.150"><failure message="RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable">mode = 'false'
+
+    @pytest.mark.parametrize("mode", ("false", "last", "shared"))
+    def test_equality_callback_read_truth_and_raw_result_match_std(mode):
+&gt;       assert scenario(dataclass, field, mode) == scenario(std.dataclass, std.field, mode)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_semantics.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_comparison_semantics.py:31: in scenario
+    @decorator(repr=False, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:146: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:558: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:555: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/astichi/assembler/scope.py:1014: in build
+    self._reject_python_materialize_fallback("scope.build")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...x108c6a430&gt;, ('Root', 'ClassDef[0]', 'NoRepr'): &lt;_astichi_native_engine.NativeOccurrenceHandle object at 0x108bea0b0&gt;})
+operation = 'scope.build'
+
+    def _reject_python_materialize_fallback(self, operation: str) -&gt; None:
+        from astichi.lower_engine.self_native_gates import (
+            native_materialize_no_python_fallback_enabled,
+        )
+    
+        if not native_materialize_no_python_fallback_enabled():
+            return
+        if select_effective_lower_engine().selected_engine == "python":
+            return
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_state_handle is None
+        ):
+            return
+&gt;       raise RuntimeError(
+            f"{operation} requires native materialization but the native "
+            "materializer did not produce a composable"
+        )
+E       RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable
+
+.venvs/py313/lib/python3.13/site-packages/astichi/assembler/scope.py:997: RuntimeError</failure></testcase><testcase classname="tests.test_comparison_semantics" name="test_equality_callback_read_truth_and_raw_result_match_std[last]" time="0.004"><failure message="RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable">mode = 'last'
+
+    @pytest.mark.parametrize("mode", ("false", "last", "shared"))
+    def test_equality_callback_read_truth_and_raw_result_match_std(mode):
+&gt;       assert scenario(dataclass, field, mode) == scenario(std.dataclass, std.field, mode)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_semantics.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_comparison_semantics.py:31: in scenario
+    @decorator(repr=False, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:146: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:558: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:555: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/astichi/assembler/scope.py:1014: in build
+    self._reject_python_materialize_fallback("scope.build")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...x109cfd2b0&gt;, ('Root', 'ClassDef[0]', 'NoRepr'): &lt;_astichi_native_engine.NativeOccurrenceHandle object at 0x109cfc2f0&gt;})
+operation = 'scope.build'
+
+    def _reject_python_materialize_fallback(self, operation: str) -&gt; None:
+        from astichi.lower_engine.self_native_gates import (
+            native_materialize_no_python_fallback_enabled,
+        )
+    
+        if not native_materialize_no_python_fallback_enabled():
+            return
+        if select_effective_lower_engine().selected_engine == "python":
+            return
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_state_handle is None
+        ):
+            return
+&gt;       raise RuntimeError(
+            f"{operation} requires native materialization but the native "
+            "materializer did not produce a composable"
+        )
+E       RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable
+
+.venvs/py313/lib/python3.13/site-packages/astichi/assembler/scope.py:997: RuntimeError</failure></testcase><testcase classname="tests.test_comparison_semantics" name="test_equality_callback_read_truth_and_raw_result_match_std[shared]" time="0.004"><failure message="RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable">mode = 'shared'
+
+    @pytest.mark.parametrize("mode", ("false", "last", "shared"))
+    def test_equality_callback_read_truth_and_raw_result_match_std(mode):
+&gt;       assert scenario(dataclass, field, mode) == scenario(std.dataclass, std.field, mode)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_semantics.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_comparison_semantics.py:31: in scenario
+    @decorator(repr=False, slots=True)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:146: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:558: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:555: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venvs/py313/lib/python3.13/site-packages/yidl/generation/assembly_runtime.py:285: in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venvs/py313/lib/python3.13/site-packages/astichi/assembler/scope.py:1014: in build
+    self._reject_python_materialize_fallback("scope.build")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...x1091ce5b0&gt;, ('Root', 'ClassDef[0]', 'NoRepr'): &lt;_astichi_native_engine.NativeOccurrenceHandle object at 0x1091cf8f0&gt;})
+operation = 'scope.build'
+
+    def _reject_python_materialize_fallback(self, operation: str) -&gt; None:
+        from astichi.lower_engine.self_native_gates import (
+            native_materialize_no_python_fallback_enabled,
+        )
+    
+        if not native_materialize_no_python_fallback_enabled():
+            return
+        if select_effective_lower_engine().selected_engine == "python":
+            return
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_state_handle is None
+        ):
+            return
+&gt;       raise RuntimeError(
+            f"{operation} requires native materialization but the native "
+            "materializer did not produce a composable"
+        )
+E       RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable
+
+.venvs/py313/lib/python3.13/site-packages/astichi/assembler/scope.py:997: RuntimeError</failure></testcase></testsuite></testsuites>

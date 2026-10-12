@@ -1,0 +1,197 @@
+module tests.comparison_neutral
+import "shared/comparison.yidl" as comparison
+export concept NeutralComparison
+
+concept NeutralComparison extends comparison.ComparisonCore {
+    resource NeutralShell = code $[
+        class Neutral:
+            __slots__ = ("payload",)
+            def __init__(self, payload):
+                self.payload = payload
+            astichi_hole(methods)
+    ]$ { keep Neutral, self, payload, __slots__, __init__ }
+    contribution NeutralMethods = ComparisonMethods {
+        as NeutralMethods
+        target methods { build /NeutralClass }
+    }
+    matcher NeutralMethodsContributions(cmp: ComparisonClasses) -> contribution {
+        default -> NeutralMethods
+    }
+    assembly NeutralModule = NeutralProduction
+    production NeutralProduction -> composable {
+        root NeutralClass = NeutralShell
+        apply methods from cmp: ComparisonClasses using NeutralMethodsContributions
+    }
+    resource NestedEqLeftRead = template $[
+        astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedEqLeftValue = NestedEqLeftRead {
+        as EqLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_left { build /EqMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher EqLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedEqLeftValue weight 2
+    }
+    resource NestedEqRightRead = template $[
+        astichi_pass(other, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedEqRightValue = NestedEqRightRead {
+        as EqRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_right { build /EqMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher EqRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedEqRightValue weight 2
+    }
+    resource NestedHashValueRead = template $[
+        astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedHashValueValue = NestedHashValueRead {
+        as HashValueValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target hash_values { build /HashMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher HashValueContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpHashIncluded == True -> NestedHashValueValue weight 2
+    }
+    resource NestedLtLeftRead = template $[
+        astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedLtLeftValue = NestedLtLeftRead {
+        as LtLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target lt_left { build /LtMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher LtLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedLtLeftValue weight 2
+    }
+    resource NestedLtRightRead = template $[
+        astichi_pass(other, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedLtRightValue = NestedLtRightRead {
+        as LtRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target lt_right { build /LtMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher LtRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedLtRightValue weight 2
+    }
+    resource NestedLeLeftRead = template $[
+        astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedLeLeftValue = NestedLeLeftRead {
+        as LeLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target le_left { build /LeMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher LeLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedLeLeftValue weight 2
+    }
+    resource NestedLeRightRead = template $[
+        astichi_pass(other, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedLeRightValue = NestedLeRightRead {
+        as LeRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target le_right { build /LeMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher LeRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedLeRightValue weight 2
+    }
+    resource NestedGtLeftRead = template $[
+        astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedGtLeftValue = NestedGtLeftRead {
+        as GtLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target gt_left { build /GtMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher GtLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedGtLeftValue weight 2
+    }
+    resource NestedGtRightRead = template $[
+        astichi_pass(other, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedGtRightValue = NestedGtRightRead {
+        as GtRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target gt_right { build /GtMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher GtRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedGtRightValue weight 2
+    }
+    resource NestedGeLeftRead = template $[
+        astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedGeLeftValue = NestedGeLeftRead {
+        as GeLeftValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target ge_left { build /GeMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher GeLeftContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedGeLeftValue weight 2
+    }
+    resource NestedGeRightRead = template $[
+        astichi_pass(other, outer_bind=True).payload.astichi_ref(external=nested_path) if True else None
+    ]$
+    contribution NestedGeRightValue = NestedGeRightRead {
+        as GeRightValue
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target ge_right { build /GeMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher GeRightContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested when CmpCompare == True -> NestedGeRightValue weight 2
+    }
+    resource NestedIntermediate = template $[
+        _y_cmp_result = astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) == astichi_pass(other, outer_bind=True).payload.astichi_ref(external=nested_path)
+        try:
+            if not _y_cmp_result:
+                return _y_cmp_result
+        finally:
+            del _y_cmp_result
+    ]$ { keep _y_cmp_result }
+    resource NestedFinal = template $[
+        return astichi_pass(self, outer_bind=True).payload.astichi_ref(external=nested_path) == astichi_pass(other, outer_bind=True).payload.astichi_ref(external=nested_path)
+    ]$
+    contribution NestedIntermediateStep = NestedIntermediate {
+        as EqStep
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_steps { build /EqMethod }
+        external nested_path = CmpReadPath
+    }
+    contribution NestedFinalStep = NestedFinal {
+        as EqStep
+        index CmpOperandOrder
+        order CmpOperandOrder
+        target eq_steps { build /EqMethod }
+        external nested_path = CmpReadPath
+    }
+    matcher EqStepContributions(operand: ComparisonOperands, cmp: ComparisonClasses) -> contribution {
+        rule nested_intermediate when CmpCompare == True and CmpLast == False -> NestedIntermediateStep weight 2
+        rule nested_final when CmpCompare == True and CmpLast == True -> NestedFinalStep weight 2
+    }
+}

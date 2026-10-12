@@ -100,3 +100,10 @@ def params_for(options: DataclassOptions):
         options.slots,
         options.weakref_slot,
     )
+
+
+def recursive_repr_decorator():
+    """Select the interpreter's actual recursion guard, not a method generator."""
+    if sys.version_info[:2] == (3, 12):
+        return std._recursive_repr
+    return std.recursive_repr()

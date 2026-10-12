@@ -1,0 +1,101 @@
+module dataclass.comparison
+import "dataclass_core.yidl" as core
+import "../shared/comparison.yidl" as comparison
+export concept DataclassComparison
+
+concept DataclassComparison extends core.DataclassCore, comparison.ComparisonCore {
+    property ReprClassId: str
+    property HasReprFields: bool = False
+    property GenerateRepr: bool = False
+    property IncludeRepr: bool = True
+    record DataclassMethodClass {
+        ReprClassId
+        GenerateRepr
+        HasReprFields
+    }
+    record DataclassReprField {
+        FieldId
+        FieldOwner
+        FieldName
+        FieldOrder
+        IncludeRepr
+    }
+    collection MethodClasses: DataclassMethodClass identity ReprClassId many
+    collection ReprFields: DataclassReprField identity FieldId many
+
+    resource ReprShell = template $[
+        @_y_dc_recursive_repr
+        def __repr__(self):
+            return self.__class__.__qualname__ + "(" + ", ".join((*astichi_hole(repr_parts),)) + ")"
+    ]$ { keep self, __repr__, _y_dc_recursive_repr }
+    resource ReprPart = template $[
+        astichi_bind_external(repr_label) + "=" + repr(astichi_pass(self, outer_bind=True).astichi_ref(external=repr_path))
+    ]$ { keep repr }
+    resource EmptyReprShell = template $[
+        @_y_dc_recursive_repr
+        def __repr__(self):
+            return self.__class__.__qualname__ + "()"
+    ]$ { keep self, __repr__, _y_dc_recursive_repr }
+    contribution DataclassClassContribution = DataclassClassProduction {
+        as ClassDef
+        index ClassOrder
+        order ClassOrder
+        target classes { build /Root }
+    }
+    matcher ClassContributions(cls: Classes) -> contribution {
+        rule slots when UseSlots == True -> DataclassClassContribution
+        rule dictionary when UseSlots == False -> DataclassClassContribution
+    }
+    contribution ComparisonBundle = ComparisonMethods {
+        as ComparisonBundle
+        target comparison_methods { build /ClassDef }
+    }
+    contribution ReprMethod = ReprProduction {
+        as ReprMethod
+        target repr_method { build /ClassDef }
+    }
+    contribution EmptyReprMethod = EmptyReprProduction {
+        as ReprMethod
+        target repr_method { build /ClassDef }
+    }
+    contribution NoRepr = EmptyStatement {
+        target repr_method { build /ClassDef }
+    }
+    contribution ReprPartContribution = ReprPart {
+        as ReprPart
+        index FieldOrder
+        order FieldOrder
+        target repr_parts { build /ReprMethod }
+        external repr_label = FieldName
+        external repr_path = FieldName
+    }
+    matcher ComparisonBundleContributions(cmp: ComparisonClasses, cls: Classes) -> contribution {
+        default -> ComparisonBundle
+    }
+    matcher ReprMethodContributions(method: MethodClasses, cls: Classes) -> contribution {
+        default -> NoRepr
+        rule populated when GenerateRepr == True and HasReprFields == True -> ReprMethod
+        rule empty when GenerateRepr == True and HasReprFields == False -> EmptyReprMethod
+    }
+    matcher ReprPartContributions(field: ReprFields, method: MethodClasses) -> contribution {
+        rule selected when IncludeRepr == True -> ReprPartContribution
+    }
+    production ReprProduction(method: MethodClasses) -> composable {
+        root ReprMethod = ReprShell
+        apply parts from field: ReprFields where FieldOwner == ReprClassId using ReprPartContributions
+    }
+    production EmptyReprProduction(method: MethodClasses) -> composable {
+        root ReprMethod = EmptyReprShell
+    }
+    production DataclassClassProduction(cls: Classes) -> composable {
+        root ClassDef = ClassShell {
+            ident class_name = ClassName
+            external bases_name = BasesName
+            external namespace_name = NamespaceName
+        }
+        apply slots using SlotsContributions
+        apply init using InitContributions
+        apply comparison from cmp: ComparisonClasses where CmpClassId == ClassId using ComparisonBundleContributions
+        apply repr from method: MethodClasses where ReprClassId == ClassId using ReprMethodContributions
+    }
+}
