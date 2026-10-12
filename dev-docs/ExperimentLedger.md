@@ -66,6 +66,22 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+Stage B is verified and committed at
+`d3997d6f27f178b5b16df6e479f3e41c920b69cf`. Its final six source runs have
+86 passed/one skip and all six independent installed std differential probes
+pass. The shared resource remains consumer-owned; original SDKs are unchanged.
+Flat authored short-circuit steps replace a failed nested-expression pattern;
+genuine temporary-lifetime RED/GREEN fixes cover true and retained-exception
+paths. Expanded hash/neutral/recursion checks added after core GREEN are recorded
+as verification, not the test-first increments promised by the plan. This process
+deviation remains part of final requirement assessment.
+
+Latest twelve-actor observations at approximately 10:31Z estimate $43.3339886
+Standard API-equivalent USD, about 6h54m from original GO. Cumulative input is
+222,137,545 tokens, including 217,841,664 repeated cached input. Output is
+1,105,657 tokens including 588,625 reasoning tokens. Actual billing is unavailable.
+Stage C has begun; this is not a completed-product cost or performance claim.
+
 Product Stage A was independently verified and committed at
 `9fdcd7cfa8c8bea4e343965f48dab7ed9382e30a` on 2026-10-12 around 09:39Z.
 Its three-minor source suite and six isolated installed owner probes pass the

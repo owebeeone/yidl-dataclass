@@ -3,8 +3,8 @@
 Status: autonomous experiment in progress following the operator GO at
 2026-10-12T03:36:48Z. Semantic design and TDD plan were accepted; the operator
 removed all SDK prerequisites through `ScopeCorrection.md`. The active consumer
-generation amendment is independently accepted; Dataclass Stage A is verified
-and Stage B are verified product checkpoints. Stages C–H and final acceptance
+generation amendment is independently accepted; Dataclass Stages A and B are
+verified product checkpoints. Stages C–H and final acceptance
 remain; Stage B records a test-first sequencing deviation.
 Astichi/YIDL SDK edits, builds, version increments and resource additions are
 outside this experiment; use original Astichi 1.1.3 / YIDL 0.1.0 APIs. `CurrentProgramCheckpoint.md` records the
