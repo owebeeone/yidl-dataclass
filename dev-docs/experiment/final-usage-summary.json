@@ -1,0 +1,44 @@
+{
+  "actors": [
+    "consumer-generation-consistency",
+    "consumer-generation-safety",
+    "dataclass-drafter",
+    "design-consistency",
+    "design-consistency-replacement",
+    "design-safety",
+    "design-safety-replacement",
+    "final-code",
+    "final-state",
+    "lane-owner",
+    "native-lowering-consistency",
+    "native-lowering-safety",
+    "precompiled-consistency",
+    "precompiled-safety"
+  ],
+  "delta": {
+    "input_tokens": 468704106,
+    "cached_input_tokens": 460434944,
+    "output_tokens": 2280842,
+    "reasoning_output_tokens": 1237301,
+    "total_tokens": 470984948
+  },
+  "standard_api_equivalent_usd": 91.68679180000002,
+  "missing_estimates": [],
+  "actual_billed_usd": null,
+  "observation_times": {
+    "lane-owner": "2026-10-12T18:38:36.838Z",
+    "dataclass-drafter": "2026-10-12T18:27:25.698Z",
+    "design-consistency": "2026-10-12T04:08:32.842Z",
+    "design-safety": "2026-10-12T04:10:28.726Z",
+    "design-consistency-replacement": "2026-10-12T04:35:54.988Z",
+    "design-safety-replacement": "2026-10-12T04:23:06.633Z",
+    "precompiled-consistency": "2026-10-12T05:07:07.782Z",
+    "precompiled-safety": "2026-10-12T05:07:06.599Z",
+    "native-lowering-consistency": "2026-10-12T07:36:16.046Z",
+    "native-lowering-safety": "2026-10-12T07:36:35.312Z",
+    "consumer-generation-consistency": "2026-10-12T08:54:51.128Z",
+    "consumer-generation-safety": "2026-10-12T08:54:55.412Z",
+    "final-code": "2026-10-12T18:38:17.553Z",
+    "final-state": "2026-10-12T18:38:17.102Z"
+  }
+}

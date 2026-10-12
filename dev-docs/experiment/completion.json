@@ -1,0 +1,22 @@
+{
+  "status": "functional/package implementation accepted; final report filing",
+  "start_utc": "2026-10-12T03:36:48Z",
+  "functional_acceptance_observed_utc": "2026-10-12T18:38:36Z",
+  "completion_checkpoint_utc": "2026-10-12T18:39:51Z",
+  "wall_elapsed_seconds": 54183,
+  "wall_elapsed": "15h 3m 3s",
+  "reviewed_tuple": {
+    "dataclass": "4b8987299d591f13f7c6db61fd5826db8ee9f346",
+    "undoable": "a689b98dce22f69dece2a2a48ac14472c55b67e2"
+  },
+  "reviews": {
+    "Code": "GO",
+    "State": "GO",
+    "remediation_rounds": 1
+  },
+  "usage_summary": "final-usage-summary.json",
+  "standard_api_equivalent_usd": 91.68679180000002,
+  "actual_billed_usd": null,
+  "active_compute_duration": null,
+  "limits": "Counters are observations at listed actor times; final filing/output after them is not counted. All detour cost/time remains included. Cached input repeats context; reasoning is included in output. Historical H2 is not final-byte performance. No uninterrupted one-shot or strict all-features-test-first claim."
+}

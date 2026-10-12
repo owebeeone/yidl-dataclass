@@ -1,5 +1,17 @@
 # YIDL Dataclass checkpoint
 
+Status: **functional/package implementation accepted** at Dataclass
+`4b8987299d591f13f7c6db61fd5826db8ee9f346` and Undoable
+`a689b98dce22f69dece2a2a48ac14472c55b67e2`, after both final independent
+re-verdicts reported GO. See `Dataclass-FinalReviewResult.md` and
+`Dataclass-ExperimentResult.md` for the exact acceptance/evidence boundaries.
+The complete supported implementation, real shared comparison integration,
+TDD/attempt evidence, installed packaging, author exercise, historical
+measurements and experiment metrics are recorded. No final-byte timing or
+calibrated declarative grade is claimed. Dependencies remain reference-only.
+
+## Historical checkpoint entries
+
 Status: **operator scope correction: no Astichi or YIDL SDK changes belong to
 this task**. All SDK implementation is stopped. The committed P1 and partial P2
 work are a preserved out-of-scope detour, not active Dataclass prerequisites.
