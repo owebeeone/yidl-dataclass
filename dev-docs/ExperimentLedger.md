@@ -1,8 +1,8 @@
 # YIDL Dataclass preparation and review ledger
 
 Status: autonomous Dataclass run authorized; operator has excluded SDK changes.
-Compiler detour stopped and preserved; consumer-only Stages A/B are verified and
-Stage C is active. Final product acceptance remains outstanding. The original
+Compiler detour stopped and preserved; consumer-only Stages A–C are verified and
+Stage D is active. Final product acceptance remains outstanding. The original
 Undoable experiment and this experiment's earlier requirements preparation remain
 separate measurement stages.
 
@@ -66,6 +66,27 @@ separate measurement stages.
 | 2026-10-12T09:00Z / product Stage A resumed | Sole drafter begins consumer-only product work after amendment acceptance, using separate original-SDK environments and behavioral slot/constructor RED rather than import/setup failures. Latest twelve-actor observations estimate approximately $35.37 Standard API-equivalent USD, about 5h23m from original GO; actual billing unavailable. This includes the preserved scope detour, operator correction and independent amendment review, not a completed-product cost. SDK source/build changes remain forbidden. |
 
 ## Autonomous scope and intervention rules
+
+Latest observations at 2026-10-12T12:45Z across twelve disjoint actors estimate
+$55.0345382 Standard API-equivalent USD, about 9h09m after original GO. Input is
+280,452,538 tokens including 274,960,384 repeated cached input; output is
+1,453,133 tokens including 805,880 reasoning tokens. Actual billing remains
+unavailable. The drafter reports focused D inheritance, copy/deepcopy, pickle
+cycle, replacement and annotation checks passing against both original backends;
+source/descriptor proof and the complete matrix still precede owner acceptance.
+An owner-installed C probe independently exposed a valid `property` field
+shadowing the bare builtin; the drafter records RED on both backends and GREEN
+with a private builtin binding. The raw owner failure and unchanged probe are
+retained for independent installed D verification. No SDK change is authorized.
+
+External benchmark drafts now include ordinary/frozen operations, extension
+pipelines, fresh lazy pools, repeated generation with declarations outside timing,
+actual commented-source emission from an untimed captured owned build result,
+and the memory inventory. Six deterministic harness checks pass; generation and
+source-emission setup smoke passes on installed C with both backends. These are
+preparation/verification observations after code drafting, not a test-first claim
+or measured performance result. Cold sampling retains its pre-measurement note;
+Undoable seam, full product matrix and final independent reviews remain ahead.
 
 Latest observations around 2026-10-12T12:27Z across twelve disjoint actors
 estimate $53.6625282 Standard API-equivalent USD, about 8h51m after original GO.
