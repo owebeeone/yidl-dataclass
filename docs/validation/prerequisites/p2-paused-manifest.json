@@ -1,0 +1,505 @@
+{
+  "accepted_p1_commit": "4a62b093498dae7b6d346306eae23e5925aaa004",
+  "code_and_tests": [
+    {
+      "bytes": 18348,
+      "path": "native_engine/Cargo.lock",
+      "sha256": "a7f8a82060dd3c91900a6a13237d2063c5039da1a02945f54a2f177107731c5c"
+    },
+    {
+      "bytes": 648,
+      "path": "native_engine/Cargo.toml",
+      "sha256": "0a4c80e67856a7e1e00bdcea04940159ef2ba4a561d4d1fbed88dbaa09bf03fb"
+    },
+    {
+      "bytes": 3456,
+      "path": "native_engine/src/artifact_codec.rs",
+      "sha256": "77c2fa107580197d3be93f7c6b6c6eeec044e740b5aeb5ba08b7bcd9bc1a06eb"
+    },
+    {
+      "bytes": 40239,
+      "path": "native_engine/src/artifact_decode.rs",
+      "sha256": "31604dc3b959f665427f929905741dd76871e47b11ad87be5491d36e7beb3b0a"
+    },
+    {
+      "bytes": 3589,
+      "path": "native_engine/src/capabilities.rs",
+      "sha256": "ee508b68b1185549de4d18b9b99d8fdbe388e52b736da6ae1a59e4393f7b4665"
+    },
+    {
+      "bytes": 6128,
+      "path": "native_engine/src/handles.rs",
+      "sha256": "8ba3bec18d5de11ea518eb947240c24307b8836adab55f3ac54d6abf5fe7415b"
+    },
+    {
+      "bytes": 1322,
+      "path": "native_engine/src/lib.rs",
+      "sha256": "2692a009f39ae8b88614eadb5b3dbafa9f16d6f93247386382915088516529c1"
+    },
+    {
+      "bytes": 219268,
+      "path": "native_engine/src/materialize_ir.rs",
+      "sha256": "ff0ce31d1469bba0b2944af456932989658247a5e86a5b74dc78f24d2c710d5f"
+    },
+    {
+      "bytes": 99745,
+      "path": "native_engine/src/occurrence_store.rs",
+      "sha256": "f05080fd9e2f2feca985f1803ac8953106197b5b30d7606e7c8bef0efe7e15ca"
+    },
+    {
+      "bytes": 69752,
+      "path": "native_engine/src/parser_ir.rs",
+      "sha256": "980bb368a8d4529bf418d18beadd7f52f21e80cc65205711c11ae02b09076c63"
+    },
+    {
+      "bytes": 107195,
+      "path": "native_engine/src/template_extract.rs",
+      "sha256": "62f9c34d8f99604303856c53d9380202692f689f6da473f79b42063f90172885"
+    },
+    {
+      "bytes": 143451,
+      "path": "native_engine/src/template_package_v2.rs",
+      "sha256": "c6879b5701bec1a9b35cee2868820ed935edc2b422d75b9f21eecff61eda43ca"
+    },
+    {
+      "bytes": 7615,
+      "path": "native_engine/src/template_package_v2/artifact_rows.rs",
+      "sha256": "1425d2eb9c32cf571813ac7b9e08c09d40e78db58fd63ea9e02b824e0d63c9a0"
+    },
+    {
+      "bytes": 15414,
+      "path": "src/astichi/artifacts/api.py",
+      "sha256": "f188b31b94ab877bd94291c2d04c5093637c7d6c34a3193b59c5c05d2e3fba04"
+    },
+    {
+      "bytes": 17710,
+      "path": "src/astichi/artifacts/codec.py",
+      "sha256": "2c1e6cd65cc640672159e5ea987ab5a980e40b7391784378a20e14b7ba4675c0"
+    },
+    {
+      "bytes": 10851,
+      "path": "src/astichi/artifacts/native_bridge.py",
+      "sha256": "f9f687c61f220a5129fff5a37d46aabb195c66443406d208c552523ef759d5ea"
+    },
+    {
+      "bytes": 2496,
+      "path": "src/astichi/artifacts/policy.py",
+      "sha256": "10cc70fea3f8652c7935659da7f912eeff7bb4f769ccd70897d94045dcc02432"
+    },
+    {
+      "bytes": 157033,
+      "path": "src/astichi/assembler/scope.py",
+      "sha256": "ef5dd26edda77ba69f2e9c1a55ea97d23158a896f945636b7d3aafc64218fe7d"
+    },
+    {
+      "bytes": 21928,
+      "path": "src/astichi/frontend/api.py",
+      "sha256": "1358c1f6dd8bfba51bf1faee088080e4e1ed91bb2ffd7a17bd3d3bad37f6a962"
+    },
+    {
+      "bytes": 68727,
+      "path": "src/astichi/lower_engine/facade.py",
+      "sha256": "853fe001e4d2de8db735616d1de9d0f07e147f73723306175ae8b22aeb61e9c3"
+    },
+    {
+      "bytes": 38388,
+      "path": "src/astichi/model/basic.py",
+      "sha256": "8ed60ebaa84673c3a59f6dece0b53a819977bd2fa448a70a26305c1d376a8faf"
+    },
+    {
+      "bytes": 4031,
+      "path": "tests/artifact_golden_runner.py",
+      "sha256": "f24e201369b2ca0538e81626957cae3348a4edfc7789c8db7aa5809d9cfa453f"
+    },
+    {
+      "bytes": 3436,
+      "path": "tests/data/gold_src/compiled_template_resources.py",
+      "sha256": "542f2f6ac83ebcd0ce4f5f75decedc9c57b7b05138f6c6398b337f702ac23913"
+    },
+    {
+      "bytes": 2416,
+      "path": "tests/test_compiled_template_roundtrip_goldens.py",
+      "sha256": "3278942c4ce96f7abb84c5553a6da6b0a31c84d267e88dd0c5b75f7a90edf3d1"
+    },
+    {
+      "bytes": 6973,
+      "path": "tests/test_native_compiled_template_artifacts.py",
+      "sha256": "d19fb34f3748e1282094e052c6cdec875d71a83741d68f62148a839d60d1bded"
+    }
+  ],
+  "evidence": [
+    {
+      "bytes": 13883,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/increments.jsonl",
+      "sha256": "0e771de15566436a84660da57ab0d2777037d3522e6e065f4eae58ca0c253367"
+    },
+    {
+      "bytes": 646473,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-backend-red.junit.xml",
+      "sha256": "b7dafee7513c67f8af46566568c5b1642cd4870c3b8625770bbc2bf234339c25"
+    },
+    {
+      "bytes": 411819,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-backend-red.log",
+      "sha256": "89fe9f30d1b56034532f4554ab939fe3b17bf0089721c1f53b1d659f160f6ba2"
+    },
+    {
+      "bytes": 478791,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-boundary-classification.junit.xml",
+      "sha256": "add2d24564d6d1f198ac645933d8b6e28d45741de39beb3f6c116b95ba1daa17"
+    },
+    {
+      "bytes": 292652,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-boundary-classification.log",
+      "sha256": "ab07dbfa75ee5502a6ce187681f2f9cb2cc3d41dba5d11ff3f0f55467a48a149"
+    },
+    {
+      "bytes": 5518,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-cargo-first-check.log",
+      "sha256": "e844db0dbb91e3b7406f572dd64bd3fc4032773309000a161865c7b337fa9aa0"
+    },
+    {
+      "bytes": 140,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-cargo-payload-check.log",
+      "sha256": "9d3d395d492b6fa81766449e4f7981f066b69b20ea0a13f32cf5a05db83a9e5f"
+    },
+    {
+      "bytes": 140,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-cargo-registration-check.log",
+      "sha256": "b9d06ba3f4ad27a3606b2dd95dc42c3977cb79cd838f915036b210943091f1ff"
+    },
+    {
+      "bytes": 6331,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-explicit-singleton-red.junit.xml",
+      "sha256": "ca187a9ec8698e4f4b116a7b88cb5d078c4cde32e3a61890ae5d4a5ba1655907"
+    },
+    {
+      "bytes": 5311,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-explicit-singleton-red.log",
+      "sha256": "bd4af420cc0fbac20816bea873aec7c6065eaef6c42b3d9881f5689880fc2a60"
+    },
+    {
+      "bytes": 390,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-first-native-build.log",
+      "sha256": "32c382d2e080f2b1bd6f55670ddb0cdf7e0a4aca8fa2ca4e23ca8c7ff3edaa1b"
+    },
+    {
+      "bytes": 2289,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-core-green.junit.xml",
+      "sha256": "d1778ee12ee2c11e741646f2ed5e0ab693352e6666cb2896a3d8074b81726240"
+    },
+    {
+      "bytes": 99,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-core-green.log",
+      "sha256": "d0d5fe161f7f6a5cd079c12d188d23e76a40df672399ddaac542c3ad8486b18b"
+    },
+    {
+      "bytes": 4326,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-first-attempt.junit.xml",
+      "sha256": "54e4470d001a90a07c6c08afe3ab56ce1a933a2aced6930dcbc282484fef48f5"
+    },
+    {
+      "bytes": 3481,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-first-attempt.log",
+      "sha256": "db710f7079ca5aa783839046c5650a45985464f30753b7b60ea15b6a3ce236b5"
+    },
+    {
+      "bytes": 12638,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-initial-red.junit.xml",
+      "sha256": "d216d91d4bdfe04c5ffdced34b8d1f4cc0e787cebf0f22472c90e1c909597180"
+    },
+    {
+      "bytes": 11122,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-initial-red.log",
+      "sha256": "53551cdca7dd1c5f9bfc9e5bca7dc3cf38ebad5cb854ac391b0901ae11085596"
+    },
+    {
+      "bytes": 16064,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-package-attempt.junit.xml",
+      "sha256": "de028ec6fd59c7bedc8a60828d6ecfc4de8a9f23085bf021a9e6b8c4f5d56b50"
+    },
+    {
+      "bytes": 14247,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-package-attempt.log",
+      "sha256": "8cbc047d9c75fb4ed0f00f49c8eebafd8cf5127cf4f2116b5d84f86cde3eea1e"
+    },
+    {
+      "bytes": 594,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-package-codec-check.log",
+      "sha256": "8728dbfcf8377de4930d141911fd4a743dfd007747154015d19c6daf24559911"
+    },
+    {
+      "bytes": 261,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-package-native-build.log",
+      "sha256": "0f9bd4ddf7bf178607ca2e724ca5d56af972469a266105747ebacea2af52e9bd"
+    },
+    {
+      "bytes": 7431,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-identity-red.junit.xml",
+      "sha256": "ee0bb7ce8d8bd280744286bb9f9090d3e9250f7f300fd833bf322e737182a35d"
+    },
+    {
+      "bytes": 5900,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-identity-red.log",
+      "sha256": "347b3ad916486865cfbc5bc6c0a320727527afced34383e2b9ad11ac8a11dd8b"
+    },
+    {
+      "bytes": 4465,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-metadata-red.junit.xml",
+      "sha256": "b1a6a749cfbfe3e0f21bc1d72b7dd3c43e13df0156464c95474e04a2501a5d4d"
+    },
+    {
+      "bytes": 3481,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-metadata-red.log",
+      "sha256": "af49175c4700ba2326148b1b1d33dca36402c5595a85620a67462cd9ee34d78f"
+    },
+    {
+      "bytes": 2372,
+      "path": "dev-docs/experiment-evidence/precompiled/p2/record_check.py",
+      "sha256": "a522b6f5bcf685fd90417b8d32f46d4688649d61ef8edab52b96ab28c2236104"
+    }
+  ],
+  "excluded": [
+    "this manifest itself",
+    "unrelated files and ignored environment/build dependencies"
+  ],
+  "ignored_prototype_build_products": [
+    {
+      "bytes": 3946848,
+      "path": "native_engine/_astichi_native_engine.abi3.so",
+      "sha256": "2b9d6e1abce7b386e1b02b95df963e8c953e94d3054cd4c3301ecf2b16762ed6"
+    },
+    {
+      "bytes": 3946848,
+      "path": "native_engine/_astichi_native_engine.cpython-312-darwin.so",
+      "sha256": "2b9d6e1abce7b386e1b02b95df963e8c953e94d3054cd4c3301ecf2b16762ed6"
+    },
+    {
+      "bytes": 3946848,
+      "path": "native_engine/target/release/lib_astichi_native_engine.dylib",
+      "sha256": "2b9d6e1abce7b386e1b02b95df963e8c953e94d3054cd4c3301ecf2b16762ed6"
+    }
+  ],
+  "owner_repository": "astichi",
+  "prior_draft_observations": [
+    {
+      "note": "Initial proposal digest before owner-requested native pre-expansion/indexed-resolution consistency clarification; supporting code/evidence/binaries unchanged.",
+      "related_design": {
+        "owner_repository": "yidl-dataclass",
+        "path": "dev-docs/NativeLoweringAddendum.md",
+        "sha256": "4f135caad3ff4765626b8e79aefe1a5bd65dc9df63ff8772318d53827ff1259d"
+      }
+    }
+  ],
+  "raw_archive_policy": "Original bytes are retained externally under sha256 plus .raw; owner handoff supplies local archive location. No raw paths or machine identifiers are embedded here.",
+  "raw_to_sanitized_evidence": [
+    {
+      "original_raw_sha256": [
+        "86b88c6c325294db1a115ac102254bec825a9d124e1c13a1c0206b2ae8650e36"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-backend-red.junit.xml",
+      "sanitized_sha256": "b7dafee7513c67f8af46566568c5b1642cd4870c3b8625770bbc2bf234339c25"
+    },
+    {
+      "original_raw_sha256": [
+        "6df336871606458a5072a88cbc59eb92c1b8c137d78ac5d6c4c4379df4c2240b"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-backend-red.log",
+      "sanitized_sha256": "89fe9f30d1b56034532f4554ab939fe3b17bf0089721c1f53b1d659f160f6ba2"
+    },
+    {
+      "original_raw_sha256": [
+        "ffa73c0ae3c7808d1b139262a275bb268a4b60b1dfd7cb538822082ff4be23ec"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-boundary-classification.junit.xml",
+      "sanitized_sha256": "add2d24564d6d1f198ac645933d8b6e28d45741de39beb3f6c116b95ba1daa17"
+    },
+    {
+      "original_raw_sha256": [
+        "3ebbfa8e64eefd039e9157a9ad55c6e4d30ff6d7d142763d2f26e7c9f8f8ef58"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-canonical-boundary-classification.log",
+      "sanitized_sha256": "ab07dbfa75ee5502a6ce187681f2f9cb2cc3d41dba5d11ff3f0f55467a48a149"
+    },
+    {
+      "original_raw_sha256": [
+        "582d98171403458d66f88fcde646e24676c375201718e4eba527b02b998744a4"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-cargo-first-check.log",
+      "sanitized_sha256": "e844db0dbb91e3b7406f572dd64bd3fc4032773309000a161865c7b337fa9aa0"
+    },
+    {
+      "original_raw_sha256": [
+        "687efd286f35c8bff31d8fc789dd5bb449827c270eb7c185990be2e0902f5edc"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-cargo-payload-check.log",
+      "sanitized_sha256": "9d3d395d492b6fa81766449e4f7981f066b69b20ea0a13f32cf5a05db83a9e5f"
+    },
+    {
+      "original_raw_sha256": [
+        "45fa07ce00744937b48f461fd8e21cb9776ba6efba51807990e968c9195ba338"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-cargo-registration-check.log",
+      "sanitized_sha256": "b9d06ba3f4ad27a3606b2dd95dc42c3977cb79cd838f915036b210943091f1ff"
+    },
+    {
+      "original_raw_sha256": [
+        "854714b91fd6b23a3e722772d30a62feab40be098ec69a491f39e7e4cbb573f5"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-explicit-singleton-red.junit.xml",
+      "sanitized_sha256": "ca187a9ec8698e4f4b116a7b88cb5d078c4cde32e3a61890ae5d4a5ba1655907"
+    },
+    {
+      "original_raw_sha256": [
+        "9ef10b5d1d750f8fa4b7ee9022c0e8b619adfae193a255789e81b58a6d94a3ba"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-explicit-singleton-red.log",
+      "sanitized_sha256": "bd4af420cc0fbac20816bea873aec7c6065eaef6c42b3d9881f5689880fc2a60"
+    },
+    {
+      "original_raw_sha256": [
+        "7d6abc139f424438ffca23d38d69db95313b46057f084b4d8a4254065e2eb5f5"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-first-native-build.log",
+      "sanitized_sha256": "32c382d2e080f2b1bd6f55670ddb0cdf7e0a4aca8fa2ca4e23ca8c7ff3edaa1b"
+    },
+    {
+      "original_raw_sha256": [
+        "df52b050d8afd6e49e31b1eb0d0c886b8ebe683f0de502933903c97109e89336"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-core-green.junit.xml",
+      "sanitized_sha256": "d1778ee12ee2c11e741646f2ed5e0ab693352e6666cb2896a3d8074b81726240"
+    },
+    {
+      "original_raw_sha256": [
+        "d0d5fe161f7f6a5cd079c12d188d23e76a40df672399ddaac542c3ad8486b18b"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-core-green.log",
+      "sanitized_sha256": "d0d5fe161f7f6a5cd079c12d188d23e76a40df672399ddaac542c3ad8486b18b"
+    },
+    {
+      "original_raw_sha256": [
+        "086c1d855db8c3e8920b1f24e8f93be8607a55d76f4533b32bee286ac47bdf95"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-first-attempt.junit.xml",
+      "sanitized_sha256": "54e4470d001a90a07c6c08afe3ab56ce1a933a2aced6930dcbc282484fef48f5"
+    },
+    {
+      "original_raw_sha256": [
+        "c4e3090f9f1cf54b8a2330f3ca40c032855571e19ad48df0a89c58bbf5b9d438"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-first-attempt.log",
+      "sanitized_sha256": "db710f7079ca5aa783839046c5650a45985464f30753b7b60ea15b6a3ce236b5"
+    },
+    {
+      "original_raw_sha256": [
+        "fdcd5aebb0fb32d1003c6106a265d20058be4e39a35af4e9508d418cddbec29d"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-initial-red.junit.xml",
+      "sanitized_sha256": "d216d91d4bdfe04c5ffdced34b8d1f4cc0e787cebf0f22472c90e1c909597180"
+    },
+    {
+      "original_raw_sha256": [
+        "53551cdca7dd1c5f9bfc9e5bca7dc3cf38ebad5cb854ac391b0901ae11085596"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-initial-red.log",
+      "sanitized_sha256": "53551cdca7dd1c5f9bfc9e5bca7dc3cf38ebad5cb854ac391b0901ae11085596"
+    },
+    {
+      "original_raw_sha256": [
+        "ec074051fc6e117e5d98cae203f3e66082346cdf97962beff2bac6f6697b3747"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-package-attempt.junit.xml",
+      "sanitized_sha256": "de028ec6fd59c7bedc8a60828d6ecfc4de8a9f23085bf021a9e6b8c4f5d56b50"
+    },
+    {
+      "original_raw_sha256": [
+        "8cbc047d9c75fb4ed0f00f49c8eebafd8cf5127cf4f2116b5d84f86cde3eea1e"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-native-package-attempt.log",
+      "sanitized_sha256": "8cbc047d9c75fb4ed0f00f49c8eebafd8cf5127cf4f2116b5d84f86cde3eea1e"
+    },
+    {
+      "original_raw_sha256": [
+        "4d236194ca728c32eeee685c8ab82aa4fae38cbab5e270766afac5ecc4f2729f"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-package-codec-check.log",
+      "sanitized_sha256": "8728dbfcf8377de4930d141911fd4a743dfd007747154015d19c6daf24559911"
+    },
+    {
+      "original_raw_sha256": [
+        "5d9a04b1bbeda781202139336669facf5179cf6cbdbe430d37ed0114bcf389ff"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-package-native-build.log",
+      "sanitized_sha256": "0f9bd4ddf7bf178607ca2e724ca5d56af972469a266105747ebacea2af52e9bd"
+    },
+    {
+      "original_raw_sha256": [
+        "b556a9ada840b2b398623864c8a260e2fb9e2aec694eb018f4cd4a322394aa0a"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-identity-red.junit.xml",
+      "sanitized_sha256": "ee0bb7ce8d8bd280744286bb9f9090d3e9250f7f300fd833bf322e737182a35d"
+    },
+    {
+      "original_raw_sha256": [
+        "9fda328dd08b99337235ac1cc08622895dee9fe6d991e200dc01ed4258ccc344"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-identity-red.log",
+      "sanitized_sha256": "347b3ad916486865cfbc5bc6c0a320727527afced34383e2b9ad11ac8a11dd8b"
+    },
+    {
+      "original_raw_sha256": [
+        "4fca1c511eb2563a651f1e93649ebb2876e6217070d5aaa65dfd54c6fe77b256"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-metadata-red.junit.xml",
+      "sanitized_sha256": "b1a6a749cfbfe3e0f21bc1d72b7dd3c43e13df0156464c95474e04a2501a5d4d"
+    },
+    {
+      "original_raw_sha256": [
+        "73902234cfce450fa5b328aac0afa5b9ed81bcf751a1a072057805f487dd4fb0"
+      ],
+      "raw_archive_key_suffix": ".raw",
+      "sanitized_path": "dev-docs/experiment-evidence/precompiled/p2/p2-singleton-metadata-red.log",
+      "sanitized_sha256": "af49175c4700ba2326148b1b1d33dca36402c5595a85620a67462cd9ee34d78f"
+    }
+  ],
+  "recorded_utc": "2026-10-12T07:23:45.098091+00:00",
+  "related_design": {
+    "owner_repository": "yidl-dataclass",
+    "path": "dev-docs/NativeLoweringAddendum.md",
+    "sha256": "0aff58c92dd6da67f6011c12ed33e29ece719260e4e15fa3fc52d4e23bf7f639"
+  },
+  "related_design_updated_utc": "2026-10-12T07:27:45.056124+00:00",
+  "schema": "paused-native-p2-manifest-v1",
+  "status": "provisional P2 core; full native lowering incomplete; implementation paused for dual design review",
+  "verification": {
+    "historical_artifact_hashes_verified": true,
+    "jsonl_records": 19,
+    "junit_xml_files": 9,
+    "raw_mapping_complete": true,
+    "source_behavior_tests_rerun_for_docs_only_task": false
+  }
+}
