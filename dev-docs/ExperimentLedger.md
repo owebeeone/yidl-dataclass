@@ -354,3 +354,15 @@ records the bounded cold-only correction and its necessity/provenance. Ordinary
 No failed threshold, product bug or missing compiler facility was inferred.
 V1 source/raw observations remain distinct from the planned H2 dataset; the
 original experiment start and cumulative cost/time are unchanged.
+
+## Revised measurement start — 2026-10-12T16:10:09.487589Z
+
+H2 source/definition freeze is committed at
+`fc5a47fd325c8a2ad01fb87b120e5319ce38ab1c`, definition canonical SHA256
+`c4226335a0ecef51dc52b23906be2594deb68f2d226878c5ad45d2c2e900fc39`.
+The revised sequence uses original installed G consumers/SDKs with no concurrent
+CPU-heavy task agents. First complete Python 3.12 and 3.13 process durations are
+260.755524 and 233.652457 seconds. Each validates the complete 132 timing cases,
+3,960 aggregate timing rows and 32 memory observations. These are sample-coverage
+successes, not aggregate numerical performance conclusions. Full parent process
+sets remain pending; the original v1 interrupted observations stay excluded.

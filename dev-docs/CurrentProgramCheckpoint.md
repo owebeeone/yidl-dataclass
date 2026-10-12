@@ -70,6 +70,10 @@ preparing H2 with genuine focused tests; product and dependency bytes unchanged.
 H2 is now stopped and owner-verified; see `Dataclass-StageH2PreparationResult.md`.
 Its new definition is ready for a committed freeze and restarted full process
 sets. V1 remains a separately archived interrupted attempt, excluded from H2.
+H2 source/definition freeze: `fc5a47fd325c8a2ad01fb87b120e5319ce38ab1c`.
+Revised serial measurement began at `2026-10-12T16:10:09.487589Z`.
+First Python 3.12 and 3.13 processes complete successfully; no aggregate numerical
+verdict exists until all five complete independent processes per minor finish.
 
 ## Requirements review history and authority
 
