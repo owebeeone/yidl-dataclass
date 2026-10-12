@@ -5,7 +5,9 @@ for module in (astichi,yidl,product):
  assert pathlib.Path(module.__file__).resolve().is_relative_to(pathlib.Path(sys.prefix).resolve())
 assert importlib.metadata.version('astichi')=='1.1.3'
 assert importlib.metadata.version('yidl')=='0.1.0'
-from astichi.lower_engine.native import load_native_extension
+from astichi.lower_engine.native import load_native_extension, select_lower_engine
+selection=select_lower_engine()
+assert selection.selected_engine==sys.argv[1] and selection.fallback_scope is None
 native=load_native_extension(required=True)
 assert pathlib.Path(native.__file__).resolve().is_relative_to(pathlib.Path(sys.prefix).resolve())
 assert native.capabilities()['version']=='1.0.7'

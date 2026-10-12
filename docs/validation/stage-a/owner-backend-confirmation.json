@@ -1,0 +1,137 @@
+{
+  "verified_utc": "2026-10-12 09:50:39 UTC",
+  "scope": "Stage A installed subset; explicit selected engine and absent fallback verified",
+  "wheel": {
+    "file": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+    "sha256": "037a696d2d5531fa1c9859e47613f8f2739564d8dec4798c79bb1ea51c7b7315",
+    "bytes": 17797
+  },
+  "results": [
+    {
+      "python_minor": "3.12",
+      "backend": "python",
+      "exit_code": 0,
+      "result": {
+        "dictionary_class_default_fallback": "pass",
+        "field_copy_ownership": "pass",
+        "installed_origins": "pass",
+        "opaque_default_capture_isolation": "pass",
+        "product_version": "0.1.0.dev0",
+        "python": "3.12.12",
+        "scope": "Stage A subset only; repr/comparison/policies/lazy/inheritance remain unverified",
+        "sdk_versions": {
+          "astichi": "1.1.3",
+          "native": "1.0.7",
+          "yidl": "0.1.0"
+        },
+        "selected_backend": "python",
+        "slot_constructor_metadata_helpers": "pass"
+      }
+    },
+    {
+      "python_minor": "3.12",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "result": {
+        "dictionary_class_default_fallback": "pass",
+        "field_copy_ownership": "pass",
+        "installed_origins": "pass",
+        "opaque_default_capture_isolation": "pass",
+        "product_version": "0.1.0.dev0",
+        "python": "3.12.12",
+        "scope": "Stage A subset only; repr/comparison/policies/lazy/inheritance remain unverified",
+        "sdk_versions": {
+          "astichi": "1.1.3",
+          "native": "1.0.7",
+          "yidl": "0.1.0"
+        },
+        "selected_backend": "native-rust",
+        "slot_constructor_metadata_helpers": "pass"
+      }
+    },
+    {
+      "python_minor": "3.13",
+      "backend": "python",
+      "exit_code": 0,
+      "result": {
+        "dictionary_class_default_fallback": "pass",
+        "field_copy_ownership": "pass",
+        "installed_origins": "pass",
+        "opaque_default_capture_isolation": "pass",
+        "product_version": "0.1.0.dev0",
+        "python": "3.13.12",
+        "scope": "Stage A subset only; repr/comparison/policies/lazy/inheritance remain unverified",
+        "sdk_versions": {
+          "astichi": "1.1.3",
+          "native": "1.0.7",
+          "yidl": "0.1.0"
+        },
+        "selected_backend": "python",
+        "slot_constructor_metadata_helpers": "pass"
+      }
+    },
+    {
+      "python_minor": "3.13",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "result": {
+        "dictionary_class_default_fallback": "pass",
+        "field_copy_ownership": "pass",
+        "installed_origins": "pass",
+        "opaque_default_capture_isolation": "pass",
+        "product_version": "0.1.0.dev0",
+        "python": "3.13.12",
+        "scope": "Stage A subset only; repr/comparison/policies/lazy/inheritance remain unverified",
+        "sdk_versions": {
+          "astichi": "1.1.3",
+          "native": "1.0.7",
+          "yidl": "0.1.0"
+        },
+        "selected_backend": "native-rust",
+        "slot_constructor_metadata_helpers": "pass"
+      }
+    },
+    {
+      "python_minor": "3.14",
+      "backend": "python",
+      "exit_code": 0,
+      "result": {
+        "dictionary_class_default_fallback": "pass",
+        "field_copy_ownership": "pass",
+        "installed_origins": "pass",
+        "opaque_default_capture_isolation": "pass",
+        "product_version": "0.1.0.dev0",
+        "python": "3.14.3",
+        "scope": "Stage A subset only; repr/comparison/policies/lazy/inheritance remain unverified",
+        "sdk_versions": {
+          "astichi": "1.1.3",
+          "native": "1.0.7",
+          "yidl": "0.1.0"
+        },
+        "selected_backend": "python",
+        "slot_constructor_metadata_helpers": "pass"
+      }
+    },
+    {
+      "python_minor": "3.14",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "result": {
+        "dictionary_class_default_fallback": "pass",
+        "field_copy_ownership": "pass",
+        "installed_origins": "pass",
+        "opaque_default_capture_isolation": "pass",
+        "product_version": "0.1.0.dev0",
+        "python": "3.14.3",
+        "scope": "Stage A subset only; repr/comparison/policies/lazy/inheritance remain unverified",
+        "sdk_versions": {
+          "astichi": "1.1.3",
+          "native": "1.0.7",
+          "yidl": "0.1.0"
+        },
+        "selected_backend": "native-rust",
+        "slot_constructor_metadata_helpers": "pass"
+      }
+    }
+  ]
+}
