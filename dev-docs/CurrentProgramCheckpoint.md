@@ -1,8 +1,9 @@
 # YIDL Dataclass checkpoint
 
-Status: requirements accepted by the operator after dual round-2 GO and a
-subsequent operator-approved locality amendment without re-review. Implementation
-has not started. This checkpoint governs this member's experiment preparation.
+Status: autonomous run authorized at 2026-10-12T03:36:48Z. Requirements accepted
+by the operator after dual round-2 GO and a subsequent operator-approved locality
+amendment without re-review. Detailed design is underway; implementation has not
+started. This checkpoint governs the experiment.
 
 ## Object and authority
 
@@ -75,6 +76,10 @@ protocol and golden amendment. The owner records its exact committed revision in
 the review result. Acceptance covers suitability as a brief for detailed design
 only, not a completed design, implementation, release or performance result.
 
-Next action: detailed design and compatibility/extension matrix, then a separately
-reviewed design and TDD plan. No implementation has begun and no new reviewer
-dispatch is required for the accepted locality amendment.
+The operator has delegated the full remaining task, without requiring personal
+review of the detailed design or TDD plan. Run the independent design and final
+implementation review gates autonomously. The waiver applies to the accepted
+locality amendment, not the remainder of the experiment's review workflow.
+
+Next action: compact detailed design and compatibility/extension matrix, dual
+independent design review, separate TDD plan, implementation and final evidence.

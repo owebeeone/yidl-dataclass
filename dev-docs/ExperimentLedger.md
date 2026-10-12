@@ -1,7 +1,8 @@
 # YIDL Dataclass preparation and review ledger
 
-Status: requirements preparation and independent review, before detailed design
-or autonomous implementation. The original Undoable experiment remains separate.
+Status: autonomous run authorized; detailed design underway. The original
+Undoable experiment and this experiment's earlier requirements preparation remain
+separate measurement stages.
 
 ## Checkpoints
 
@@ -19,6 +20,23 @@ or autonomous implementation. The original Undoable experiment remains separate.
 | Round 1 remediation | One corrected documentation object, incorporating the operator's golden-example addition; fresh reviewers required for changed interface. |
 | `0ceb048a98f9e4464366fc1abfb0827888e8fc54` | Both fresh round-2 reviewers GO; original findings independently closed on that draft. |
 | Operator locality correction | Decorator mapping rejected; field-local logical comparison and separately named write policy specified. Operator explicitly accepts this amendment without another review round. |
+| 2026-10-12T03:36:48Z | Operator says GO for the full autonomous run, without requiring personal review of design/TDD planning. Recorded start: 14:36:48 Australia/Sydney. Detailed design and run measurements begin here; implementation begins only after its design/plan checkpoints. |
+
+## Autonomous scope and intervention rules
+
+The run includes compact detailed design, a separate TDD plan, native YIDL-generated
+Dataclass implementation, real Undoable comparison integration, canonical goldens,
+independent reviews, correctness/performance/declarative evaluation, package checks
+and final evidence. No operator approval is required at intermediate design or plan
+checkpoints. Bounded remediation may exceed two cycles; architectural failures
+require redesign before continuation. No remote creation or publication of the new
+member is inferred from implementation authorization.
+
+Baseline Dataclass documentation HEAD at go-ahead:
+`d0cc37c061efb8b02bd126e547c01eb87baa904f`, verified against Git. Undoable baseline:
+`f79e4ce6d985ed0a6463552e163baabf1a28942d`. Its existing modified checkpoint and
+untracked `UndoableLeaf.md` belong to a paused unrelated change and must remain
+uncommitted and untouched by this run.
 
 The round-2 GO reports apply to their exact historical object. The subsequent
 locality amendment is operator-accepted rather than independently re-reviewed.
@@ -33,8 +51,27 @@ review baseline for the owner; fresh reviewers have their own independent baseli
 Reasoning output is included in output totals, not counted again. Cached input is
 repeated request context, not unique source volume.
 
-Actual billing is unavailable. No cost estimate has yet been calculated or claimed.
+For the earlier requirements-review stage, actual billing is unavailable and no
+cost estimate was calculated or claimed.
 Any later estimate must verify applicable dated model rates and request conditions;
 the first experiment's rates must not be assumed automatically. A completed-stage
 sample cannot include subsequent owner output. Formal design/implementation start
-times remain unset; this ledger does not label requirements review as implementation.
+times were unset at requirements-review close; the subsequent go-ahead above
+starts design. This ledger does not label requirements review as implementation.
+
+## Autonomous usage and pricing basis
+
+Autonomous-run observations are written to `experiment/usage.jsonl` by
+`experiment/record_usage.py`, with each actor's own baseline at the go-ahead.
+Aggregate only the latest observation for each disjoint actor/segment, not every
+checkpoint's cumulative delta. Preserve missing coverage and counter resets rather
+than turning them into zero or negative usage. Reasoning output remains a subset
+of output and is not added twice.
+
+Standard API-equivalent prices checked on 2026-10-12 in the
+[official GPT-6.1 Sol documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol):
+$2/M uncached input, $0.10/M cached input, $2.50/M cache writes, $10/M output.
+This is an explicit Standard, ordinary-context estimate; actual service-tier,
+regional/tool charges and Codex billing are not established. The recorder checks
+observed request sizes against the 272K ordinary-context limit; otherwise it leaves
+the estimate unavailable pending per-request pricing analysis.
