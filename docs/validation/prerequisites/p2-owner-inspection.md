@@ -29,3 +29,16 @@ The first inspection invocation lacked the local `src` import path and failed
 with `ModuleNotFoundError`. That was setup-only, not behavioral RED. Corrected
 source-path inspection and the subsequent direct Rust probe produced the invalid
 acceptance observations above.
+
+## Focused follow-up
+
+Observed UTC: 2026-10-12T08:17:52.906829+00:00
+
+After the drafter recorded two genuine REDs and the 15-test native artifact
+GREEN, the owner independently reran both mutations through Rust registration.
+Both raise `CompiledTemplateFormatError`. In each same fresh engine, a subsequent
+valid registration is still template index zero, and the lowest parser-entry
+counter remains unchanged. This verifies these two negative reproductions and
+absence of partial registration only; it does not accept broader P2 lowering or
+installed/minor behavior. The original invalid-acceptance observation above is
+retained as history.
