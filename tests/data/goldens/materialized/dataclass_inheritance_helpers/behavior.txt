@@ -1,2 +1,3 @@
 [('BaseDeclaration', 'named'), ('BaseDeclaration', 'subclass'), ('BaseDeclaration', 'named'), ('BaseDeclaration', 'subclass'), ('Child', 'subclass'), ('Child', 'subclass')]
 merged-order=units,token,tag; slots-reused=True; class-cells-independent=True; super=mixin/base/child
+lazy-empty-chain-and-override=slots-reused; retry,busy-copy,reset,readonly,ready-and-unready-protocols=True

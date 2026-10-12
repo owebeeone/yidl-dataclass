@@ -1,0 +1,59 @@
+{
+  "python": "3.12.12",
+  "cases": [
+    {
+      "case": "dataclass-type",
+      "pass": false,
+      "error": "TypeError",
+      "message": "object.__new__(X): X is not a type object (type)"
+    },
+    {
+      "case": "dataclass-tuple",
+      "pass": false,
+      "error": "ValueError",
+      "message": "unsupported dataclass state schema"
+    },
+    {
+      "case": "dataclass-dict",
+      "pass": false,
+      "error": "ValueError",
+      "message": "unsupported dataclass state schema"
+    },
+    {
+      "case": "dataclass-int",
+      "pass": false,
+      "error": "ValueError",
+      "message": "unsupported dataclass state schema"
+    },
+    {
+      "case": "dataclass-hash",
+      "pass": false,
+      "error": "TypeError",
+      "message": "__hash__ method should return an integer"
+    },
+    {
+      "case": "dataclass-_y_dc_converter_0",
+      "pass": false,
+      "error": "FieldConversionError",
+      "message": "_y_dc_converter_0.value: converter failed"
+    },
+    {
+      "case": "inherited-lazy-slots",
+      "pass": false,
+      "error": "AssertionError",
+      "message": "(('_y_dc_ready_0', '_y_dc_busy_0'), ('_y_dc_ready_0', '_y_dc_busy_0'))"
+    },
+    {
+      "case": "undoable-_u_historical_write_scope",
+      "pass": false,
+      "error": "AttributeError",
+      "message": "type object '_u_historical_write_scope' has no attribute 'get'"
+    },
+    {
+      "case": "undoable-_u_historical_eq",
+      "pass": false,
+      "error": "TypeError",
+      "message": "build_undoable_class.<locals>._u_historical_eq.__init__() takes 1 positional argument but 3 were given"
+    }
+  ]
+}

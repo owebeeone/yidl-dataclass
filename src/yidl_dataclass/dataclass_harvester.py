@@ -180,6 +180,7 @@ def harvest(
         for item in definitions
         if item.kind.label == "lazy"
         for name in (item.ready_name, item.busy_name)
+        if name not in inherited_slots
     )
     steps, calls, planned = plan_initialization(
         cls, definitions, options, generate_init, captures

@@ -1,0 +1,223 @@
+{
+  "status": "PASS",
+  "owned_files": 222,
+  "increments": 93,
+  "artifact_references": 140,
+  "distinct_raw_hashes": 123,
+  "junit_files": 47,
+  "sanitation_corrections": 16,
+  "source_and_installed_gate_counts": [
+    {
+      "gate": "rem1-source-dataclass-312-native-rust",
+      "tests": 262,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    {
+      "gate": "rem1-source-undoable-312-native-rust",
+      "tests": 350,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-dataclass-312-native-rust-v2",
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    {
+      "gate": "rem1-installed-undoable-312-native-rust-v3",
+      "tests": 349,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-undoable-312-native-rust-v3-without-authority",
+      "tests": 342,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-source-dataclass-312-python-restored",
+      "tests": 262,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    {
+      "gate": "rem1-source-undoable-312-python",
+      "tests": 350,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-dataclass-312-python-v2",
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    {
+      "gate": "rem1-installed-undoable-312-python-v3",
+      "tests": 349,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-undoable-312-python-v3-without-authority",
+      "tests": 342,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-source-dataclass-313-native-rust",
+      "tests": 262,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    {
+      "gate": "rem1-source-undoable-313-native-rust",
+      "tests": 350,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-dataclass-313-native-rust-v2",
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    {
+      "gate": "rem1-installed-undoable-313-native-rust-v3",
+      "tests": 349,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-undoable-313-native-rust-v3-without-authority",
+      "tests": 342,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-source-dataclass-313-python-restored",
+      "tests": 262,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    {
+      "gate": "rem1-source-undoable-313-python",
+      "tests": 350,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-dataclass-313-python-v2",
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2
+    },
+    {
+      "gate": "rem1-installed-undoable-313-python-v3",
+      "tests": 349,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-undoable-313-python-v3-without-authority",
+      "tests": 342,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-source-dataclass-314-native-rust",
+      "tests": 262,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "gate": "rem1-source-undoable-314-native-rust",
+      "tests": 350,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-dataclass-314-native-rust-v2",
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "gate": "rem1-installed-undoable-314-native-rust-v3",
+      "tests": 349,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-undoable-314-native-rust-v3-without-authority",
+      "tests": 342,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-source-dataclass-314-python-restored",
+      "tests": 262,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "gate": "rem1-source-undoable-314-python",
+      "tests": 350,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-dataclass-314-python-v2",
+      "tests": 205,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "gate": "rem1-installed-undoable-314-python-v3",
+      "tests": 349,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "gate": "rem1-installed-undoable-314-python-v3-without-authority",
+      "tests": 342,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "neutral_authority_unchanged": true,
+  "scope": "Owner independent hash/raw-chain/XML arithmetic audit; drafter QA generator not imported or executed"
+}

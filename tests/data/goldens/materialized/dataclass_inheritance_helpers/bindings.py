@@ -1,6 +1,10 @@
 """Test-first merged metadata/layout and independent class-cell replacement."""
 
 import dataclasses as std
+import copy
+import pickle
+from dataclasses import FrozenInstanceError
+from support import inherited_lazy_models as inherited
 from yidl_dataclass import dataclass, const, generated_source
 
 
@@ -76,8 +80,65 @@ def render_case():
         ("Child", "subclass"),
         ("Child", "subclass"),
     ]
+    lazy_models = (
+        inherited.LazyBase,
+        inherited.LazyChild,
+        inherited.LazyGrandchild,
+        inherited.LazyOverride,
+    )
+    assert all(model.__slots__ == () for model in lazy_models[1:])
+    assert all(
+        model.__basicsize__ == lazy_models[0].__basicsize__ for model in lazy_models
+    )
+    inherited.EVENTS.clear()
+    for model in lazy_models:
+        item = model([2])
+        before = list(inherited.EVENTS)
+        copies = (
+            copy.copy(item),
+            copy.deepcopy(item),
+            pickle.loads(pickle.dumps(item)),
+        )
+        assert inherited.EVENTS == before
+        assert all(not hasattr(other, "_y_dc_store_1") for other in copies)
+        inherited.FAIL = True
+        try:
+            item.value
+        except Exception as exc:
+            assert isinstance(exc.__cause__, ValueError)
+        else:
+            raise AssertionError("failed factory accepted")
+        finally:
+            inherited.FAIL = False
+        inherited.BUSY_COPY = True
+        try:
+            item.value
+        except Exception as exc:
+            assert isinstance(exc, RuntimeError)
+        else:
+            raise AssertionError("active copy accepted")
+        finally:
+            inherited.BUSY_COPY = False
+        assert item.value == [2] and item.value is item.value
+        ready = (copy.copy(item), copy.deepcopy(item), pickle.loads(pickle.dumps(item)))
+        before = list(inherited.EVENTS)
+        assert all(other.value == [2] for other in ready) and inherited.EVENTS == before
+        item.value = [8]
+        assert item.value == [8]
+        del item.value
+        assert item.value == [2] and item.readonly == 7
+        try:
+            item.readonly = 9
+        except FrozenInstanceError:
+            pass
+        else:
+            raise AssertionError("readonly assignment accepted")
     return {
-        "generated_output.py": generated_source(Base) + "\n" + generated_source(Child),
+        "generated_output.py": generated_source(Base)
+        + "\n"
+        + generated_source(Child)
+        + "\n"
+        + "\n".join(generated_source(model) for model in lazy_models),
         "behavior.txt": str(events)
-        + "\nmerged-order=units,token,tag; slots-reused=True; class-cells-independent=True; super=mixin/base/child\n",
+        + "\nmerged-order=units,token,tag; slots-reused=True; class-cells-independent=True; super=mixin/base/child\nlazy-empty-chain-and-override=slots-reused; retry,busy-copy,reset,readonly,ready-and-unready-protocols=True\n",
     }

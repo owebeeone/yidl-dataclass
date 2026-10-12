@@ -1,0 +1,18 @@
+{
+  "status": "baseline counterexamples reproduced; closure pending",
+  "dataclass_revision": "f6c1c561c1670fc26b19da09537fc6822140d8d2",
+  "undoable_revision": "6e7edd17de5b30568f2ffa96dee24fa023dd3061",
+  "dataclass_wheel_sha256": "50e7a1b17f68de56d88441ee47df8d2b0a4377981dd236e591d2a8eff8ff5f1b",
+  "undoable_wheel_sha256": "346dcf928dd4bf52362195e1a351b0b716fe03a77ffc7a97b8a5e69310b4281d",
+  "requested_backend": "native-rust",
+  "python": "3.12.12",
+  "exit_code": 1,
+  "case_count": 9,
+  "failed_cases": 9,
+  "files": {
+    "owner_closure_probe.py": "1e322c845f14cae339b5881c32e01ad7d3e7d25443acd540591005852b02f8b7",
+    "owner_closure_red.json": "cdf9643297cec0b77d80fac5eb13c9d97a47a70efa7d349ed2e3e7d27f31b442"
+  },
+  "command": "PYTHONDONTWRITEBYTECODE=1 ASTICHI_LOWER_ENGINE=native-rust <installed-G-env>/bin/python -I owner_closure_probe.py",
+  "scope": "Owner independent baseline retrace. Same script will run against fresh installed correction. Reviewer reports establish separately selected backend/origin checks and broader matrix."
+}

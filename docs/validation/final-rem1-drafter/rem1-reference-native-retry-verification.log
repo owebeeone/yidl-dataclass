@@ -1,0 +1,3 @@
+rejected-fixed-symbol: hooks/metaclass observe internal name before public restoration
+safe-reference-route: direct original ContextVar/function capture attributes, aliases avoid all three public bindings
+backend=native-rust

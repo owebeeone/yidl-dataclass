@@ -1,0 +1,189 @@
+{
+  "all_six_no_authority_pass": true,
+  "all_six_regeneration_public_smokes_pass": true,
+  "artifact_references": 140,
+  "consumer_artifacts": {
+    "dataclass": [
+      {
+        "bytes": 86608,
+        "file": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+        "sha256": "2c72e83f76dc8b81680d90f27602fb54fb0c4e7c7a5f826349dcfbfbb79cc9eb"
+      },
+      {
+        "bytes": 1259390,
+        "file": "yidl_dataclass-0.1.0.dev0.tar.gz",
+        "sha256": "f58f7951b0f118e87b0547d8acba91dbe40ec17c53a55fb521432b933274bbfc"
+      }
+    ],
+    "undoable": [
+      {
+        "bytes": 62102,
+        "file": "yidl_undoable-0.1.0-py3-none-any.whl",
+        "sha256": "2974b01923a10acb60573c46bc3bd95b1bb8ec90198345b9162173bd327219cb"
+      },
+      {
+        "bytes": 100272,
+        "file": "yidl_undoable-0.1.0.tar.gz",
+        "sha256": "2996fadce36c2b6f5d1d3035ff1da6ab3755c4a1f7f4a31294f4c450648977ad"
+      }
+    ]
+  },
+  "distinct_raw_hashes": 123,
+  "explicit_sanitation_corrections": 16,
+  "final_installed_matrix": [
+    {
+      "backend": "native-rust",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 3,
+        "tests": 205
+      },
+      "member": "dataclass",
+      "minor": "312",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-312-native-rust-v2-verification.junit.xml"
+    },
+    {
+      "backend": "native-rust",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 349
+      },
+      "member": "undoable",
+      "minor": "312",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-native-rust-v3-verification.junit.xml"
+    },
+    {
+      "backend": "python",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 3,
+        "tests": 205
+      },
+      "member": "dataclass",
+      "minor": "312",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-312-python-v2-verification.junit.xml"
+    },
+    {
+      "backend": "python",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 349
+      },
+      "member": "undoable",
+      "minor": "312",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-python-v3-verification.junit.xml"
+    },
+    {
+      "backend": "native-rust",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 2,
+        "tests": 205
+      },
+      "member": "dataclass",
+      "minor": "313",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-313-native-rust-v2-verification.junit.xml"
+    },
+    {
+      "backend": "native-rust",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 349
+      },
+      "member": "undoable",
+      "minor": "313",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-native-rust-v3-verification.junit.xml"
+    },
+    {
+      "backend": "python",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 2,
+        "tests": 205
+      },
+      "member": "dataclass",
+      "minor": "313",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-313-python-v2-verification.junit.xml"
+    },
+    {
+      "backend": "python",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 349
+      },
+      "member": "undoable",
+      "minor": "313",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-python-v3-verification.junit.xml"
+    },
+    {
+      "backend": "native-rust",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 1,
+        "tests": 205
+      },
+      "member": "dataclass",
+      "minor": "314",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-314-native-rust-v2-verification.junit.xml"
+    },
+    {
+      "backend": "native-rust",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 349
+      },
+      "member": "undoable",
+      "minor": "314",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-native-rust-v3-verification.junit.xml"
+    },
+    {
+      "backend": "python",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 1,
+        "tests": 205
+      },
+      "member": "dataclass",
+      "minor": "314",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-314-python-v2-verification.junit.xml"
+    },
+    {
+      "backend": "python",
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 349
+      },
+      "member": "undoable",
+      "minor": "314",
+      "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-python-v3-verification.junit.xml"
+    }
+  ],
+  "frozen_h2_definition_sha256": "279995dee0f0a5088030714a4e9935bf51d139d1f92fad20a2b8af566fa3c29b",
+  "frozen_h2_source_hashes": 19,
+  "increments": 93,
+  "junit_files": 47,
+  "limits": "Historical H2 measurements retain their old artifact tuple; no timings performed and no numerical parity claim.",
+  "owned_distribution_paths": {
+    "dataclass": 35,
+    "undoable": 21
+  },
+  "result": "PASS"
+}

@@ -24,7 +24,9 @@ def test_wheel_and_sdist_include_public_documentation_and_example(tmp_path):
             "docs/Generation.md",
             "examples/first_use.py",
         ):
-            assert "yidl_dataclass/documentation/" + name in names, name
+            packaged = "yidl_dataclass/documentation/" + name
+            assert packaged in names, name
+            assert wheel.read(packaged) == (ROOT / name).read_bytes()
     with tarfile.open(next(tmp_path.glob("*.tar.gz"))) as sdist:
         names = {name.partition("/")[2] for name in sdist.getnames()}
         assert {

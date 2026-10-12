@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "[consumer-root]/tests/support/refresh_goldens.py", line 7, in <module>
+    from support.golden_case import run_multi_source_case
+ModuleNotFoundError: No module named 'support'

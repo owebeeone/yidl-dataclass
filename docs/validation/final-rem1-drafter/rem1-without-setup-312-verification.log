@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "[consumer-root]/docs/validation/final-rem1-drafter/package_gates.py", line 107, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "[consumer-root]/docs/validation/final-rem1-drafter/package_gates.py", line 103, in main
+    elif args.mode == 'without': without(args)
+                                 ~~~~~~~^^^^^^
+  File "[consumer-root]/docs/validation/final-rem1-drafter/package_gates.py", line 82, in without
+    wheelhouse = Path((Path(tempfile.gettempdir()) / 'yidl-dataclass-dependency-wheels-root.txt').read_text().strip())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "[runtime-root]/lib/python3.14/pathlib/__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[runtime-root]/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '[temp]/yidl-dataclass-dependency-wheels-root.txt'

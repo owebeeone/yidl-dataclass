@@ -1,0 +1,102 @@
+........................................................................ [ 20%]
+........................................................................ [ 41%]
+........................................................................ [ 61%]
+.....F.................................................................. [ 82%]
+..............................................................           [100%]
+=================================== FAILURES ===================================
+________ test_wheel_and_sdist_include_public_documentation_and_example _________
+
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1710/test_wheel_and_sdist_include_p0')
+
+    def test_wheel_and_sdist_include_public_documentation_and_example(tmp_path):
+>       subprocess.run(
+            [sys.executable, "-m", "hatchling", "build", "-d", str(tmp_path)],
+            cwd=ROOT,
+            capture_output=True,
+            check=True,
+        )
+
+[temp]/yidl-dataclass-final-rem1-p659xpds/installed-undoable-313-native-rust-v2/tests/test_distribution_contract.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = None, check = True
+popenargs = (['[temp]/yidl-dataclass-final-rem1-p659xpds/venv-313/bin/python', '...ate[temp]/pytest-of-user/pytest-1710/test_wheel_and_sdist_include_p0'],)
+kwargs = {'cwd': PosixPath('[temp]/yidl-dataclass-final-rem1-p659xpds/installed-undoable-313-native-rust-v2'), 'stderr': -1, 'stdout': -1}
+process = <Popen: returncode: 1 args: ['[external-truncated-path]>
+stdout = b''
+stderr = b'[sdist]\nTraceback (most recent call last):\n  File "<frozen runpy>", line 198, in _run_module_as_main\n  File "<fro..., in core_raw_metadata\n    raise ValueError(message)\nValueError: Missing `project` metadata table in configuration\n'
+retcode = 1
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['[temp]/yidl-dataclass-final-rem1-p659xpds/venv-313/bin/python', '-m', 'hatchling', 'build', '-d', '[temp]/pytest-of-user/pytest-1710/test_wheel_and_sdist_include_p0']' returned non-zero exit status 1.
+
+[package-runtime-root]/Cellar/python@3.13/3.13.12_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py:577: CalledProcessError
+=========================== short test summary info ============================
+FAILED ../../../../../../../../dev/test_distribution_contract.py::test_wheel_and_sdist_include_public_documentation_and_example
+1 failed, 349 passed in 14.27s

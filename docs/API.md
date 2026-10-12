@@ -13,10 +13,12 @@ dataclass(cls=None, /, *, init=True, repr=True, eq=True, order=False,
 ```
 
 All switches require exact booleans. Use `@dataclass` or `@dataclass(...)`.
-Decoration returns a generated replacement class with the declaration's bases,
-name/module/qualified name and supported methods/attributes. Bind that result as
-usual; retain the old declaration only when deliberately inspecting it.
-`slots=False` selects dictionary storage. `weakref_slot=True` requires slots.
+With `slots=True` (the default), decoration returns a generated replacement class
+with the declaration's bases, name/module/qualified name and supported
+methods/attributes. Bind that result as usual; retain the old declaration only
+for inspection. With `slots=False`, decoration updates and returns the original
+declaration, so existing references see its generated methods and metadata.
+`weakref_slot=True` requires slots.
 An existing local custom initializer or `init=False` suppresses ordinary generated
 initialization, including factories. A source-free ordinary `field(init=False)`
 may remain absent. Policy/frozen/InitVar/local-store/named-provider models require

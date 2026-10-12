@@ -1,0 +1,3 @@
+Both consumer sdists reproduced byte-identical wheels; public bytes and resource ownership PASS
+[temp]/yidl-dataclass-final-rem1-p659xpds/dataclass-final/sdist-rebuilt/yidl_dataclass-0.1.0.dev0-py3-none-any.whl
+[temp]/yidl-dataclass-final-rem1-p659xpds/undoable-final/sdist-rebuilt/yidl_undoable-0.1.0-py3-none-any.whl

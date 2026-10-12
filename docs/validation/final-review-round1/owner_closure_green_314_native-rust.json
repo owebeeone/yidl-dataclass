@@ -1,0 +1,41 @@
+{
+  "python": "3.14.3",
+  "cases": [
+    {
+      "case": "dataclass-type",
+      "pass": true
+    },
+    {
+      "case": "dataclass-tuple",
+      "pass": true
+    },
+    {
+      "case": "dataclass-dict",
+      "pass": true
+    },
+    {
+      "case": "dataclass-int",
+      "pass": true
+    },
+    {
+      "case": "dataclass-hash",
+      "pass": true
+    },
+    {
+      "case": "dataclass-_y_dc_converter_0",
+      "pass": true
+    },
+    {
+      "case": "inherited-lazy-slots",
+      "pass": true
+    },
+    {
+      "case": "undoable-_u_historical_write_scope",
+      "pass": true
+    },
+    {
+      "case": "undoable-_u_historical_eq",
+      "pass": true
+    }
+  ]
+}

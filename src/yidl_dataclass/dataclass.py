@@ -210,10 +210,14 @@ def dataclass(
         composable = generated.build_DataclassModule(builder.freeze())
         source = composable.emit_commented()
         tree = composable.to_executable_ast()
+        # Output names belong to module locals; methods keep unmodified captures.
+        results = {}
         exec(
-            compile(tree, "<yidl-dataclass-model>", "exec", dont_inherit=True), captures
+            compile(tree, "<yidl-dataclass-model>", "exec", dont_inherit=True),
+            captures,
+            results,
         )
-        model = captures[declaration.__name__]
+        model = results[declaration.__name__]
         if not options.slots:
             for name in names:
                 if name in declaration.__dict__ and name not in model.__dict__:

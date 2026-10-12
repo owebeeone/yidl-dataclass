@@ -1,0 +1,243 @@
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+_ test_original_capture_names_do_not_break_actual_comparison[_u_historical_write_scope] _
+
+name = '_u_historical_write_scope'
+
+    @pytest.mark.parametrize('name', ('_u_historical_write_scope','_u_historical_eq'))
+    def test_original_capture_names_do_not_break_actual_comparison(name):
+        model=undoable(builtins.type(name,(),{'__annotations__':{'value':int},'value':managed(default=2)}),eq=True)
+        @undoable
+        class Parent:
+            children:tuple=managed(default=())
+        manager=UndoRedoManager()
+        a,b=model(transaction_manager=manager),model(transaction_manager=manager)
+        parent=Parent(children=(a,),transaction_manager=manager)
+        manager.initialize(parent,a,b)
+>       assert a==b
+               ^^^^
+
+tests/test_comparison_capture_names.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_comparison_capture_names._u_historical_write_scope object at 0x108366080>
+other = <test_comparison_capture_names._u_historical_write_scope object at 0x108366350>
+
+>   ???
+E   AttributeError: type object '_u_historical_write_scope' has no attribute 'get'
+
+<undoable._u_historical_write_scope>:1: AttributeError
+_ test_original_capture_names_do_not_break_actual_comparison[_u_historical_eq] _
+
+name = '_u_historical_eq'
+
+    @pytest.mark.parametrize('name', ('_u_historical_write_scope','_u_historical_eq'))
+    def test_original_capture_names_do_not_break_actual_comparison(name):
+        model=undoable(builtins.type(name,(),{'__annotations__':{'value':int},'value':managed(default=2)}),eq=True)
+        @undoable
+        class Parent:
+            children:tuple=managed(default=())
+        manager=UndoRedoManager()
+        a,b=model(transaction_manager=manager),model(transaction_manager=manager)
+        parent=Parent(children=(a,),transaction_manager=manager)
+        manager.initialize(parent,a,b)
+        assert a==b
+        manager.begin()
+        try:
+>           parent.children=(b,)
+            ^^^^^^^^^^^^^^^
+
+tests/test_comparison_capture_names.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+<undoable.test_original_capture_names_do_not_break_actual_comparison.<locals>.Parent>:1: in children
+    ???
+src/yidl_undoable/facades.py:217: in _u_write_managed
+    self._u_state.manager._write_managed(self, name, value)
+src/yidl_undoable/transaction_yidl.py:610: in _write_managed
+    equal = self._call(
+src/yidl_undoable/transaction_yidl.py:662: in _call
+    return call(self, context, function)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_undoable/callbacks.py:60: in call
+    result = function()
+             ^^^^^^^^^^
+src/yidl_undoable/transaction_yidl.py:613: in <lambda>
+    old is value if fact["compare"] == "identity" else _historical_write_equal(old, value)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_undoable/write_comparison_context.py:21: in _historical_write_equal
+    return bool(old == value)
+                ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_comparison_capture_names._u_historical_eq object at 0x107d8a350>
+other = <test_comparison_capture_names._u_historical_eq object at 0x107d8bc50>
+
+>   ???
+E   TypeError: build_undoable_class.<locals>._u_historical_eq.__init__() takes 1 positional argument but 3 were given
+E   Parent.children: comparison
+
+<undoable._u_historical_eq>:1: TypeError
+_ test_capture_names_do_not_break_disabled_inheritance_resets[_u_historical_hash] _
+
+name = '_u_historical_hash'
+
+    @pytest.mark.parametrize('name', ('_u_historical_hash','_u_object_lt','_u_object_le','_u_object_gt','_u_object_ge'))
+    def test_capture_names_do_not_break_disabled_inheritance_resets(name):
+        @undoable(eq=True,order=True)
+        class Base:
+            value:int=managed(default=2)
+>       model=undoable(builtins.type(name,(Base,),{'__annotations__':{}}))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_capture_names.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_undoable/undoable.py:151: in undoable
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:149: in decorate
+    return _decorate(declaration, eq=eq, order=order)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:135: in _decorate
+    result = namespace["build_undoable_class"](base, schema=schema)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<undoable._u_historical_hash>:1: in build_undoable_class
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: cannot access free variable '_u_historical_hash' where it is not associated with a value in enclosing scope
+
+<undoable._u_historical_hash>:1: NameError
+__ test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_lt] ___
+
+name = '_u_object_lt'
+
+    @pytest.mark.parametrize('name', ('_u_historical_hash','_u_object_lt','_u_object_le','_u_object_gt','_u_object_ge'))
+    def test_capture_names_do_not_break_disabled_inheritance_resets(name):
+        @undoable(eq=True,order=True)
+        class Base:
+            value:int=managed(default=2)
+>       model=undoable(builtins.type(name,(Base,),{'__annotations__':{}}))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_capture_names.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_undoable/undoable.py:151: in undoable
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:149: in decorate
+    return _decorate(declaration, eq=eq, order=order)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:135: in _decorate
+    result = namespace["build_undoable_class"](base, schema=schema)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<undoable._u_object_lt>:1: in build_undoable_class
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: cannot access free variable '_u_object_lt' where it is not associated with a value in enclosing scope
+
+<undoable._u_object_lt>:1: NameError
+__ test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_le] ___
+
+name = '_u_object_le'
+
+    @pytest.mark.parametrize('name', ('_u_historical_hash','_u_object_lt','_u_object_le','_u_object_gt','_u_object_ge'))
+    def test_capture_names_do_not_break_disabled_inheritance_resets(name):
+        @undoable(eq=True,order=True)
+        class Base:
+            value:int=managed(default=2)
+>       model=undoable(builtins.type(name,(Base,),{'__annotations__':{}}))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_capture_names.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_undoable/undoable.py:151: in undoable
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:149: in decorate
+    return _decorate(declaration, eq=eq, order=order)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:135: in _decorate
+    result = namespace["build_undoable_class"](base, schema=schema)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<undoable._u_object_le>:1: in build_undoable_class
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: cannot access free variable '_u_object_le' where it is not associated with a value in enclosing scope
+
+<undoable._u_object_le>:1: NameError
+__ test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_gt] ___
+
+name = '_u_object_gt'
+
+    @pytest.mark.parametrize('name', ('_u_historical_hash','_u_object_lt','_u_object_le','_u_object_gt','_u_object_ge'))
+    def test_capture_names_do_not_break_disabled_inheritance_resets(name):
+        @undoable(eq=True,order=True)
+        class Base:
+            value:int=managed(default=2)
+>       model=undoable(builtins.type(name,(Base,),{'__annotations__':{}}))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_capture_names.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_undoable/undoable.py:151: in undoable
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:149: in decorate
+    return _decorate(declaration, eq=eq, order=order)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:135: in _decorate
+    result = namespace["build_undoable_class"](base, schema=schema)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<undoable._u_object_gt>:1: in build_undoable_class
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: cannot access free variable '_u_object_gt' where it is not associated with a value in enclosing scope
+
+<undoable._u_object_gt>:1: NameError
+__ test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_ge] ___
+
+name = '_u_object_ge'
+
+    @pytest.mark.parametrize('name', ('_u_historical_hash','_u_object_lt','_u_object_le','_u_object_gt','_u_object_ge'))
+    def test_capture_names_do_not_break_disabled_inheritance_resets(name):
+        @undoable(eq=True,order=True)
+        class Base:
+            value:int=managed(default=2)
+>       model=undoable(builtins.type(name,(Base,),{'__annotations__':{}}))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_comparison_capture_names.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_undoable/undoable.py:151: in undoable
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:149: in decorate
+    return _decorate(declaration, eq=eq, order=order)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_undoable/undoable.py:135: in _decorate
+    result = namespace["build_undoable_class"](base, schema=schema)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<undoable._u_object_ge>:1: in build_undoable_class
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   NameError: cannot access free variable '_u_object_ge' where it is not associated with a value in enclosing scope
+
+<undoable._u_object_ge>:1: NameError
+=========================== short test summary info ============================
+FAILED tests/test_comparison_capture_names.py::test_original_capture_names_do_not_break_actual_comparison[_u_historical_write_scope]
+FAILED tests/test_comparison_capture_names.py::test_original_capture_names_do_not_break_actual_comparison[_u_historical_eq]
+FAILED tests/test_comparison_capture_names.py::test_capture_names_do_not_break_disabled_inheritance_resets[_u_historical_hash]
+FAILED tests/test_comparison_capture_names.py::test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_lt]
+FAILED tests/test_comparison_capture_names.py::test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_le]
+FAILED tests/test_comparison_capture_names.py::test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_gt]
+FAILED tests/test_comparison_capture_names.py::test_capture_names_do_not_break_disabled_inheritance_resets[_u_object_ge]
+7 failed in 0.33s

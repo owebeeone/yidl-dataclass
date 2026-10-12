@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "[consumer-root]/tests/data/gold_src/dataclass_inheritance_helpers.py", line 104, in render_case
+    item.value
+  File "<yidl-dataclass-model>", line 1, in _y_dc_get_1
+  File "[consumer-root]/tests/support/inherited_lazy_models.py", line 14, in cache
+    copy.copy(self)
+  File "[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/copy.py", line 79, in copy
+    return copier(x)
+           ^^^^^^^^^
+  File "<yidl-dataclass-model>", line 1, in __copy__
+  File "<yidl-dataclass-model>", line 1, in __getstate__
+yidl_dataclass.errors.LazyInitializationError: LazyBase: active lazy copy/pickle is unsupported
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "[consumer-root]/docs/validation/final-rem1-drafter/run_contracts.py", line 8, in <module>
+    runpy.run_path(str(ROOT/'tests/data/gold_src'/name))['render_case']()
+  File "[consumer-root]/tests/data/gold_src/dataclass_inheritance_helpers.py", line 106, in render_case
+    assert isinstance(exc.__cause__,RuntimeError)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

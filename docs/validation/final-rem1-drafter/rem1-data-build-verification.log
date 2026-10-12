@@ -1,0 +1,6 @@
+{"artifacts": [{"bytes": 86608, "file": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl", "sha256": "2c72e83f76dc8b81680d90f27602fb54fb0c4e7c7a5f826349dcfbfbb79cc9eb"}, {"bytes": 1259390, "file": "yidl_dataclass-0.1.0.dev0.tar.gz", "sha256": "f58f7951b0f118e87b0547d8acba91dbe40ec17c53a55fb521432b933274bbfc"}], "member": "dataclass"}
+[sdist]
+[temp]/yidl-dataclass-final-rem1-p659xpds/dataclass-final/yidl_dataclass-0.1.0.dev0.tar.gz
+
+[wheel]
+[temp]/yidl-dataclass-final-rem1-p659xpds/dataclass-final/yidl_dataclass-0.1.0.dev0-py3-none-any.whl

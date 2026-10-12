@@ -1,0 +1,7 @@
+type: copy,deepcopy,state,pickle,callback-identity=True
+tuple: copy,deepcopy,state,pickle,callback-identity=True
+dict: copy,deepcopy,state,pickle,callback-identity=True
+int: copy,deepcopy,state,pickle,callback-identity=True
+hash: copy,deepcopy,state,pickle,callback-identity=True
+_y_dc_converter_0: copy,deepcopy,state,pickle,callback-identity=True
+hash-builtin=True; no-generation-callbacks=True

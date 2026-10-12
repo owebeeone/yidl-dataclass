@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="6" time="0.245" timestamp="2026-10-13T04:57:11.359937+11:00" hostname="[host]"><testcase classname="tests.test_result_namespace" name="test_result_binding_does_not_replace_method_dependencies[type]" time="0.175"><failure message="AssertionError: assert &lt;class 'test_result_namespace.type'&gt; is &lt;class 'type'&gt;&#10; +  where &lt;class 'test_result_namespace.type'&gt; = &lt;built-in method get of dict object at 0x10b558040&gt;('type', &lt;class 'type'&gt;)&#10; +    where &lt;built-in method get of dict object at 0x10b558040&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get&#10; +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function type.__init__ at 0x10be8a980&gt;.__globals__&#10; +        where &lt;function type.__init__ at 0x10be8a980&gt; = &lt;class 'test_result_namespace.type'&gt;.__init__">name = 'type'
+
+    @pytest.mark.parametrize('name', ('type','tuple','dict','int','hash','_y_dc_converter_0'))
+    def test_result_binding_does_not_replace_method_dependencies(name):
+        events=[]
+        def converter(value):
+            events.append(value)
+            return builtins.int(value)
+        private=name.startswith('_y_dc_')
+        model=dataclass(builtins.type(name, (), {'__annotations__': {'value': builtins.int}, 'value': field(default=3, converter=converter) if private else const(default=3)}), frozen=name=='hash')
+        assert events == []
+        expected=converter if private else getattr(builtins,name)
+&gt;       assert model.__init__.__globals__.get(name,expected) is expected
+E       AssertionError: assert &lt;class 'test_result_namespace.type'&gt; is &lt;class 'type'&gt;
+E        +  where &lt;class 'test_result_namespace.type'&gt; = &lt;built-in method get of dict object at 0x10b558040&gt;('type', &lt;class 'type'&gt;)
+E        +    where &lt;built-in method get of dict object at 0x10b558040&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get
+E        +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function type.__init__ at 0x10be8a980&gt;.__globals__
+E        +        where &lt;function type.__init__ at 0x10be8a980&gt; = &lt;class 'test_result_namespace.type'&gt;.__init__
+
+tests/test_result_namespace.py:16: AssertionError</failure></testcase><testcase classname="tests.test_result_namespace" name="test_result_binding_does_not_replace_method_dependencies[tuple]" time="0.006"><failure message="AssertionError: assert &lt;class 'test_result_namespace.tuple'&gt; is &lt;class 'tuple'&gt;&#10; +  where &lt;class 'test_result_namespace.tuple'&gt; = &lt;built-in method get of dict object at 0x10bdac6c0&gt;('tuple', &lt;class 'tuple'&gt;)&#10; +    where &lt;built-in method get of dict object at 0x10bdac6c0&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get&#10; +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function tuple.__init__ at 0x10bd7d940&gt;.__globals__&#10; +        where &lt;function tuple.__init__ at 0x10bd7d940&gt; = &lt;class 'test_result_namespace.tuple'&gt;.__init__">name = 'tuple'
+
+    @pytest.mark.parametrize('name', ('type','tuple','dict','int','hash','_y_dc_converter_0'))
+    def test_result_binding_does_not_replace_method_dependencies(name):
+        events=[]
+        def converter(value):
+            events.append(value)
+            return builtins.int(value)
+        private=name.startswith('_y_dc_')
+        model=dataclass(builtins.type(name, (), {'__annotations__': {'value': builtins.int}, 'value': field(default=3, converter=converter) if private else const(default=3)}), frozen=name=='hash')
+        assert events == []
+        expected=converter if private else getattr(builtins,name)
+&gt;       assert model.__init__.__globals__.get(name,expected) is expected
+E       AssertionError: assert &lt;class 'test_result_namespace.tuple'&gt; is &lt;class 'tuple'&gt;
+E        +  where &lt;class 'test_result_namespace.tuple'&gt; = &lt;built-in method get of dict object at 0x10bdac6c0&gt;('tuple', &lt;class 'tuple'&gt;)
+E        +    where &lt;built-in method get of dict object at 0x10bdac6c0&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get
+E        +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function tuple.__init__ at 0x10bd7d940&gt;.__globals__
+E        +        where &lt;function tuple.__init__ at 0x10bd7d940&gt; = &lt;class 'test_result_namespace.tuple'&gt;.__init__
+
+tests/test_result_namespace.py:16: AssertionError</failure></testcase><testcase classname="tests.test_result_namespace" name="test_result_binding_does_not_replace_method_dependencies[dict]" time="0.006"><failure message="AssertionError: assert &lt;class 'test_result_namespace.dict'&gt; is &lt;class 'dict'&gt;&#10; +  where &lt;class 'test_result_namespace.dict'&gt; = &lt;built-in method get of dict object at 0x10bcf0bc0&gt;('dict', &lt;class 'dict'&gt;)&#10; +    where &lt;built-in method get of dict object at 0x10bcf0bc0&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get&#10; +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function dict.__init__ at 0x10b6162a0&gt;.__globals__&#10; +        where &lt;function dict.__init__ at 0x10b6162a0&gt; = &lt;class 'test_result_namespace.dict'&gt;.__init__">name = 'dict'
+
+    @pytest.mark.parametrize('name', ('type','tuple','dict','int','hash','_y_dc_converter_0'))
+    def test_result_binding_does_not_replace_method_dependencies(name):
+        events=[]
+        def converter(value):
+            events.append(value)
+            return builtins.int(value)
+        private=name.startswith('_y_dc_')
+        model=dataclass(builtins.type(name, (), {'__annotations__': {'value': builtins.int}, 'value': field(default=3, converter=converter) if private else const(default=3)}), frozen=name=='hash')
+        assert events == []
+        expected=converter if private else getattr(builtins,name)
+&gt;       assert model.__init__.__globals__.get(name,expected) is expected
+E       AssertionError: assert &lt;class 'test_result_namespace.dict'&gt; is &lt;class 'dict'&gt;
+E        +  where &lt;class 'test_result_namespace.dict'&gt; = &lt;built-in method get of dict object at 0x10bcf0bc0&gt;('dict', &lt;class 'dict'&gt;)
+E        +    where &lt;built-in method get of dict object at 0x10bcf0bc0&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get
+E        +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function dict.__init__ at 0x10b6162a0&gt;.__globals__
+E        +        where &lt;function dict.__init__ at 0x10b6162a0&gt; = &lt;class 'test_result_namespace.dict'&gt;.__init__
+
+tests/test_result_namespace.py:16: AssertionError</failure></testcase><testcase classname="tests.test_result_namespace" name="test_result_binding_does_not_replace_method_dependencies[int]" time="0.006"><failure message="AssertionError: assert &lt;class 'test_result_namespace.int'&gt; is &lt;class 'int'&gt;&#10; +  where &lt;class 'test_result_namespace.int'&gt; = &lt;built-in method get of dict object at 0x10c2d2080&gt;('int', &lt;class 'int'&gt;)&#10; +    where &lt;built-in method get of dict object at 0x10c2d2080&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get&#10; +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function int.__init__ at 0x10c321e40&gt;.__globals__&#10; +        where &lt;function int.__init__ at 0x10c321e40&gt; = &lt;class 'test_result_namespace.int'&gt;.__init__">name = 'int'
+
+    @pytest.mark.parametrize('name', ('type','tuple','dict','int','hash','_y_dc_converter_0'))
+    def test_result_binding_does_not_replace_method_dependencies(name):
+        events=[]
+        def converter(value):
+            events.append(value)
+            return builtins.int(value)
+        private=name.startswith('_y_dc_')
+        model=dataclass(builtins.type(name, (), {'__annotations__': {'value': builtins.int}, 'value': field(default=3, converter=converter) if private else const(default=3)}), frozen=name=='hash')
+        assert events == []
+        expected=converter if private else getattr(builtins,name)
+&gt;       assert model.__init__.__globals__.get(name,expected) is expected
+E       AssertionError: assert &lt;class 'test_result_namespace.int'&gt; is &lt;class 'int'&gt;
+E        +  where &lt;class 'test_result_namespace.int'&gt; = &lt;built-in method get of dict object at 0x10c2d2080&gt;('int', &lt;class 'int'&gt;)
+E        +    where &lt;built-in method get of dict object at 0x10c2d2080&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get
+E        +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function int.__init__ at 0x10c321e40&gt;.__globals__
+E        +        where &lt;function int.__init__ at 0x10c321e40&gt; = &lt;class 'test_result_namespace.int'&gt;.__init__
+
+tests/test_result_namespace.py:16: AssertionError</failure></testcase><testcase classname="tests.test_result_namespace" name="test_result_binding_does_not_replace_method_dependencies[hash]" time="0.008"><failure message="AssertionError: assert &lt;class 'test_result_namespace.hash'&gt; is &lt;built-in function hash&gt;&#10; +  where &lt;class 'test_result_namespace.hash'&gt; = &lt;built-in method get of dict object at 0x10bc6c500&gt;('hash', &lt;built-in function hash&gt;)&#10; +    where &lt;built-in method get of dict object at 0x10bc6c500&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get&#10; +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function hash.__init__ at 0x10c323060&gt;.__globals__&#10; +        where &lt;function hash.__init__ at 0x10c323060&gt; = &lt;class 'test_result_namespace.hash'&gt;.__init__">name = 'hash'
+
+    @pytest.mark.parametrize('name', ('type','tuple','dict','int','hash','_y_dc_converter_0'))
+    def test_result_binding_does_not_replace_method_dependencies(name):
+        events=[]
+        def converter(value):
+            events.append(value)
+            return builtins.int(value)
+        private=name.startswith('_y_dc_')
+        model=dataclass(builtins.type(name, (), {'__annotations__': {'value': builtins.int}, 'value': field(default=3, converter=converter) if private else const(default=3)}), frozen=name=='hash')
+        assert events == []
+        expected=converter if private else getattr(builtins,name)
+&gt;       assert model.__init__.__globals__.get(name,expected) is expected
+E       AssertionError: assert &lt;class 'test_result_namespace.hash'&gt; is &lt;built-in function hash&gt;
+E        +  where &lt;class 'test_result_namespace.hash'&gt; = &lt;built-in method get of dict object at 0x10bc6c500&gt;('hash', &lt;built-in function hash&gt;)
+E        +    where &lt;built-in method get of dict object at 0x10bc6c500&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get
+E        +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function hash.__init__ at 0x10c323060&gt;.__globals__
+E        +        where &lt;function hash.__init__ at 0x10c323060&gt; = &lt;class 'test_result_namespace.hash'&gt;.__init__
+
+tests/test_result_namespace.py:16: AssertionError</failure></testcase><testcase classname="tests.test_result_namespace" name="test_result_binding_does_not_replace_method_dependencies[_y_dc_converter_0]" time="0.010"><failure message="AssertionError: assert &lt;class 'test_result_namespace._y_dc_converter_0'&gt; is &lt;function test_result_binding_does_not_replace_method_dependencies.&lt;locals&gt;.converter at 0x10c323d80&gt;&#10; +  where &lt;class 'test_result_namespace._y_dc_converter_0'&gt; = &lt;built-in method get of dict object at 0x10bda3840&gt;('_y_dc_converter_0', &lt;function test_result_binding_does_not_replace_method_dependencies.&lt;locals&gt;.converter at 0x10c323d80&gt;)&#10; +    where &lt;built-in method get of dict object at 0x10bda3840&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get&#10; +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function _y_dc_converter_0.__init__ at 0x10c380180&gt;.__globals__&#10; +        where &lt;function _y_dc_converter_0.__init__ at 0x10c380180&gt; = &lt;class 'test_result_namespace._y_dc_converter_0'&gt;.__init__">name = '_y_dc_converter_0'
+
+    @pytest.mark.parametrize('name', ('type','tuple','dict','int','hash','_y_dc_converter_0'))
+    def test_result_binding_does_not_replace_method_dependencies(name):
+        events=[]
+        def converter(value):
+            events.append(value)
+            return builtins.int(value)
+        private=name.startswith('_y_dc_')
+        model=dataclass(builtins.type(name, (), {'__annotations__': {'value': builtins.int}, 'value': field(default=3, converter=converter) if private else const(default=3)}), frozen=name=='hash')
+        assert events == []
+        expected=converter if private else getattr(builtins,name)
+&gt;       assert model.__init__.__globals__.get(name,expected) is expected
+E       AssertionError: assert &lt;class 'test_result_namespace._y_dc_converter_0'&gt; is &lt;function test_result_binding_does_not_replace_method_dependencies.&lt;locals&gt;.converter at 0x10c323d80&gt;
+E        +  where &lt;class 'test_result_namespace._y_dc_converter_0'&gt; = &lt;built-in method get of dict object at 0x10bda3840&gt;('_y_dc_converter_0', &lt;function test_result_binding_does_not_replace_method_dependencies.&lt;locals&gt;.converter at 0x10c323d80&gt;)
+E        +    where &lt;built-in method get of dict object at 0x10bda3840&gt; = {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...}.get
+E        +      where {'__builtins__': {'ArithmeticError': &lt;class 'ArithmeticError'&gt;, 'AssertionError': &lt;class 'AssertionError'&gt;, 'Attribute...&gt;, &lt;class 'yidl_dataclass.errors.FieldValidationError'&gt;, &lt;class 'yidl_dataclass.errors.LazyInitializationError'&gt;), ...} = &lt;function _y_dc_converter_0.__init__ at 0x10c380180&gt;.__globals__
+E        +        where &lt;function _y_dc_converter_0.__init__ at 0x10c380180&gt; = &lt;class 'test_result_namespace._y_dc_converter_0'&gt;.__init__
+
+tests/test_result_namespace.py:16: AssertionError</failure></testcase></testsuite></testsuites>

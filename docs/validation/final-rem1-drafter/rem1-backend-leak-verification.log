@@ -1,0 +1,16 @@
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+_______________ test_requested_backend_survives_frozen_cli_mock ________________
+
+    def test_requested_backend_survives_frozen_cli_mock():
+        expected=os.environ['REMEDIATION_EXPECTED_BACKEND']
+>       assert os.environ['ASTICHI_LOWER_ENGINE']==expected
+E       AssertionError: assert 'native-rust' == 'python'
+E         
+E         - python
+E         + native-rust
+
+docs/validation/final-rem1-drafter/backend_restoration_test.py:7: AssertionError
+=========================== short test summary info ============================
+FAILED docs/validation/final-rem1-drafter/backend_restoration_test.py::test_requested_backend_survives_frozen_cli_mock
+1 failed, 1 passed in 0.11s

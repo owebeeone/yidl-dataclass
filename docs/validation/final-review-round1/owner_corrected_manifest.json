@@ -1,0 +1,35 @@
+{
+  "status": "all nine original cases pass in six isolated installed environments",
+  "wheels": [
+    {
+      "member": "yidl-dataclass",
+      "wheel_sha256": "2c72e83f76dc8b81680d90f27602fb54fb0c4e7c7a5f826349dcfbfbb79cc9eb",
+      "source_members_matched": 32,
+      "public_documentation_matched": true
+    },
+    {
+      "member": "yidl_undoable",
+      "wheel_sha256": "2974b01923a10acb60573c46bc3bd95b1bb8ec90198345b9162173bd327219cb",
+      "source_members_matched": 30,
+      "public_documentation_matched": true
+    }
+  ],
+  "original_dependencies": "Astichi 1.1.3 / YIDL 0.1.0 / Lifecycle 0.1.0; Lark 1.3.1 restored by fresh installation",
+  "backend_and_origin_guards": "owner_installed_wrapper.py checks selected engine, no fallback, installed prefix origins and exact versions",
+  "files": {
+    "owner_baseline_manifest.json": "560d8f2ed035bb3b89797021f559bfebfb20884e4d383cdac83b79e8ad1f5168",
+    "owner_closure_green_312_native-rust.json": "3ad38c13b4ae58a6023bb2e004c04f30d8bce208b6f45e10bc2f8622016d7be5",
+    "owner_closure_green_312_python.json": "3ad38c13b4ae58a6023bb2e004c04f30d8bce208b6f45e10bc2f8622016d7be5",
+    "owner_closure_green_313_native-rust.json": "b1fe1f2eda610574d86e2ff7e5aee02a60981b778b4110f49f8528735f24099f",
+    "owner_closure_green_313_python.json": "b1fe1f2eda610574d86e2ff7e5aee02a60981b778b4110f49f8528735f24099f",
+    "owner_closure_green_314_native-rust.json": "45ebddd207fb60edfe84e7b3027e9e4351698249922aa53c0f006866f2786e4b",
+    "owner_closure_green_314_python.json": "45ebddd207fb60edfe84e7b3027e9e4351698249922aa53c0f006866f2786e4b",
+    "owner_closure_probe.py": "1e322c845f14cae339b5881c32e01ad7d3e7d25443acd540591005852b02f8b7",
+    "owner_closure_red.json": "cdf9643297cec0b77d80fac5eb13c9d97a47a70efa7d349ed2e3e7d27f31b442",
+    "owner_drafter_audit.json": "05209b6c49053d3cd45eb4d312957e5b490d5251ebd82235388a3869f4e32245",
+    "owner_historical_performance_guard.json": "1758d4063b13eb7148faa0f1adc9358483ea16d6d9e23f2d042f45ce82f02143",
+    "owner_installed_wrapper.py": "5baa7e4322443d760715a637dfb15a5e6872d4d1dd4744c211508a0b461cc37b",
+    "owner_original_dependencies.json": "273bf7407480262ccaf69569f691891c8622b106eec0e92e3a602e2cf7ee7fd9"
+  },
+  "billing": "unavailable"
+}

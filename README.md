@@ -43,7 +43,7 @@ The [generation guide](docs/Generation.md) explains emitted source, packaging,
 regeneration and the reusable comparison resource.
 
 The main differences from stdlib dataclasses are slots enabled by default, strict
-boolean flags, generated class replacement, no `__post_init__`, hidden InitVars,
+boolean flags, replacement of slotted declarations, no `__post_init__`, hidden InitVars,
 field-specific read-only properties, and explicitly excluded writable frozen
 caches. Several advanced combinations are rejected rather than silently ignored;
 the API guide lists them. Std `Field`, `MISSING`, `InitVar`, `KW_ONLY`, inspection

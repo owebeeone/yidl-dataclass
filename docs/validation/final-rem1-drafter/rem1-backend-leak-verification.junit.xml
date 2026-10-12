@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="0.106" timestamp="2026-10-13T05:09:49.588972+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_gate_integrity" name="test_failed_final_validation_preserves_completed_result" time="0.003" /><testcase classname="docs.validation.final-rem1-drafter.backend_restoration_test" name="test_requested_backend_survives_frozen_cli_mock" time="0.000"><failure message="AssertionError: assert 'native-rust' == 'python'&#10;  &#10;  - python&#10;  + native-rust">def test_requested_backend_survives_frozen_cli_mock():
+        expected=os.environ['REMEDIATION_EXPECTED_BACKEND']
+&gt;       assert os.environ['ASTICHI_LOWER_ENGINE']==expected
+E       AssertionError: assert 'native-rust' == 'python'
+E         
+E         - python
+E         + native-rust
+
+docs/validation/final-rem1-drafter/backend_restoration_test.py:7: AssertionError</failure></testcase></testsuite></testsuites>

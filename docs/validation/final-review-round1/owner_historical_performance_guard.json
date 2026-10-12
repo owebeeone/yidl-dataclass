@@ -1,0 +1,12 @@
+{
+  "status": "historical H2 source/raw artifacts unchanged",
+  "harness_source_count": 19,
+  "original_reviewed_dataclass": "f6c1c561c1670fc26b19da09537fc6822140d8d2",
+  "comparison_scope": [
+    "docs/validation/perf",
+    "docs/validation/stage-h2-preparation/definition.json",
+    "tests/data/perf"
+  ],
+  "final_byte_performance_claim": false,
+  "limits": "Namespace setup changes affect decoration; Undoable carrier attribute reads change comparison prelude and dependent setter seam paths. No timing rerun occurred. All H2 timings remain observations of the original artifact tuple. Inherited lazy layouts were not benchmarked."
+}

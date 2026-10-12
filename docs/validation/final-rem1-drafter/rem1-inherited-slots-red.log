@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "[consumer-root]/docs/validation/final-rem1-drafter/run_contracts.py", line 8, in <module>
+    runpy.run_path(str(ROOT/'tests/data/gold_src'/name))['render_case']()
+  File "[consumer-root]/tests/data/gold_src/dataclass_inheritance_helpers.py", line 84, in render_case
+    assert all(model.__slots__==() for model in lazy_models[1:])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

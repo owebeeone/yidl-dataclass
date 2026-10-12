@@ -1,0 +1,5 @@
+usage: run_fresh.py [-h] [--minor {312,313,314}]
+                    [--backend {native-rust,python}]
+                    [--member {dataclass,undoable}]
+                    ...
+run_fresh.py: error: unrecognized arguments: -I

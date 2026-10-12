@@ -240,3 +240,9 @@ Original H2 measurements retain their original byte provenance. Supplied
 external environments now lack Lark source/metadata; recorded prior smokes pass,
 delete cause unknown. The observation is retained separately, and fresh isolated
 environments will verify the correction without dependency source changes.
+
+The sole drafter is now stopped after the merged correction.
+`Dataclass-FinalRemResult.md` records independent owner closure probes, original
+dependency payload checks and raw/XML/owned-file audit. All source, installed,
+absent-authority and package/resource gates pass. A settled correction tuple
+and same-reviewer focused re-verdict remain; no final acceptance yet.

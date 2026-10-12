@@ -1,0 +1,1147 @@
+{
+  "consumer_artifacts": {
+    "dataclass": [
+      {
+        "bytes": 86608,
+        "file": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+        "sha256": "2c72e83f76dc8b81680d90f27602fb54fb0c4e7c7a5f826349dcfbfbb79cc9eb"
+      },
+      {
+        "bytes": 1259390,
+        "file": "yidl_dataclass-0.1.0.dev0.tar.gz",
+        "sha256": "f58f7951b0f118e87b0547d8acba91dbe40ec17c53a55fb521432b933274bbfc"
+      }
+    ],
+    "undoable": [
+      {
+        "bytes": 62102,
+        "file": "yidl_undoable-0.1.0-py3-none-any.whl",
+        "sha256": "2974b01923a10acb60573c46bc3bd95b1bb8ec90198345b9162173bd327219cb"
+      },
+      {
+        "bytes": 100272,
+        "file": "yidl_undoable-0.1.0.tar.gz",
+        "sha256": "2996fadce36c2b6f5d1d3035ff1da6ab3755c4a1f7f4a31294f4c450648977ad"
+      }
+    ]
+  },
+  "files": {
+    "dataclass": [
+      {
+        "bytes": 3168,
+        "path": "README.md",
+        "sha256": "c47e8a3bfa6d87bab64cd9f8c3b261836aa339f9ebccecba30ba5abe47233446"
+      },
+      {
+        "bytes": 14415,
+        "path": "docs/API.md",
+        "sha256": "6af862c0cdd21e1ece9188830f72972ed16e5fd5b1c256e6c9931b306e1ad0e7"
+      },
+      {
+        "bytes": 11289,
+        "path": "docs/validation/final-rem1-drafter/README.md",
+        "sha256": "ffaa5bf01721986222b337dc192f2990247f8fcf7bc537dddf0a0de9983be117"
+      },
+      {
+        "bytes": 432,
+        "path": "docs/validation/final-rem1-drafter/backend_restoration_test.py",
+        "sha256": "73de605acb8f986074727ba54bfe4bc2524b882d814677554950faf3f524ea1e"
+      },
+      {
+        "bytes": 1115,
+        "path": "docs/validation/final-rem1-drafter/build_consumers.py",
+        "sha256": "27c4e299061d1c329003b36b0d9111faf48e0a5885bb149368686863003358b2"
+      },
+      {
+        "bytes": 898,
+        "path": "docs/validation/final-rem1-drafter/capture_audit.py",
+        "sha256": "d457901bfdb05991d566fd268becb3c9129facb7f4e90c2da00413d1f6def06e"
+      },
+      {
+        "bytes": 3692,
+        "path": "docs/validation/final-rem1-drafter/changed-distribution-paths.json",
+        "sha256": "1efae02d6733a9a743ee41abbf55205fe689b95d38b834eb19a1bd300233cec6"
+      },
+      {
+        "bytes": 6747,
+        "path": "docs/validation/final-rem1-drafter/check_evidence.py",
+        "sha256": "1ce0992e597ca35b85e3fdc88078f29c73ff82855438d36572f2c020f2eb477d"
+      },
+      {
+        "bytes": 331,
+        "path": "docs/validation/final-rem1-drafter/dataclass-artifacts.json",
+        "sha256": "3b552ae26fc13f23bd904bf08157dc32ba300dd49ce387abb2bf6b28d3eb59ec"
+      },
+      {
+        "bytes": 6208,
+        "path": "docs/validation/final-rem1-drafter/environment-312-native-rust.json",
+        "sha256": "81ea5dfa32abbb37aa0fdc7847890949e7a4f779ddb2342a9e9a6ca6846d2f46"
+      },
+      {
+        "bytes": 6203,
+        "path": "docs/validation/final-rem1-drafter/environment-312-python.json",
+        "sha256": "bd8901a29bc4a86de6bde7e82d79e6f02da7529213222766aa33b8e87c116b3f"
+      },
+      {
+        "bytes": 6208,
+        "path": "docs/validation/final-rem1-drafter/environment-313-native-rust.json",
+        "sha256": "6c4b05f505d87f3658bc2724676e9032f461369a3371d7f50d193bbbecde8e26"
+      },
+      {
+        "bytes": 6203,
+        "path": "docs/validation/final-rem1-drafter/environment-313-python.json",
+        "sha256": "772cda350f7aef3ca440058af14b60b777b61239727bb70d9e942668eb9fc495"
+      },
+      {
+        "bytes": 6207,
+        "path": "docs/validation/final-rem1-drafter/environment-314-native-rust.json",
+        "sha256": "8afded5267280e4dc675bb72cea9e37f97e0b87d10415906d136a015e5320cb2"
+      },
+      {
+        "bytes": 6202,
+        "path": "docs/validation/final-rem1-drafter/environment-314-python.json",
+        "sha256": "9be5ba27dab2389d775d0ca6df1af53d7d058f1e1240ea5a8d0fd05b4e1ed492"
+      },
+      {
+        "bytes": 1395,
+        "path": "docs/validation/final-rem1-drafter/environment_probe.py",
+        "sha256": "b94dc2ff192ccb4ded2105d1c3af027d973b1151ba984bb73e3b8e394800cf40"
+      },
+      {
+        "bytes": 2701,
+        "path": "docs/validation/final-rem1-drafter/feasibility.py",
+        "sha256": "2c6779a3a057f69a499b5b7e8ca89cd1d3d28e4fe23e407b3798d3f553defda0"
+      },
+      {
+        "bytes": 98670,
+        "path": "docs/validation/final-rem1-drafter/increments.jsonl",
+        "sha256": "d622decbff9346633732c2d1134afecb56e2d8f291fca33640aeabca83266d53"
+      },
+      {
+        "bytes": 3547,
+        "path": "docs/validation/final-rem1-drafter/installed_matrix.py",
+        "sha256": "11a4eea583b86d9b0264ac404de13b3a5cc7678489e4b7244589f1b43596c239"
+      },
+      {
+        "bytes": 9025,
+        "path": "docs/validation/final-rem1-drafter/package-rebuilds.json",
+        "sha256": "1c81eff3e0a936eed64c675f066bb82e6785d2556fedb292a56b12199775da3a"
+      },
+      {
+        "bytes": 6369,
+        "path": "docs/validation/final-rem1-drafter/package_gates.py",
+        "sha256": "b4fe135d9d541ded2afd21d6d4eb60e7b7dac080fb22d5b7df87315f779e20a1"
+      },
+      {
+        "bytes": 5291,
+        "path": "docs/validation/final-rem1-drafter/qa.json",
+        "sha256": "6d2bc456ef8c0720448f0e9d133b37501152f9f492b2c6e93b3df9cdeee1efc1"
+      },
+      {
+        "bytes": 3394,
+        "path": "docs/validation/final-rem1-drafter/record_increment.py",
+        "sha256": "14f5d072e1a6acb8a1258f3e32063ff463f204e340e505a05d4331414ff8754b"
+      },
+      {
+        "bytes": 1029,
+        "path": "docs/validation/final-rem1-drafter/rem1-backend-leak-verification.junit.xml",
+        "sha256": "defd8ffa403bd94e9c5544cf76ed13d73449ea92785c784e33c21014b895288c"
+      },
+      {
+        "bytes": 843,
+        "path": "docs/validation/final-rem1-drafter/rem1-backend-leak-verification.log",
+        "sha256": "9dc07c359e88c13fad4b9f7715d5f913080018ef94d2b2211d0b946ec1e8ede0"
+      },
+      {
+        "bytes": 530,
+        "path": "docs/validation/final-rem1-drafter/rem1-backend-restored-verification.junit.xml",
+        "sha256": "ef989a196e2dff56325adadd2a8136ce4e64447e11b79f4afc3f146e565acae7"
+      },
+      {
+        "bytes": 98,
+        "path": "docs/validation/final-rem1-drafter/rem1-backend-restored-verification.log",
+        "sha256": "19e95f03931508bcb63d5f1f276741db94fd3f8f0399d2690ed306a73c3ba6c7"
+      },
+      {
+        "bytes": 540,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-build-verification.log",
+        "sha256": "7b6873c698d5a6d058498ecae4ac652778f6caff7b1ff746a68b8348c1b8d4f7"
+      },
+      {
+        "bytes": 0,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-goldens-retry-312-verification.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-goldens-retry-313-verification.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-goldens-retry-314-verification.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 1065,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-names-green.junit.xml",
+        "sha256": "291071dfcebc9c5ce212675b14ef248221a4002a63b44a3387e76f3f7100c89c"
+      },
+      {
+        "bytes": 98,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-names-green.log",
+        "sha256": "d0d01de59c5c7e1f92c1ce4304c821a5336a981420918b884138939cbffb7a59"
+      },
+      {
+        "bytes": 19196,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-names-red.junit.xml",
+        "sha256": "708f53452f1f450ce03fcde0e1b8861f5eba2dad6a564ed5add6b5468234ca81"
+      },
+      {
+        "bytes": 12018,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-names-red.log",
+        "sha256": "076d9c38cf71b5cb9adade0e0b8fdc0304959ba8e52d8c5f411cee58090e3039"
+      },
+      {
+        "bytes": 32,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-protocol-green.log",
+        "sha256": "6c982d77f640a0575fc46887aff6d1983989deecb74f48f7c23eb8dc9401ee67"
+      },
+      {
+        "bytes": 631,
+        "path": "docs/validation/final-rem1-drafter/rem1-data-protocol-red.log",
+        "sha256": "6edacc798768c58513873a57e7b082dd90851f3a05885cafa4086be14c53f38a"
+      },
+      {
+        "bytes": 219,
+        "path": "docs/validation/final-rem1-drafter/rem1-dataclass-goldens-312-verification.log",
+        "sha256": "ed79a234a41456526d6101d0a885375d641bdaccb06ee99d62d7336768e65101"
+      },
+      {
+        "bytes": 219,
+        "path": "docs/validation/final-rem1-drafter/rem1-dataclass-goldens-313-verification.log",
+        "sha256": "ed79a234a41456526d6101d0a885375d641bdaccb06ee99d62d7336768e65101"
+      },
+      {
+        "bytes": 219,
+        "path": "docs/validation/final-rem1-drafter/rem1-dataclass-goldens-314-verification.log",
+        "sha256": "ed79a234a41456526d6101d0a885375d641bdaccb06ee99d62d7336768e65101"
+      },
+      {
+        "bytes": 88,
+        "path": "docs/validation/final-rem1-drafter/rem1-extra-capture-domain-verification.log",
+        "sha256": "e5cd5eeec8a2de1e9eac4c3dd6f3cc46edb11c9443afbc5d404eb9f374f95ddc"
+      },
+      {
+        "bytes": 0,
+        "path": "docs/validation/final-rem1-drafter/rem1-format-refactor.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 1172,
+        "path": "docs/validation/final-rem1-drafter/rem1-inherited-slots-green.log",
+        "sha256": "294d7e5301ddf1006c8274d9d0b0672b037d8450feaf05e52e82daa6d9383916"
+      },
+      {
+        "bytes": 39,
+        "path": "docs/validation/final-rem1-drafter/rem1-inherited-slots-oracle-corrected-green.log",
+        "sha256": "589f89b150e6485480d4d44997d118edef2d86c91d0babda4bf3e35bed4ea389"
+      },
+      {
+        "bytes": 455,
+        "path": "docs/validation/final-rem1-drafter/rem1-inherited-slots-red.log",
+        "sha256": "178cf9d9c5d1cf758cc6aebbcf4185007f73bb36cf697596d2d259807f1cec47"
+      },
+      {
+        "bytes": 26093,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-312-native-rust-v2-verification.junit.xml",
+        "sha256": "0d63774acabdf26d1fb92b0ba2dc60412a97f6503c8434fc24f5aa53fa5d2d3d"
+      },
+      {
+        "bytes": 282,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-312-native-rust-v2-verification.log",
+        "sha256": "5e654daab9740ea064727bd09848c6afee04fc5c4bed956defd1f23241c18e30"
+      },
+      {
+        "bytes": 126,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-312-native-rust-verification.log",
+        "sha256": "2f5ed7fb76fc3c535c108f4c66bc6a72db3ceb6aaea3248bb6f34e861fbaf9c9"
+      },
+      {
+        "bytes": 26079,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-312-python-v2-verification.junit.xml",
+        "sha256": "4ce3c429180a47c203bf5f7e6e554d66d887f6204729e4fa6d0d12c884560198"
+      },
+      {
+        "bytes": 283,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-312-python-v2-verification.log",
+        "sha256": "7dff943f6ace295cba78875da85ab3e5715368d32279c15590c424437a81656f"
+      },
+      {
+        "bytes": 25822,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-313-native-rust-v2-verification.junit.xml",
+        "sha256": "e82df93c4cc74cbb8421557991fd307cf836aa839fe07d337f3d16b801d0131e"
+      },
+      {
+        "bytes": 282,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-313-native-rust-v2-verification.log",
+        "sha256": "a2344624d8b68158ba44e4ac8a735a5988c110e7f5c43bc3c1e2f953c6c3395e"
+      },
+      {
+        "bytes": 25813,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-313-python-v2-verification.junit.xml",
+        "sha256": "4df6008f4f52c7d09109e4f4c6c58bde9702afe313ec7420ff588b6f19446c57"
+      },
+      {
+        "bytes": 283,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-313-python-v2-verification.log",
+        "sha256": "6436a7f4acbd0072e9098998359db985b0878cec06bf80d450f2004fe0d37900"
+      },
+      {
+        "bytes": 25542,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-314-native-rust-v2-verification.junit.xml",
+        "sha256": "32fb36946b295ba1fc831e6afa5f8408e97e56a7b151b97530001b3e4b454d27"
+      },
+      {
+        "bytes": 282,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-314-native-rust-v2-verification.log",
+        "sha256": "31bdaa335494197d4db5d8bae26646d1d3aad2ec8460fa24c4af95d2beb960cf"
+      },
+      {
+        "bytes": 25538,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-314-python-v2-verification.junit.xml",
+        "sha256": "609516c63ec15300a617737087c88eb8303541cefbc099da3311af532e94cbca"
+      },
+      {
+        "bytes": 283,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-dataclass-314-python-v2-verification.log",
+        "sha256": "dee02e658560c945bc307651f31580bc0014ad30c375be2a22627302a95d4685"
+      },
+      {
+        "bytes": 52425,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-native-rust-v2-verification.junit.xml",
+        "sha256": "288dff58cc9ccc467d8760c1be54f20ef6357a8b1c106f72a85a6a6af4805378"
+      },
+      {
+        "bytes": 5921,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-native-rust-v2-verification.log",
+        "sha256": "d7c0c67cf60582cb31a6ae3bcac3c8bc31738e4e58f7a62338297009e0234adb"
+      },
+      {
+        "bytes": 46873,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-native-rust-v3-verification.junit.xml",
+        "sha256": "e9539e6e564d7f2ff08ee3db1940e9ab8279afa6240858d499c167030504c3ca"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-native-rust-v3-verification.log",
+        "sha256": "645465e237ccedc5fbd194e48ab4bdfbadce0c0e300e3164297f8cce80dae793"
+      },
+      {
+        "bytes": 46072,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-native-rust-v3-without-authority-verification.junit.xml",
+        "sha256": "e515d677d709265fb2da8c1bbe5e942679bc8087d9a2f019230653412e30e7f9"
+      },
+      {
+        "bytes": 434,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-native-rust-v3-without-authority-verification.log",
+        "sha256": "d4cf6c146cc3adb51a55b64e2ee267a591ff4f107044e233c39da98856e09075"
+      },
+      {
+        "bytes": 52415,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-python-v2-verification.junit.xml",
+        "sha256": "eceef4be9372b98ee24fc5a21236f113df405c5f0ed2f517da837c171649b56f"
+      },
+      {
+        "bytes": 5911,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-python-v2-verification.log",
+        "sha256": "99beb2961e60d14bb70262bc61cdf9a60ea349241bf650eb7c80e26c2fdc343c"
+      },
+      {
+        "bytes": 46873,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-python-v3-verification.junit.xml",
+        "sha256": "e96d23ac423690a85238729de0a29ee2cee127dece557b2c5773520d28bb5435"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-python-v3-verification.log",
+        "sha256": "90aebcc3fd2d620e6c8a50f2eae50d3d80d776fb16259946417dff74cb61632c"
+      },
+      {
+        "bytes": 46072,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-python-v3-without-authority-verification.junit.xml",
+        "sha256": "6737dcea7115daa36ab0a103d2cc693465ef0ecd331b9784d7e355be3b87ba7f"
+      },
+      {
+        "bytes": 434,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-312-python-v3-without-authority-verification.log",
+        "sha256": "3fd1657256af5d8b47196eaab921d7401a87311a46b0431725e4704e4b1bf9f2"
+      },
+      {
+        "bytes": 52446,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-native-rust-v2-verification.junit.xml",
+        "sha256": "dd4b3b6005ca958e5065915eaada9742bbd94b2282bacb09aabe8fe305b45c70"
+      },
+      {
+        "bytes": 5942,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-native-rust-v2-verification.log",
+        "sha256": "7897d58e2421c66a8910b3c000321cf9a92b4bf39ee19a9e7e5ec1c764c2ebfc"
+      },
+      {
+        "bytes": 46873,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-native-rust-v3-verification.junit.xml",
+        "sha256": "59822e6fe961cec42af5fd6d789830a3116fcb847ed9486706b23548a00ab15e"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-native-rust-v3-verification.log",
+        "sha256": "954c6f9126067c6ced4178273818afca1c3e63973e9eaa901fc777d68e892efb"
+      },
+      {
+        "bytes": 46072,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-native-rust-v3-without-authority-verification.junit.xml",
+        "sha256": "2a322a98dd8c6e69330a15a61baf5a92536f1b2a9e119d3d44236bdf27a4ac55"
+      },
+      {
+        "bytes": 434,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-native-rust-v3-without-authority-verification.log",
+        "sha256": "edd27fc03715772c1a18b3505fa9e78db6a80159e6b0a2c3261b729edeb1e182"
+      },
+      {
+        "bytes": 52436,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-python-v2-verification.junit.xml",
+        "sha256": "23baa5306a065b0d700ab907496a465ae2e91b6c40f43a919db5be10ce0a39b3"
+      },
+      {
+        "bytes": 5932,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-python-v2-verification.log",
+        "sha256": "6905dffa632bf005e2b1d99958268e98ec9c0a15287a6aa3f272e79355edcafe"
+      },
+      {
+        "bytes": 46873,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-python-v3-verification.junit.xml",
+        "sha256": "e1b2358953c49c2e03158e9d95c9731aa49b7ca6edd9a689d9b5917c5f9f4700"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-python-v3-verification.log",
+        "sha256": "ca8f0952edb0ad20e81982c95e66dd0f4a27f1f86e0dac8a488b758201a0daaf"
+      },
+      {
+        "bytes": 46073,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-python-v3-without-authority-verification.junit.xml",
+        "sha256": "f49950032c709bf114571bea4bf68b0fcee571f8aac25f8216f5ed6f421621ba"
+      },
+      {
+        "bytes": 435,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-313-python-v3-without-authority-verification.log",
+        "sha256": "852f6f9659cba73bc4ee77aac31ef635f66d07854f258135ebf8e09c90286d41"
+      },
+      {
+        "bytes": 52367,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-native-rust-v2-verification.junit.xml",
+        "sha256": "18d1498581bff5ee500b51cc85e78729162b2cf60ce8aab61ea21d63dcf756ba"
+      },
+      {
+        "bytes": 5863,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-native-rust-v2-verification.log",
+        "sha256": "c959b2b1e022c80a3ec59716ea79f00a8f739ab8a4c9f5025672a31baa581a20"
+      },
+      {
+        "bytes": 46873,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-native-rust-v3-verification.junit.xml",
+        "sha256": "d387a860c6788666cec6190a71b70acabf18c0d2df6ddca16db10312d52292a1"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-native-rust-v3-verification.log",
+        "sha256": "53c6797ff290e6f4ba8ea2203a41e7d19819159d92a044fe02ba0e75d0953a2f"
+      },
+      {
+        "bytes": 46072,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-native-rust-v3-without-authority-verification.junit.xml",
+        "sha256": "0c0e7a9cd3dfb532ef84f68c57be71f4f2acd3d56d83f1bf3be9a3bccc9eeb67"
+      },
+      {
+        "bytes": 434,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-native-rust-v3-without-authority-verification.log",
+        "sha256": "1761925fa41cd3d5d9455d271d1a53873a99928d559aeec3af5e6b1a8fb61c93"
+      },
+      {
+        "bytes": 52357,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-python-v2-verification.junit.xml",
+        "sha256": "c461020c8c561aa88b4ff7a379fcebe3060e6dca3b7a9f865ba5d52faada906b"
+      },
+      {
+        "bytes": 5853,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-python-v2-verification.log",
+        "sha256": "8a3141447f794e558a1b828d0a8b0625aa0f7f227a08bdc40ebe5ad83699d82b"
+      },
+      {
+        "bytes": 46873,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-python-v3-verification.junit.xml",
+        "sha256": "cbe113197b2a7bc1fc1fe6e4dacf3a174c24579764ecfac840dc20e12b6ca1fa"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-python-v3-verification.log",
+        "sha256": "bcf9a93dbd707780560044d936396657247764cf3169f330e55eab68e8e65760"
+      },
+      {
+        "bytes": 46073,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-python-v3-without-authority-verification.junit.xml",
+        "sha256": "5e521b7d395914011529dc9396aa7371b57ab1554644b8ff46390d8b0baa682b"
+      },
+      {
+        "bytes": 435,
+        "path": "docs/validation/final-rem1-drafter/rem1-installed-undoable-314-python-v3-without-authority-verification.log",
+        "sha256": "9aa3fe6e623d3929f0a59f59de14a1a6ea7e312ef8048f8f1e3d4eff19bc8817"
+      },
+      {
+        "bytes": 5527,
+        "path": "docs/validation/final-rem1-drafter/rem1-provenance-312-native-rust-verification.log",
+        "sha256": "b7192685dce6bc9da8c8498af495c772f34fefb59d6f08dd259092323ef5dffd"
+      },
+      {
+        "bytes": 5522,
+        "path": "docs/validation/final-rem1-drafter/rem1-provenance-312-python-verification.log",
+        "sha256": "34879e6a8f9d70683b34a7b309077073438a59fd0153032fd738807ddfd99172"
+      },
+      {
+        "bytes": 5527,
+        "path": "docs/validation/final-rem1-drafter/rem1-provenance-313-native-rust-verification.log",
+        "sha256": "1e1576c9f01b1c1c14905905c59d31971769dcb533521551d789d802cf8576fd"
+      },
+      {
+        "bytes": 5522,
+        "path": "docs/validation/final-rem1-drafter/rem1-provenance-313-python-verification.log",
+        "sha256": "8bbbe716f1e89744cd08e7190469dd98a94dc9d26d7b4f9c44e4dd50b00ac710"
+      },
+      {
+        "bytes": 5526,
+        "path": "docs/validation/final-rem1-drafter/rem1-provenance-314-native-rust-verification.log",
+        "sha256": "b57dae638b8ff9c6d7387747b0b49e1bb4ac9fb58038dd5918a1bb95c8fdaaee"
+      },
+      {
+        "bytes": 5521,
+        "path": "docs/validation/final-rem1-drafter/rem1-provenance-314-python-verification.log",
+        "sha256": "41c8c5a7b81732ea88dff6a59aca37fc4d402d78fd04cdb07325cae48a4684d9"
+      },
+      {
+        "bytes": 80,
+        "path": "docs/validation/final-rem1-drafter/rem1-public-example-verification.log",
+        "sha256": "f23ca41f9d2e4278c04bc200e8f04039cceb73a582e5561f2b7ae74d3b5c8b56"
+      },
+      {
+        "bytes": 225,
+        "path": "docs/validation/final-rem1-drafter/rem1-reference-native-retry-verification.log",
+        "sha256": "0bb931bc7d02ff8a54abef5a27b63631f696b364f03f795dd0b445811e951f7b"
+      },
+      {
+        "bytes": 226,
+        "path": "docs/validation/final-rem1-drafter/rem1-reference-native-verification.log",
+        "sha256": "c94f0e5e5cfa42bc40b708eb4cc8e9bfbbfa0ac42c5db5235068251caeca19cc"
+      },
+      {
+        "bytes": 220,
+        "path": "docs/validation/final-rem1-drafter/rem1-reference-python-verification.log",
+        "sha256": "4c92cb6bf3166190724862359b1ad4ffad3a95f7d303eacdc4a9b8de827e17a0"
+      },
+      {
+        "bytes": 319,
+        "path": "docs/validation/final-rem1-drafter/rem1-sdist-verification.log",
+        "sha256": "86d3eb4632013a010fd3b1009d2920f0b4c91726d78d914d348b3e1f84bdc890"
+      },
+      {
+        "bytes": 144,
+        "path": "docs/validation/final-rem1-drafter/rem1-smoke-312-native-rust-verification.log",
+        "sha256": "7bb171fa675b0edac34b793d7df262178dab074f48538c5b76a1d2c411c285df"
+      },
+      {
+        "bytes": 144,
+        "path": "docs/validation/final-rem1-drafter/rem1-smoke-312-python-verification.log",
+        "sha256": "7bb171fa675b0edac34b793d7df262178dab074f48538c5b76a1d2c411c285df"
+      },
+      {
+        "bytes": 144,
+        "path": "docs/validation/final-rem1-drafter/rem1-smoke-313-native-rust-verification.log",
+        "sha256": "7bb171fa675b0edac34b793d7df262178dab074f48538c5b76a1d2c411c285df"
+      },
+      {
+        "bytes": 144,
+        "path": "docs/validation/final-rem1-drafter/rem1-smoke-313-python-verification.log",
+        "sha256": "7bb171fa675b0edac34b793d7df262178dab074f48538c5b76a1d2c411c285df"
+      },
+      {
+        "bytes": 144,
+        "path": "docs/validation/final-rem1-drafter/rem1-smoke-314-native-rust-verification.log",
+        "sha256": "7bb171fa675b0edac34b793d7df262178dab074f48538c5b76a1d2c411c285df"
+      },
+      {
+        "bytes": 144,
+        "path": "docs/validation/final-rem1-drafter/rem1-smoke-314-python-verification.log",
+        "sha256": "7bb171fa675b0edac34b793d7df262178dab074f48538c5b76a1d2c411c285df"
+      },
+      {
+        "bytes": 34639,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-312-native-rust-verification.junit.xml",
+        "sha256": "9a7f9783dfba4b47a0f31597620156af14b77eac6ec4a5191384c5d5ac0fa9a9"
+      },
+      {
+        "bytes": 362,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-312-native-rust-verification.log",
+        "sha256": "f909702f7dfaa5fa8575dc7ce363b9c8e1eabb3d8135eca150eea646bd2aea06"
+      },
+      {
+        "bytes": 34639,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-312-python-restored-verification.junit.xml",
+        "sha256": "630a38c38021caca25dbbf825a8eeb9acacc81a8ac34a11c898fbb6a7449ac5e"
+      },
+      {
+        "bytes": 362,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-312-python-restored-verification.log",
+        "sha256": "718b8156b3be8f72233e759b2054988812ae34cc47b87ffcc767034e8a868df6"
+      },
+      {
+        "bytes": 356251,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-312-python-verification.junit.xml",
+        "sha256": "7d2de7734b185255b1f8fc6c6e65a639e19e02576ce1a77f736ed03e9f9ac3d8"
+      },
+      {
+        "bytes": 326638,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-312-python-verification.log",
+        "sha256": "3e173ce2f16a2c707695d66bd2a09cd82dc3dc3514c12696136d5f3413b92219"
+      },
+      {
+        "bytes": 34433,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-313-native-rust-verification.junit.xml",
+        "sha256": "170d05f37bf87b5e90e3ec7f8e7179524fd2a4229479d821a6c06d5b8a87266a"
+      },
+      {
+        "bytes": 362,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-313-native-rust-verification.log",
+        "sha256": "2d87ed8a2ca54503583c2196cda3108073a4636e850b5230c4df6a598a526d80"
+      },
+      {
+        "bytes": 34433,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-313-python-restored-verification.junit.xml",
+        "sha256": "57ccf67dbc244ce60e5529321d2695b29ab14cd2add5e7c4fa7eacdc39b6e97d"
+      },
+      {
+        "bytes": 362,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-313-python-restored-verification.log",
+        "sha256": "07a3824ba5a73644f54a1d743d3cc2db656da300437954c1153a740a249f6f12"
+      },
+      {
+        "bytes": 359814,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-313-python-verification.junit.xml",
+        "sha256": "d14f2999c7bb50da9040fbdcd4900779cae17decff889f0d4346472e10d6e72d"
+      },
+      {
+        "bytes": 330461,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-313-python-verification.log",
+        "sha256": "e4d65150a45fd07bcca2477df79a8fca14582264fb26438b2672d4f2385acece"
+      },
+      {
+        "bytes": 34218,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-314-native-rust-verification.junit.xml",
+        "sha256": "f69baf44ba5f98d8d833a9df8e4a573cd295388edf27788564ec95498dd64d86"
+      },
+      {
+        "bytes": 362,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-314-native-rust-verification.log",
+        "sha256": "0b07ca8f678ec6dc0aa42b351ffc9dba75d5195f703f9efadc1fe432a38de638"
+      },
+      {
+        "bytes": 34218,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-314-python-restored-verification.junit.xml",
+        "sha256": "7c4615171622bbcebbd347e57536ad54ba6ebd277ab5dde3e66de2b8f31cd082"
+      },
+      {
+        "bytes": 362,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-314-python-restored-verification.log",
+        "sha256": "4157146b75198a1eae36c20c0574283da8118ed39328890442c8b0f1c8c2b48b"
+      },
+      {
+        "bytes": 363447,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-314-python-verification.junit.xml",
+        "sha256": "404801575edbd407831b251cc96d12a17be759edbfceac893bbbae10c341c6ee"
+      },
+      {
+        "bytes": 334375,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-dataclass-314-python-verification.log",
+        "sha256": "3aca61f930ed8c5fc35edb17c0d8dc9c6c41dad875a5362ba59be7654c8d7f5d"
+      },
+      {
+        "bytes": 49106,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-312-native-rust-verification.junit.xml",
+        "sha256": "c8f11f8283fbdeaffed9825ea6c85ac9946b6822839b440020371bd847ed735b"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-312-native-rust-verification.log",
+        "sha256": "bae2cf7d82818bb696073e3033ed1982b136c7ee7a6d1f663f8543d10a4ec7d3"
+      },
+      {
+        "bytes": 49106,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-312-python-verification.junit.xml",
+        "sha256": "bfbf9104087bab22f7a6d4666ea6ada791a0a9ce84a1ba50b1e0f8671c47dbca"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-312-python-verification.log",
+        "sha256": "ec7e32ddc065b96cf2de83b7cdc4d9d25fc80d3532b588a4940e787c18e6ff8e"
+      },
+      {
+        "bytes": 49106,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-313-native-rust-verification.junit.xml",
+        "sha256": "b53ba7d8bcaac07892764203bcc7bad55c9609aaf58b9b9c7b43647b47681a24"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-313-native-rust-verification.log",
+        "sha256": "cbb9de59ebfeb54d19e6d95e5ae8c19bbceeb1a1525ab1347c81cef6e1293c08"
+      },
+      {
+        "bytes": 49106,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-313-python-verification.junit.xml",
+        "sha256": "04f14bc779a997b8a87c60bd7880c0465e30d55f34fd5196ee2cf06c49b279ac"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-313-python-verification.log",
+        "sha256": "e7a39abc02fb3fa9a33708fb8d61adb75f863b6aefc85f14aa40356509cbfa2c"
+      },
+      {
+        "bytes": 49106,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-314-native-rust-verification.junit.xml",
+        "sha256": "2ee43ffd948cfce7763f35512e1e19d76ce4dffada13cca429e170e906da7833"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-314-native-rust-verification.log",
+        "sha256": "e1b9d6f554f391fa1eaed7299ba5bfb7babf41045e5f1010ead282d6c8aa0c19"
+      },
+      {
+        "bytes": 49106,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-314-python-verification.junit.xml",
+        "sha256": "f9ede2fcec69424f8cec03efad0e12dba1be936272bb79dfd9954b19e4885734"
+      },
+      {
+        "bytes": 421,
+        "path": "docs/validation/final-rem1-drafter/rem1-source-undoable-314-python-verification.log",
+        "sha256": "58fd731f93890c4d7017d0316bbeb928c428659b897a6c7223e820ecd9559e53"
+      },
+      {
+        "bytes": 512,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-build-verification.log",
+        "sha256": "111f269386a371fef9f0f6b21fa82d853ed54831acb3b89fac79ad84e7e3ae2e"
+      },
+      {
+        "bytes": 0,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-canonical-refined-verification.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 0,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-canonical-verification.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 1341,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-captures-green.junit.xml",
+        "sha256": "b1582eb0bc1644b36b0a31504c7ba36f25b69a11e30c0d290d5738b0b9e61ec0"
+      },
+      {
+        "bytes": 98,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-captures-green.log",
+        "sha256": "3b699c09a131f6fce9f8c5f77719de7f8be6f3d226bd0fbfbe7c408b1742ff02"
+      },
+      {
+        "bytes": 12859,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-captures-red.junit.xml",
+        "sha256": "f83bf729f500413408f3e27e291292518774d815f1a820ad2c1e60eaa7c4395a"
+      },
+      {
+        "bytes": 12009,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-captures-red.log",
+        "sha256": "ecea4c944643afce1a75a924f70a0f4cb503d020a751da71b9a284338091f4ef"
+      },
+      {
+        "bytes": 0,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-format-refactor.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 41,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-goldens-312-verification.log",
+        "sha256": "628d9a80b9163bce118657fbeed651df1b0fee076f73a3173300e7582d9f64b0"
+      },
+      {
+        "bytes": 41,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-goldens-313-verification.log",
+        "sha256": "628d9a80b9163bce118657fbeed651df1b0fee076f73a3173300e7582d9f64b0"
+      },
+      {
+        "bytes": 41,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-goldens-314-verification.log",
+        "sha256": "628d9a80b9163bce118657fbeed651df1b0fee076f73a3173300e7582d9f64b0"
+      },
+      {
+        "bytes": 2168,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-refined-verification.junit.xml",
+        "sha256": "e11baa382813d52098d14907706ba84613e8d0174cec5366e6dd42c9507a82ca"
+      },
+      {
+        "bytes": 99,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-refined-verification.log",
+        "sha256": "99637fed520cb77d0628b8fee59431a3b11f13d0bfe0fe8662d965240e887494"
+      },
+      {
+        "bytes": 52,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-regen-verification.log",
+        "sha256": "3f6fd93c104c89aa1df6aa6851eaf8699014b4c8d6c51a1f7a8dd92dec060076"
+      },
+      {
+        "bytes": 8761,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-source-verification.junit.xml",
+        "sha256": "c0427f23f8b27e850053555bd6c687dd458e23467e69d8fc33bb901332e244b2"
+      },
+      {
+        "bytes": 99,
+        "path": "docs/validation/final-rem1-drafter/rem1-undoable-source-verification.log",
+        "sha256": "e0f35843343c1c14512dd1946c0f662399c857c40af5805d921eb54415180966"
+      },
+      {
+        "bytes": 1952,
+        "path": "docs/validation/final-rem1-drafter/rem1-without-setup-312-retry-verification.log",
+        "sha256": "4de731cb6cccad4e7e02c40e5cc47c0013cc37c3121e1a96394429a2d18af99b"
+      },
+      {
+        "bytes": 1300,
+        "path": "docs/validation/final-rem1-drafter/rem1-without-setup-312-verification.log",
+        "sha256": "e2ab329b5112683d16fe60db91d1411245dde7aaae480210a6ab4ed110ceded8"
+      },
+      {
+        "bytes": 1952,
+        "path": "docs/validation/final-rem1-drafter/rem1-without-setup-313-retry-verification.log",
+        "sha256": "0709ddc12b537b51945c1b5e48ef34d21a14765613bbad44d34a173c0c1b349a"
+      },
+      {
+        "bytes": 1300,
+        "path": "docs/validation/final-rem1-drafter/rem1-without-setup-313-verification.log",
+        "sha256": "e2ab329b5112683d16fe60db91d1411245dde7aaae480210a6ab4ed110ceded8"
+      },
+      {
+        "bytes": 1950,
+        "path": "docs/validation/final-rem1-drafter/rem1-without-setup-314-retry-verification.log",
+        "sha256": "c8ffcdefd63fe2468064ea67a4542b3a3d19083d72c470d552bc8a2a3d4e4f43"
+      },
+      {
+        "bytes": 1300,
+        "path": "docs/validation/final-rem1-drafter/rem1-without-setup-314-verification.log",
+        "sha256": "e2ab329b5112683d16fe60db91d1411245dde7aaae480210a6ab4ed110ceded8"
+      },
+      {
+        "bytes": 340,
+        "path": "docs/validation/final-rem1-drafter/run_contracts.py",
+        "sha256": "fa144c10834465abfbc8032208f818595efd05309572e534cd9cd52c2291ee49"
+      },
+      {
+        "bytes": 1384,
+        "path": "docs/validation/final-rem1-drafter/run_fresh.py",
+        "sha256": "00c6dd01360dfdedba0b6b43d8b8523bef4df71cb7cce260c5379b953e55252d"
+      },
+      {
+        "bytes": 11692,
+        "path": "docs/validation/final-rem1-drafter/sanitation-corrections.jsonl",
+        "sha256": "50e0628dbb3c093dc9fd7311e4bf119181d41ebbdcbe73ddecb49349f64f32ff"
+      },
+      {
+        "bytes": 1937,
+        "path": "docs/validation/final-rem1-drafter/sanitize_corrections.py",
+        "sha256": "b1976b147d3a11821afcbe0e9e88042c3d19e79f1ad0840a8c23b72ebf3b5ee7"
+      },
+      {
+        "bytes": 318,
+        "path": "docs/validation/final-rem1-drafter/undoable-artifacts.json",
+        "sha256": "ecb485eb180cf7aaa49a304f1323cddc6fc7706652e9012cdb5dafbc007cfcd0"
+      },
+      {
+        "bytes": 1226,
+        "path": "examples/first_use.py",
+        "sha256": "274877f89dd0c5898ddbb1e7dd5a8902e135d488bae55b8cae666e19f1f6d18d"
+      },
+      {
+        "bytes": 10571,
+        "path": "src/yidl_dataclass/dataclass.py",
+        "sha256": "884b3784452247628e8955c98e17332141a502dbcb5a776b9edfbbe0e1840e69"
+      },
+      {
+        "bytes": 8562,
+        "path": "src/yidl_dataclass/dataclass_harvester.py",
+        "sha256": "539796b55418d6b090f891ff574eecef8e51ff7cf962bdcab0b0ca4a6d5ad0c7"
+      },
+      {
+        "bytes": 682,
+        "path": "tests/conftest.py",
+        "sha256": "0a8c5f6a3677c79ec6f8ee2d623c947cac6cf4b93cad4bbb75873c89241ab89e"
+      },
+      {
+        "bytes": 4684,
+        "path": "tests/data/gold_src/dataclass_inheritance_helpers.py",
+        "sha256": "e81b6bcaf0cb5a7d17c8f3bc04b6f2f570c24be18edc9817a87baf85bd18b1c2"
+      },
+      {
+        "bytes": 2710,
+        "path": "tests/data/gold_src/dataclass_layout.py",
+        "sha256": "13e2ff1d76705b458172f94aa8af861fe877513ec05cb6ad7ef0f2969d6cf1b0"
+      },
+      {
+        "bytes": 1337,
+        "path": "tests/data/gold_src/dataclass_result_names.py",
+        "sha256": "0edd999eefdbf4f439731201880fc44e9c3d8e2c42c384470667f5779496c78c"
+      },
+      {
+        "bytes": 383,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/behavior.txt",
+        "sha256": "d4f139de631e494f937c439d4f31724e6c8e9ccf67c916513479b1b0fc5e9647"
+      },
+      {
+        "bytes": 4684,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/bindings.py",
+        "sha256": "e81b6bcaf0cb5a7d17c8f3bc04b6f2f570c24be18edc9817a87baf85bd18b1c2"
+      },
+      {
+        "bytes": 36761,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_prettier_py312.py",
+        "sha256": "8732ddaad1fcb421736143c843ea81fa758ad2f4eb89cefc39749c44284a904d"
+      },
+      {
+        "bytes": 37668,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_prettier_py313.py",
+        "sha256": "e3c9f0a5685cd334349428a0103ac926674c508c201bb84c625dcf1a4157b39d"
+      },
+      {
+        "bytes": 37668,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_prettier_py314.py",
+        "sha256": "e3c9f0a5685cd334349428a0103ac926674c508c201bb84c625dcf1a4157b39d"
+      },
+      {
+        "bytes": 35083,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_py312.py",
+        "sha256": "5e447e4d62f3590966bbccedacd6ee3e22d878e3a756531f0e8daffe78d5b24c"
+      },
+      {
+        "bytes": 36119,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_py313.py",
+        "sha256": "277681b3b09a29b76d595796b9faa300942fd71dfc54c019940a8f08df37ccae"
+      },
+      {
+        "bytes": 36119,
+        "path": "tests/data/goldens/materialized/dataclass_inheritance_helpers/generated_output_py314.py",
+        "sha256": "277681b3b09a29b76d595796b9faa300942fd71dfc54c019940a8f08df37ccae"
+      },
+      {
+        "bytes": 175,
+        "path": "tests/data/goldens/materialized/dataclass_layout/behavior.txt",
+        "sha256": "801b242d764b0122bf1ba8fd0c9f4f67677e5868d66896ca1c1ff283f8eaa988"
+      },
+      {
+        "bytes": 2710,
+        "path": "tests/data/goldens/materialized/dataclass_layout/bindings.py",
+        "sha256": "13e2ff1d76705b458172f94aa8af861fe877513ec05cb6ad7ef0f2969d6cf1b0"
+      },
+      {
+        "bytes": 397,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/behavior.txt",
+        "sha256": "4279f755316c2d4cd192e327c44a12aa5557505924e81392e5e0aa31110b0b47"
+      },
+      {
+        "bytes": 1337,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/bindings.py",
+        "sha256": "0edd999eefdbf4f439731201880fc44e9c3d8e2c42c384470667f5779496c78c"
+      },
+      {
+        "bytes": 372817,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/decorator.py",
+        "sha256": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430"
+      },
+      {
+        "bytes": 582983,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/decorator_prettier.py",
+        "sha256": "0cb6c0b6f3067d4172e948ad4768690e47d78667ac3383b7af39c4356a5dbfa0"
+      },
+      {
+        "bytes": 15793,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/generated_output_prettier_py312.py",
+        "sha256": "f7ba3c0678a77b1d3ad2d4a09f104aad841ab26c4a2c32d9cd5b7ca883d62e17"
+      },
+      {
+        "bytes": 16297,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/generated_output_prettier_py313.py",
+        "sha256": "de9dba18cca691a11f66e67bf143128735a575155decb61ace2beb33f3a12b19"
+      },
+      {
+        "bytes": 16297,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/generated_output_prettier_py314.py",
+        "sha256": "de9dba18cca691a11f66e67bf143128735a575155decb61ace2beb33f3a12b19"
+      },
+      {
+        "bytes": 14834,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/generated_output_py312.py",
+        "sha256": "eb05ccc0922a8e8cba84ef9cf3cee57c2f365384b5e0a3b31ef9f24e821f459d"
+      },
+      {
+        "bytes": 15338,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/generated_output_py313.py",
+        "sha256": "db796bc8a0ac13bc2db5cfdd12a371c1db3e9d1bbdd7befa510ce3c0523652c6"
+      },
+      {
+        "bytes": 15338,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/generated_output_py314.py",
+        "sha256": "db796bc8a0ac13bc2db5cfdd12a371c1db3e9d1bbdd7befa510ce3c0523652c6"
+      },
+      {
+        "bytes": 353,
+        "path": "tests/data/goldens/materialized/dataclass_result_names/runtime_manifest.json",
+        "sha256": "9fb142fe57807112955f745b9306831da3fd3d6371bc427cd211487796b697fd"
+      },
+      {
+        "bytes": 986,
+        "path": "tests/support/inherited_lazy_models.py",
+        "sha256": "9783081e30e43d7f83a85f8dea285c06b3558877c79ee021bd81dfa6d04402b9"
+      },
+      {
+        "bytes": 2180,
+        "path": "tests/support/refresh_goldens.py",
+        "sha256": "c2c7b065cdba8379377a4016430aef25f20df66163269cae7d4245d376e6766f"
+      },
+      {
+        "bytes": 815,
+        "path": "tests/support/result_name_models.py",
+        "sha256": "1cf273c56b585979fccc6e2f30e0c816d9c0aae2659fab3ac7ee9ed331a34002"
+      },
+      {
+        "bytes": 1184,
+        "path": "tests/test_distribution_contract.py",
+        "sha256": "48eda4d6fe2b5f78258a8d45d3af24404274b2eb252f49903389bb6715722358"
+      },
+      {
+        "bytes": 1043,
+        "path": "tests/test_result_namespace.py",
+        "sha256": "51eed331bdf6f42a49bb879003f61f38807e72b47579b8231d26dcfadb230afd"
+      }
+    ],
+    "undoable": [
+      {
+        "bytes": 5437,
+        "path": "docs/Architecture.md",
+        "sha256": "a781567783626990684239260c75ac191cca9d68f2f66f045d505a9abe720caa"
+      },
+      {
+        "bytes": 198385,
+        "path": "src/yidl_undoable/_generated_undoable_base.py",
+        "sha256": "f940694e45a05a316e810ed25c8fa0f882305963137061aaed7c76b6bed13d0a"
+      },
+      {
+        "bytes": 826,
+        "path": "src/yidl_undoable/comparison_captures.py",
+        "sha256": "bd948f9ad5895f3993ab06a92f21010c6ab748d19b89396fcc8f4b87ad035fbe"
+      },
+      {
+        "bytes": 6083,
+        "path": "src/yidl_undoable/undoable.py",
+        "sha256": "2b96f54085a729b384ca837bfd8eb29c7500d0565651574e4ff2f7f07a22095f"
+      },
+      {
+        "bytes": 10392,
+        "path": "src/yidl_undoable/yidl/undoable_comparison.yidl",
+        "sha256": "e7ed5acfcb1548be26a2c87329bb5ecf0a8a520b607ad39e9a8d4fc953b2d3dd"
+      },
+      {
+        "bytes": 966,
+        "path": "tests/canonical_support.py",
+        "sha256": "99411f1970fd07f3374adf622eb1068378456b14ee28ea7518acb8ddf1036599"
+      },
+      {
+        "bytes": 2936,
+        "path": "tests/data/gold_src/24_comparison_capture_names.py",
+        "sha256": "b990ecec1d9d99fe01d513b7240b3816672b7647ec68a4188d9d68e7583ea48e"
+      },
+      {
+        "bytes": 20384,
+        "path": "tests/data/golden/21_undoable_comparisons.py312.generated.py",
+        "sha256": "55ed75b405087935417e526887c21321e38d46e46ab61d522f6165b127b70b3d"
+      },
+      {
+        "bytes": 23084,
+        "path": "tests/data/golden/21_undoable_comparisons.py313.generated.py",
+        "sha256": "f0a4207d132ebe0d4c2e0406a6494e1569e65c06ab4f9c6134dd2d346e8c8533"
+      },
+      {
+        "bytes": 23084,
+        "path": "tests/data/golden/21_undoable_comparisons.py314.generated.py",
+        "sha256": "f0a4207d132ebe0d4c2e0406a6494e1569e65c06ab4f9c6134dd2d346e8c8533"
+      },
+      {
+        "bytes": 17141,
+        "path": "tests/data/golden/22_undoable_field_removal.py312.generated.py",
+        "sha256": "d23766e855e209cf8c173b830a351ac8d0707452414acfe702f9a0d48528715f"
+      },
+      {
+        "bytes": 17333,
+        "path": "tests/data/golden/22_undoable_field_removal.py313.generated.py",
+        "sha256": "5cc66fe4bc36a350c3fe7b13f22ba5e47c1f5ca2e79cca632784a7820998a4c3"
+      },
+      {
+        "bytes": 17333,
+        "path": "tests/data/golden/22_undoable_field_removal.py314.generated.py",
+        "sha256": "5cc66fe4bc36a350c3fe7b13f22ba5e47c1f5ca2e79cca632784a7820998a4c3"
+      },
+      {
+        "bytes": 50544,
+        "path": "tests/data/golden/23_undoable_write_compatibility.py312.generated.py",
+        "sha256": "2546543a7f2db3a3a3f31cf47f5ed7cddf1c9cbc86b1d9ed80bfcc28010b4bcc"
+      },
+      {
+        "bytes": 51276,
+        "path": "tests/data/golden/23_undoable_write_compatibility.py313.generated.py",
+        "sha256": "53e5fbdce892ffd099a7127ae9a995bfa2aabb6a24210cc95d2b80c5d5dd7d6c"
+      },
+      {
+        "bytes": 51276,
+        "path": "tests/data/golden/23_undoable_write_compatibility.py314.generated.py",
+        "sha256": "53e5fbdce892ffd099a7127ae9a995bfa2aabb6a24210cc95d2b80c5d5dd7d6c"
+      },
+      {
+        "bytes": 106631,
+        "path": "tests/data/golden/24_comparison_capture_names.py312.generated.py",
+        "sha256": "1a53c6072110afd56e463ce01ad9cd0b24a1b5f09b8adca3a4dc81108931b2e7"
+      },
+      {
+        "bytes": 107207,
+        "path": "tests/data/golden/24_comparison_capture_names.py313.generated.py",
+        "sha256": "6fce6c9f0092de6c25dbfbf9a2ff4170ed990cab13f2150f5c5371952fd3f732"
+      },
+      {
+        "bytes": 107207,
+        "path": "tests/data/golden/24_comparison_capture_names.py314.generated.py",
+        "sha256": "6fce6c9f0092de6c25dbfbf9a2ff4170ed990cab13f2150f5c5371952fd3f732"
+      },
+      {
+        "bytes": 2212,
+        "path": "tests/test_comparison_capture_names.py",
+        "sha256": "9e59a5228d753d0aee85a511b4d320eb015c985b5e22244d7c5bfa40f94e44ef"
+      },
+      {
+        "bytes": 7728,
+        "path": "tests/test_comparison_source.py",
+        "sha256": "41dde0b29e6c1aa8a4c810616f2b4f9f2937168acffc90211c8555c0e909bf32"
+      }
+    ]
+  },
+  "h2_definition_sha256": "279995dee0f0a5088030714a4e9935bf51d139d1f92fad20a2b8af566fa3c29b",
+  "raw_archive": "external:yidl-dataclass-final-rem1-drafter-raw",
+  "scope": "Final remediation round1 sole-drafter changed consumer/public/test paths and evidence only; owner and paused files excluded."
+}

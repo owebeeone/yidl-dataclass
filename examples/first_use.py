@@ -11,6 +11,17 @@ class Inventory:
 
 
 def main():
+    class SlottedDeclaration:
+        value: int
+
+    class DictionaryDeclaration:
+        value: int
+
+    slotted = dataclass(SlottedDeclaration)
+    dictionary = dataclass(DictionaryDeclaration, slots=False)
+    assert slotted is not SlottedDeclaration
+    assert dictionary is DictionaryDeclaration
+    assert "__dataclass_fields__" in DictionaryDeclaration.__dict__
     first = Inventory(3)
     second = Inventory(3)
     first.tags.append("reviewed")

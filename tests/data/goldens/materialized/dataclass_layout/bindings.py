@@ -68,10 +68,20 @@ def observation(classes):
 
 
 def render_case():
+    class SlottedDeclaration:
+        value: int
+
+    class DictionaryDeclaration:
+        value: int
+
+    assert dataclass(SlottedDeclaration) is not SlottedDeclaration
+    assert dataclass(DictionaryDeclaration, slots=False) is DictionaryDeclaration
+    assert "__dataclass_fields__" in DictionaryDeclaration.__dict__
     actual = layouts(dataclass, field)
     reference = layouts(std.dataclass, std.field)
     assert observation(actual) == observation(reference)
     return {
         "generated_output.py": "\n".join(generated_source(cls) for cls in actual),
-        "behavior.txt": str(observation(layouts(dataclass, field))) + "\n",
+        "behavior.txt": str(observation(layouts(dataclass, field)))
+        + "\nslotted-replacement=True; dictionary-identity-and-metadata=True\n",
     }
