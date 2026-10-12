@@ -1,0 +1,2 @@
+[(1, '2'), (10, '2'), (1, '4')]
+namespace-owned=True; stable-shape=True; no-repr-generation=True; policy-deleted=True; dictionary-fallback=9; absent-unset=True

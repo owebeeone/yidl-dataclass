@@ -1,0 +1,255 @@
+..........FF                                                             [100%]
+=================================== FAILURES ===================================
+_____________ test_required_initvar_replace_and_disallowed_changes _____________
+
+    def test_required_initvar_replace_and_disallowed_changes():
+        @dataclass
+        class Required:
+            seed:int=initvar()
+            value:int=field(init=False,default_factory=lambda seed:seed)
+>       first=Required(3)
+              ^^^^^^^^^^^
+
+tests/test_provider_kinds.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'Required' object has no attribute 'value'") raised in repr()] Required object at 0x109bba980>
+seed = 3
+
+>   ???
+E   AttributeError: 'Required' object has no attribute 'seed'
+
+<yidl-dataclass-model>:1: AttributeError
+_________________ test_canonical_case[dataclass_providers.py] __________________
+
+cls = <class '<run_path>.render_case.<locals>.Configuration'>
+annotations = {'total': <class 'int'>, 'seed': <class 'int'>, 'scale': <class 'int'>, 'management': <class 'list'>, ...}
+kw_only = False
+
+    def fields_for(
+        cls: type, annotations: dict[str, Any], *, kw_only: bool
+    ) -> tuple[std.Field[Any], ...]:
+        attributes = {"__module__": cls.__module__}
+        for name in annotations:
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            if value is not std.MISSING:
+                if isinstance(value, FieldDeclaration):
+                    value = value.field
+                attributes[name] = copy.copy(value) if isinstance(value, std.Field) else value
+        harvest = type(cls.__name__, (), attributes)
+        result = []
+        fence_seen = False
+        for name, annotation in annotations.items():
+            if annotation is std.KW_ONLY or (
+                isinstance(annotation, str)
+                and std._is_type(
+                    annotation,
+                    harvest,
+                    std,
+                    std.KW_ONLY,
+                    lambda a, module: a is module.KW_ONLY,
+                )
+            ):
+                if fence_seen:
+                    raise DataclassDefinitionError("KW_ONLY specified more than once")
+                kw_only = True
+                fence_seen = True
+                continue
+            value = attributes.get(name, std.MISSING)
+            factory = value.default_factory if isinstance(value, std.Field) else std.MISSING
+            if factory is not std.MISSING:
+                value.default_factory = std.MISSING
+            declaration = inspect.getattr_static(cls, name, std.MISSING)
+            original_type = annotation
+            if isinstance(declaration, (InitvarDeclaration, ClassvarDeclaration)):
+                probe = std._get_field(harvest, name, original_type, kw_only)
+                opposite = is_classvar(probe) if isinstance(declaration, InitvarDeclaration) else is_initvar(probe)
+                if opposite:
+                    raise DataclassDefinitionError(f"{name}: annotation kind conflict")
+                annotation = std.InitVar[original_type] if isinstance(declaration, InitvarDeclaration) else ClassVar[original_type]
+            try:
+>               item = std._get_field(harvest, name, annotation, kw_only)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/yidl_dataclass/stdlib_adapter.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class '<run_path>.Configuration'>, a_name = 'scale'
+a_type = typing.ClassVar[int], default_kw_only = False
+
+    def _get_field(cls, a_name, a_type, default_kw_only):
+        # Return a Field object for this field name and type.  ClassVars and
+        # InitVars are also returned, but marked as such (see f._field_type).
+        # default_kw_only is the value of kw_only to use if there isn't a field()
+        # that defines it.
+    
+        # If the default value isn't derived from Field, then it's only a
+        # normal default value.  Convert it to a Field().
+        default = getattr(cls, a_name, MISSING)
+        if isinstance(default, Field):
+            f = default
+        else:
+            if isinstance(default, types.MemberDescriptorType):
+                # This is a field in __slots__, so it has no default value.
+                default = MISSING
+            f = field(default=default)
+    
+        # Only at this point do we know the name and the type.  Set them.
+        f.name = a_name
+        f.type = a_type
+    
+        # Assume it's a normal field until proven otherwise.  We're next
+        # going to decide if it's a ClassVar or InitVar, everything else
+        # is just a normal field.
+        f._field_type = _FIELD
+    
+        # In addition to checking for actual types here, also check for
+        # string annotations.  get_type_hints() won't always work for us
+        # (see https://github.com/python/typing/issues/508 for example),
+        # plus it's expensive and would require an eval for every string
+        # annotation.  So, make a best effort to see if this is a ClassVar
+        # or InitVar using regex's and checking that the thing referenced
+        # is actually of the correct type.
+    
+        # For the complete discussion, see https://bugs.python.org/issue33453
+    
+        # If typing has not been imported, then it's impossible for any
+        # annotation to be a ClassVar.  So, only look for ClassVar if
+        # typing has been imported by any module (not necessarily cls's
+        # module).
+        typing = sys.modules.get('typing')
+        if typing:
+            if (_is_classvar(a_type, typing)
+                or (isinstance(f.type, str)
+                    and _is_type(f.type, cls, typing, typing.ClassVar,
+                                 _is_classvar))):
+                f._field_type = _FIELD_CLASSVAR
+    
+        # If the type is InitVar, or if it's a matching string annotation,
+        # then it's an InitVar.
+        if f._field_type is _FIELD:
+            # The module we're checking against is the module we're
+            # currently in (dataclasses.py).
+            dataclasses = sys.modules[__name__]
+            if (_is_initvar(a_type, dataclasses)
+                or (isinstance(f.type, str)
+                    and _is_type(f.type, cls, dataclasses, dataclasses.InitVar,
+                                 _is_initvar))):
+                f._field_type = _FIELD_INITVAR
+    
+        # Validations for individual fields.  This is delayed until now,
+        # instead of in the Field() constructor, since only here do we
+        # know the field name, which allows for better error reporting.
+    
+        # Special restrictions for ClassVar and InitVar.
+        if f._field_type in (_FIELD_CLASSVAR, _FIELD_INITVAR):
+            if f.default_factory is not MISSING:
+                raise TypeError(f'field {f.name} cannot have a '
+                                'default factory')
+            # Should I check for other field settings? default_factory
+            # seems the most serious to check for.  Maybe add others.  For
+            # example, how about init=False (or really,
+            # init=<not-the-default-init-value>)?  It makes no sense for
+            # ClassVar and InitVar to specify init=<anything>.
+    
+        # kw_only validation and assignment.
+        if f._field_type in (_FIELD, _FIELD_INITVAR):
+            # For real and InitVar fields, if kw_only wasn't specified use the
+            # default value.
+            if f.kw_only is MISSING:
+                f.kw_only = default_kw_only
+        else:
+            # Make sure kw_only isn't set for ClassVars
+            assert f._field_type is _FIELD_CLASSVAR
+            if f.kw_only is not MISSING:
+>               raise TypeError(f'field {f.name} is a ClassVar but specifies '
+                                'kw_only')
+E               TypeError: field scale is a ClassVar but specifies kw_only
+
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/dataclasses.py:845: TypeError
+
+The above exception was the direct cause of the following exception:
+
+case = 'dataclass_providers.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1514/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_providers.py:21: in render_case
+    @dataclass
+     ^^^^^^^^^
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass_harvester.py:72: in harvest
+    items = adapter.fields_for(cls, annotations, kw_only=options.kw_only)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class '<run_path>.render_case.<locals>.Configuration'>
+annotations = {'total': <class 'int'>, 'seed': <class 'int'>, 'scale': <class 'int'>, 'management': <class 'list'>, ...}
+kw_only = False
+
+    def fields_for(
+        cls: type, annotations: dict[str, Any], *, kw_only: bool
+    ) -> tuple[std.Field[Any], ...]:
+        attributes = {"__module__": cls.__module__}
+        for name in annotations:
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            if value is not std.MISSING:
+                if isinstance(value, FieldDeclaration):
+                    value = value.field
+                attributes[name] = copy.copy(value) if isinstance(value, std.Field) else value
+        harvest = type(cls.__name__, (), attributes)
+        result = []
+        fence_seen = False
+        for name, annotation in annotations.items():
+            if annotation is std.KW_ONLY or (
+                isinstance(annotation, str)
+                and std._is_type(
+                    annotation,
+                    harvest,
+                    std,
+                    std.KW_ONLY,
+                    lambda a, module: a is module.KW_ONLY,
+                )
+            ):
+                if fence_seen:
+                    raise DataclassDefinitionError("KW_ONLY specified more than once")
+                kw_only = True
+                fence_seen = True
+                continue
+            value = attributes.get(name, std.MISSING)
+            factory = value.default_factory if isinstance(value, std.Field) else std.MISSING
+            if factory is not std.MISSING:
+                value.default_factory = std.MISSING
+            declaration = inspect.getattr_static(cls, name, std.MISSING)
+            original_type = annotation
+            if isinstance(declaration, (InitvarDeclaration, ClassvarDeclaration)):
+                probe = std._get_field(harvest, name, original_type, kw_only)
+                opposite = is_classvar(probe) if isinstance(declaration, InitvarDeclaration) else is_initvar(probe)
+                if opposite:
+                    raise DataclassDefinitionError(f"{name}: annotation kind conflict")
+                annotation = std.InitVar[original_type] if isinstance(declaration, InitvarDeclaration) else ClassVar[original_type]
+            try:
+                item = std._get_field(harvest, name, annotation, kw_only)
+            except (TypeError, ValueError) as error:
+>               raise DataclassDefinitionError(f"{cls.__qualname__}.{name}: {error}") from error
+E               yidl_dataclass.errors.DataclassDefinitionError: render_case.<locals>.Configuration.scale: field scale is a ClassVar but specifies kw_only
+
+src/yidl_dataclass/stdlib_adapter.py:79: DataclassDefinitionError
+=========================== short test summary info ============================
+FAILED tests/test_provider_kinds.py::test_required_initvar_replace_and_disallowed_changes
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_providers.py]
+2 failed, 10 passed in 0.66s

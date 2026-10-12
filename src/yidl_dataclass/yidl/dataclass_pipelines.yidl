@@ -1,0 +1,124 @@
+module dataclass.pipelines
+import "dataclass_comparison.yidl" as comparison
+export concept DataclassPipelines
+
+concept DataclassPipelines extends comparison.DataclassComparison {
+    property ValueName: str
+    property PipelineValueName: str
+    property PipelineId: str
+    property PipelineOwner: str
+    property ConstructorSite: bool
+    property PipelineIdentity: int
+    property HasConverter: bool = False
+    property HasValidator: bool = False
+    property NullableConverter: bool = False
+    property ConverterName: str = ""
+    property ValidatorName: str = ""
+    property ConversionMessage: str
+    property ValidationMessage: str
+    property ValidationRejected: str
+    property ValidationContract: str
+    record DataclassPipelineSite {
+        PipelineId
+        PipelineOwner
+        ConstructorSite
+        PipelineIdentity
+        PipelineValueName
+        HasConverter
+        HasValidator
+        NullableConverter
+        ConverterName
+        ValidatorName
+        ConversionMessage
+        ValidationMessage
+        ValidationRejected
+        ValidationContract
+    }
+    collection PipelineSites: DataclassPipelineSite identity PipelineId many
+    resource PipelineShell = code $[
+        astichi_hole(convert)
+        astichi_hole(validate)
+    ]$
+    resource ConvertValue = template $[
+        try:
+            astichi_pass(value_name__astichi_arg__, outer_bind=True)._ = converter_name__astichi_arg__(astichi_pass(value_name__astichi_arg__, outer_bind=True))
+        except _y_dc_ContextErrors:
+            raise
+        except Exception as _y_dc_conversion_error:
+            raise _y_dc_FieldConversionError(conversion_message__astichi_arg__) from _y_dc_conversion_error
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldConversionError, Exception, _y_dc_conversion_error }
+    resource ConvertNullableValue = template $[
+        if astichi_pass(value_name__astichi_arg__, outer_bind=True) is not None:
+            try:
+                astichi_pass(value_name__astichi_arg__, outer_bind=True)._ = converter_name__astichi_arg__(astichi_pass(value_name__astichi_arg__, outer_bind=True))
+            except _y_dc_ContextErrors:
+                raise
+            except Exception as _y_dc_conversion_error:
+                raise _y_dc_FieldConversionError(conversion_message__astichi_arg__) from _y_dc_conversion_error
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldConversionError, Exception, _y_dc_conversion_error }
+    resource ValidateValue = template $[
+        try:
+            _y_dc_validation_result = validator_name__astichi_arg__(astichi_pass(value_name__astichi_arg__, outer_bind=True))
+        except _y_dc_ContextErrors:
+            raise
+        except Exception as _y_dc_validation_error:
+            raise _y_dc_FieldValidationError(validation_message__astichi_arg__) from _y_dc_validation_error
+        try:
+            if _y_dc_validation_result is False:
+                raise _y_dc_FieldValidationError(validation_rejected__astichi_arg__)
+            if _y_dc_validation_result is not None and _y_dc_validation_result is not True:
+                raise TypeError(validation_contract__astichi_arg__)
+        finally:
+            del _y_dc_validation_result
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldValidationError, TypeError, Exception, _y_dc_validation_error, _y_dc_validation_result }
+    contribution Convert = ConvertValue {
+        as Converter
+        index PipelineIdentity
+        target convert { build /Pipeline }
+        ident value_name = PipelineValueName
+        ident converter_name = ConverterName
+        ident conversion_message = ConversionMessage
+    }
+    contribution ConvertNullable = ConvertNullableValue {
+        as Converter
+        index PipelineIdentity
+        target convert { build /Pipeline }
+        ident value_name = PipelineValueName
+        ident converter_name = ConverterName
+        ident conversion_message = ConversionMessage
+    }
+    contribution NoConvert = EmptyStatement {
+        as Converter
+        index PipelineIdentity
+        target convert { build /Pipeline }
+    }
+    contribution Validate = ValidateValue {
+        as Validator
+        index PipelineIdentity
+        target validate { build /Pipeline }
+        ident value_name = PipelineValueName
+        ident validator_name = ValidatorName
+        ident validation_message = ValidationMessage
+        ident validation_rejected = ValidationRejected
+        ident validation_contract = ValidationContract
+    }
+    contribution NoValidate = EmptyStatement {
+        as Validator
+        index PipelineIdentity
+        target validate { build /Pipeline }
+    }
+    matcher ConversionContributions(pipe: PipelineSites) -> contribution {
+        default -> NoConvert
+        rule converted when HasConverter == True and NullableConverter == False -> Convert
+        rule nullable when HasConverter == True and NullableConverter == True -> ConvertNullable
+    }
+    matcher ValidationContributions(pipe: PipelineSites) -> contribution {
+        default -> NoValidate
+        rule validated when HasValidator == True -> Validate
+    }
+    production PipelineProduction(pipe: PipelineSites) -> composable {
+        root Pipeline = PipelineShell
+        apply convert using ConversionContributions
+        apply validate using ValidationContributions
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.395" timestamp="2026-10-12T22:30:40.066183+11:00" hostname="[host]"><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_pipeline_ownership.py]" time="1.242"><failure message="NameError: name 'astichi_hole' is not defined">case = 'dataclass_pipeline_ownership.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1532/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_pipeline_ownership.py:43: in render_case
+    fallback=Fallback()
+             ^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;[AttributeError("'Fallback' object has no attribute 'result'") raised in repr()] Fallback object at 0x107e28680&gt;
+
+&gt;   ???
+E   NameError: name 'astichi_hole' is not defined
+
+&lt;yidl-dataclass-model&gt;:26: NameError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2411, in _resource_hole_names
+    description = resource.to_generator().describe()
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/generation/matcher_values.py", line 63, in to_generator
+    return self.template.to_generator()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/generation/matcher_values.py", line 40, in to_generator
+    generator = astichi.compile(
+                ^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/astichi/frontend/api.py", line 143, in compile
+    lower_template, inventory = register_native_template_source_hot_path(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/astichi/lower_engine/facade.py", line 321, in register_native_template_source_hot_path
+    template_handle = register_hot_path_template_source(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/astichi/lower_engine/native_hot_path_registry.py", line 36, in register_hot_path_template_source
+    return module.register_template_package_v2_source(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: native schema error: astichi_import(...) / astichi_export(...) are only valid as direct __astichi_ph_{N}__= carriers inside astichi_funcargs(...)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 75, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 54, in main
+    rendered = render_dataclass_base_source()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/regenerate_dataclass_base.py", line 30, in render_dataclass_base_source
+    concept = compile_yidl_files(sources, "dataclass/dataclass_base.yidl").concepts[
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 224, in compile_yidl_files
+    return compiler.compile(entry_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 249, in compile
+    imports = self._compile_imports(resolved_path, tree)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 285, in _compile_imports
+    aliases[alias] = self.compile(imported_path)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 264, in compile
+    ).compile(concept_tree)
+      ^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 592, in compile
+    self._validate_static_assembly_scopes(
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2284, in _validate_static_assembly_scopes
+    self._validate_static_scope(
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2331, in _validate_static_scope
+    self._validate_static_scope(
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2331, in _validate_static_scope
+    self._validate_static_scope(
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2331, in _validate_static_scope
+    self._validate_static_scope(
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2338, in _validate_static_scope
+    self._validate_static_contribution(
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2382, in _validate_static_contribution
+    source_holes = self._contribution_source_hole_names(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2396, in _contribution_source_hole_names
+    return self._resource_hole_names(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/concept_parser.py", line 2413, in _resource_hole_names
+    raise YidlSymbolError(f"{context} cannot be described: {exc}") from exc
+yidl.concept_parser.YidlSymbolError: contribution 'ProviderPositionalArgumentContribution' source cannot be described: native schema error: astichi_import(...) / astichi_export(...) are only valid as direct __astichi_ph_{N}__= carriers inside astichi_funcargs(...)

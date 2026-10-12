@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.256" timestamp="2026-10-12T22:07:50.260238+11:00" hostname="[host]"><testcase classname="tests.test_provider_kinds" name="test_hidden_provider_unhashable_default_rejected" time="0.215"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">def test_hidden_provider_unhashable_default_rejected():
+        class MutableProvider:
+            seed:object=initvar(default=[])
+&gt;       with pytest.raises(DataclassDefinitionError,match="mutable default"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_provider_kinds.py:75: Failed</failure></testcase></testsuite></testsuites>

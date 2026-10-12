@@ -1,0 +1,390 @@
+module dataclass.factories
+import "dataclass_pipelines.yidl" as pipelines
+export concept DataclassFactories
+
+concept DataclassFactories extends pipelines.DataclassPipelines {
+    property ConstructorOrder: int
+    property CandidateInput: bool = False
+    property CandidateFactory: bool = False
+    property HasFactoryArguments: bool = False
+    property CandidateDefault: bool = False
+    property CandidateFallback: bool = False
+    property ClassProvider: bool = False
+    property InstallValue: bool = True
+    property StoreName: str
+    property FactoryMessage: str
+    property ArgumentId: str
+    property CallerFieldId: str
+    property ArgumentOrder: int
+    property ArgumentIdentity: int
+    property ArgumentName: str
+    property PositionalArgument: bool = False
+    property InstanceArgument: bool = False
+    property ClassArgument: bool = False
+    property CapturedArgument: bool = False
+    property ArgumentCapture: str = ""
+    property ProviderValue: str = ""
+    record DataclassInitializationField {
+        FieldId
+        FieldOwner
+        FieldName
+        ConstructorOrder
+        ValueName
+        CandidateInput
+        CandidateFactory
+        HasFactoryArguments
+        CandidateDefault
+        CandidateFallback
+        ClassProvider
+        InstallValue
+        StoreName
+        FactoryName
+        DefaultName
+        FactoryMessage
+    }
+    record DataclassFactoryArgument {
+        ArgumentId
+        CallerFieldId
+        ArgumentOrder
+        ArgumentIdentity
+        ArgumentName
+        PositionalArgument
+        InstanceArgument
+        ClassArgument
+        CapturedArgument
+        ArgumentCapture
+        ProviderValue
+    }
+    collection InitializationFields: DataclassInitializationField identity FieldId many
+    collection FactoryArguments: DataclassFactoryArgument identity ArgumentId many
+
+    resource InputCandidate = template $[
+        value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
+        astichi_hole(pipeline)
+        astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = value_name__astichi_arg__
+        astichi_export(value_name__astichi_arg__)
+    ]$
+    resource DefaultCandidate = template $[
+        value_name__astichi_arg__ = default_name__astichi_arg__
+        astichi_hole(pipeline)
+        astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = value_name__astichi_arg__
+        astichi_export(value_name__astichi_arg__)
+    ]$
+    resource FallbackCandidate = template $[
+        value_name__astichi_arg__ = astichi_pass(self, outer_bind=True).astichi_ref(external=source_path)
+        astichi_export(value_name__astichi_arg__)
+    ]$
+    resource ClassCandidate = template $[
+        value_name__astichi_arg__ = type(astichi_pass(self, outer_bind=True)).astichi_ref(external=source_path)
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep type }
+    resource FactoryCandidate = template $[
+        try:
+            value_name__astichi_arg__ = factory_name__astichi_arg__(*astichi_hole(positional_arguments), **astichi_hole(keyword_arguments))
+        except _y_dc_ContextErrors:
+            raise
+        except Exception as _y_dc_factory_error:
+            raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        astichi_hole(pipeline)
+        astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = value_name__astichi_arg__
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    resource InputFactoryCandidate = template $[
+        if astichi_pass(input_name__astichi_arg__, outer_bind=True) is _y_dc_factory_sentinel:
+            try:
+                value_name__astichi_arg__ = factory_name__astichi_arg__(*astichi_hole(positional_arguments), **astichi_hole(keyword_arguments))
+            except _y_dc_ContextErrors:
+                raise
+            except Exception as _y_dc_factory_error:
+                raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        else:
+            value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
+        astichi_hole(pipeline)
+        astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = value_name__astichi_arg__
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    resource ZeroFactoryCandidate = template $[
+        try:
+            value_name__astichi_arg__ = factory_name__astichi_arg__()
+        except _y_dc_ContextErrors:
+            raise
+        except Exception as _y_dc_factory_error:
+            raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        astichi_hole(pipeline)
+        astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = value_name__astichi_arg__
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    resource ZeroInputFactoryCandidate = template $[
+        if astichi_pass(input_name__astichi_arg__, outer_bind=True) is _y_dc_factory_sentinel:
+            try:
+                value_name__astichi_arg__ = factory_name__astichi_arg__()
+            except _y_dc_ContextErrors:
+                raise
+            except Exception as _y_dc_factory_error:
+                raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        else:
+            value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
+        astichi_hole(pipeline)
+        astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = value_name__astichi_arg__
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    contribution PlannedInitContribution = PlannedInitProduction {
+        as InitMethod
+        target methods { build /ClassDef }
+    }
+    matcher InitContributions(cls: Classes) -> contribution {
+        rule planned when GenerateInit == True and HasPlannedInit == True -> PlannedInitContribution weight 2
+    }
+    contribution ConstructorPipeline = PipelineProduction {
+        as ConstructorPipeline
+        index PipelineIdentity
+        target pipeline { build /Candidate }
+    }
+    matcher ConstructorPipelineContributions(pipe: PipelineSites, step: InitializationFields, cls: Classes) -> contribution {
+        default -> ConstructorPipeline
+    }
+    contribution InputStep = InputStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production InputStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = InputCandidate {
+            ident value_name = ValueName
+            ident input_name = FieldName
+            external store_path = StoreName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    contribution DefaultStep = DefaultStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production DefaultStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = DefaultCandidate {
+            ident value_name = ValueName
+            ident default_name = DefaultName
+            external store_path = StoreName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    contribution FallbackStep = FallbackStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production FallbackStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = FallbackCandidate {
+            ident value_name = ValueName
+            external source_path = FieldName
+        }
+    }
+    contribution ClassStep = ClassStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ClassStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ClassCandidate {
+            ident value_name = ValueName
+            external source_path = FieldName
+        }
+    }
+    contribution FactoryStep = FactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production FactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = FactoryCandidate {
+            ident value_name = ValueName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+            external store_path = StoreName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+        apply empty_positional using EmptyPositionalArgumentsContributions
+        apply empty_keywords using EmptyKeywordArgumentsContributions
+        apply arguments from argument: FactoryArguments where CallerFieldId == FieldId using FactoryArgumentContributions
+    }
+    contribution InputFactoryStep = InputFactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production InputFactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = InputFactoryCandidate {
+            ident value_name = ValueName
+            ident input_name = FieldName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+            external store_path = StoreName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+        apply empty_positional using EmptyPositionalArgumentsContributions
+        apply empty_keywords using EmptyKeywordArgumentsContributions
+        apply arguments from argument: FactoryArguments where CallerFieldId == FieldId using FactoryArgumentContributions
+    }
+    contribution ZeroFactoryStep = ZeroFactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ZeroFactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ZeroFactoryCandidate {
+            ident value_name = ValueName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+            external store_path = StoreName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    contribution ZeroInputFactoryStep = ZeroInputFactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ZeroInputFactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ZeroInputFactoryCandidate {
+            ident value_name = ValueName
+            ident input_name = FieldName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+            external store_path = StoreName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    resource EmptyCallArguments = template `astichi_funcargs()`
+    contribution EmptyPositionalArgumentsContribution = EmptyCallArguments {
+        as PositionalStart
+        index ConstructorOrder
+        target positional_arguments { build /Candidate }
+    }
+    contribution EmptyKeywordArgumentsContribution = EmptyCallArguments {
+        as KeywordStart
+        index ConstructorOrder
+        target keyword_arguments { build /Candidate }
+    }
+    matcher EmptyPositionalArgumentsContributions(step: InitializationFields, cls: Classes) -> contribution {
+        default -> EmptyPositionalArgumentsContribution
+    }
+    matcher EmptyKeywordArgumentsContributions(step: InitializationFields, cls: Classes) -> contribution {
+        default -> EmptyKeywordArgumentsContribution
+    }
+    matcher InitializationStepContributions(step: InitializationFields, cls: Classes) -> contribution {
+        rule zero_input_factory when CandidateInput == True and CandidateFactory == True and HasFactoryArguments == False -> ZeroInputFactoryStep
+        rule zero_factory when CandidateInput == False and CandidateFactory == True and HasFactoryArguments == False -> ZeroFactoryStep
+        rule input_factory when CandidateInput == True and CandidateFactory == True and HasFactoryArguments == True -> InputFactoryStep
+        rule factory when CandidateInput == False and CandidateFactory == True and HasFactoryArguments == True -> FactoryStep
+        rule input when CandidateInput == True and CandidateFactory == False -> InputStep
+        rule fallback when CandidateFallback == True -> FallbackStep
+        rule defaulted when CandidateInput == False and CandidateFactory == False and CandidateDefault == True and CandidateFallback == False and ClassProvider == False -> DefaultStep
+        rule class_provider when ClassProvider == True -> ClassStep
+    }
+    resource ProviderPositionalArgument = template $[
+        astichi_funcargs(astichi_pass(provider_name__astichi_arg__, outer_bind=True))
+    ]$
+    contribution ProviderPositionalArgumentContribution = ProviderPositionalArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target positional_arguments { build /Candidate }
+        ident provider_name = ProviderValue
+    }
+    resource ProviderKeywordArgument = template $[
+        astichi_funcargs(argument_name__astichi_arg__=astichi_pass(provider_name__astichi_arg__, outer_bind=True))
+    ]$
+    contribution ProviderKeywordArgumentContribution = ProviderKeywordArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target keyword_arguments { build /Candidate }
+        ident provider_name = ProviderValue
+        ident argument_name = ArgumentName
+    }
+    resource CapturedPositionalArgument = template $[
+        astichi_funcargs(capture_name__astichi_arg__)
+    ]$
+    contribution CapturedPositionalArgumentContribution = CapturedPositionalArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target positional_arguments { build /Candidate }
+        ident capture_name = ArgumentCapture
+    }
+    resource CapturedKeywordArgument = template $[
+        astichi_funcargs(argument_name__astichi_arg__=capture_name__astichi_arg__)
+    ]$
+    contribution CapturedKeywordArgumentContribution = CapturedKeywordArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target keyword_arguments { build /Candidate }
+        ident capture_name = ArgumentCapture
+        ident argument_name = ArgumentName
+    }
+    resource InstancePositionalArgument = template $[
+        astichi_funcargs(astichi_pass(self, outer_bind=True))
+    ]$
+    contribution InstancePositionalArgumentContribution = InstancePositionalArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target positional_arguments { build /Candidate }
+    }
+    resource InstanceKeywordArgument = template $[
+        astichi_funcargs(argument_name__astichi_arg__=astichi_pass(self, outer_bind=True))
+    ]$
+    contribution InstanceKeywordArgumentContribution = InstanceKeywordArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target keyword_arguments { build /Candidate }
+        ident argument_name = ArgumentName
+    }
+    resource ClassPositionalArgument = template $[
+        astichi_funcargs(type(astichi_pass(self, outer_bind=True)))
+    ]$ { keep type }
+    contribution ClassPositionalArgumentContribution = ClassPositionalArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target positional_arguments { build /Candidate }
+    }
+    resource ClassKeywordArgument = template $[
+        astichi_funcargs(argument_name__astichi_arg__=type(astichi_pass(self, outer_bind=True)))
+    ]$ { keep type }
+    contribution ClassKeywordArgumentContribution = ClassKeywordArgument {
+        as Argument
+        index ArgumentIdentity
+        order ArgumentOrder
+        target keyword_arguments { build /Candidate }
+        ident argument_name = ArgumentName
+    }
+    matcher FactoryArgumentContributions(argument: FactoryArguments, step: InitializationFields, cls: Classes) -> contribution {
+        rule providerpositional when InstanceArgument == False and ClassArgument == False and CapturedArgument == False and PositionalArgument == True -> ProviderPositionalArgumentContribution
+        rule providerkeyword when InstanceArgument == False and ClassArgument == False and CapturedArgument == False and PositionalArgument == False -> ProviderKeywordArgumentContribution
+        rule capturedpositional when CapturedArgument == True and PositionalArgument == True -> CapturedPositionalArgumentContribution
+        rule capturedkeyword when CapturedArgument == True and PositionalArgument == False -> CapturedKeywordArgumentContribution
+        rule instancepositional when InstanceArgument == True and PositionalArgument == True -> InstancePositionalArgumentContribution
+        rule instancekeyword when InstanceArgument == True and PositionalArgument == False -> InstanceKeywordArgumentContribution
+        rule classpositional when ClassArgument == True and PositionalArgument == True -> ClassPositionalArgumentContribution
+        rule classkeyword when ClassArgument == True and PositionalArgument == False -> ClassKeywordArgumentContribution
+    }
+    production PlannedInitProduction(cls: Classes) -> composable {
+        root InitMethod = InitShell
+        apply empty_params using EmptyParamsContributions
+        apply params from field: Fields where FieldOwner == ClassId using ParamContributions
+        apply empty_stores using EmptyStoresContributions
+        apply steps from step: InitializationFields where FieldOwner == ClassId using InitializationStepContributions
+    }
+}

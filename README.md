@@ -1,8 +1,8 @@
 # YIDL Dataclass
 
-Status: Stage A is owner-verified; Stage B comparison/method checkpoint is ready
-for owner verification. Semantic design and TDD plan are independently accepted.
-Stages C–H remain outstanding. The operator-directed consumer-only generation
+Status: Stages A and B are owner-verified; Stage C provider/policy checkpoint is
+ready for owner verification. Semantic design and TDD plan are independently
+accepted. Stages D–H remain outstanding. The operator-directed consumer-only generation
 amendment is independently accepted at the
 [recorded boundary](dev-docs/ConsumerOnlyGenerationAmendment-ReviewResult.md). Astichi/YIDL SDK changes are outside
 scope; original Astichi 1.1.3 / YIDL 0.1.0 generation is the candidate baseline.
@@ -38,9 +38,14 @@ Equality follows each minor: tuple comparison on 3.12 and ordered field comparis
 with the self shortcut on 3.13/3.14. Repr omits excluded fields and handles recursion.
 Field-local `compare`/`hash` flags select direct generated operands;
 `hash=True, compare=False` is rejected to preserve equal-object hash consistency.
-Frozen/policy fields, named factories, InitVars and extension kinds remain later
-stages and currently raise `NotImplementedError` when selected. This is an
-unreleased partial implementation, not the completed compatibility matrix.
+Named factories resolve a checked provider DAG and receive converted/validated
+values through specialized calls. Constant/frozen fields, writable cache
+exceptions, construction-scoped InitVars, ClassVars and local storage are
+implemented. Conversion/validation accessors have individual backing storage;
+failed assignments preserve the previous value. Lazy fields and generated-model
+inheritance explicitly raise `NotImplementedError` until Stage D; complete
+copy/serialization support, Undoable integration and performance gates remain
+outstanding. This is an unreleased partial implementation.
 
 ```python
 from yidl_dataclass import dataclass, field, asdict, generated_source
@@ -72,7 +77,9 @@ separate environments, then run `python -m pytest`. The regeneration command is
 to update). The [Stage A evidence](docs/validation/stage-a/README.md) records
 scope, exact RED/GREEN commands, failures and validation limits. The
 [Stage B evidence](docs/validation/stage-b/README.md) includes the std differential
-callback matrix and independently inherited neutral comparison consumer.
+callback matrix and independently inherited neutral comparison consumer. The
+[Stage C evidence](docs/validation/stage-c/README.md) records provider DAGs,
+hidden providers, pipeline atomicity and namespace ownership.
 The authoritative `yidl/shared/comparison.yidl` is included in the consumer wheel;
 future Undoable integration will reuse it at build time. No performance result is
 claimed at this checkpoint.

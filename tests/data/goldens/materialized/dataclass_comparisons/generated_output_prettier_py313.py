@@ -13,15 +13,44 @@ class Quote(*_y_dc_bases):
         audit: _y_dc_annotation_6 = _y_dc_default_6,
     ) -> None:
         pass
-        self.sku = sku
-        self.price = price
-        self.currency = currency
-        self.tags = tags
-        self.note = note
+        _y_dc_value_0 = sku
+        pass
+        pass
+        self.sku = _y_dc_value_0
+        _y_dc_value_1 = price
+        pass
+        pass
+        self.price = _y_dc_value_1
+        _y_dc_value_2 = currency
+        pass
+        pass
+        self.currency = _y_dc_value_2
+        _y_dc_value_3 = tags
+        pass
+        pass
+        self.tags = _y_dc_value_3
+        _y_dc_value_4 = note
+        pass
+        pass
+        self.note = _y_dc_value_4
         if cache is _y_dc_factory_sentinel:
-            cache = _y_dc_factory_5()
-        self.cache = cache
-        self.audit = audit
+            try:
+                _y_dc_value_5 = _y_dc_factory_5()
+            except _y_dc_ContextErrors:
+                raise
+            except Exception as _y_dc_factory_error:
+                raise _y_dc_FieldInitializationError(
+                    "models.<locals>.Quote.cache: factory failed"
+                ) from _y_dc_factory_error
+        else:
+            _y_dc_value_5 = cache
+        pass
+        pass
+        self.cache = _y_dc_value_5
+        _y_dc_value_6 = audit
+        pass
+        pass
+        self.audit = _y_dc_value_6
 
     def __eq__(self, other):
         pass

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.303" timestamp="2026-10-12T22:28:20.547271+11:00" hostname="[host]"><testcase classname="tests.test_dictionary_policies" name="test_dictionary_hidden_provider_has_no_declared_public_default" time="0.244"><failure message="AssertionError: assert not True&#10; +  where True = hasattr(&lt;class 'test_dictionary_policies.test_dictionary_hidden_provider_has_no_declared_public_default.&lt;locals&gt;.DictionaryProvider'&gt;, 'seed')">def test_dictionary_hidden_provider_has_no_declared_public_default():
+        @dataclass(slots=False)
+        class DictionaryProvider:
+            seed:int=initvar(default=3)
+            value:int=field(init=False,default_factory=lambda seed:seed*2)
+        instance=DictionaryProvider()
+        assert instance.value==6
+&gt;       assert not hasattr(DictionaryProvider,"seed")
+E       AssertionError: assert not True
+E        +  where True = hasattr(&lt;class 'test_dictionary_policies.test_dictionary_hidden_provider_has_no_declared_public_default.&lt;locals&gt;.DictionaryProvider'&gt;, 'seed')
+
+tests/test_dictionary_policies.py:12: AssertionError</failure></testcase><testcase classname="tests.test_dictionary_policies" name="test_dictionary_absent_field_does_not_fall_back_to_declaration_marker" time="0.012"><failure message="AssertionError: assert not True&#10; +  where True = hasattr(&lt;class 'test_dictionary_policies.test_dictionary_absent_field_does_not_fall_back_to_declaration_marker.&lt;locals&gt;.Absent'&gt;, 'value')">def test_dictionary_absent_field_does_not_fall_back_to_declaration_marker():
+        @dataclass(slots=False)
+        class Absent:
+            value:int=field(init=False,repr=False,compare=False)
+&gt;       assert not hasattr(Absent,"value")
+E       AssertionError: assert not True
+E        +  where True = hasattr(&lt;class 'test_dictionary_policies.test_dictionary_absent_field_does_not_fall_back_to_declaration_marker.&lt;locals&gt;.Absent'&gt;, 'value')
+
+tests/test_dictionary_policies.py:21: AssertionError</failure></testcase></testsuite></testsuites>

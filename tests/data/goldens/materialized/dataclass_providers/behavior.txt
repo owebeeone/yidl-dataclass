@@ -1,0 +1,2 @@
+[('total', 5, 2), ('local', 10), ('self', 10, 'Configuration'), ('box', 10), ('total', 8, 2), ('local', 16), ('self', 16, 'Configuration'), ('box', 16), ('total', 5, 2), ('local', 10), ('self', 10, 'Configuration'), ('box', 10)]
+fields=total,tag,box; hidden-seed=True; local-excluded=True; replacement-seed=5; std-initvar-factory=True

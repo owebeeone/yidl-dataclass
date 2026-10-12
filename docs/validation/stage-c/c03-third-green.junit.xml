@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="28" time="4.350" timestamp="2026-10-12T22:25:59.608807+11:00" hostname="[host]"><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[0]" time="0.354" /><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[1]" time="0.011" /><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[yes]" time="0.006" /><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[result3]" time="0.013" /><testcase classname="tests.test_pipelines" name="test_converter_failure_is_contextual_atomic_and_preserves_cause" time="0.010" /><testcase classname="tests.test_pipelines" name="test_validator_failure_rejection_and_existing_context_preserved" time="0.011" /><testcase classname="tests.test_pipelines" name="test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[converter]" time="0.008" /><testcase classname="tests.test_pipelines" name="test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[validator]" time="0.008" /><testcase classname="tests.test_pipelines" name="test_derived_conversion_exact_primitive_nullable_and_explicit_disable" time="0.014" /><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[list]" time="0.000" /><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[object]" time="0.000" /><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[unresolved]" time="0.001" /><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[annotation3]" time="0.001" /><testcase classname="tests.test_pipelines" name="test_processed_initvar_reaches_factory_without_public_retention" time="0.022" /><testcase classname="tests.test_pipelines" name="test_callback_signature_must_accept_one_positional_value[converter]" time="0.001" /><testcase classname="tests.test_pipelines" name="test_callback_signature_must_accept_one_positional_value[validator]" time="0.001" /><testcase classname="tests.test_policies" name="test_frozen_writable_fields_must_be_excluded[options0]" time="0.001" /><testcase classname="tests.test_policies" name="test_frozen_writable_fields_must_be_excluded[options1]" time="0.001" /><testcase classname="tests.test_policies" name="test_frozen_dictionary_mode_rejected" time="0.001" /><testcase classname="tests.test_policies" name="test_policy_initialization_cannot_be_suppressed[False]" time="0.001" /><testcase classname="tests.test_policies" name="test_policy_initialization_cannot_be_suppressed[True]" time="0.001" /><testcase classname="tests.test_policies" name="test_policy_interceptors_are_rejected_including_inherited[__getattribute__]" time="0.000" /><testcase classname="tests.test_policies" name="test_policy_interceptors_are_rejected_including_inherited[__setattr__]" time="0.000" /><testcase classname="tests.test_policies" name="test_policy_interceptors_are_rejected_including_inherited[__delattr__]" time="0.000" /><testcase classname="tests.test_policies" name="test_const_invalid_mutability_flag_is_not_overwritten" time="0.000" /><testcase classname="tests.test_policies" name="test_readonly_policy_requires_constructor_source_even_without_consumer" time="0.000" /><testcase classname="tests.test_policies" name="test_mutable_pipeline_deletion_and_readonly_delete_errors" time="0.014" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_policies.py]" time="3.666"><failure message="FileNotFoundError: [Errno 2] No such file or directory: '[consumer-root]/tests/data/goldens/materialized/dataclass_policies/generated_output.py'">case = 'dataclass_policies.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1526/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+            source_path, runpy.run_path(str(source_path))["render_case"]()
+        )
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        manifest_path = expected / "runtime_manifest.json"
+        manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+        minor = f"py{sys.version_info.major}{sys.version_info.minor}"
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+            expected_name = manifest.get(name, {}).get(minor, name)
+&gt;           assert actual == (expected / expected_name).read_text(), name
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_yidl_goldens.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('[consumer-root]/tests/data/goldens/materialized/dataclass_policies/generated_output.py')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '[consumer-root]/tests/data/goldens/materialized/dataclass_policies/generated_output.py'
+
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1013: FileNotFoundError</failure></testcase></testsuite></testsuites>

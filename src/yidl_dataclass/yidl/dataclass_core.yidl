@@ -10,6 +10,8 @@ concept DataclassCore {
     property SlotNames: object = ()
     property UseSlots: bool = True
     property GenerateInit: bool = True
+    property HasPlannedInit: bool = False
+    property HasProperties: bool = False
     property FieldId: str
     property FieldOwner: str
     property FieldName: str
@@ -34,6 +36,8 @@ concept DataclassCore {
         SlotNames
         UseSlots
         GenerateInit
+        HasPlannedInit
+        HasProperties
     }
     record DataclassField {
         FieldId

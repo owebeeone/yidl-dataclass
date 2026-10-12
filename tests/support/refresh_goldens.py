@@ -12,7 +12,15 @@ from yidl.testing.versioned_test_harness import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
-VERSIONED = {"dataclass_comparisons", "dataclass_method_actions", "comparison_neutral"}
+VERSIONED = {
+    "dataclass_comparisons",
+    "dataclass_method_actions",
+    "comparison_neutral",
+    "dataclass_initialization",
+    "dataclass_providers",
+    "dataclass_policies",
+    "dataclass_pipeline_ownership",
+}
 
 
 def main():

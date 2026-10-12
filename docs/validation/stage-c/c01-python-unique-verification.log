@@ -1,0 +1,37 @@
+......F                                                                  [100%]
+=================================== FAILURES ===================================
+_______________ test_canonical_case[dataclass_initialization.py] _______________
+
+case = 'dataclass_initialization.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1509/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+            source_path, runpy.run_path(str(source_path))["render_case"]()
+        )
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        manifest_path = expected / "runtime_manifest.json"
+        manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+        minor = f"py{sys.version_info.major}{sys.version_info.minor}"
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+            expected_name = manifest.get(name, {}).get(minor, name)
+>           assert actual == (expected / expected_name).read_text(), name
+E           AssertionError: generated_output.py
+E           assert "class Order(...ts))) + ')'\n" == "class Order(...ts))) + ')'\n"
+E             
+E             Skipping 972 identical leading characters in diff, use -v to show
+E             - from error
+E             + from error__astichi_scoped_1
+E                       pass
+E                       self.summary = _y_dc_value_0
+E               ...
+E             
+E             ...Full output truncated (14 lines hidden), use '-vv' to show
+
+tests/test_yidl_goldens.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_initialization.py]
+1 failed, 6 passed in 1.83s

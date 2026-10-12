@@ -107,3 +107,52 @@ def test_constant_expression_carrier_has_direct_hash_operation_sequence():
         ]
 
     assert instructions(Direct.__hash__) == instructions(reference)
+
+
+def test_policy_canonical_has_field_local_backing_and_direct_callback_calls():
+    import json
+    import sys
+
+    directory = data_golden_dir(ROOT) / "dataclass_policies"
+    manifest = json.loads((directory / "runtime_manifest.json").read_text())
+    name = manifest["generated_output.py"][
+        f"py{sys.version_info.major}{sys.version_info.minor}"
+    ]
+    tree = ast.parse((directory / name).read_text())
+    declarations = [node for node in tree.body if isinstance(node, ast.ClassDef)]
+    assert all(not node.decorator_list for node in declarations)
+    processed = declarations[0]
+    units = [
+        node
+        for node in processed.body
+        if isinstance(node, ast.FunctionDef) and node.name == "units"
+    ]
+    assert len(units) == 3
+    getter = units[0]
+    assert isinstance(getter.body[0].value, ast.Attribute)
+    assert getter.body[0].value.attr == "_y_dc_store_1"
+    setter = units[1]
+    callbacks = [
+        node.func.id
+        for node in ast.walk(setter)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    ]
+    assert "_y_dc_converter_1" in callbacks and "_y_dc_validator_1" in callbacks
+    assert not any(
+        isinstance(node, ast.Name)
+        and node.id in ("getattr", "setattr", "storage_fields", "_pipeline")
+        for node in ast.walk(setter)
+    )
+    stores = [node.targets[0] for node in setter.body if isinstance(node, ast.Assign)]
+    assert len(stores) == 1 and stores[0].attr == "_y_dc_store_1"
+    init = next(
+        node
+        for node in processed.body
+        if isinstance(node, ast.FunctionDef) and node.name == "__init__"
+    )
+    assert any(
+        isinstance(node, ast.Attribute)
+        and node.attr == "total"
+        and isinstance(node.ctx, ast.Store)
+        for node in ast.walk(init)
+    )

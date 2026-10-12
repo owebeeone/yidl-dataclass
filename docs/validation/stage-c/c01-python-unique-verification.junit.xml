@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="7" time="1.832" timestamp="2026-10-12T21:53:54.045055+11:00" hostname="[host]"><testcase classname="tests.test_provider_failures" name="test_known_optional_unavailable_provider_is_not_omitted" time="0.146" /><testcase classname="tests.test_provider_failures" name="test_named_cycle_rejected_even_when_inputs_could_bypass_factories" time="0.000" /><testcase classname="tests.test_provider_failures" name="test_unknown_required_parameter_rejected" time="0.000" /><testcase classname="tests.test_provider_failures" name="test_variadic_factory_rejected" time="0.000" /><testcase classname="tests.test_provider_failures" name="test_factory_callback_failure_is_contextual_and_preserves_cause" time="0.093" /><testcase classname="tests.test_provider_failures" name="test_factory_does_not_wrap_baseexception_or_existing_context_error" time="0.126" /><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_initialization.py]" time="1.365"><failure message="AssertionError: generated_output.py&#10;assert &quot;class Order(...ts))) + ')'\n&quot; == &quot;class Order(...ts))) + ')'\n&quot;&#10;  &#10;  Skipping 972 identical leading characters in diff, use -v to show&#10;  - from error&#10;  + from error__astichi_scoped_1&#10;            pass&#10;            self.summary = _y_dc_value_0&#10;    ...&#10;  &#10;  ...Full output truncated (14 lines hidden), use '-vv' to show">case = 'dataclass_initialization.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1509/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+            source_path, runpy.run_path(str(source_path))["render_case"]()
+        )
+        expected = data_golden_dir(ROOT) / Path(case).stem
+        manifest_path = expected / "runtime_manifest.json"
+        manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+        minor = f"py{sys.version_info.major}{sys.version_info.minor}"
+        for name, actual in sources.items():
+            (tmp_path / name).write_text(actual)
+            expected_name = manifest.get(name, {}).get(minor, name)
+&gt;           assert actual == (expected / expected_name).read_text(), name
+E           AssertionError: generated_output.py
+E           assert "class Order(...ts))) + ')'\n" == "class Order(...ts))) + ')'\n"
+E             
+E             Skipping 972 identical leading characters in diff, use -v to show
+E             - from error
+E             + from error__astichi_scoped_1
+E                       pass
+E                       self.summary = _y_dc_value_0
+E               ...
+E             
+E             ...Full output truncated (14 lines hidden), use '-vv' to show
+
+tests/test_yidl_goldens.py:31: AssertionError</failure></testcase></testsuite></testsuites>

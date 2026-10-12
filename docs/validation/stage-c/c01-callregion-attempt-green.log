@@ -1,0 +1,718 @@
+....FFF                                                                  [100%]
+=================================== FAILURES ===================================
+_______ test_factory_callback_failure_is_contextual_and_preserves_cause ________
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[0]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10bdbbef0>})
+resource = ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin=CompileOrigin(file_name=...ursionError', 'BytesWarning', 'int', 'UnicodeWarning', 'oct'})), build_name='ArgumentStart', build_index=None, order=0)
+contribution = ContributionSpec(name='EmptyFactoryArgumentsContribution', source_name='EmptyFactoryArguments', source_kind='resource'...th=PathSpec(segments=(PathSegmentSpec(kind='name', name='Candidate', indexes=()),))),)), bindings=(), diagnostic=False)
+stack = DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_y_dc_d... '_y_dc_bases', 'SlotNames': ('value',), 'UseSlots': True, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'InitMethod': ('Root', 'ClassDef[0]', 'InitMethod'), 'Candidate': ('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[0]')}
+binding_groups = (((), DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_...ue, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None), "contribution 'EmptyFactoryArgumentsContribution'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -> AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+>               scope.apply_batch(tuple(chained_requests))
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:609: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:488: in apply_batch
+    return self._apply_batch_uncounted(request_tuple)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:499: in _apply_batch_uncounted
+    native_candidates = self._try_apply_native_batch(requests)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[0]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10bdbbef0>})
+requests = (BindingRequest(resource=ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin...d_match=('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[0]'), owner_match=None, allow_equivalent_demand_sites=False),)
+
+    def _try_apply_native_batch(
+        self,
+        requests: tuple[BindingRequest, ...],
+    ) -> tuple[BindingCandidate, ...] | None:
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_template_cache is None
+            or self._native_state_handle is None
+        ):
+            return None
+        native_requests = self._native_batch_request_payload(requests)
+        if native_requests is None:
+            return None
+>       result = self._native_module.assembly_state_apply_request_batch(
+            self._native_engine_handle,
+            self._native_state_handle,
+            native_requests,
+        )
+E       ValueError: native schema error: expected exactly one candidate, found 0
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:554: ValueError
+
+The above exception was the direct cause of the following exception:
+
+    def test_factory_callback_failure_is_contextual_and_preserves_cause():
+        from yidl_dataclass import FieldInitializationError
+        original = ValueError("factory failed")
+        def factory():
+            raise original
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_provider_failures.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:190: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:767: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:764: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:276: in _run_production
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:458: in _apply_contribution
+    applied = _apply_resource_to_target(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[0]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10bdbbef0>})
+resource = ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin=CompileOrigin(file_name=...ursionError', 'BytesWarning', 'int', 'UnicodeWarning', 'oct'})), build_name='ArgumentStart', build_index=None, order=0)
+contribution = ContributionSpec(name='EmptyFactoryArgumentsContribution', source_name='EmptyFactoryArguments', source_kind='resource'...th=PathSpec(segments=(PathSegmentSpec(kind='name', name='Candidate', indexes=()),))),)), bindings=(), diagnostic=False)
+stack = DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_y_dc_d... '_y_dc_bases', 'SlotNames': ('value',), 'UseSlots': True, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'InitMethod': ('Root', 'ClassDef[0]', 'InitMethod'), 'Candidate': ('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[0]')}
+binding_groups = (((), DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_...ue, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None), "contribution 'EmptyFactoryArgumentsContribution'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -> AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+                scope.apply_batch(tuple(chained_requests))
+            except ValueError as exc:
+>               raise ValueError(
+                    f"contribution {contribution.name!r}: failed to target "
+                    f"{contribution.target.name!r}"
+                ) from exc
+E               ValueError: contribution 'EmptyFactoryArgumentsContribution': failed to target 'arguments'
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:611: ValueError
+______ test_factory_does_not_wrap_baseexception_or_existing_context_error ______
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[0]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10cb5b530>})
+resource = ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin=CompileOrigin(file_name=...ursionError', 'BytesWarning', 'int', 'UnicodeWarning', 'oct'})), build_name='ArgumentStart', build_index=None, order=0)
+contribution = ContributionSpec(name='EmptyFactoryArgumentsContribution', source_name='EmptyFactoryArguments', source_kind='resource'...th=PathSpec(segments=(PathSegmentSpec(kind='name', name='Candidate', indexes=()),))),)), bindings=(), diagnostic=False)
+stack = DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_y_dc_d... '_y_dc_bases', 'SlotNames': ('value',), 'UseSlots': True, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'InitMethod': ('Root', 'ClassDef[0]', 'InitMethod'), 'Candidate': ('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[0]')}
+binding_groups = (((), DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_...ue, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None), "contribution 'EmptyFactoryArgumentsContribution'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -> AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+>               scope.apply_batch(tuple(chained_requests))
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:609: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:488: in apply_batch
+    return self._apply_batch_uncounted(request_tuple)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:499: in _apply_batch_uncounted
+    native_candidates = self._try_apply_native_batch(requests)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[0]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10cb5b530>})
+requests = (BindingRequest(resource=ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin...d_match=('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[0]'), owner_match=None, allow_equivalent_demand_sites=False),)
+
+    def _try_apply_native_batch(
+        self,
+        requests: tuple[BindingRequest, ...],
+    ) -> tuple[BindingCandidate, ...] | None:
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_template_cache is None
+            or self._native_state_handle is None
+        ):
+            return None
+        native_requests = self._native_batch_request_payload(requests)
+        if native_requests is None:
+            return None
+>       result = self._native_module.assembly_state_apply_request_batch(
+            self._native_engine_handle,
+            self._native_state_handle,
+            native_requests,
+        )
+E       ValueError: native schema error: expected exactly one candidate, found 0
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:554: ValueError
+
+The above exception was the direct cause of the following exception:
+
+    def test_factory_does_not_wrap_baseexception_or_existing_context_error():
+        from yidl_dataclass import FieldConversionError
+        for original in (KeyboardInterrupt("stop"), FieldConversionError("already contextual")):
+            def factory():
+                raise original
+>           @dataclass
+             ^^^^^^^^^
+
+tests/test_provider_failures.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:190: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:767: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:764: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:276: in _run_production
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:458: in _apply_contribution
+    applied = _apply_resource_to_target(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[0]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10cb5b530>})
+resource = ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin=CompileOrigin(file_name=...ursionError', 'BytesWarning', 'int', 'UnicodeWarning', 'oct'})), build_name='ArgumentStart', build_index=None, order=0)
+contribution = ContributionSpec(name='EmptyFactoryArgumentsContribution', source_name='EmptyFactoryArguments', source_kind='resource'...th=PathSpec(segments=(PathSegmentSpec(kind='name', name='Candidate', indexes=()),))),)), bindings=(), diagnostic=False)
+stack = DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_y_dc_d... '_y_dc_bases', 'SlotNames': ('value',), 'UseSlots': True, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'InitMethod': ('Root', 'ClassDef[0]', 'InitMethod'), 'Candidate': ('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[0]')}
+binding_groups = (((), DataStack(value_dicts=({'FieldId': 'Model.value', 'FieldOwner': 'Model', 'FieldName': 'value', 'DefaultName': '_...ue, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None), "contribution 'EmptyFactoryArgumentsContribution'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -> AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+                scope.apply_batch(tuple(chained_requests))
+            except ValueError as exc:
+>               raise ValueError(
+                    f"contribution {contribution.name!r}: failed to target "
+                    f"{contribution.target.name!r}"
+                ) from exc
+E               ValueError: contribution 'EmptyFactoryArgumentsContribution': failed to target 'arguments'
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:611: ValueError
+_______________ test_canonical_case[dataclass_initialization.py] _______________
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[2]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10be09530>})
+resource = ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin=CompileOrigin(file_name=...ursionError', 'BytesWarning', 'int', 'UnicodeWarning', 'oct'})), build_name='ArgumentStart', build_index=None, order=0)
+contribution = ContributionSpec(name='EmptyFactoryArgumentsContribution', source_name='EmptyFactoryArguments', source_kind='resource'...th=PathSpec(segments=(PathSegmentSpec(kind='name', name='Candidate', indexes=()),))),)), bindings=(), diagnostic=False)
+stack = DataStack(value_dicts=({'FieldId': 'Model.total', 'FieldOwner': 'Model', 'FieldName': 'total', 'DefaultName': '_y_dc_d...otNames': ('summary', 'total', 'units'), 'UseSlots': True, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'InitMethod': ('Root', 'ClassDef[0]', 'InitMethod'), 'Candidate': ('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[2]')}
+binding_groups = (((), DataStack(value_dicts=({'FieldId': 'Model.total', 'FieldOwner': 'Model', 'FieldName': 'total', 'DefaultName': '_...ue, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None), "contribution 'EmptyFactoryArgumentsContribution'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -> AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+>               scope.apply_batch(tuple(chained_requests))
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:609: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:488: in apply_batch
+    return self._apply_batch_uncounted(request_tuple)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:499: in _apply_batch_uncounted
+    native_candidates = self._try_apply_native_batch(requests)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[2]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10be09530>})
+requests = (BindingRequest(resource=ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin...d_match=('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[2]'), owner_match=None, allow_equivalent_demand_sites=False),)
+
+    def _try_apply_native_batch(
+        self,
+        requests: tuple[BindingRequest, ...],
+    ) -> tuple[BindingCandidate, ...] | None:
+        if (
+            self._native_module is None
+            or self._native_engine_handle is None
+            or self._native_template_cache is None
+            or self._native_state_handle is None
+        ):
+            return None
+        native_requests = self._native_batch_request_payload(requests)
+        if native_requests is None:
+            return None
+>       result = self._native_module.assembly_state_apply_request_batch(
+            self._native_engine_handle,
+            self._native_state_handle,
+            native_requests,
+        )
+E       ValueError: native schema error: expected exactly one candidate, found 0
+
+.venv/lib/python3.12/site-packages/astichi/assembler/scope.py:554: ValueError
+
+The above exception was the direct cause of the following exception:
+
+case = 'dataclass_initialization.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1501/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_initialization.py:16: in render_case
+    @dataclass
+     ^^^^^^^^^
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:190: in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:767: in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/yidl_dataclass/_generated_dataclass_base.py:764: in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:242: in run_assembly
+    return _run_production(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:276: in _run_production
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:426: in _apply_contribution
+    _apply_production_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:531: in _apply_production_contribution
+    _run_production_edges(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:319: in _run_production_edges
+    _run_edge(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:375: in _run_edge
+    _apply_contribution(
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:458: in _apply_contribution
+    applied = _apply_resource_to_target(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+scope = AssemblyScope(builder=BuilderHandle(graph=BuilderGraph(_instances={'Root': InstanceRecord(name='Root', composable=Basi...0]', 'InitMethod', 'Candidate[2]', 'Pipeline'): <_astichi_native_engine.NativeOccurrenceHandle object at 0x10be09530>})
+resource = ComposableResource(composable=BasicComposable(tree=<ast.Module object at 0x10bdb9810>, origin=CompileOrigin(file_name=...ursionError', 'BytesWarning', 'int', 'UnicodeWarning', 'oct'})), build_name='ArgumentStart', build_index=None, order=0)
+contribution = ContributionSpec(name='EmptyFactoryArgumentsContribution', source_name='EmptyFactoryArguments', source_kind='resource'...th=PathSpec(segments=(PathSegmentSpec(kind='name', name='Candidate', indexes=()),))),)), bindings=(), diagnostic=False)
+stack = DataStack(value_dicts=({'FieldId': 'Model.total', 'FieldOwner': 'Model', 'FieldName': 'total', 'DefaultName': '_y_dc_d...otNames': ('summary', 'total', 'units'), 'UseSlots': True, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None)
+root_mapping = {'Root': ('Root',), 'ClassDef': ('Root', 'ClassDef[0]'), 'InitMethod': ('Root', 'ClassDef[0]', 'InitMethod'), 'Candidate': ('Root', 'ClassDef[0]', 'InitMethod', 'Candidate[2]')}
+binding_groups = (((), DataStack(value_dicts=({'FieldId': 'Model.total', 'FieldOwner': 'Model', 'FieldName': 'total', 'DefaultName': '_...ue, 'GenerateInit': True, 'HasPlannedInit': True}), parent=None), "contribution 'EmptyFactoryArgumentsContribution'"),)
+
+    def _apply_resource_to_target(
+        scope: AssemblyScope,
+        resource: object,
+        contribution: ContributionSpec,
+        stack: DataStack,
+        *,
+        root_mapping: Mapping[str, tuple[str, ...]],
+        binding_groups: tuple[
+            tuple[tuple[BindingSpec, ...], DataStack, str],
+            ...,
+        ] = (),
+    ) -> AppliedTarget:
+        if contribution.target is None:
+            raise ValueError(f"contribution {contribution.name!r} must declare a target")
+        build_selectors = _target_selectors(
+            contribution.target.paths,
+            "build",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} build",
+        )
+        owner_selectors = _target_selectors(
+            contribution.target.paths,
+            "owner",
+            stack,
+            root_mapping=root_mapping,
+            context=f"contribution {contribution.name!r} owner",
+        )
+    
+        requests: list[BindingRequest] = []
+        request_build_matches: list[tuple[str, ...] | None] = []
+        for build_match in build_selectors:
+            for owner_match in owner_selectors:
+                requests.append(
+                    BindingRequest(
+                        resource,
+                        name=contribution.target.name,
+                        build_match=build_match,
+                        owner_match=owner_match,
+                    )
+                )
+                request_build_matches.append(build_match)
+        if _can_chain_contribution_requests(request_build_matches, owner_selectors):
+            build_match = request_build_matches[0]
+            assert build_match is not None
+            concrete_build_path = build_match + (resource.instance_name,)
+            chained_requests = list(requests)
+            for bindings, binding_stack, _binding_context in binding_groups:
+                chained_requests.extend(
+                    _binding_requests(
+                        bindings,
+                        binding_stack,
+                        build_match=concrete_build_path,
+                    )
+                )
+            try:
+                scope.apply_batch(tuple(chained_requests))
+            except ValueError as exc:
+>               raise ValueError(
+                    f"contribution {contribution.name!r}: failed to target "
+                    f"{contribution.target.name!r}"
+                ) from exc
+E               ValueError: contribution 'EmptyFactoryArgumentsContribution': failed to target 'arguments'
+
+.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py:611: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_provider_failures.py::test_factory_callback_failure_is_contextual_and_preserves_cause
+FAILED tests/test_provider_failures.py::test_factory_does_not_wrap_baseexception_or_existing_context_error
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_initialization.py]
+3 failed, 4 passed in 0.63s

@@ -7,11 +7,12 @@ import keyword
 import types
 from typing import Any
 from .dataclass_definition import DataclassDefinition, DataclassOptions, StorageField
-from .dataclass_markers import FieldDeclaration
+from .dataclass_markers import FieldDeclaration, LazyDeclaration, LocalStoreDeclaration
+from .field_kinds import OrdinaryKind, InitvarKind, ClassvarKind, LocalKind
 from .errors import DataclassDefinitionError
 from . import stdlib_adapter as adapter
-
-_ZERO_ARG_BUILTINS = (list, dict, set, tuple, int, float, str, bytes, bool)
+from .provider_plan import plan_initialization
+from .policy_plan import normalize_policies
 
 
 def harvest(
@@ -34,8 +35,14 @@ def harvest(
         raise DataclassDefinitionError(
             "__post_init__ is unsupported; use named factories"
         )
-    if options.frozen or options.convert:
-        raise NotImplementedError("policy generation belongs to Stage C")
+    if any(
+        "__yidl_dataclass_definition__" in base.__dict__ for base in cls.__mro__[1:]
+    ):
+        raise NotImplementedError("generated model inheritance belongs to Stage D")
+    for base in cls.__mro__[1:]:
+        for name in base.__dict__:
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
     annotations = adapter.annotations_for(cls)
     for name in (*annotations, *cls.__dict__):
         if name.startswith("_y_dc_"):
@@ -51,7 +58,8 @@ def harvest(
         ):
             raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
         value = inspect.getattr_static(cls, name, std.MISSING)
-        default = value.default if isinstance(value, std.Field) else value
+        raw = value.field if isinstance(value, FieldDeclaration) else value
+        default = raw.default if isinstance(raw, std.Field) else raw
         if (
             default is not std.MISSING
             and not isinstance(default, types.MemberDescriptorType)
@@ -60,12 +68,23 @@ def harvest(
             raise DataclassDefinitionError(
                 f"{name}: descriptor-valued defaults are unsupported"
             )
-        if isinstance(cls.__dict__.get(name), FieldDeclaration):
-            raise NotImplementedError("extension fields belong to Stage C")
+        if isinstance(value, LazyDeclaration):
+            raise NotImplementedError("lazy fields belong to Stage D")
     items = adapter.fields_for(cls, annotations, kw_only=options.kw_only)
-    if any(adapter.is_initvar(item) for item in items):
-        raise NotImplementedError("InitVar initialization belongs to Stage C")
-    instance = tuple(item for item in items if adapter.is_instance_field(item))
+    kinds = {}
+    for item in items:
+        declaration = inspect.getattr_static(cls, item.name, std.MISSING)
+        kind = (
+            LocalKind()
+            if isinstance(declaration, LocalStoreDeclaration)
+            else (
+                InitvarKind()
+                if adapter.is_initvar(item)
+                else ClassvarKind() if adapter.is_classvar(item) else OrdinaryKind()
+            )
+        )
+        kinds[item.name] = kind
+    instance = tuple(item for item in items if kinds[item.name].parameter)
     positional = tuple(item for item in instance if item.init and not item.kw_only)
     keyword_only = tuple(item for item in instance if item.init and item.kw_only)
     seen_default = False
@@ -86,7 +105,9 @@ def harvest(
         if isinstance(value, types.MemberDescriptorType)
     }
     slot_names = tuple(
-        item.name for item in instance if item.name not in inherited_slots
+        item.name
+        for item in items
+        if kinds[item.name].stored and item.name not in inherited_slots
     )
     if options.weakref_slot and not any(
         base.__weakrefoffset__ for base in cls.__bases__
@@ -104,14 +125,6 @@ def harvest(
             captures[default_name] = item.default
         if item.default_factory is not std.MISSING:
             factory = item.default_factory
-            if (
-                generate_init
-                and not any(factory is builtin for builtin in _ZERO_ARG_BUILTINS)
-                and inspect.signature(factory).parameters
-            ):
-                raise NotImplementedError(
-                    f"{item.name}: named factory graph belongs to Stage C"
-                )
             captures[factory_name] = factory
         definitions.append(
             StorageField(
@@ -121,10 +134,41 @@ def harvest(
                 default_name,
                 factory_name,
                 orders.get(item.name, index),
-                adapter.is_instance_field(item),
+                adapter.is_instance_field(item) and kinds[item.name].metadata,
+                kind=kinds[item.name],
+                allow_self_factory=(
+                    inspect.getattr_static(cls, item.name).policy.allow_self_factory
+                    if isinstance(
+                        inspect.getattr_static(cls, item.name, None), FieldDeclaration
+                    )
+                    else False
+                ),
             )
         )
+    definitions, policy_class = normalize_policies(
+        cls, tuple(definitions), options, captures
+    )
+    slot_names = tuple(
+        item.store_name
+        for item in definitions
+        if item.kind.stored and item.name not in inherited_slots
+    ) + (("__weakref__",) if "__weakref__" in slot_names else ())
+    steps, calls, planned = plan_initialization(
+        cls, definitions, options, generate_init, captures
+    )
+    dependencies = {call.field_name: call.dependencies for call in calls}
+    definitions = tuple(
+        std.replace(item, dependencies=dependencies.get(item.name, ()))
+        for item in definitions
+    )
     definition = DataclassDefinition(
-        options, tuple(definitions), slot_names, generate_init
+        options,
+        tuple(definitions),
+        slot_names,
+        generate_init,
+        steps,
+        calls,
+        planned,
+        policy_class,
     )
     return definition, annotations, captures

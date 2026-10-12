@@ -67,6 +67,20 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+At 2026-10-12T11:42Z Stage C is owner-verified: all six complete source runs
+have 156 passed/one version-specific skip; all six isolated installed extension
+probes and both installed regeneration checks pass. Owner independently checks
+286 owned hashes, 75 increment records, 123 artifact references, 103 distinct raw
+hashes and 48 JUnit artifacts. `Dataclass-StageCResult.md` records exact source and
+wheel provenance. D–H and final reviews remain. The unsupported owner `--check`
+CLI attempt is preserved as setup; default invocation performs the supported
+check. Latest twelve-actor observations estimate $49.880027 Standard
+API-equivalent USD at about 8h05m from original GO: 253,224,491 input tokens,
+248,081,408 repeated cached input, and 1,288,423 output tokens including 700,065
+reasoning tokens. Actual billing remains unavailable; this is not a
+completed-product cost. Source-only scope, prior intervention and sequencing
+limitations remain unchanged.
+
 At 2026-10-12T11:18:26Z the owner preserved an Undoable pre-integration wheel
 for later write-path comparison. An unnecessary packaging-only Lifecycle wheel
 build breached the recorded dependency no-rebuild boundary. No new source edit

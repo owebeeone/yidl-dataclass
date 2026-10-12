@@ -1,0 +1,23 @@
+reformatted src/yidl_dataclass/field_kinds.py
+reformatted src/yidl_dataclass/policy_generation.py
+reformatted tests/test_dictionary_policies.py
+reformatted tests/data/gold_src/dataclass_providers.py
+reformatted tests/data/gold_src/dataclass_pipeline_ownership.py
+reformatted tests/support/refresh_goldens.py
+reformatted tests/data/gold_src/dataclass_policies.py
+reformatted src/yidl_dataclass/factory_generation.py
+reformatted src/yidl_dataclass/dataclass_harvester.py
+reformatted tests/test_extension_boundaries.py
+reformatted src/yidl_dataclass/stdlib_adapter.py
+reformatted tests/data/gold_src/dataclass_initialization.py
+reformatted src/yidl_dataclass/policy_plan.py
+reformatted tests/test_policies.py
+reformatted tests/test_provider_failures.py
+reformatted tests/test_pipelines.py
+reformatted tests/test_provider_kinds.py
+reformatted src/yidl_dataclass/dataclass.py
+reformatted src/yidl_dataclass/provider_plan.py
+reformatted tests/test_source_contract.py
+
+All done! ✨ 🍰 ✨
+20 files reformatted, 3 files left unchanged.

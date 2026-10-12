@@ -1,0 +1,2 @@
+[('convert', '2'), ('validate', 2), ('convert', '5'), ('validate', 5), ('convert', '-2'), ('validate', -2), ('convert', '9'), ('validate', 9)]
+converted-provider-total=6; assignment-atomic=True; mutable-delete=True; const=True; frozen-hash=amount; writable-cache=True; local-excluded=True

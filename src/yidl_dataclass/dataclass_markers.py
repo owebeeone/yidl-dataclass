@@ -118,6 +118,8 @@ def _as_declaration(value, cls):
 
 
 def const(**field_options):
+    if field_options.get("mutable") is not None:
+        require_bool("mutable", field_options["mutable"])
     if field_options.get("mutable") is True:
         raise DataclassDefinitionError("const mutable must be False")
     field_options["mutable"] = False

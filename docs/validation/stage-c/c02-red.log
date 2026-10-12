@@ -1,0 +1,721 @@
+FFFFFFFF.FFF                                                             [100%]
+=================================== FAILURES ===================================
+_________ test_convenience_annotation_kind_conflict[initvar-ClassVar] __________
+
+marker = <function initvar at 0x106d3dbc0>, annotation = typing.ClassVar[int]
+
+    @pytest.mark.parametrize("marker,annotation", ((initvar,ClassVar[int]),(classvar,std.InitVar[int]),(local_store,std.InitVar[int])))
+    def test_convenience_annotation_kind_conflict(marker,annotation):
+        declaration=type("Conflict",(),{"__annotations__":{"value":annotation},"value":marker(default=3)})
+        with pytest.raises(DataclassDefinitionError,match="kind.*conflict"):
+>           dataclass(declaration)
+
+tests/test_provider_kinds.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.Conflict'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+_______ test_convenience_annotation_kind_conflict[classvar-annotation1] ________
+
+marker = <function classvar at 0x106d3dc60>
+annotation = dataclasses.InitVar[int]
+
+    @pytest.mark.parametrize("marker,annotation", ((initvar,ClassVar[int]),(classvar,std.InitVar[int]),(local_store,std.InitVar[int])))
+    def test_convenience_annotation_kind_conflict(marker,annotation):
+        declaration=type("Conflict",(),{"__annotations__":{"value":annotation},"value":marker(default=3)})
+        with pytest.raises(DataclassDefinitionError,match="kind.*conflict"):
+>           dataclass(declaration)
+
+tests/test_provider_kinds.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.Conflict'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+______ test_convenience_annotation_kind_conflict[local_store-annotation2] ______
+
+marker = <function local_store at 0x106d3dd00>
+annotation = dataclasses.InitVar[int]
+
+    @pytest.mark.parametrize("marker,annotation", ((initvar,ClassVar[int]),(classvar,std.InitVar[int]),(local_store,std.InitVar[int])))
+    def test_convenience_annotation_kind_conflict(marker,annotation):
+        declaration=type("Conflict",(),{"__annotations__":{"value":annotation},"value":marker(default=3)})
+        with pytest.raises(DataclassDefinitionError,match="kind.*conflict"):
+>           dataclass(declaration)
+
+tests/test_provider_kinds.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.Conflict'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+____________ test_source_free_extension_provider_rejected[initvar] _____________
+
+marker = <function initvar at 0x106d3dbc0>
+
+    @pytest.mark.parametrize("marker",(initvar,local_store))
+    def test_source_free_extension_provider_rejected(marker):
+        declaration=type("Unavailable",(),{"__annotations__":{"value":int},"value":marker(init=False) if marker is initvar else marker()})
+        with pytest.raises(DataclassDefinitionError,match="value.*source"):
+>           dataclass(declaration)
+
+tests/test_provider_kinds.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.Unavailable'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+__________ test_source_free_extension_provider_rejected[local_store] ___________
+
+marker = <function local_store at 0x106d3dd00>
+
+    @pytest.mark.parametrize("marker",(initvar,local_store))
+    def test_source_free_extension_provider_rejected(marker):
+        declaration=type("Unavailable",(),{"__annotations__":{"value":int},"value":marker(init=False) if marker is initvar else marker()})
+        with pytest.raises(DataclassDefinitionError,match="value.*source"):
+>           dataclass(declaration)
+
+tests/test_provider_kinds.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.Unavailable'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+__________ test_extension_initialization_cannot_be_suppressed[False] ___________
+
+custom = False
+
+    @pytest.mark.parametrize("custom",(False,True))
+    def test_extension_initialization_cannot_be_suppressed(custom):
+        namespace={"__annotations__":{"seed":int},"seed":initvar(default=3)}
+        if custom:namespace["__init__"]=lambda self:None
+        with pytest.raises(DataclassDefinitionError,match="requires generated init"):
+>           dataclass(type("Suppressed",(),namespace),init=custom)
+
+tests/test_provider_kinds.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.Suppressed'>
+options = DataclassOptions(init=False, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+___________ test_extension_initialization_cannot_be_suppressed[True] ___________
+
+custom = True
+
+    @pytest.mark.parametrize("custom",(False,True))
+    def test_extension_initialization_cannot_be_suppressed(custom):
+        namespace={"__annotations__":{"seed":int},"seed":initvar(default=3)}
+        if custom:namespace["__init__"]=lambda self:None
+        with pytest.raises(DataclassDefinitionError,match="requires generated init"):
+>           dataclass(type("Suppressed",(),namespace),init=custom)
+
+tests/test_provider_kinds.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.Suppressed'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+__________ test_named_dependency_initialization_cannot_be_suppressed ___________
+
+    def test_named_dependency_initialization_cannot_be_suppressed():
+        class Suppressed:
+            base:int
+            value:int=field(default_factory=lambda base:base)
+>       with pytest.raises(DataclassDefinitionError,match="requires generated init"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_provider_kinds.py:34: Failed
+___ test_imported_extended_field_is_copied_without_mutating_factory_metadata ___
+
+    def test_imported_extended_field_is_copied_without_mutating_factory_metadata():
+        declaration=initvar(default_factory=lambda:2)
+        class First:
+            seed:int=declaration
+            value:int=field(init=False,default_factory=lambda seed:seed)
+        class Second:
+            seed:int=declaration
+            value:int=field(init=False,default_factory=lambda seed:seed)
+>       one,two=dataclass(First),dataclass(Second)
+                ^^^^^^^^^^^^^^^^
+
+tests/test_provider_kinds.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.test_imported_extended_field_is_copied_without_mutating_factory_metadata.<locals>.First'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+_____________ test_required_initvar_replace_and_disallowed_changes _____________
+
+    def test_required_initvar_replace_and_disallowed_changes():
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_provider_kinds.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'test_provider_kinds.test_required_initvar_replace_and_disallowed_changes.<locals>.Required'>
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -> tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            default = value.default if isinstance(value, std.Field) else value
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(cls.__dict__.get(name), FieldDeclaration):
+>               raise NotImplementedError("extension fields belong to Stage C")
+E               NotImplementedError: extension fields belong to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:65: NotImplementedError
+_________________ test_canonical_case[dataclass_providers.py] __________________
+
+case = 'dataclass_providers.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1512/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_providers.py:22: in render_case
+    class Configuration:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @dataclass
+    class Configuration:
+>       total: int = field(init=False, default_factory=total)
+                                                       ^^^^^
+E       NameError: name 'total' is not defined
+
+tests/data/gold_src/dataclass_providers.py:23: NameError
+=========================== short test summary info ============================
+FAILED tests/test_provider_kinds.py::test_convenience_annotation_kind_conflict[initvar-ClassVar]
+FAILED tests/test_provider_kinds.py::test_convenience_annotation_kind_conflict[classvar-annotation1]
+FAILED tests/test_provider_kinds.py::test_convenience_annotation_kind_conflict[local_store-annotation2]
+FAILED tests/test_provider_kinds.py::test_source_free_extension_provider_rejected[initvar]
+FAILED tests/test_provider_kinds.py::test_source_free_extension_provider_rejected[local_store]
+FAILED tests/test_provider_kinds.py::test_extension_initialization_cannot_be_suppressed[False]
+FAILED tests/test_provider_kinds.py::test_extension_initialization_cannot_be_suppressed[True]
+FAILED tests/test_provider_kinds.py::test_named_dependency_initialization_cannot_be_suppressed
+FAILED tests/test_provider_kinds.py::test_imported_extended_field_is_copied_without_mutating_factory_metadata
+FAILED tests/test_provider_kinds.py::test_required_initvar_replace_and_disallowed_changes
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_providers.py]
+11 failed, 1 passed in 0.48s

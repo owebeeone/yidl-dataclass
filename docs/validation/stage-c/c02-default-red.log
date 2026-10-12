@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_hidden_provider_unhashable_default_rejected _______________
+
+    def test_hidden_provider_unhashable_default_rejected():
+        class MutableProvider:
+            seed:object=initvar(default=[])
+>       with pytest.raises(DataclassDefinitionError,match="mutable default"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_provider_kinds.py:75: Failed
+=========================== short test summary info ============================
+FAILED tests/test_provider_kinds.py::test_hidden_provider_unhashable_default_rejected
+1 failed in 0.26s

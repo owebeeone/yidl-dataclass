@@ -56,7 +56,7 @@ def dataclass(
         namespace["__qualname__"] = declaration.__qualname__
         namespace["__annotations__"] = annotations
         namespace["__dataclass_fields__"] = {
-            item.name: item.field for item in definition.fields
+            item.name: item.field for item in definition.fields if item.kind.metadata
         }
         namespace["__dataclass_params__"] = params_for(options)
         namespace["__yidl_dataclass_definition__"] = definition
@@ -64,11 +64,12 @@ def dataclass(
             namespace["__match_args__"] = tuple(
                 item.name
                 for item in definition.fields
-                if item.is_instance and item.field.init and not item.field.kw_only
+                if item.kind.parameter and item.field.init and not item.field.kw_only
             )
         for item in definition.fields:
             if item.field.default is not std.MISSING and (
-                not item.is_instance or not options.slots
+                item.kind.label == "classvar"
+                or (item.is_instance and not item.has_accessor and not options.slots)
             ):
                 namespace[item.name] = item.field.default
         captures.update(
@@ -88,6 +89,8 @@ def dataclass(
                 slot_names=definition.slot_names,
                 use_slots=options.slots,
                 generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
             ),
         )
         logical = tuple(
@@ -126,12 +129,12 @@ def dataclass(
                 repr_class_id="Model",
                 generate_repr=actions.repr,
                 has_repr_fields=any(
-                    item.is_instance and item.field.repr for item in definition.fields
+                    item.kind.stored and item.field.repr for item in definition.fields
                 ),
             ),
         )
         for index, item in enumerate(definition.fields):
-            if not item.is_instance:
+            if not (item.kind.stored or item.kind.parameter):
                 continue
             metadata = item.field
             builder.add(
@@ -141,7 +144,7 @@ def dataclass(
                     cmp_owner="Model",
                     cmp_operand_order=index,
                     cmp_read_path=item.name,
-                    cmp_compare=metadata.compare,
+                    cmp_compare=metadata.compare and item.is_instance,
                     cmp_hash_included=item.name in hashed_names,
                     cmp_last=item.name == last_compare_name,
                 ),
@@ -153,7 +156,7 @@ def dataclass(
                     field_owner="Model",
                     field_name=item.name,
                     field_order=index,
-                    include_repr=metadata.repr,
+                    include_repr=metadata.repr and item.kind.stored,
                 ),
             )
             install_default = (
@@ -183,6 +186,12 @@ def dataclass(
                     install_factory=install_factory,
                 ),
             )
+        from .factory_generation import add_initialization_facts
+
+        add_initialization_facts(generated, builder, definition, declaration, captures)
+        from .policy_generation import add_policy_facts
+
+        add_policy_facts(generated, builder, definition, captures)
         composable = generated.build_DataclassModule(builder.freeze())
         source = composable.emit_commented()
         tree = composable.to_executable_ast()
@@ -191,6 +200,9 @@ def dataclass(
         )
         model = captures[declaration.__name__]
         if not options.slots:
+            for name in names:
+                if name in declaration.__dict__ and name not in model.__dict__:
+                    delattr(declaration, name)
             for name, value in model.__dict__.items():
                 if name not in ("__dict__", "__weakref__"):
                     setattr(declaration, name, value)
@@ -210,5 +222,24 @@ def storage_fields(class_or_instance):
 
 
 def replace(obj, /, **changes):
-    # The Stage A ordinary subset follows the independent std helper directly.
-    return std.replace(obj, **changes)
+    definition = obj.__yidl_dataclass_definition__
+    by_name = {item.name: item for item in definition.fields}
+    for name in changes:
+        item = by_name.get(name)
+        if item is None or item.kind.label == "classvar":
+            raise TypeError(f"unknown replacement field: {name}")
+        if not item.field.init:
+            raise ValueError(f"{name}: replacement of init=False field is unsupported")
+    values = dict(changes)
+    for item in definition.fields:
+        if not item.kind.parameter or not item.field.init or item.name in values:
+            continue
+        if item.kind.label == "initvar":
+            if (
+                item.field.default is std.MISSING
+                and item.field.default_factory is std.MISSING
+            ):
+                raise ValueError(f"{item.name}: required InitVar must be supplied")
+        else:
+            values[item.name] = getattr(obj, item.name)
+    return type(obj)(**values)

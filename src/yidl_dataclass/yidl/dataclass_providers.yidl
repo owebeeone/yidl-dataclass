@@ -1,0 +1,160 @@
+module dataclass.providers
+import "dataclass_factories.yidl" as factories
+export concept DataclassProviders
+
+concept DataclassProviders extends factories.DataclassFactories {
+    resource ProviderInputCandidate = template $[
+        value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
+        astichi_hole(pipeline)
+        astichi_export(value_name__astichi_arg__)
+    ]$
+    contribution ProviderInputStep = ProviderInputStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ProviderInputStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ProviderInputCandidate {
+            ident value_name = ValueName
+            ident input_name = FieldName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    resource ProviderDefaultCandidate = template $[
+        value_name__astichi_arg__ = default_name__astichi_arg__
+        astichi_hole(pipeline)
+        astichi_export(value_name__astichi_arg__)
+    ]$
+    contribution ProviderDefaultStep = ProviderDefaultStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ProviderDefaultStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ProviderDefaultCandidate {
+            ident value_name = ValueName
+            ident default_name = DefaultName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    resource ProviderFactoryCandidate = template $[
+        try:
+            value_name__astichi_arg__ = factory_name__astichi_arg__(*astichi_hole(positional_arguments), **astichi_hole(keyword_arguments))
+        except _y_dc_ContextErrors:
+            raise
+        except Exception as _y_dc_factory_error:
+            raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        astichi_hole(pipeline)
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    contribution ProviderFactoryStep = ProviderFactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ProviderFactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ProviderFactoryCandidate {
+            ident value_name = ValueName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+        apply empty_positional using EmptyPositionalArgumentsContributions
+        apply empty_keywords using EmptyKeywordArgumentsContributions
+        apply arguments from argument: FactoryArguments where CallerFieldId == FieldId using FactoryArgumentContributions
+    }
+    resource ProviderInputFactoryCandidate = template $[
+        if astichi_pass(input_name__astichi_arg__, outer_bind=True) is _y_dc_factory_sentinel:
+            try:
+                value_name__astichi_arg__ = factory_name__astichi_arg__(*astichi_hole(positional_arguments), **astichi_hole(keyword_arguments))
+            except _y_dc_ContextErrors:
+                raise
+            except Exception as _y_dc_factory_error:
+                raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        else:
+            value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
+        astichi_hole(pipeline)
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    contribution ProviderInputFactoryStep = ProviderInputFactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ProviderInputFactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ProviderInputFactoryCandidate {
+            ident value_name = ValueName
+            ident input_name = FieldName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+        apply empty_positional using EmptyPositionalArgumentsContributions
+        apply empty_keywords using EmptyKeywordArgumentsContributions
+        apply arguments from argument: FactoryArguments where CallerFieldId == FieldId using FactoryArgumentContributions
+    }
+    resource ProviderZeroFactoryCandidate = template $[
+        try:
+            value_name__astichi_arg__ = factory_name__astichi_arg__()
+        except _y_dc_ContextErrors:
+            raise
+        except Exception as _y_dc_factory_error:
+            raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        astichi_hole(pipeline)
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    contribution ProviderZeroFactoryStep = ProviderZeroFactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ProviderZeroFactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ProviderZeroFactoryCandidate {
+            ident value_name = ValueName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    resource ProviderZeroInputFactoryCandidate = template $[
+        if astichi_pass(input_name__astichi_arg__, outer_bind=True) is _y_dc_factory_sentinel:
+            try:
+                value_name__astichi_arg__ = factory_name__astichi_arg__()
+            except _y_dc_ContextErrors:
+                raise
+            except Exception as _y_dc_factory_error:
+                raise _y_dc_FieldInitializationError(astichi_bind_external(factory_message)) from _y_dc_factory_error
+        else:
+            value_name__astichi_arg__ = astichi_pass(input_name__astichi_arg__, outer_bind=True)
+        astichi_hole(pipeline)
+        astichi_export(value_name__astichi_arg__)
+    ]$ { keep _y_dc_factory_sentinel, _y_dc_ContextErrors, _y_dc_FieldInitializationError, Exception, _y_dc_factory_error }
+    contribution ProviderZeroInputFactoryStep = ProviderZeroInputFactoryStepProduction {
+        as Candidate
+        index ConstructorOrder
+        order ConstructorOrder
+        target stores { build /InitMethod }
+    }
+    production ProviderZeroInputFactoryStepProduction(step: InitializationFields, cls: Classes) -> composable {
+        root Candidate = ProviderZeroInputFactoryCandidate {
+            ident value_name = ValueName
+            ident input_name = FieldName
+            ident factory_name = FactoryName
+            external factory_message = FactoryMessage
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == True using ConstructorPipelineContributions
+    }
+    matcher InitializationStepContributions(step: InitializationFields, cls: Classes) -> contribution {
+        rule provider_input_factory when InstallValue == False and ClassProvider == False and CandidateFallback == False and CandidateInput == True and CandidateFactory == True and HasFactoryArguments == True -> ProviderInputFactoryStep weight 2
+        rule provider_factory when InstallValue == False and ClassProvider == False and CandidateFallback == False and CandidateInput == False and CandidateFactory == True and HasFactoryArguments == True -> ProviderFactoryStep weight 2
+        rule provider_zero_input_factory when InstallValue == False and ClassProvider == False and CandidateFallback == False and CandidateInput == True and CandidateFactory == True and HasFactoryArguments == False -> ProviderZeroInputFactoryStep weight 2
+        rule provider_zero_factory when InstallValue == False and ClassProvider == False and CandidateFallback == False and CandidateInput == False and CandidateFactory == True and HasFactoryArguments == False -> ProviderZeroFactoryStep weight 2
+        rule provider_input when InstallValue == False and ClassProvider == False and CandidateFallback == False and CandidateInput == True and CandidateFactory == False -> ProviderInputStep weight 2
+        rule provider_default when InstallValue == False and ClassProvider == False and CandidateFallback == False and CandidateInput == False and CandidateFactory == False and CandidateDefault == True -> ProviderDefaultStep weight 2
+    }
+}

@@ -1,0 +1,226 @@
+....FFF                                                                  [100%]
+=================================== FAILURES ===================================
+_______ test_factory_callback_failure_is_contextual_and_preserves_cause ________
+
+    def test_factory_callback_failure_is_contextual_and_preserves_cause():
+        from yidl_dataclass import FieldInitializationError
+        original = ValueError("factory failed")
+        def factory():
+            raise original
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_provider_failures.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_provider_failures.test_factory_callback_failure_is_contextual_and_preserves_cause.<locals>.Failure'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.is_instance and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                not item.is_instance or not options.slots
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_planned_init'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+______ test_factory_does_not_wrap_baseexception_or_existing_context_error ______
+
+    def test_factory_does_not_wrap_baseexception_or_existing_context_error():
+        from yidl_dataclass import FieldConversionError
+        for original in (KeyboardInterrupt("stop"), FieldConversionError("already contextual")):
+            def factory():
+                raise original
+>           @dataclass
+             ^^^^^^^^^
+
+tests/test_provider_failures.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_provider_failures.test_factory_does_not_wrap_baseexception_or_existing_context_error.<locals>.Failure'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.is_instance and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                not item.is_instance or not options.slots
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_planned_init'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+_______________ test_canonical_case[dataclass_initialization.py] _______________
+
+case = 'dataclass_initialization.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1496/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_initialization.py:16: in render_case
+    @dataclass
+     ^^^^^^^^^
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class '<run_path>.render_case.<locals>.Order'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.is_instance and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                not item.is_instance or not options.slots
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_planned_init'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_provider_failures.py::test_factory_callback_failure_is_contextual_and_preserves_cause
+FAILED tests/test_provider_failures.py::test_factory_does_not_wrap_baseexception_or_existing_context_error
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_initialization.py]
+3 failed, 4 passed in 0.29s

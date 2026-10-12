@@ -1,0 +1,874 @@
+FFFFFFFFF....F............FF                                             [100%]
+=================================== FAILURES ===================================
+___ test_invalid_validator_result_is_direct_typeerror_and_preserves_value[0] ___
+
+result = 0
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+___ test_invalid_validator_result_is_direct_typeerror_and_preserves_value[1] ___
+
+result = 1
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+__ test_invalid_validator_result_is_direct_typeerror_and_preserves_value[yes] __
+
+result = 'yes'
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+_ test_invalid_validator_result_is_direct_typeerror_and_preserves_value[result3] _
+
+result = <object object at 0x104de58d0>
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+_______ test_converter_failure_is_contextual_atomic_and_preserves_cause ________
+
+    def test_converter_failure_is_contextual_atomic_and_preserves_cause():
+        error=ValueError("bad conversion")
+        def converter(value):
+            if value=="bad":raise error
+            return int(value)
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_converter_failure_is_contextual_atomic_and_preserves_cause.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+_______ test_validator_failure_rejection_and_existing_context_preserved ________
+
+    def test_validator_failure_rejection_and_existing_context_preserved():
+        error=RuntimeError("validator failed")
+        contextual=FieldValidationError("already contextual")
+        def validator(value):
+            if value==3:raise error
+            if value==4:raise contextual
+            return value!=5
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_validator_failure_rejection_and_existing_context_preserved.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+__ test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[converter] ___
+
+role = 'converter'
+
+    @pytest.mark.parametrize("role",("converter","validator"))
+    def test_pipeline_baseexception_is_unwrapped_and_assignment_atomic(role):
+        cancellation=KeyboardInterrupt("cancel")
+        def callback(value):
+            if value==3:raise cancellation
+            return value if role=="converter" else True
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_pipeline_baseexception_is_unwrapped_and_assignment_atomic.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+__ test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[validator] ___
+
+role = 'validator'
+
+    @pytest.mark.parametrize("role",("converter","validator"))
+    def test_pipeline_baseexception_is_unwrapped_and_assignment_atomic(role):
+        cancellation=KeyboardInterrupt("cancel")
+        def callback(value):
+            if value==3:raise cancellation
+            return value if role=="converter" else True
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_pipeline_baseexception_is_unwrapped_and_assignment_atomic.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+____ test_derived_conversion_exact_primitive_nullable_and_explicit_disable _____
+
+    def test_derived_conversion_exact_primitive_nullable_and_explicit_disable():
+>       @dataclass(convert=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_pipelines.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_derived_conversion_exact_primitive_nullable_and_explicit_disable.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+_______ test_processed_initvar_reaches_factory_without_public_retention ________
+
+    def test_processed_initvar_reaches_factory_without_public_retention():
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:90: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_pipelines.test_processed_initvar_reaches_factory_without_public_retention.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+__________ test_mutable_pipeline_deletion_and_readonly_delete_errors ___________
+
+    def test_mutable_pipeline_deletion_and_readonly_delete_errors():
+>       @dataclass
+         ^^^^^^^^^
+
+tests/test_policies.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class 'test_policies.test_mutable_pipeline_deletion_and_readonly_delete_errors.<locals>.Value'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+__________________ test_canonical_case[dataclass_policies.py] __________________
+
+case = 'dataclass_policies.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1524/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+>           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_policies.py:14: in render_case
+    @dataclass
+     ^^^^^^^^^
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+declaration = <class '<run_path>.render_case.<locals>.Processed'>
+
+    def decorate(declaration):
+        from . import _generated_dataclass_base as generated
+    
+        definition, annotations, captures = harvest(declaration, options)
+        actions = resolve_methods(declaration, options)
+        names = {item.name for item in definition.fields}
+        namespace = {
+            name: value
+            for name, value in declaration.__dict__.items()
+            if name not in (*names, "__dict__", "__weakref__", "__classcell__")
+        }
+        namespace["__qualname__"] = declaration.__qualname__
+        namespace["__annotations__"] = annotations
+        namespace["__dataclass_fields__"] = {
+            item.name: item.field for item in definition.fields if item.kind.metadata
+        }
+        namespace["__dataclass_params__"] = params_for(options)
+        namespace["__yidl_dataclass_definition__"] = definition
+        if options.match_args and "__match_args__" not in namespace:
+            namespace["__match_args__"] = tuple(
+                item.name
+                for item in definition.fields
+                if item.kind.parameter and item.field.init and not item.field.kw_only
+            )
+        for item in definition.fields:
+            if item.field.default is not std.MISSING and (
+                item.kind.label == "classvar" or (item.is_instance and not item.has_accessor and not options.slots)
+            ):
+                namespace[item.name] = item.field.default
+        captures.update(
+            _y_dc_namespace=namespace,
+            _y_dc_bases=declaration.__bases__,
+            _y_dc_factory_sentinel=std._HAS_DEFAULT_FACTORY,
+            _y_dc_recursive_repr=recursive_repr_decorator(),
+        )
+        builder = generated.new_builder()
+        builder.add(
+            generated.ClassesCollection,
+>           generated.DataclassClass(
+                class_id="Model",
+                class_name=declaration.__name__,
+                namespace_name="_y_dc_namespace",
+                bases_name="_y_dc_bases",
+                slot_names=definition.slot_names,
+                use_slots=options.slots,
+                generate_init=definition.generate_init,
+                has_planned_init=definition.planned_init,
+                has_properties=any(item.has_accessor for item in definition.fields),
+            ),
+        )
+E       TypeError: DataclassClass.__init__() got an unexpected keyword argument 'has_properties'
+
+src/yidl_dataclass/dataclass.py:83: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_pipelines.py::test_invalid_validator_result_is_direct_typeerror_and_preserves_value[0]
+FAILED tests/test_pipelines.py::test_invalid_validator_result_is_direct_typeerror_and_preserves_value[1]
+FAILED tests/test_pipelines.py::test_invalid_validator_result_is_direct_typeerror_and_preserves_value[yes]
+FAILED tests/test_pipelines.py::test_invalid_validator_result_is_direct_typeerror_and_preserves_value[result3]
+FAILED tests/test_pipelines.py::test_converter_failure_is_contextual_atomic_and_preserves_cause
+FAILED tests/test_pipelines.py::test_validator_failure_rejection_and_existing_context_preserved
+FAILED tests/test_pipelines.py::test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[converter]
+FAILED tests/test_pipelines.py::test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[validator]
+FAILED tests/test_pipelines.py::test_derived_conversion_exact_primitive_nullable_and_explicit_disable
+FAILED tests/test_pipelines.py::test_processed_initvar_reaches_factory_without_public_retention
+FAILED tests/test_policies.py::test_mutable_pipeline_deletion_and_readonly_delete_errors
+FAILED tests/test_yidl_goldens.py::test_canonical_case[dataclass_policies.py]
+12 failed, 16 passed in 0.52s

@@ -30,6 +30,8 @@ def test_consumer_wheel_contains_resources_and_locked_sdk_metadata(tmp_path):
         names = archive.namelist()
         assert "yidl_dataclass/yidl/dataclass_core.yidl" in names
         assert "yidl_dataclass/yidl/dataclass_base.yidl" in names
+        for module in ("factories", "providers", "pipelines", "policies"):
+            assert f"yidl_dataclass/yidl/dataclass_{module}.yidl" in names
         assert "yidl_dataclass/yidl/dataclass_comparison.yidl" in names
         assert "yidl_dataclass/yidl/shared/comparison.yidl" in names
         assert "yidl_dataclass/py.typed" in names

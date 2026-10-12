@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="18" skipped="0" tests="18" time="0.652" timestamp="2026-10-12T22:27:04.422947+11:00" hostname="[host]"><testcase classname="tests.test_extension_boundaries" name="test_const_conflicts_with_pseudo_field_annotation[ClassVar]" time="0.218"><failure message="TypeError: KwOnly must be bool, got _MISSING_TYPE">annotation = typing.ClassVar[int]
+
+    @pytest.mark.parametrize("annotation", (ClassVar[int], std.InitVar[int]))
+    def test_const_conflicts_with_pseudo_field_annotation(annotation):
+        declaration=type("Conflict",(),{"__annotations__":{"value":annotation},"value":const(default=3)})
+        with pytest.raises(DataclassDefinitionError,match="kind.*conflict"):
+&gt;           dataclass(declaration)
+
+tests/test_extension_boundaries.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:209: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:171: in decorate
+    generated.DataclassField(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;[AttributeError("'DataclassField' object has no attribute 'kw_only'") raised in repr()] DataclassField object at 0x106db4040&gt;
+field_id = 'Model.value', field_owner = 'Model', field_name = 'value'
+field_order = 0, annotation_name = '_y_dc_annotation_0'
+default_name = '_y_dc_default_0', has_default = True, include_param = True
+factory_name = '_y_dc_factory_0', has_factory = False
+kw_only = &lt;dataclasses._MISSING_TYPE object at 0x1011a22a0&gt;, param_order = 0
+install_default = False, install_factory = False
+
+    def __init__(self, *, field_id: str, field_owner: str, field_name: str, field_order: int, annotation_name: str, default_name: str='', has_default: bool=False, include_param: bool=True, factory_name: str='', has_factory: bool=False, kw_only: bool=False, param_order: int=0, install_default: bool=False, install_factory: bool=False):
+        if not isinstance(field_id, str):
+            raise TypeError('FieldId must be str, got ' + type(field_id).__name__)
+        object.__setattr__(self, 'field_id', field_id)
+        if not isinstance(field_owner, str):
+            raise TypeError('FieldOwner must be str, got ' + type(field_owner).__name__)
+        object.__setattr__(self, 'field_owner', field_owner)
+        if not isinstance(field_name, str):
+            raise TypeError('FieldName must be str, got ' + type(field_name).__name__)
+        object.__setattr__(self, 'field_name', field_name)
+        if not isinstance(field_order, int):
+            raise TypeError('FieldOrder must be int, got ' + type(field_order).__name__)
+        object.__setattr__(self, 'field_order', field_order)
+        if not isinstance(annotation_name, str):
+            raise TypeError('AnnotationName must be str, got ' + type(annotation_name).__name__)
+        object.__setattr__(self, 'annotation_name', annotation_name)
+        if not isinstance(default_name, str):
+            raise TypeError('DefaultName must be str, got ' + type(default_name).__name__)
+        object.__setattr__(self, 'default_name', default_name)
+        if not isinstance(has_default, bool):
+            raise TypeError('HasDefault must be bool, got ' + type(has_default).__name__)
+        object.__setattr__(self, 'has_default', has_default)
+        if not isinstance(include_param, bool):
+            raise TypeError('IncludeParam must be bool, got ' + type(include_param).__name__)
+        object.__setattr__(self, 'include_param', include_param)
+        if not isinstance(factory_name, str):
+            raise TypeError('FactoryName must be str, got ' + type(factory_name).__name__)
+        object.__setattr__(self, 'factory_name', factory_name)
+        if not isinstance(has_factory, bool):
+            raise TypeError('HasFactory must be bool, got ' + type(has_factory).__name__)
+        object.__setattr__(self, 'has_factory', has_factory)
+        if not isinstance(kw_only, bool):
+&gt;           raise TypeError('KwOnly must be bool, got ' + type(kw_only).__name__)
+E           TypeError: KwOnly must be bool, got _MISSING_TYPE
+
+src/yidl_dataclass/_generated_dataclass_base.py:220: TypeError</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_const_conflicts_with_pseudo_field_annotation[annotation1]" time="0.042"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">annotation = dataclasses.InitVar[int]
+
+    @pytest.mark.parametrize("annotation", (ClassVar[int], std.InitVar[int]))
+    def test_const_conflicts_with_pseudo_field_annotation(annotation):
+        declaration=type("Conflict",(),{"__annotations__":{"value":annotation},"value":const(default=3)})
+&gt;       with pytest.raises(DataclassDefinitionError,match="kind.*conflict"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:11: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[False-__copy__]" time="0.010"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__copy__', inherited = False
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[False-__deepcopy__]" time="0.011"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__deepcopy__', inherited = False
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[False-__getstate__]" time="0.014"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__getstate__', inherited = False
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[False-__setstate__]" time="0.013"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__setstate__', inherited = False
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[False-__reduce__]" time="0.006"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__reduce__', inherited = False
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[False-__reduce_ex__]" time="0.010"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__reduce_ex__', inherited = False
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[True-__copy__]" time="0.008"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__copy__', inherited = True
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[True-__deepcopy__]" time="0.012"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__deepcopy__', inherited = True
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[True-__getstate__]" time="0.006"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__getstate__', inherited = True
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[True-__setstate__]" time="0.009"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__setstate__', inherited = True
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[True-__reduce__]" time="0.011"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__reduce__', inherited = True
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_policy_classes_reject_bypassing_copy_state_hooks[True-__reduce_ex__]" time="0.006"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">hook = '__reduce_ex__', inherited = True
+
+    @pytest.mark.parametrize("hook", ("__copy__","__deepcopy__","__getstate__","__setstate__","__reduce__","__reduce_ex__"))
+    @pytest.mark.parametrize("inherited", (False,True))
+    def test_policy_classes_reject_bypassing_copy_state_hooks(hook,inherited):
+        namespace={hook:lambda *args:None}
+        base=type("Hook",(),dict(namespace,__slots__=())) if inherited else object
+        declaration=type("Policy",(base,),dict({} if inherited else namespace,__annotations__={"value":int},value=const(default=3)))
+&gt;       with pytest.raises(DataclassDefinitionError,match=hook):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:21: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_dependencies_are_immutable_provider_names_without_values" time="0.020"><failure message="AttributeError: 'StorageField' object has no attribute 'dependencies'">def test_dependencies_are_immutable_provider_names_without_values():
+        @dataclass
+        class Dependencies:
+            base:int=2
+            value:int=field(init=False,default_factory=lambda base,cls:base+1)
+        descriptions=storage_fields(Dependencies)
+&gt;       assert tuple((item.name,item.dependencies) for item in descriptions)==(("base",()),("value",("base",)))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_extension_boundaries.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = &lt;tuple_iterator object at 0x1079e4190&gt;
+
+&gt;   assert tuple((item.name,item.dependencies) for item in descriptions)==(("base",()),("value",("base",)))
+                            ^^^^^^^^^^^^^^^^^
+E   AttributeError: 'StorageField' object has no attribute 'dependencies'
+
+tests/test_extension_boundaries.py:31: AttributeError</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_generated_model_inheritance_is_explicitly_pending" time="0.015"><failure message="Failed: DID NOT RAISE NotImplementedError">def test_generated_model_inheritance_is_explicitly_pending():
+        @dataclass
+        class Base:
+            value:int=2
+        class Child(Base):
+            other:int=3
+&gt;       with pytest.raises(NotImplementedError,match="inheritance.*Stage D"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE NotImplementedError
+
+tests/test_extension_boundaries.py:42: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_inherited_private_generated_name_collision_rejected[_y_dc_store_0]" time="0.010"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">private_name = '_y_dc_store_0'
+
+    @pytest.mark.parametrize("private_name",("_y_dc_store_0","_y_dc_factory_0"))
+    def test_inherited_private_generated_name_collision_rejected(private_name):
+        base=type("Private",(),{"__slots__":(private_name,)})
+        declaration=type("Collision",(base,),{"__annotations__":{"value":int},"value":const(default=3)})
+&gt;       with pytest.raises(DataclassDefinitionError,match="reserved generated name"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:50: Failed</failure></testcase><testcase classname="tests.test_extension_boundaries" name="test_inherited_private_generated_name_collision_rejected[_y_dc_factory_0]" time="0.008"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">private_name = '_y_dc_factory_0'
+
+    @pytest.mark.parametrize("private_name",("_y_dc_store_0","_y_dc_factory_0"))
+    def test_inherited_private_generated_name_collision_rejected(private_name):
+        base=type("Private",(),{"__slots__":(private_name,)})
+        declaration=type("Collision",(base,),{"__annotations__":{"value":int},"value":const(default=3)})
+&gt;       with pytest.raises(DataclassDefinitionError,match="reserved generated name"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_extension_boundaries.py:50: Failed</failure></testcase></testsuite></testsuites>

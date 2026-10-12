@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "[consumer-root]/tests/support/refresh_goldens.py", line 49, in <module>
+    main()
+  File "[consumer-root]/tests/support/refresh_goldens.py", line 23, in main
+    source_path, runpy.run_path(str(source_path))["render_case"]()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/tests/data/gold_src/dataclass_pipeline_ownership.py", line 37, in render_case
+    @dataclass(slots=False)
+     ^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/dataclass.py", line 194, in decorate
+    composable = generated.build_DataclassModule(builder.freeze())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py", line 1065, in build_DataclassModule
+    return build_assembly('DataclassModule', container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/src/yidl_dataclass/_generated_dataclass_base.py", line 1062, in build_assembly
+    return run_assembly(ASSEMBLY_CONCEPT, entrypoint, container, unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py", line 242, in run_assembly
+    return _run_production(
+           ^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/yidl/generation/assembly_runtime.py", line 285, in _run_production
+    return scope.build(unroll=unroll)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/astichi/assembler/scope.py", line 1014, in build
+    self._reject_python_materialize_fallback("scope.build")
+  File "[consumer-root]/.venv/lib/python3.12/site-packages/astichi/assembler/scope.py", line 997, in _reject_python_materialize_fallback
+    raise RuntimeError(
+RuntimeError: scope.build requires native materialization but the native materializer did not produce a composable

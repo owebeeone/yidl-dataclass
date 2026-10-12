@@ -1,0 +1,1805 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="28" skipped="0" tests="28" time="0.681" timestamp="2026-10-12T22:12:27.118642+11:00" hostname="[host]"><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[0]" time="0.171"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">result = 0
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[1]" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">result = 1
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[yes]" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">result = 'yes'
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_invalid_validator_result_is_direct_typeerror_and_preserves_value[result3]" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">result = &lt;object object at 0x104b91a10&gt;
+
+    @pytest.mark.parametrize("result",(0,1,"yes",object()))
+    def test_invalid_validator_result_is_direct_typeerror_and_preserves_value(result):
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_invalid_validator_result_is_direct_typeerror_and_preserves_value.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_converter_failure_is_contextual_atomic_and_preserves_cause" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">def test_converter_failure_is_contextual_atomic_and_preserves_cause():
+        error=ValueError("bad conversion")
+        def converter(value):
+            if value=="bad":raise error
+            return int(value)
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_converter_failure_is_contextual_atomic_and_preserves_cause.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_validator_failure_rejection_and_existing_context_preserved" time="0.001"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">def test_validator_failure_rejection_and_existing_context_preserved():
+        error=RuntimeError("validator failed")
+        contextual=FieldValidationError("already contextual")
+        def validator(value):
+            if value==3:raise error
+            if value==4:raise contextual
+            return value!=5
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_validator_failure_rejection_and_existing_context_preserved.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[converter]" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">role = 'converter'
+
+    @pytest.mark.parametrize("role",("converter","validator"))
+    def test_pipeline_baseexception_is_unwrapped_and_assignment_atomic(role):
+        cancellation=KeyboardInterrupt("cancel")
+        def callback(value):
+            if value==3:raise cancellation
+            return value if role=="converter" else True
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_pipeline_baseexception_is_unwrapped_and_assignment_atomic.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_pipeline_baseexception_is_unwrapped_and_assignment_atomic[validator]" time="0.001"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">role = 'validator'
+
+    @pytest.mark.parametrize("role",("converter","validator"))
+    def test_pipeline_baseexception_is_unwrapped_and_assignment_atomic(role):
+        cancellation=KeyboardInterrupt("cancel")
+        def callback(value):
+            if value==3:raise cancellation
+            return value if role=="converter" else True
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_pipeline_baseexception_is_unwrapped_and_assignment_atomic.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_derived_conversion_exact_primitive_nullable_and_explicit_disable" time="0.000"><failure message="NotImplementedError: policy generation belongs to Stage C">def test_derived_conversion_exact_primitive_nullable_and_explicit_disable():
+&gt;       @dataclass(convert=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_pipelines.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_derived_conversion_exact_primitive_nullable_and_explicit_disable.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=True)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[list]" time="0.000"><failure message="NotImplementedError: policy generation belongs to Stage C">annotation = list[int]
+
+    @pytest.mark.parametrize("annotation",(list[int],object,"unresolved",int|str))
+    def test_unsupported_type_derived_conversion_requires_explicit_converter(annotation):
+        class Value:pass
+        Value.__annotations__={"item":annotation}
+        with pytest.raises(DataclassDefinitionError,match="explicit converter"):
+&gt;           dataclass(Value,convert=True)
+
+tests/test_pipelines.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_unsupported_type_derived_conversion_requires_explicit_converter.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=True)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[object]" time="0.000"><failure message="NotImplementedError: policy generation belongs to Stage C">annotation = &lt;class 'object'&gt;
+
+    @pytest.mark.parametrize("annotation",(list[int],object,"unresolved",int|str))
+    def test_unsupported_type_derived_conversion_requires_explicit_converter(annotation):
+        class Value:pass
+        Value.__annotations__={"item":annotation}
+        with pytest.raises(DataclassDefinitionError,match="explicit converter"):
+&gt;           dataclass(Value,convert=True)
+
+tests/test_pipelines.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_unsupported_type_derived_conversion_requires_explicit_converter.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=True)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[unresolved]" time="0.000"><failure message="NotImplementedError: policy generation belongs to Stage C">annotation = 'unresolved'
+
+    @pytest.mark.parametrize("annotation",(list[int],object,"unresolved",int|str))
+    def test_unsupported_type_derived_conversion_requires_explicit_converter(annotation):
+        class Value:pass
+        Value.__annotations__={"item":annotation}
+        with pytest.raises(DataclassDefinitionError,match="explicit converter"):
+&gt;           dataclass(Value,convert=True)
+
+tests/test_pipelines.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_unsupported_type_derived_conversion_requires_explicit_converter.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=True)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_unsupported_type_derived_conversion_requires_explicit_converter[annotation3]" time="0.001"><failure message="NotImplementedError: policy generation belongs to Stage C">annotation = int | str
+
+    @pytest.mark.parametrize("annotation",(list[int],object,"unresolved",int|str))
+    def test_unsupported_type_derived_conversion_requires_explicit_converter(annotation):
+        class Value:pass
+        Value.__annotations__={"item":annotation}
+        with pytest.raises(DataclassDefinitionError,match="explicit converter"):
+&gt;           dataclass(Value,convert=True)
+
+tests/test_pipelines.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_unsupported_type_derived_conversion_requires_explicit_converter.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=True)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_processed_initvar_reaches_factory_without_public_retention" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">def test_processed_initvar_reaches_factory_without_public_retention():
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_pipelines.py:90: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_processed_initvar_reaches_factory_without_public_retention.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_callback_signature_must_accept_one_positional_value[converter]" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">role = 'converter'
+
+    @pytest.mark.parametrize("role",("converter","validator"))
+    def test_callback_signature_must_accept_one_positional_value(role):
+        def invalid(*,value):return value
+        class Value:
+            item:int=field(**{role:invalid})
+        with pytest.raises(DataclassDefinitionError,match="one positional"):
+&gt;           dataclass(Value)
+
+tests/test_pipelines.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_callback_signature_must_accept_one_positional_value.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_pipelines" name="test_callback_signature_must_accept_one_positional_value[validator]" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">role = 'validator'
+
+    @pytest.mark.parametrize("role",("converter","validator"))
+    def test_callback_signature_must_accept_one_positional_value(role):
+        def invalid(*,value):return value
+        class Value:
+            item:int=field(**{role:invalid})
+        with pytest.raises(DataclassDefinitionError,match="one positional"):
+&gt;           dataclass(Value)
+
+tests/test_pipelines.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_pipelines.test_callback_signature_must_accept_one_positional_value.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_frozen_writable_fields_must_be_excluded[options0]" time="0.001"><failure message="NotImplementedError: policy generation belongs to Stage C">options = {'compare': True}
+
+    @pytest.mark.parametrize("options",({"compare":True},{"compare":False,"hash":True}))
+    def test_frozen_writable_fields_must_be_excluded(options):
+        class Frozen:
+            cache:int=field(default=2,mutable=True,**options)
+        with pytest.raises(DataclassDefinitionError,match="compare|hash"):
+&gt;           dataclass(Frozen,frozen=True,unsafe_hash=True)
+
+tests/test_policies.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.test_frozen_writable_fields_must_be_excluded.&lt;locals&gt;.Frozen'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=True, frozen=True, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_frozen_writable_fields_must_be_excluded[options1]" time="0.000"><failure message="NotImplementedError: policy generation belongs to Stage C">options = {'compare': False, 'hash': True}
+
+    @pytest.mark.parametrize("options",({"compare":True},{"compare":False,"hash":True}))
+    def test_frozen_writable_fields_must_be_excluded(options):
+        class Frozen:
+            cache:int=field(default=2,mutable=True,**options)
+        with pytest.raises(DataclassDefinitionError,match="compare|hash"):
+&gt;           dataclass(Frozen,frozen=True,unsafe_hash=True)
+
+tests/test_policies.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.test_frozen_writable_fields_must_be_excluded.&lt;locals&gt;.Frozen'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=True, frozen=True, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_frozen_dictionary_mode_rejected" time="0.001"><failure message="NotImplementedError: policy generation belongs to Stage C">def test_frozen_dictionary_mode_rejected():
+        with pytest.raises(DataclassDefinitionError,match="frozen.*slots"):
+&gt;           dataclass(type("Frozen",(),{}),frozen=True,slots=False)
+
+tests/test_policies.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.Frozen'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True, match_args=True, kw_only=False, slots=False, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+&gt;           raise NotImplementedError("policy generation belongs to Stage C")
+E           NotImplementedError: policy generation belongs to Stage C
+
+src/yidl_dataclass/dataclass_harvester.py:40: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_policy_initialization_cannot_be_suppressed[False]" time="0.000"><failure message="NotImplementedError: const policies are the next Stage C increment">custom = False
+
+    @pytest.mark.parametrize("custom",(False,True))
+    def test_policy_initialization_cannot_be_suppressed(custom):
+        namespace={"__annotations__":{"value":int},"value":const(default=3)}
+        if custom:namespace["__init__"]=lambda self:None
+        with pytest.raises(DataclassDefinitionError,match="requires generated init"):
+&gt;           dataclass(type("Suppressed",(),namespace),init=custom)
+
+tests/test_policies.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.Suppressed'&gt;
+options = DataclassOptions(init=False, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+&gt;               raise NotImplementedError("const policies are the next Stage C increment")
+E               NotImplementedError: const policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:69: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_policy_initialization_cannot_be_suppressed[True]" time="0.000"><failure message="NotImplementedError: const policies are the next Stage C increment">custom = True
+
+    @pytest.mark.parametrize("custom",(False,True))
+    def test_policy_initialization_cannot_be_suppressed(custom):
+        namespace={"__annotations__":{"value":int},"value":const(default=3)}
+        if custom:namespace["__init__"]=lambda self:None
+        with pytest.raises(DataclassDefinitionError,match="requires generated init"):
+&gt;           dataclass(type("Suppressed",(),namespace),init=custom)
+
+tests/test_policies.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.Suppressed'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+&gt;               raise NotImplementedError("const policies are the next Stage C increment")
+E               NotImplementedError: const policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:69: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_policy_interceptors_are_rejected_including_inherited[__getattribute__]" time="0.000"><failure message="NotImplementedError: const policies are the next Stage C increment">method = '__getattribute__'
+
+    @pytest.mark.parametrize("method",("__getattribute__","__setattr__","__delattr__"))
+    def test_policy_interceptors_are_rejected_including_inherited(method):
+        base=type("Intercept",(),{"__slots__":(),method:getattr(object,method)})
+        class Policy(base):
+            value:int=const(default=3)
+        with pytest.raises(DataclassDefinitionError,match="interceptor"):
+&gt;           dataclass(Policy)
+
+tests/test_policies.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.test_policy_interceptors_are_rejected_including_inherited.&lt;locals&gt;.Policy'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+&gt;               raise NotImplementedError("const policies are the next Stage C increment")
+E               NotImplementedError: const policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:69: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_policy_interceptors_are_rejected_including_inherited[__setattr__]" time="0.000"><failure message="NotImplementedError: const policies are the next Stage C increment">method = '__setattr__'
+
+    @pytest.mark.parametrize("method",("__getattribute__","__setattr__","__delattr__"))
+    def test_policy_interceptors_are_rejected_including_inherited(method):
+        base=type("Intercept",(),{"__slots__":(),method:getattr(object,method)})
+        class Policy(base):
+            value:int=const(default=3)
+        with pytest.raises(DataclassDefinitionError,match="interceptor"):
+&gt;           dataclass(Policy)
+
+tests/test_policies.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.test_policy_interceptors_are_rejected_including_inherited.&lt;locals&gt;.Policy'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+&gt;               raise NotImplementedError("const policies are the next Stage C increment")
+E               NotImplementedError: const policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:69: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_policy_interceptors_are_rejected_including_inherited[__delattr__]" time="0.000"><failure message="NotImplementedError: const policies are the next Stage C increment">method = '__delattr__'
+
+    @pytest.mark.parametrize("method",("__getattribute__","__setattr__","__delattr__"))
+    def test_policy_interceptors_are_rejected_including_inherited(method):
+        base=type("Intercept",(),{"__slots__":(),method:getattr(object,method)})
+        class Policy(base):
+            value:int=const(default=3)
+        with pytest.raises(DataclassDefinitionError,match="interceptor"):
+&gt;           dataclass(Policy)
+
+tests/test_policies.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.test_policy_interceptors_are_rejected_including_inherited.&lt;locals&gt;.Policy'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+&gt;               raise NotImplementedError("const policies are the next Stage C increment")
+E               NotImplementedError: const policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:69: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_const_invalid_mutability_flag_is_not_overwritten" time="0.000"><failure message="Failed: DID NOT RAISE DataclassDefinitionError">def test_const_invalid_mutability_flag_is_not_overwritten():
+&gt;       with pytest.raises(DataclassDefinitionError,match="bool"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE DataclassDefinitionError
+
+tests/test_policies.py:37: Failed</failure></testcase><testcase classname="tests.test_policies" name="test_readonly_policy_requires_constructor_source_even_without_consumer" time="0.000"><failure message="NotImplementedError: const policies are the next Stage C increment">def test_readonly_policy_requires_constructor_source_even_without_consumer():
+        class Missing:
+            value:int=const(init=False)
+        with pytest.raises(DataclassDefinitionError,match="value.*source"):
+&gt;           dataclass(Missing)
+
+tests/test_policies.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.test_readonly_policy_requires_constructor_source_even_without_consumer.&lt;locals&gt;.Missing'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+&gt;               raise NotImplementedError("const policies are the next Stage C increment")
+E               NotImplementedError: const policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:69: NotImplementedError</failure></testcase><testcase classname="tests.test_policies" name="test_mutable_pipeline_deletion_and_readonly_delete_errors" time="0.000"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">def test_mutable_pipeline_deletion_and_readonly_delete_errors():
+&gt;       @dataclass
+         ^^^^^^^^^
+
+tests/test_policies.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class 'test_policies.test_mutable_pipeline_deletion_and_readonly_delete_errors.&lt;locals&gt;.Value'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase><testcase classname="tests.test_yidl_goldens" name="test_canonical_case[dataclass_policies.py]" time="0.005"><failure message="NotImplementedError: pipelines/policies are the next Stage C increment">case = 'dataclass_policies.py'
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1518/test_canonical_case_dataclass_0')
+
+    @pytest.mark.parametrize("case", discover_golden_cases(ROOT))
+    def test_canonical_case(case, tmp_path):
+        source_path = data_gold_src_dir(ROOT) / case
+        sources = run_multi_source_case(
+&gt;           source_path, runpy.run_path(str(source_path))["render_case"]()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+tests/test_yidl_goldens.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/data/gold_src/dataclass_policies.py:14: in render_case
+    @dataclass
+     ^^^^^^^^^
+src/yidl_dataclass/dataclass.py:205: in dataclass
+    return decorate if cls is None else decorate(cls)
+                                        ^^^^^^^^^^^^^
+src/yidl_dataclass/dataclass.py:48: in decorate
+    definition, annotations, captures = harvest(declaration, options)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = &lt;class '&lt;run_path&gt;.render_case.&lt;locals&gt;.Processed'&gt;
+options = DataclassOptions(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=True, weakref_slot=False, convert=False)
+
+    def harvest(
+        cls: type, options: DataclassOptions
+    ) -&gt; tuple[DataclassDefinition, dict[str, Any], dict[str, Any]]:
+        adapter.ensure_supported_runtime()
+        if not isinstance(cls, type):
+            raise DataclassDefinitionError("dataclass requires a class")
+        if "__slots__" in cls.__dict__:
+            raise DataclassDefinitionError("manual __slots__ is unsupported")
+        if options.weakref_slot and not options.slots:
+            raise DataclassDefinitionError("weakref_slot requires slots=True")
+        if options.order and not options.eq:
+            raise DataclassDefinitionError("order=True requires eq=True")
+        if options.slots and any(base.__dictoffset__ for base in cls.__bases__):
+            raise DataclassDefinitionError(
+                "slotted model cannot inherit an instance dictionary"
+            )
+        if hasattr(cls, "__post_init__"):
+            raise DataclassDefinitionError(
+                "__post_init__ is unsupported; use named factories"
+            )
+        if options.frozen or options.convert:
+            raise NotImplementedError("policy generation belongs to Stage C")
+        annotations = adapter.annotations_for(cls)
+        for name in (*annotations, *cls.__dict__):
+            if name.startswith("_y_dc_"):
+                raise DataclassDefinitionError(f"reserved generated name: {name}")
+        for name, value in cls.__dict__.items():
+            if isinstance(value, (std.Field, FieldDeclaration)) and name not in annotations:
+                raise DataclassDefinitionError(f"{name}: field requires a type annotation")
+        for name in annotations:
+            if (
+                not name.isidentifier()
+                or keyword.iskeyword(name)
+                or name in ("self", "cls", "__dict__", "__weakref__")
+            ):
+                raise DataclassDefinitionError(f"invalid or reserved field name: {name}")
+            value = inspect.getattr_static(cls, name, std.MISSING)
+            raw = value.field if isinstance(value, FieldDeclaration) else value
+            default = raw.default if isinstance(raw, std.Field) else raw
+            if (
+                default is not std.MISSING
+                and not isinstance(default, types.MemberDescriptorType)
+                and hasattr(type(default), "__get__")
+            ):
+                raise DataclassDefinitionError(
+                    f"{name}: descriptor-valued defaults are unsupported"
+                )
+            if isinstance(value, LazyDeclaration):
+                raise NotImplementedError("lazy fields belong to Stage D")
+            if isinstance(value, ConstDeclaration):
+                raise NotImplementedError("const policies are the next Stage C increment")
+            if isinstance(value, FieldDeclaration) and (value.policy.mutable is False or value.policy.converter is not std.MISSING or value.policy.validator is not None):
+&gt;               raise NotImplementedError("pipelines/policies are the next Stage C increment")
+E               NotImplementedError: pipelines/policies are the next Stage C increment
+
+src/yidl_dataclass/dataclass_harvester.py:71: NotImplementedError</failure></testcase></testsuite></testsuites>

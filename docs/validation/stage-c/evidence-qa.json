@@ -1,0 +1,54 @@
+{
+  "absolute_path_or_hostname_matches": 0,
+  "artifact_references": 123,
+  "final_full_runs": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-c/c09-final-native-rust-312-checkpoint.junit.xml",
+      "skipped": 1,
+      "tests": 157
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-c/c09-final-native-rust-313-checkpoint.junit.xml",
+      "skipped": 1,
+      "tests": 157
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-c/c09-final-native-rust-314-checkpoint.junit.xml",
+      "skipped": 1,
+      "tests": 157
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-c/c09-final-python-312-checkpoint.junit.xml",
+      "skipped": 1,
+      "tests": 157
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-c/c09-final-python-313-checkpoint.junit.xml",
+      "skipped": 1,
+      "tests": 157
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "docs/validation/stage-c/c09-final-python-314-checkpoint.junit.xml",
+      "skipped": 1,
+      "tests": 157
+    }
+  ],
+  "increments": 75,
+  "junit_files": 48,
+  "owned_sdk_changes": false,
+  "owned_text_hygiene_files": 285,
+  "raw_hashes_verified": 123,
+  "sanitized_hashes_verified": 123
+}

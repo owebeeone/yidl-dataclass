@@ -1,0 +1,137 @@
+{
+  "stage": "C",
+  "scope": "Independent bounded extension verification, not final product acceptance",
+  "manifest_sha256": "c9a432c4112d8d151754e4800eafc1f6a47266dc51510a8b965e4f8a6e71f664",
+  "wheel": {
+    "name": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+    "sha256": "602024966e2b034fb6e484283da06abebeea6aee4ec05f6d523d88ed33fe5d3a",
+    "bytes": 52137
+  },
+  "environment": "External isolated installed environments; original SDK versions; -I outside repository; origins under interpreter prefix and backend/no fallback asserted",
+  "probes": [
+    {
+      "minor": "3.12",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "elapsed_seconds": 0.92482375,
+      "observations": {
+        "atomic_pipeline_failures": "pass",
+        "backend": "native-rust",
+        "dependency_order_and_processed_providers": "pass",
+        "hidden_provider": "pass",
+        "python": "3.12.12",
+        "readonly_and_frozen_cache": "pass",
+        "scope": "Stage C extension subset only; lazy/inheritance/copy deferred",
+        "unavailable_optional_provider": "pass"
+      }
+    },
+    {
+      "minor": "3.12",
+      "backend": "python",
+      "exit_code": 0,
+      "elapsed_seconds": 2.08100225,
+      "observations": {
+        "atomic_pipeline_failures": "pass",
+        "backend": "python",
+        "dependency_order_and_processed_providers": "pass",
+        "hidden_provider": "pass",
+        "python": "3.12.12",
+        "readonly_and_frozen_cache": "pass",
+        "scope": "Stage C extension subset only; lazy/inheritance/copy deferred",
+        "unavailable_optional_provider": "pass"
+      }
+    },
+    {
+      "minor": "3.13",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "elapsed_seconds": 1.055252,
+      "observations": {
+        "atomic_pipeline_failures": "pass",
+        "backend": "native-rust",
+        "dependency_order_and_processed_providers": "pass",
+        "hidden_provider": "pass",
+        "python": "3.13.12",
+        "readonly_and_frozen_cache": "pass",
+        "scope": "Stage C extension subset only; lazy/inheritance/copy deferred",
+        "unavailable_optional_provider": "pass"
+      }
+    },
+    {
+      "minor": "3.13",
+      "backend": "python",
+      "exit_code": 0,
+      "elapsed_seconds": 2.212809542,
+      "observations": {
+        "atomic_pipeline_failures": "pass",
+        "backend": "python",
+        "dependency_order_and_processed_providers": "pass",
+        "hidden_provider": "pass",
+        "python": "3.13.12",
+        "readonly_and_frozen_cache": "pass",
+        "scope": "Stage C extension subset only; lazy/inheritance/copy deferred",
+        "unavailable_optional_provider": "pass"
+      }
+    },
+    {
+      "minor": "3.14",
+      "backend": "native-rust",
+      "exit_code": 0,
+      "elapsed_seconds": 1.066357667,
+      "observations": {
+        "atomic_pipeline_failures": "pass",
+        "backend": "native-rust",
+        "dependency_order_and_processed_providers": "pass",
+        "hidden_provider": "pass",
+        "python": "3.14.3",
+        "readonly_and_frozen_cache": "pass",
+        "scope": "Stage C extension subset only; lazy/inheritance/copy deferred",
+        "unavailable_optional_provider": "pass"
+      }
+    },
+    {
+      "minor": "3.14",
+      "backend": "python",
+      "exit_code": 0,
+      "elapsed_seconds": 2.231664416,
+      "observations": {
+        "atomic_pipeline_failures": "pass",
+        "backend": "python",
+        "dependency_order_and_processed_providers": "pass",
+        "hidden_provider": "pass",
+        "python": "3.14.3",
+        "readonly_and_frozen_cache": "pass",
+        "scope": "Stage C extension subset only; lazy/inheritance/copy deferred",
+        "unavailable_optional_provider": "pass"
+      }
+    }
+  ],
+  "additional_probe_assertion": "Consumed dictionary fallback reads the current class default after class replacement",
+  "installed_regeneration": [
+    {
+      "backend": "native-rust",
+      "exit_code": 0,
+      "elapsed_seconds": 1.280747041
+    },
+    {
+      "backend": "python",
+      "exit_code": 0,
+      "elapsed_seconds": 1.641669375
+    }
+  ],
+  "preserved_cli_attempts": [
+    {
+      "backend": "native-rust",
+      "exit_code": 2,
+      "output": "usage: regenerate_dataclass_base.py [-h] [--write]\nregenerate_dataclass_base.py: error: unrecognized arguments: --check\n",
+      "classification": "Owner CLI setup mistake: --check is unsupported; default no-argument invocation performs comparison. No product defect."
+    },
+    {
+      "backend": "python",
+      "exit_code": 2,
+      "output": "usage: regenerate_dataclass_base.py [-h] [--write]\nregenerate_dataclass_base.py: error: unrecognized arguments: --check\n",
+      "classification": "Owner CLI setup mistake: --check is unsupported; default no-argument invocation performs comparison. No product defect."
+    }
+  ],
+  "remaining": "D–H and final independent reviews"
+}
