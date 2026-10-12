@@ -1,0 +1,742 @@
+{
+  "scope": "Complete primary H2 dataset; separate interrupted v1 is excluded",
+  "source_freeze": "fc5a47fd325c8a2ad01fb87b120e5319ce38ab1c",
+  "definition_canonical_sha256": "c4226335a0ecef51dc52b23906be2594deb68f2d226878c5ad45d2c2e900fc39",
+  "raw_archive": "external:yidl-dataclass-performance-primary-raw",
+  "compression": "Lossless gzip; path substitutions explicitly create derivatives, original raw bytes/hash preserved externally",
+  "files": [
+    {
+      "path": "docs/validation/perf/primary/aggregation.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/aggregation.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/owner-executions.jsonl.gz",
+      "raw_sha256": "e70f57003c36bf8a1025c58b92e0d3eeaeec8bd8a1f21d6b50cdf946db36f889",
+      "raw_bytes": 22135,
+      "sanitized_uncompressed_sha256": "950534a47a369ab7988c6d7a7fbe427feedd40988510966b7d6cbd26a6f7ae2b",
+      "compressed_sha256": "3922712557e80f638d5eba3d5bd1d54bbbcc62623f70437245aee04818b64a7e",
+      "compressed_bytes": 1338,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-01.attempt.json.gz",
+      "raw_sha256": "8426cb1f0a451808c66a249227a4d1c13b921a130e340569892c3eb55565b6d9",
+      "raw_bytes": 2631571,
+      "sanitized_uncompressed_sha256": "8426cb1f0a451808c66a249227a4d1c13b921a130e340569892c3eb55565b6d9",
+      "compressed_sha256": "f50ac50e307d6d9cd633af0719a786a97ad9a67e1b317e19483b59523d7a8605",
+      "compressed_bytes": 98221,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-01.journal.jsonl.gz",
+      "raw_sha256": "17c06676b522bacec4599fed6b409ddb204838164386de0cfb9803b62a220e60",
+      "raw_bytes": 2923092,
+      "sanitized_uncompressed_sha256": "17c06676b522bacec4599fed6b409ddb204838164386de0cfb9803b62a220e60",
+      "compressed_sha256": "3e6ffcda7cb86ba352ad4e6a61a49b37c013bdca89a30d1b5a566a207ba749bd",
+      "compressed_bytes": 106384,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-01.json.gz",
+      "raw_sha256": "8426cb1f0a451808c66a249227a4d1c13b921a130e340569892c3eb55565b6d9",
+      "raw_bytes": 2631571,
+      "sanitized_uncompressed_sha256": "8426cb1f0a451808c66a249227a4d1c13b921a130e340569892c3eb55565b6d9",
+      "compressed_sha256": "f50ac50e307d6d9cd633af0719a786a97ad9a67e1b317e19483b59523d7a8605",
+      "compressed_bytes": 98221,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-01.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-01.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-02.attempt.json.gz",
+      "raw_sha256": "f502afc8d820dc025b4fc20b14563b1563384b2c25b9766003d127fef11da43d",
+      "raw_bytes": 2632902,
+      "sanitized_uncompressed_sha256": "f502afc8d820dc025b4fc20b14563b1563384b2c25b9766003d127fef11da43d",
+      "compressed_sha256": "107d51d9afeae817ac79d4ba8dfef67068585fdbe593cf226ed0ff893ee3157b",
+      "compressed_bytes": 97286,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-02.journal.jsonl.gz",
+      "raw_sha256": "97b448a60dc546c6b3c13f9e066e41229edbc363124751493ecbc68245a0258c",
+      "raw_bytes": 2924314,
+      "sanitized_uncompressed_sha256": "97b448a60dc546c6b3c13f9e066e41229edbc363124751493ecbc68245a0258c",
+      "compressed_sha256": "4347e32703b3abc533c95f35a42f5e99f82fe6e5c05277fb67af85cc4a54d7e5",
+      "compressed_bytes": 104899,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-02.json.gz",
+      "raw_sha256": "f502afc8d820dc025b4fc20b14563b1563384b2c25b9766003d127fef11da43d",
+      "raw_bytes": 2632902,
+      "sanitized_uncompressed_sha256": "f502afc8d820dc025b4fc20b14563b1563384b2c25b9766003d127fef11da43d",
+      "compressed_sha256": "107d51d9afeae817ac79d4ba8dfef67068585fdbe593cf226ed0ff893ee3157b",
+      "compressed_bytes": 97286,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-02.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-02.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-03.attempt.json.gz",
+      "raw_sha256": "1ebc663931941c55e2aae95e76576f2cc8834afe4b20e415c013ac9e17aa913f",
+      "raw_bytes": 2626784,
+      "sanitized_uncompressed_sha256": "1ebc663931941c55e2aae95e76576f2cc8834afe4b20e415c013ac9e17aa913f",
+      "compressed_sha256": "1dd38135a98a71571d694f47c791e01f10679b3af87613ff66a71541376bf482",
+      "compressed_bytes": 97344,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-03.journal.jsonl.gz",
+      "raw_sha256": "0605b8e0945a5af42958090ed145317ea80abb8b7310d221770b47d6c041f6c6",
+      "raw_bytes": 2918321,
+      "sanitized_uncompressed_sha256": "0605b8e0945a5af42958090ed145317ea80abb8b7310d221770b47d6c041f6c6",
+      "compressed_sha256": "63c74d235c21d9258418755506aaa676adeb78ac6a4abd1506a9f83d76db1b06",
+      "compressed_bytes": 105165,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-03.json.gz",
+      "raw_sha256": "1ebc663931941c55e2aae95e76576f2cc8834afe4b20e415c013ac9e17aa913f",
+      "raw_bytes": 2626784,
+      "sanitized_uncompressed_sha256": "1ebc663931941c55e2aae95e76576f2cc8834afe4b20e415c013ac9e17aa913f",
+      "compressed_sha256": "1dd38135a98a71571d694f47c791e01f10679b3af87613ff66a71541376bf482",
+      "compressed_bytes": 97344,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-03.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-03.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-04.attempt.json.gz",
+      "raw_sha256": "321ad8696e8759e27b3fb2ee7e21f615f3f427581ecf411590880aaa9b0e310e",
+      "raw_bytes": 2630153,
+      "sanitized_uncompressed_sha256": "321ad8696e8759e27b3fb2ee7e21f615f3f427581ecf411590880aaa9b0e310e",
+      "compressed_sha256": "2375d04ffc9d9a5ea7f43cbb0400fafcb001c45b5e31da12f5b50c063ff653a3",
+      "compressed_bytes": 96069,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-04.journal.jsonl.gz",
+      "raw_sha256": "d61ec07ac06d8fabb60439154560e0c1d1f0621ef7dc97a0878ec9235d357ef7",
+      "raw_bytes": 2921582,
+      "sanitized_uncompressed_sha256": "d61ec07ac06d8fabb60439154560e0c1d1f0621ef7dc97a0878ec9235d357ef7",
+      "compressed_sha256": "5b97a3165289f7685b252b50facfda8b94eb8fcb1e6932a490a54d5cc035a657",
+      "compressed_bytes": 103886,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-04.json.gz",
+      "raw_sha256": "321ad8696e8759e27b3fb2ee7e21f615f3f427581ecf411590880aaa9b0e310e",
+      "raw_bytes": 2630153,
+      "sanitized_uncompressed_sha256": "321ad8696e8759e27b3fb2ee7e21f615f3f427581ecf411590880aaa9b0e310e",
+      "compressed_sha256": "2375d04ffc9d9a5ea7f43cbb0400fafcb001c45b5e31da12f5b50c063ff653a3",
+      "compressed_bytes": 96069,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-04.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-04.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-05.attempt.json.gz",
+      "raw_sha256": "128697af146a36863eed9f285060ef1876b2894719ef847bb98440f6dcf67705",
+      "raw_bytes": 2628008,
+      "sanitized_uncompressed_sha256": "128697af146a36863eed9f285060ef1876b2894719ef847bb98440f6dcf67705",
+      "compressed_sha256": "46e23e22d49f708ce513559a484e5a37c626ec8f81e2ea379629dac07810d77b",
+      "compressed_bytes": 98602,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-05.journal.jsonl.gz",
+      "raw_sha256": "1e250feb69c9b9cb78fe13020d88357beb8f9265e0def906a1d84eeaba3eaa81",
+      "raw_bytes": 2919571,
+      "sanitized_uncompressed_sha256": "1e250feb69c9b9cb78fe13020d88357beb8f9265e0def906a1d84eeaba3eaa81",
+      "compressed_sha256": "a953cdd71277e2ff1bb3f669025d93793be5fceeb271a0536f6f75784748881a",
+      "compressed_bytes": 106615,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-05.json.gz",
+      "raw_sha256": "128697af146a36863eed9f285060ef1876b2894719ef847bb98440f6dcf67705",
+      "raw_bytes": 2628008,
+      "sanitized_uncompressed_sha256": "128697af146a36863eed9f285060ef1876b2894719ef847bb98440f6dcf67705",
+      "compressed_sha256": "46e23e22d49f708ce513559a484e5a37c626ec8f81e2ea379629dac07810d77b",
+      "compressed_bytes": 98602,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-05.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.12-process-05.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-01.attempt.json.gz",
+      "raw_sha256": "2990d76a45af88971a5c70b07c9d6378cfd00776d0562dc2fd6d9ab6594de496",
+      "raw_bytes": 2625745,
+      "sanitized_uncompressed_sha256": "2990d76a45af88971a5c70b07c9d6378cfd00776d0562dc2fd6d9ab6594de496",
+      "compressed_sha256": "d65bffb20852956ab0c1e8f305bac504d925c22f6d79a7f86cc931d548abc661",
+      "compressed_bytes": 96392,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-01.journal.jsonl.gz",
+      "raw_sha256": "b04e10261b81b6a654928212cedd49813a15f3b0efc6937fe871866c19d22a14",
+      "raw_bytes": 2917403,
+      "sanitized_uncompressed_sha256": "b04e10261b81b6a654928212cedd49813a15f3b0efc6937fe871866c19d22a14",
+      "compressed_sha256": "0be4e2244ec5e75b0d7b019fa72083c71b61eab21ff1b31fa9792e15e326a6b8",
+      "compressed_bytes": 104074,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-01.json.gz",
+      "raw_sha256": "2990d76a45af88971a5c70b07c9d6378cfd00776d0562dc2fd6d9ab6594de496",
+      "raw_bytes": 2625745,
+      "sanitized_uncompressed_sha256": "2990d76a45af88971a5c70b07c9d6378cfd00776d0562dc2fd6d9ab6594de496",
+      "compressed_sha256": "d65bffb20852956ab0c1e8f305bac504d925c22f6d79a7f86cc931d548abc661",
+      "compressed_bytes": 96392,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-01.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-01.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-02.attempt.json.gz",
+      "raw_sha256": "7680d9e0f9ad5f0d220e6c3c9f3c041c8116c54fbb0955dcc14a4487c8c2618c",
+      "raw_bytes": 2626435,
+      "sanitized_uncompressed_sha256": "7680d9e0f9ad5f0d220e6c3c9f3c041c8116c54fbb0955dcc14a4487c8c2618c",
+      "compressed_sha256": "35aaee740ee84503f873b7f13b8ead6c7c08d07a420265c4fc20c0b15597cb04",
+      "compressed_bytes": 96178,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-02.journal.jsonl.gz",
+      "raw_sha256": "4ad5f0ff74085449bda9fa2509371a64ea21bd2fbbe32a066155d20a110dfd5c",
+      "raw_bytes": 2918097,
+      "sanitized_uncompressed_sha256": "4ad5f0ff74085449bda9fa2509371a64ea21bd2fbbe32a066155d20a110dfd5c",
+      "compressed_sha256": "f42a009a39738fe2594213aa01e7427b3b899dba0f6eeeea3930018abc38402b",
+      "compressed_bytes": 104303,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-02.json.gz",
+      "raw_sha256": "7680d9e0f9ad5f0d220e6c3c9f3c041c8116c54fbb0955dcc14a4487c8c2618c",
+      "raw_bytes": 2626435,
+      "sanitized_uncompressed_sha256": "7680d9e0f9ad5f0d220e6c3c9f3c041c8116c54fbb0955dcc14a4487c8c2618c",
+      "compressed_sha256": "35aaee740ee84503f873b7f13b8ead6c7c08d07a420265c4fc20c0b15597cb04",
+      "compressed_bytes": 96178,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-02.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-02.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-03.attempt.json.gz",
+      "raw_sha256": "1eefa503003d08d57fca5b080fb7fe3b73731393c362fab3678f22d3e5902027",
+      "raw_bytes": 2623474,
+      "sanitized_uncompressed_sha256": "1eefa503003d08d57fca5b080fb7fe3b73731393c362fab3678f22d3e5902027",
+      "compressed_sha256": "a60600b63e4ce03000181f9f0d6281a6e0af3b6e9ed342f93f29ca0d39800191",
+      "compressed_bytes": 98380,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-03.journal.jsonl.gz",
+      "raw_sha256": "968006d8f8bc0ccc5eedba7cd60b34da4fa826b5534524cf1db377cad6abb961",
+      "raw_bytes": 2915258,
+      "sanitized_uncompressed_sha256": "968006d8f8bc0ccc5eedba7cd60b34da4fa826b5534524cf1db377cad6abb961",
+      "compressed_sha256": "c7425e2f9e919ac5fc2cf4b6484a0edbe21e32f6de84779e3b6ac5974d64e9e4",
+      "compressed_bytes": 106461,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-03.json.gz",
+      "raw_sha256": "1eefa503003d08d57fca5b080fb7fe3b73731393c362fab3678f22d3e5902027",
+      "raw_bytes": 2623474,
+      "sanitized_uncompressed_sha256": "1eefa503003d08d57fca5b080fb7fe3b73731393c362fab3678f22d3e5902027",
+      "compressed_sha256": "a60600b63e4ce03000181f9f0d6281a6e0af3b6e9ed342f93f29ca0d39800191",
+      "compressed_bytes": 98380,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-03.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-03.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-04.attempt.json.gz",
+      "raw_sha256": "eda64a7fa9abb5820e566d5808209c89d969e9636cc2e40770819eaa884b0835",
+      "raw_bytes": 2625881,
+      "sanitized_uncompressed_sha256": "eda64a7fa9abb5820e566d5808209c89d969e9636cc2e40770819eaa884b0835",
+      "compressed_sha256": "d9e3a4489110aee3260fb7e0f4b772d1970dea797bbaf0818513215844a66e92",
+      "compressed_bytes": 96250,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-04.journal.jsonl.gz",
+      "raw_sha256": "99b9018812fe42b79974531a96744be821b24602c95014c183df48d77a43d834",
+      "raw_bytes": 2917544,
+      "sanitized_uncompressed_sha256": "99b9018812fe42b79974531a96744be821b24602c95014c183df48d77a43d834",
+      "compressed_sha256": "51daabba9e3fbcdf1a0744e28febaaf6cc0c4a2082ad19a7982aacab5664dec9",
+      "compressed_bytes": 104218,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-04.json.gz",
+      "raw_sha256": "eda64a7fa9abb5820e566d5808209c89d969e9636cc2e40770819eaa884b0835",
+      "raw_bytes": 2625881,
+      "sanitized_uncompressed_sha256": "eda64a7fa9abb5820e566d5808209c89d969e9636cc2e40770819eaa884b0835",
+      "compressed_sha256": "d9e3a4489110aee3260fb7e0f4b772d1970dea797bbaf0818513215844a66e92",
+      "compressed_bytes": 96250,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-04.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-04.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-05.attempt.json.gz",
+      "raw_sha256": "525244ac9339222fceaf888939fb75a9560f05023486dbf960f2e6a46c9853cb",
+      "raw_bytes": 2623777,
+      "sanitized_uncompressed_sha256": "525244ac9339222fceaf888939fb75a9560f05023486dbf960f2e6a46c9853cb",
+      "compressed_sha256": "ebc765c3f8b725f79fa5b044d2784a653b49678104caab292ba002efe238cee3",
+      "compressed_bytes": 98147,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-05.journal.jsonl.gz",
+      "raw_sha256": "eab6cb020f6391d199290fd9fdf0a9fd10636f297fafcbafdd08cbe13a199857",
+      "raw_bytes": 2915509,
+      "sanitized_uncompressed_sha256": "eab6cb020f6391d199290fd9fdf0a9fd10636f297fafcbafdd08cbe13a199857",
+      "compressed_sha256": "1d0ce55a5cb8535d987e2097f8c4a394d59e0505c62af8a8db9fac93dfa2f81c",
+      "compressed_bytes": 105887,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-05.json.gz",
+      "raw_sha256": "525244ac9339222fceaf888939fb75a9560f05023486dbf960f2e6a46c9853cb",
+      "raw_bytes": 2623777,
+      "sanitized_uncompressed_sha256": "525244ac9339222fceaf888939fb75a9560f05023486dbf960f2e6a46c9853cb",
+      "compressed_sha256": "ebc765c3f8b725f79fa5b044d2784a653b49678104caab292ba002efe238cee3",
+      "compressed_bytes": 98147,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-05.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.13-process-05.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-01.attempt.json.gz",
+      "raw_sha256": "29e9dcf25ddcb3780e5f4d7d4e5281035281f3baa8c94eb5e3377dad30912c3c",
+      "raw_bytes": 2623328,
+      "sanitized_uncompressed_sha256": "29e9dcf25ddcb3780e5f4d7d4e5281035281f3baa8c94eb5e3377dad30912c3c",
+      "compressed_sha256": "a2b202c13f0e42a35c2f0234fb5757046f786093c6a70ba14a3611e960416d17",
+      "compressed_bytes": 98418,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-01.journal.jsonl.gz",
+      "raw_sha256": "96efcf277c7fb6eca49fbf5800df26978648ba1f0419b0033698293d797ea238",
+      "raw_bytes": 2914717,
+      "sanitized_uncompressed_sha256": "96efcf277c7fb6eca49fbf5800df26978648ba1f0419b0033698293d797ea238",
+      "compressed_sha256": "9718c86972a71560470182d11f0067a4690cbf198deb6728bef3f51e9bfb5b0a",
+      "compressed_bytes": 105937,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-01.json.gz",
+      "raw_sha256": "29e9dcf25ddcb3780e5f4d7d4e5281035281f3baa8c94eb5e3377dad30912c3c",
+      "raw_bytes": 2623328,
+      "sanitized_uncompressed_sha256": "29e9dcf25ddcb3780e5f4d7d4e5281035281f3baa8c94eb5e3377dad30912c3c",
+      "compressed_sha256": "a2b202c13f0e42a35c2f0234fb5757046f786093c6a70ba14a3611e960416d17",
+      "compressed_bytes": 98418,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-01.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-01.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-02.attempt.json.gz",
+      "raw_sha256": "4ef0039d8568509641dd9300ce4f7f8e2a7594888732cf74ecad07de1559050f",
+      "raw_bytes": 2627446,
+      "sanitized_uncompressed_sha256": "4ef0039d8568509641dd9300ce4f7f8e2a7594888732cf74ecad07de1559050f",
+      "compressed_sha256": "40c0f4ff72176f38de39c9f7e2d713cbdec41b64decb669d3f3d68c676b4778a",
+      "compressed_bytes": 96318,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-02.journal.jsonl.gz",
+      "raw_sha256": "9b4e4080b81336e0057601f7e4669a571504cfacc64ca550f70b51841bde2774",
+      "raw_bytes": 2918646,
+      "sanitized_uncompressed_sha256": "9b4e4080b81336e0057601f7e4669a571504cfacc64ca550f70b51841bde2774",
+      "compressed_sha256": "3c0f6a4cc2323dccb43b1cc0194d39aae6015426200415950524ebc781cce21b",
+      "compressed_bytes": 103653,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-02.json.gz",
+      "raw_sha256": "4ef0039d8568509641dd9300ce4f7f8e2a7594888732cf74ecad07de1559050f",
+      "raw_bytes": 2627446,
+      "sanitized_uncompressed_sha256": "4ef0039d8568509641dd9300ce4f7f8e2a7594888732cf74ecad07de1559050f",
+      "compressed_sha256": "40c0f4ff72176f38de39c9f7e2d713cbdec41b64decb669d3f3d68c676b4778a",
+      "compressed_bytes": 96318,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-02.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-02.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-03.attempt.json.gz",
+      "raw_sha256": "aa6da556c425929d252e770d02be9e2214d9d4727a379d2b442e0b7f26b71627",
+      "raw_bytes": 2623501,
+      "sanitized_uncompressed_sha256": "aa6da556c425929d252e770d02be9e2214d9d4727a379d2b442e0b7f26b71627",
+      "compressed_sha256": "b12ba94bd6fbc3fa509ae5d81764aa4b8fa4f9d083c67646033860ec25dc588c",
+      "compressed_bytes": 97925,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-03.journal.jsonl.gz",
+      "raw_sha256": "6deb2bb9a45d7c52c51369cbf131686642801b3096984fcc74da0e2af84e41f9",
+      "raw_bytes": 2914837,
+      "sanitized_uncompressed_sha256": "6deb2bb9a45d7c52c51369cbf131686642801b3096984fcc74da0e2af84e41f9",
+      "compressed_sha256": "e541d75bed3fe1ec483969bde583ac26d73ba62bf5f66cab1d049c7a5a60a6eb",
+      "compressed_bytes": 105735,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-03.json.gz",
+      "raw_sha256": "aa6da556c425929d252e770d02be9e2214d9d4727a379d2b442e0b7f26b71627",
+      "raw_bytes": 2623501,
+      "sanitized_uncompressed_sha256": "aa6da556c425929d252e770d02be9e2214d9d4727a379d2b442e0b7f26b71627",
+      "compressed_sha256": "b12ba94bd6fbc3fa509ae5d81764aa4b8fa4f9d083c67646033860ec25dc588c",
+      "compressed_bytes": 97925,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-03.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-03.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-04.attempt.json.gz",
+      "raw_sha256": "d933cc187de9cfbd5363e29bade5e36cc1e3138c3778f6bf6f9bf5481be98b10",
+      "raw_bytes": 2626620,
+      "sanitized_uncompressed_sha256": "d933cc187de9cfbd5363e29bade5e36cc1e3138c3778f6bf6f9bf5481be98b10",
+      "compressed_sha256": "0a31a73c8f25b47d6f549b125d558f182e3c65211850007afdb62a778940879d",
+      "compressed_bytes": 96395,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-04.journal.jsonl.gz",
+      "raw_sha256": "e6ac957eb9ac78e078c50f5b124645946d5141445eca14da98c191658361c7bb",
+      "raw_bytes": 2917861,
+      "sanitized_uncompressed_sha256": "e6ac957eb9ac78e078c50f5b124645946d5141445eca14da98c191658361c7bb",
+      "compressed_sha256": "58eda5a707253c274b973b5f5cb51e7ccea5568797be569fae9ab35975beb616",
+      "compressed_bytes": 103999,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-04.json.gz",
+      "raw_sha256": "d933cc187de9cfbd5363e29bade5e36cc1e3138c3778f6bf6f9bf5481be98b10",
+      "raw_bytes": 2626620,
+      "sanitized_uncompressed_sha256": "d933cc187de9cfbd5363e29bade5e36cc1e3138c3778f6bf6f9bf5481be98b10",
+      "compressed_sha256": "0a31a73c8f25b47d6f549b125d558f182e3c65211850007afdb62a778940879d",
+      "compressed_bytes": 96395,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-04.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-04.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-05.attempt.json.gz",
+      "raw_sha256": "62662e4b94e81bbe3c57628308d6dfab9aca32656210768da2b3b4ed1e325ca9",
+      "raw_bytes": 2625190,
+      "sanitized_uncompressed_sha256": "62662e4b94e81bbe3c57628308d6dfab9aca32656210768da2b3b4ed1e325ca9",
+      "compressed_sha256": "462093d17c034ac633447e26fdb559149e21086d3bd5f987232ae918c45129ee",
+      "compressed_bytes": 98217,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-05.journal.jsonl.gz",
+      "raw_sha256": "01120c6f62d2fb8d80f949bfeceeb89bed21821e836deaf5d2bfd7754d2af491",
+      "raw_bytes": 2916552,
+      "sanitized_uncompressed_sha256": "01120c6f62d2fb8d80f949bfeceeb89bed21821e836deaf5d2bfd7754d2af491",
+      "compressed_sha256": "15c86a2411c8ad4bc61a344dc0d21382b1710c583fcdc3b55f64fa71103a503d",
+      "compressed_bytes": 106053,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-05.json.gz",
+      "raw_sha256": "62662e4b94e81bbe3c57628308d6dfab9aca32656210768da2b3b4ed1e325ca9",
+      "raw_bytes": 2625190,
+      "sanitized_uncompressed_sha256": "62662e4b94e81bbe3c57628308d6dfab9aca32656210768da2b3b4ed1e325ca9",
+      "compressed_sha256": "462093d17c034ac633447e26fdb559149e21086d3bd5f987232ae918c45129ee",
+      "compressed_bytes": 98217,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-05.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/primary-3.14-process-05.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sanitized_uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "compressed_bytes": 20,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    },
+    {
+      "path": "docs/validation/perf/primary/summary.json.gz",
+      "raw_sha256": "cd36805f56753754ecce108e8ca1fd231d30d587512387d54f5320575b16fbc2",
+      "raw_bytes": 827914,
+      "sanitized_uncompressed_sha256": "cd36805f56753754ecce108e8ca1fd231d30d587512387d54f5320575b16fbc2",
+      "compressed_sha256": "e6b0359f3779d0f3876a467e5d70d46bcf619fe2541ea041037d1f789a05a174",
+      "compressed_bytes": 54680,
+      "encoding": "gzip UTF-8; explicit path-sanitized derivative; original unchanged externally"
+    }
+  ],
+  "generated_tables": [
+    {
+      "path": "docs/validation/perf/primary/summary.json",
+      "sha256": "cd36805f56753754ecce108e8ca1fd231d30d587512387d54f5320575b16fbc2",
+      "bytes": 827914
+    },
+    {
+      "path": "docs/validation/perf/primary/comparisons.csv",
+      "sha256": "60bfc1ac369e33390811b725e485c9efec4a5b66c409c008f53191e646f5a66d",
+      "bytes": 38442
+    },
+    {
+      "path": "docs/validation/perf/primary/memory.csv",
+      "sha256": "18f4a7b6fb8bfcb32be7d7b6d5e45648ed5b8b86d75642b590c661bffc86d6bd",
+      "bytes": 5447
+    },
+    {
+      "path": "docs/validation/perf/primary/owner-independent-audit.json",
+      "sha256": "b05a8633cab6f307c0d7d4ed868cb8259000adec0d45c5690a5fb7551c89bd6d",
+      "bytes": 3067
+    }
+  ]
+}

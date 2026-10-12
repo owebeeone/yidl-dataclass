@@ -74,6 +74,11 @@ H2 source/definition freeze: `fc5a47fd325c8a2ad01fb87b120e5319ce38ab1c`.
 Revised serial measurement began at `2026-10-12T16:10:09.487589Z`.
 First Python 3.12 and 3.13 processes complete successfully; no aggregate numerical
 verdict exists until all five complete independent processes per minor finish.
+All fifteen H2 processes now complete and aggregate successfully. See
+`Dataclass-StageHResult.md`: 73 threshold comparisons pass, 47 remain inconclusive,
+and zero confirmed regressions. The independent owner accounting/bootstrap audit
+matches all 216 comparisons. No favorable rerun or performance-target change was
+made. Performance/declarative evidence is ready for settled final Code/State review.
 
 ## Requirements review history and authority
 

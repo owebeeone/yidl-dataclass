@@ -367,3 +367,31 @@ CPU-heavy task agents. First complete Python 3.12 and 3.13 process durations are
 3,960 aggregate timing rows and 32 memory observations. These are sample-coverage
 successes, not aggregate numerical performance conclusions. Full parent process
 sets remain pending; the original v1 interrupted observations stay excluded.
+
+## Measured evaluation checkpoint — 2026-10-12T17:24:38Z
+
+All fifteen complete H2 native parent process sets finish at
+17:16:44.425022Z; collection wall time is 66m34.937433s. The independent owner audit
+reproduces all 216 comparisons and bootstrap intervals from complete raw data:
+73 threshold passes, 47 inconclusive, zero confirmed regressions. Environmental
+load varies; no corrected specific cause is established and no favorable rerun
+is selected. `Dataclass-StageHResult.md` retains the unresolved boundaries.
+The v1 interrupted attempt remains separate, including its wall cost and rows.
+
+Elapsed original-GO to latest owner usage observation is approximately 13h48m.
+Latest observations across thirteen disjoint actors sum to 403,011,667 input tokens
+including 395,868,544 cached input, and 2,019,900 output tokens. Reasoning output
+1,113,092 is included in output, not counted twice. Observed cache-write counters
+are zero; estimates use the reported categories. Standard API-equivalent estimate
+is **USD 78.2436088**; actual billing remains unavailable. Original SDK detour,
+interventions, preparation, measurement coordination and documentation are included.
+Final implementation reviews and later owner output are not yet included.
+
+The [official GPT-6.1 Sol page](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
+was fetched and pricing rechecked at this checkpoint: unchanged Standard rates
+of USD 2/M uncached input, 0.10/M cached input, 2.50/M cache writes and 10/M output;
+requests above 272K input use the stated full-request multipliers. Service-tier,
+regional/tool premiums and actual Codex/account billing are not established and
+are excluded rather than guessed. Cumulative observations are not summed across
+checkpoints; only the latest observation for each normalized disjoint actor enters
+the aggregate. Final Code/State acceptance remains outstanding.
