@@ -22,6 +22,9 @@ cost remain part of the experiment record; no retrospective success claim or
 metric reset. Historical reviews below retain their original exact scope but
 do not authorize SDK work against the operator's correction.
 
+Active scope/provenance: `TaskBoundary.md`. Reference-only dependency
+observations: `OutsideScopeFindings.md`; they do not authorize implementation.
+
 ## Requirements review history and authority
 
 The review object is the committed README, `dev-docs/DataclassConcept.md` and
