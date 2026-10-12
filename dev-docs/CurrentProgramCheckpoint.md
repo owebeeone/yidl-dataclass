@@ -81,5 +81,10 @@ review of the detailed design or TDD plan. Run the independent design and final
 implementation review gates autonomously. The waiver applies to the accepted
 locality amendment, not the remainder of the experiment's review workflow.
 
-Next action: compact detailed design and compatibility/extension matrix, dual
-independent design review, separate TDD plan, implementation and final evidence.
+Detailed design draft: `DataclassDesign.md`, ready for the dual Consistency/Surface
+and Safety review. It is not yet accepted. Required design tier: dual peer-blind
+review at this interface freeze. Prior requirements reviews do not accept this
+new design object. The TDD plan and implementation remain behind that gate.
+
+Next action: settle the exact design tuple, run independent design review, then
+create the separate TDD plan and implement only after the design is accepted.

@@ -3,6 +3,10 @@
 Source: `DeclarativeApiEvaluatorV2.md`, titled "Declarative API Evaluator &
 Identifier — v3". Identical bytes also occur as `DeclarativeApiEvaluatorV3.md`.
 Source SHA-256: `20a72d189d1ad032a9f0ab9bbfc1b63636cade0062c1d05bbae0383e7fb0e815`.
+The exact self-contained instrument is retained as
+[reference/DeclarativeApiEvaluatorV3.md](reference/DeclarativeApiEvaluatorV3.md).
+Its introductory historical links point to the original surrounding corpus,
+which is not bundled; its definitions and scoring procedure are self-contained.
 This is a reference summary, not a completed scorecard or substitute for the full
 instrument. The detailed experiment plan must pin its scoring inputs and mode.
 
