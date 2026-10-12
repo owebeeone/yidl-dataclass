@@ -1,8 +1,10 @@
 # YIDL Dataclass checkpoint
 
-Status: autonomous implementation is underway at Stage A after detailed-design
-dual GO and TDD-plan GO. GO/start was 2026-10-12T03:36:48Z; implementation starts
-at approximately 2026-10-12T04:36Z. Final implementation is not accepted. This
+Status: Stage A is paused for a compiler-boundary amendment after inspection found
+the required reusable precompiled-resource facility missing. Detailed-design dual
+GO and TDD-plan GO remain historical gates, not proof of this missing facility.
+GO/start was 2026-10-12T03:36:48Z; implementation preparation starts
+at approximately 2026-10-12T04:36Z. No product writes or behavioral RED yet. This
 checkpoint governs the experiment; historical requirement and design reviews
 below retain their original acceptance boundaries.
 
@@ -122,4 +124,17 @@ after `DataclassPlan-ReviewConsistency.md` reported GO with no findings**.
 No second-axis escalation was required. Product implementation starts at Stage A,
 with genuine native generation and direct public slots. The drafter stops at
 stage checkpoints for owner verification/commits. Final acceptance remains ahead.
-Next action: Stage A RED/GREEN and its three-minor checkpoint.
+Stage-A inspection found that YIDL resource wrappers compile source lazily and
+Astichi has no supported whole-template artifact restore path. Its native snapshot
+registration carries metadata without the parser IR required for materialization;
+some native external/ref/pass operations also parse expression source. Existing
+final-AST caching and provenance do not satisfy reusable-template restoration.
+
+Next action: draft and independently review `PrecompiledResourcesDesign.md`, an
+Astichi/YIDL owning-layer amendment, before Stage A proceeds. No cache warming,
+consumer serialization workaround or backend substitution closes this gap.
+
+The amendment draft is ready for a fresh dual Consistency/Safety gate. It adds
+explicit generic artifact/structural compiler APIs, full native IR restoration,
+recursive YIDL resource policy and candidate dependency versions. The owner
+settles its exact tuple; the sole drafter has made no code or test changes.

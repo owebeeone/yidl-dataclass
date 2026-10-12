@@ -6,6 +6,8 @@ Before implementation, the workspace Python 3.12.12 environment passed:
 | --- | --- | --- |
 | Undoable `f79e4ce6d985ed0a6463552e163baabf1a28942d` | `../.venv/bin/python -m pytest -q` | 215 passed in 4.06 seconds |
 | YIDL `9d374f88445c426a56d5dd1f96fad112d1ec5417` | `../.venv/bin/python -m pytest tests/generation/test_yidl_lark_parser.py::test_yidl_lark_dataclasses_source_fixture_compiles -q` | 1 passed in 0.52 seconds |
+| Astichi `1c47f781d3804130fdd61cbee07a3b2e4529158a` | `../.venv/bin/python -m pytest -q` | 2544 passed, 104 skipped in 31.55 seconds |
+| YIDL `9d374f88445c426a56d5dd1f96fad112d1ec5417` | `../.venv/bin/python -m pytest -q` | 299 passed, 2 skipped in 38.28 seconds |
 
 These are baseline checks, not Dataclass implementation evidence. The existing
 Undoable checkpoint modification and untracked initialization-helper draft remain
