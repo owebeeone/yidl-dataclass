@@ -10,8 +10,9 @@ facades and separate state objects are unnecessary for this model.
 
 [Discussion requirements and open decisions](dev-docs/DataclassConcept.md)
 record the starting point. The [proposed detailed design and compatibility
-matrix](dev-docs/DataclassDesign.md) await independent acceptance. The separately
-reviewed TDD plan and implementation remain subsequent work.
+matrix](dev-docs/DataclassDesign.md), including the redesigned Undoable write
+comparison boundary, await two fresh independent reviews. The separately reviewed
+TDD plan and implementation remain subsequent work.
 
 Ordinary writable fields use direct slots by default. Fields requiring constant,
 frozen, lazy or conversion/validation behavior use specialized generated code.

@@ -25,6 +25,8 @@ separate measurement stages.
 | `9fd44d91943ca706c4c51a0669bd3e9d03260278` | Detailed design settled for independent review. |
 | 2026-10-12T03:49:46.792Z / 03:49:51.542Z | Independent Consistency/Surface and Safety design reviewers start. |
 | Design round 1 | Both NO-GO. Two distinct bounded P2s (initializer suppression and opaque callback operands) and one P3 stale README. One merged remediation assigned; no implementation or TDD plan started. |
+| `5d7883d8838fb9fa170426fbda59a71af3e9188b` | Cycle-1 correction reviewed by the original pair. Both NO-GO, closing initial findings but independently finding dictionary hash-callback drift; Safety additionally finds tuple prefix-callback drift. |
+| 2026-10-12T04:15Z | Small write-comparison boundary redesigned before implementation: retain native equality with a scoped historical-identity prelude for Undoable only. Fresh reviewers replace the prior pair because this changes the generation/callback boundary. |
 
 ## Autonomous scope and intervention rules
 
@@ -78,4 +80,10 @@ $2/M uncached input, $0.10/M cached input, $2.50/M cache writes, $10/M output.
 This is an explicit Standard, ordinary-context estimate; actual service-tier,
 regional/tool charges and Codex billing are not established. The recorder checks
 observed request sizes against the 272K ordinary-context limit; otherwise it leaves
-the estimate unavailable pending per-request pricing analysis.
+the estimate unavailable unless complete per-request counters support pricing
+each request separately. Above 272K input, the official rates multiply input and
+cache charges by 2 and output by 1.5 for the full request. Duplicate cumulative
+observations are ignored; a gap that cannot be reconciled to the reported last
+request makes that estimate unavailable. At the comparison-redesign checkpoint,
+the owner log's changed samples all reconcile exactly; its updated estimate uses
+those per-request rates. Actual billing remains unavailable.

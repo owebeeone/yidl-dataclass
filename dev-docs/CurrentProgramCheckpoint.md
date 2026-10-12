@@ -93,6 +93,18 @@ adapter replacing opaque callback operands. All have bounded corrections; no
 architectural failure was reported. The merged design/README correction is ready
 for both original reviewers' independent re-verdicts.
 
-Next action: settle the corrected design and obtain both original reviewers'
-independent re-verdicts; then create the separate TDD plan and implement only after
+Cycle-1 correction was reviewed at
+`5d7883d8838fb9fa170426fbda59a71af3e9188b`. Both original reviewers returned
+NO-GO while independently closing the initial findings. They independently found
+that manual dictionary lookup adds hash callbacks; Safety also found that a
+length-first tuple comparison suppresses native prefix callbacks. Reports and
+`DataclassDesign-RemPlan-2.md` preserve the evidence and dispositions.
+
+The owner selected a redesign of the small write-comparison boundary: native
+equality under a temporary historical-identity context, with an Undoable-only
+generated equality prelude. Two fresh reviewers replace the prior pair for this
+changed generation and callback boundary. No product implementation has started.
+
+Next action: settle the redesigned boundary and obtain both replacement reviewers'
+independent verdicts; then create the separate TDD plan and implement only after
 the design is accepted.

@@ -29,6 +29,7 @@ def collect(session: Path):
             observations.append({
                 "time": row["timestamp"], "counts": counts,
                 "request_input_tokens": (info.get("last_token_usage") or {}).get("input_tokens"),
+                "request_counts": info.get("last_token_usage"),
                 "model": model, "effort": effort,
             })
     return observations
@@ -62,10 +63,43 @@ def main() -> None:
         raise SystemExit("Cache read/write counts exceed total input")
     estimate = None
     assumption = "unavailable: model/rate or request length not established"
+    request_pricing = None
     if last["model"] == "gpt-6.1-sol" and sizes and max(sizes) <= 272_000:
         estimate = ((input_tokens - cached - writes) * 2 + cached * .1
                     + writes * 2.5 + delta.get("output_tokens", 0) * 10) / 1_000_000
         assumption = "Standard API-equivalent USD, ordinary context; excludes regional/mode/tool premiums and actual Codex billing"
+    elif last["model"] == "gpt-6.1-sol" and sizes:
+        previous = baseline
+        request_pricing = {"ordinary_requests": 0, "long_context_requests": 0,
+                           "complete_request_accounting": True}
+        estimate = 0.0
+        for row in during:
+            change = {key: value - previous.get(key, 0)
+                      for key, value in row["counts"].items()}
+            previous = row["counts"]
+            if not any(change.values()):
+                continue
+            request = row["request_counts"]
+            keys = ("input_tokens", "cached_input_tokens", "output_tokens")
+            if (row["model"] != "gpt-6.1-sol" or request is None
+                    or any(change.get(key, 0) != request.get(key, 0) for key in keys)
+                    or any(value < 0 for value in change.values())):
+                request_pricing["complete_request_accounting"] = False
+                estimate = None
+                break
+            tokens = change.get("input_tokens", 0)
+            reads = change.get("cached_input_tokens", 0)
+            writes = change.get("cache_write_input_tokens", 0)
+            if reads + writes > tokens:
+                raise SystemExit("Request cache counts exceed request input")
+            long_context = tokens > 272_000
+            request_pricing["long_context_requests" if long_context else "ordinary_requests"] += 1
+            estimate += (((tokens - reads - writes) * 2 + reads * .1 + writes * 2.5)
+                         * (2 if long_context else 1)
+                         + change.get("output_tokens", 0) * 10
+                         * (1.5 if long_context else 1)) / 1_000_000
+        if estimate is not None:
+            assumption = "Standard API-equivalent USD, per-request ordinary/long-context rates; excludes regional/mode/tool premiums and actual Codex billing"
     record = {
         "actor": args.actor, "phase": args.phase, "start_utc": args.start,
         "recorded_utc": datetime.now(timezone.utc).isoformat(),
@@ -74,6 +108,7 @@ def main() -> None:
         "model": last["model"], "reasoning_effort": last["effort"],
         "maximum_observed_request_input_tokens": max(sizes) if sizes else None,
         "standard_api_equivalent_usd": estimate, "estimate_assumption": assumption,
+        "request_pricing": request_pricing,
         "actual_billed_usd": None,
         "pricing_checked_date": "2026-10-12",
         "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",

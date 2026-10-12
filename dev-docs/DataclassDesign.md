@@ -14,6 +14,13 @@ The controlling brief is `DataclassConcept.md`, `ExperimentProtocol.md`,
 an architectural defect requires redesign. The paused UndoableLeaf proposal is
 outside this design.
 
+Component redesign: the write-detection boundary below replaces both the earlier
+rebuilt-container projection and the subsequent manual paired traversal. Review
+counterexamples exposed operand substitution, dictionary rehashing and tuple
+prefix-evaluation defects. Neither approach is retained or extended. This revised
+component changes the generated Undoable equality prelude and callback contract,
+so it requires two fresh independent design reviews before a TDD plan or code.
+
 ## 1. Product and compatibility boundary
 
 Deliver a `yidl-dataclass` distribution exporting `yidl_dataclass`. Support
@@ -445,6 +452,11 @@ four ordering and optional hash productions. Concrete generation inputs are:
   as `self.price`, `other.price`, and a hash read path.
 - A selected compatibility resource. Initial consumers select exact-class
   compatibility. The resource has no dataclass/transaction imports.
+- An optional equality-method prelude contribution selected by consumer matching,
+  before every self shortcut, compatibility guard and structural operand read.
+  Its default is an empty resource. Dataclass selects that empty resource and
+  emits no prelude branch, context lookup or context-related import. Undoable's
+  adapter selects its own historical-write resource described in Section 8.
 
 Read-path inputs are validated Name/Attribute paths, not arbitrary Python source;
 the shared attribute-read resource lowers them using Astichi's `astichi_ref`
@@ -464,6 +476,13 @@ the shared productions into their existing class bundles. A canonical neutral
 composition fixture plus both consumers proves inheritance, field order,
 specialized read expressions and generation independence from dataclass metadata.
 Lifecycle is a future consumer; this run does not enable comparisons there.
+
+The prelude is a native YIDL extension surface, not post-generation method
+wrapping: shared equality productions expose `eq_prelude`, with a default empty
+matcher contribution. `undoable_comparison.yidl` overrides that matcher with a
+precompiled `HistoricalWriteIdentityPrelude` resource. It binds the private scope
+ContextVar and `RuntimeFacade.__eq__` as external runtime objects with stable
+generated identifiers. Ordering and hash productions have no such prelude.
 
 At regeneration, compiler source maps use stable logical keys:
 `shared/comparison.yidl`, `dataclass/<filename>.yidl`, and
@@ -495,6 +514,14 @@ working values can change. Disabling generation preserves existing identity hash
 Reject custom logical comparison/hash methods conflicting with enabled generation.
 No new Undoable unsafe-hash option is introduced.
 
+There is one explicit contextual exception to structural equality: during the
+synchronous value-write comparison scope below, generated Undoable equality uses
+historical node-state identity, including calls originating inside opaque user
+equality callbacks. Outside an active scope it uses the structural rules above.
+This dynamic rule is part of the documented comparison API, not a claimed
+invisible optimization. It also applies to other generated Undoable models whose
+equality is invoked in that same active context. Dataclass equality is unaffected.
+
 Consequently structural facade handles cannot be set/frozenset elements or mapping
 keys. Managed tuple/list/value-map edges remain supported. A thaw/freeze callback
 that constructs a hash container of structural handles receives normal TypeError;
@@ -512,104 +539,137 @@ logical flags in Undoable schema separately. New managed declarations translate
 their write policy into the legacy Lifecycle marker's string compare. Preserve
 all existing marker parameters and function exports.
 
-Preserve transaction node identity as well as the spelling of the write policy.
-The present value-write path compares exposed values with `old == value`; after
-structural generation that can accidentally equate distinct child nodes. Add an
-Undoable-owned `write_detection.py` boundary used only by value-write detection:
-paired traversal of original operands, never rebuilt containers, substituted
-payloads or identity tokens. Its procedure is `write_equal(left, right)` with an
-internal container-element context and an active recursion-pair stack:
+Preserve transaction node identity while leaving Python in charge of equality.
+The existing value-write callback remains native `bool(old == value)` on the
+original operands, inside the existing manager `_call` comparison ownership
+fence. Enter a private historical-write scope around that expression only. The
+identity-write branch remains exactly `old is value` inside its existing fence,
+without a new scope or equality callback. Do not change field inclusion, current
+read selection, write staging or either marker's effective assignment policy.
 
-1. In container-element context, `left is right` succeeds before invoking any
-   equality method, including an opaque/nonreflexive leaf. This is native
-   container identity-or-equality behavior. At the top level an opaque object's
-   self equality is still invoked; do not add a blanket identity shortcut.
-2. For two exact lists, or two exact tuples, use native same-container identity
-   success, check lengths and visit element pairs in index order, applying the
-   container-element rule and short-circuiting at the first false result. Do not
-   traverse a list against a tuple, a container subclass or an opaque object.
-3. For two exact dictionaries, preserve same-container identity success, check
-   lengths, iterate left entries in native order, and perform one native lookup
-   of each original left key in the original right dict (`get` with a private
-   absence sentinel). A miss returns false; key hashing/equality exceptions
-   propagate. Compare the original value pair in container-element context.
-   Do not clone keys or values or implement a separate key matcher. This keeps
-   key lookup direction and native hashing/identity behavior.
-4. Exact set/frozenset combinations delegate to their original native equality,
-   preserving hash-table lookup, identity shortcuts and comparison dispatch.
-   Structural handles, including native hashable containers containing them,
-   cannot be supported keys/elements because those handles are unhashable.
-   Nested sets reached as list/tuple/dict values retain this same rule; opaque
-   hashable objects are not opened to search for handles.
-5. A MappingProxyType can wrap a user mapping, so its exact type alone does not
-   authorize descent. Use a bounded CPython adapter on exact proxies only:
-   `gc.get_referents(proxy)` must expose exactly one original backing mapping.
-   Descend only when that referent is an exact dict. The adapter never calls
-   `.copy()`, `.items()` or another mapping method on a user mapping, does not
-   inspect any user object's referents, and returns the original backing object,
-   not a reconstructed payload: the returned reference must be pointer-identical
-   to the original backing dict in the adapter corpus. Contract-test this CPython
-   shape on every supported minor. An unexpected referent count fails closed
-   with UndoableDefinitionError before equality and fails the release gate; a
-   single non-exact-dict referent stays opaque as specified below. No guessed
-   fallback or ctypes/C-layout access. It needs no retained proxy registry or provenance
-   mutation and works on previously escaped/input proxies as well as engine reads.
-   With two dict-backed proxies, traverse backing-right/backing-left: left proxy
-   forwarding first meets the right proxy, whose reflected forwarding determines
-   this order. With dict-backed proxy on the left and exact dict on the right,
-   traverse backing-left/right. With exact dict on the left and dict-backed proxy
-   on the right, traverse backing-right/left: native dict equality defers to the
-   proxy's reflected forwarding. A proxy wrapping a user mapping, including a dict
-   subclass, is opaque and keeps its original callback/forwarding boundary; never
-   substitute its mapping for a callback argument. If either side of a mixed
-   comparison is opaque, do not unwrap the other operand. No freeze/thaw is called.
-6. All remaining boundaries use original operands and historical rich-equality
-   dispatch. If neither operand resolves to an engine-generated facade equality
-   method, delegate directly to `bool(left == right)`. Otherwise perform the
-   Python rich-equality slot procedure below with the engine-generated slot
-   replaced by its pre-generation identity slot. Never invoke the newly generated
-   facade equality as an accidental fallback of write detection. Explicit
-   user-owned equality methods remain opaque callbacks.
+Own the scope in `src/yidl_undoable/write_comparison_context.py`. Its private
+module-level `_historical_write_scope: ContextVar[_HistoricalWriteScope | None]`
+defaults to None. `_historical_write_equal(old, value)` is the private synchronous
+scope-and-native-expression function used by the manager. A scope
+marker is a small slotted support dataclass with only mutable `active: bool`; it
+contains no manager, node, operands, parent marker or context token. Each invocation
+allocates a fresh marker initially active, sets the ContextVar and holds the
+returned token in its synchronous stack frame. The scoped function then evaluates
+`bool(old == value)` exactly once. In finally, set this marker's active flag to
+False first, then reset the ContextVar with that token in the setting context.
+Cleanup runs on success, comparison/truth-conversion failure and BaseException.
+Do not use the 3.14-only token context-manager shorthand; the same explicit
+set/try/finally/reset sequence applies to all supported minors.
 
-The historical dispatch procedure looks up `__eq__` descriptors on each operand's
-type MRO, bypassing instance attributes. Engine-generated logical equality
-descriptors have a recorded historical replacement, `RuntimeFacade.__eq__`;
-inherited engine descriptors use that same replacement. A user subclass's own
-descriptor is retained. If the right type is a strict subtype of the left type,
-try its bound descriptor first with the original left operand. Then try the left
-descriptor with the original right operand; then the right descriptor unless
-already tried. Bind descriptors using their normal descriptor protocol; a missing
-method or exact NotImplemented continues dispatch. Convert the first implemented
-result to bool once. If all return NotImplemented, use operand identity. This
-preserves reflected-subclass priority, descriptor callbacks and NotImplemented
-fallback. The historical RuntimeFacade slot returns False against a nonfacade,
-rather than NotImplemented: a facade-left/opaque-right comparison must not start
-calling the opaque method unless native subtype priority requires it. Two ordinary
-engine facade leaves retain state identity across views, even if their logical
-fields are equal. An opaque callback that deliberately compares facades internally
-owns those comparisons; do not inspect or rewrite it.
+The manager invokes the scoped function from its existing `_call` callback,
+keeping scope setup, native equality, result truth conversion and scope teardown
+inside the original ownership fence. The existing comparison diagnostic and
+callback-depth/ownership checks remain in force. Scope creation and teardown
+perform no model reads, freeze/thaw calls or additional equality. Operand
+acquisition stays where it is in the current write path. Exceptions and their
+existing notes/ownership faults propagate through that fence. The scope does not
+permit same-manager mutation or authorize concurrent manager operations.
 
-Only active traversal pairs are tracked, not cached equality results: revisiting
-an active pair raises the existing managed-container cycle diagnostic; shared
-acyclic subobjects are compared again where native comparison would do so.
-Identity shortcuts can avoid entering a graph at all. Native/opaque boundaries
-that are delegated retain their native exception behavior. The entire procedure,
-including original key lookup, descriptor calls and result truth conversion,
-runs inside the existing manager `_call` comparison ownership fence. The
-identity-write branch stays exactly `old is value` without traversal, callbacks
-or extra truth conversion. Detector state is per call, discarded on success or
-failure, and never enters history.
+The adapter-selected YIDL equality prelude is precisely:
 
-For the Safety regression, let `inner = [child_facade]` and let an opaque
-`AcceptOriginal(inner).__eq__` accept only `other is inner`. Comparing
-`(AcceptOriginal(inner),)` with `(inner,)` descends once, then delegates the
-original opaque/list pair. The callback gets exactly `inner`. Reversing the outer
-operands delegates the original list/opaque pair; the list's NotImplemented lets
-the opaque callback receive that same original `inner`. Both return true without
-visiting its child or substituting its contents. Test equal-valued distinct child
-nodes and nested child edges separately under both write policies. Engine
-membership, history and graph identity continue to use node IDs/state identity,
-never logical facade equality.
+1. Read the private ContextVar into a method local.
+2. If its value is non-None and that marker is active, immediately return
+   `RuntimeFacade.__eq__(self, other)` using the bound historical method object.
+3. Otherwise continue into the shared generated structural equality body.
+
+The prelude executes before the version-dependent self-identity shortcut and
+exact-class guard. Thus active write comparison uses the original RuntimeFacade
+state identity across default/current/working views and against opaque operands,
+including its False result against a nonfacade. Python still decides which
+operand's rich-comparison method to invoke, reflected strict-subclass priority,
+NotImplemented handling, descriptor behavior and truth conversion. A user-owned
+subclass equality method is not replaced: native dispatch still invokes it, and
+calls it makes to a generated Undoable equality method obey the same active
+scope. No method is monkey-patched and no special-method dispatcher is emulated.
+Structural classes remain `__hash__=None` in every context; the prelude does not
+make them hashable. Generated ordering remains structural in every context and
+has no scope branch. Read-only data SnapshotNode equality remains unchanged.
+
+An opaque callback comparing two generated facade handles while evaluating a
+write now intentionally receives historical identity behavior, matching the
+pre-structural-generation engine. This applies even if it calls equality directly
+rather than letting a native container call it. Its original input operands and
+its own callback implementation are preserved. The earlier proposed exception
+letting such callbacks observe new structural equality during write detection is
+withdrawn: it contradicted preservation of the old value-write boundary. Explicit
+ordering inside an opaque callback remains the new requested ordering behavior;
+this component does not claim historical parity for newly opted-in operators or
+arbitrary user callback changes.
+
+Nested synchronous scopes allocate independent markers. Inner teardown closes
+its own marker and resets its token to restore the enclosing marker; subsequent
+parent-context equality remains historical until the outer scope closes. A
+copied context holds the marker object by reference. Closing it before token
+reset means an escaped copied context/task sees a closed marker and returns to
+normal structural equality when it later invokes a generated method. A copy of
+an inner scope does not resurrect the outer marker after the inner closes; only
+the original context's token reset restores that outer scope. Closed markers can
+remain in copied contexts but contain no manager/node data and never reactivate.
+There is no global class mutation, global active boolean, thread-local fallback,
+parent-marker chain or global context/operand registry.
+
+A copied context deliberately run while its captured marker is active sees the
+historical rule. Explicit empty contexts see the ordinary structural rule.
+Thread inheritance defaults vary by interpreter/build; do not assume a new
+thread is empty, and test explicit `Context()` versus explicit `copy_context()`
+execution. Async task context copying follows the same marker-lifetime rule;
+comparison remains synchronous and does not await. A concurrent invocation that
+has already read an active marker can finish its identity branch after closure;
+there is no atomic cutover for in-flight calls or new concurrency guarantee for
+Undoable managers. Later prelude checks after closure must see the closed marker.
+No scope state enters model storage, schemas or history.
+
+Native equality keeps native dictionary cached-hash lookup and collision order,
+tuple/list prefix evaluation, element identity shortcuts, proxy forwarding and
+opaque operands. There is no traversal, recursive dispatcher, rehashing lookup,
+rebuilt payload, proxy unwrapping, GC adapter, ctypes/C-layout access or hash-mode
+switching in this design. Do not introduce a preliminary normalization/inspection
+pass to "help" the native expression. Cycles retain native equality outcomes
+(including identity shortcuts and possible RecursionError) at this boundary;
+existing managed read/freeze/graph cycle diagnostics remain at their existing
+boundaries. No new detector promises a uniform cycle exception.
+
+For AcceptOriginal, let `inner = [child_facade]` and let the opaque callback accept
+only `other is inner`. Native comparison of `(AcceptOriginal(inner),)` against
+`(inner,)`, and the reverse direction, passes that same original inner list to
+the callback and does not walk/rebuild it. A separate native comparison of
+containers holding equal-valued distinct nodes reaches their generated equality
+prelude and observes state identity, recording replacement. Scope setup adds its
+own overhead and the prelude adds a context lookup to enabled Undoable equality;
+measure both. Dataclass method code and ordinary field access incur no scope cost.
+
+The implementation corpus must check this boundary against native expressions
+and the pre-integration Undoable write path, rather than another hand-authored
+container comparator. The following is the required component matrix:
+
+| Scenario | Required evidence |
+| --- | --- |
+| Dictionaries with opaque keys | Shared keys and distinct equal keys; constant-hash counters, post-construction raising hashes, deliberate collisions and key-equality exceptions; zero additional hash callbacks from comparison relative to native equality; preserve key/value callback order and early exit |
+| Tuple versus list lengths | Unequal lengths with common-prefix True, False, raising and observable truth-returning comparators, both directions; tuple prefix effects and contrasting list early rejection; identical nonreflexive elements retain native identity shortcuts |
+| Proxies and opaque boundaries | Dict/proxy, proxy/dict and proxy/proxy; escaped proxies and custom mapping-backed proxies; original callback argument identity and native forwarding direction; AcceptOriginal with the exact original inner list in both directions |
+| Facade leaves and user callbacks | Distinct equal-valued nodes, same-node cross-view/pinned handles, nested native containers; opaque equality directly comparing handles observes historical identity; native reflected/subclass priority, NotImplemented and nonboolean result truth conversion; nonfacade comparison keeps historical False when the facade slot runs |
+| Scope recovery | Success, equality error, truth-conversion error, BaseException and ownership fault; marker is closed and ContextVar restored on every exit; next ordinary generated equality is structural; mutation remains rejected by the existing ownership fence |
+| Nested/captured contexts | Nested scopes and cross-manager callbacks restore outer scope; copies captured at outer/inner depths observe closed markers after their own scope ends; explicit empty and copied thread contexts, async tasks running before/after closure; document concurrent in-flight sampling rather than assert atomic cutover |
+| Hash/order and cycles | Structural handles remain unhashable inside/outside scope; ordering remains structural; native cyclic equality success/error remains native, with existing read/freeze/graph cycle checks still enforced where applicable |
+| Generated source and cost | Undoable prelude precedes all structural guards/reads; Dataclass generated eq has no prelude/context import; native expression receives unchanged operands; benchmark ordinary enabled Undoable eq and value-write scoping separately |
+
+Run the dictionary/tuple/proxy/opaque working-value scenarios through managed
+fields with the existing custom freeze/thaw extension, not only through a scope
+unit probe. Across supported minors cover legacy `compare="value"|"identity"`
+and new boolean-compare/write_compare declarations, generation enabled/disabled,
+and logical inclusion true/false where eligible. Value policy must preserve the
+native callback/write decision; identity policy must remain `old is value` with
+no equality callback or newly created scope. Include a comparisons-disabled
+parent whose managed values contain comparisons-enabled child nodes: scoping
+belongs to value-write detection regardless of the parent's structural options.
+Keep source inspection, narrow
+failure tests and canonical integration evidence distinct, without duplicating
+the same successful scenario in bespoke tests.
 
 Legacy `managed(compare="value"|"identity")` preserves that write policy and
 logical inclusion=True. Reject a legacy string plus any explicit write_compare,
@@ -747,19 +807,11 @@ red/green steps. This design specifies gates, not an implementation sequence:
    Verify that equal-valued distinct child-node edges still record replacement
    under value policy and that nested native containers preserve node identity;
    cover hash-container restrictions and unchanged SnapshotNode behavior.
-   Add the AcceptOriginal narrow detector case and an integration case with
-   staged opaque working values/custom freeze, in both operand directions, for
-   legacy/new value-policy spellings with structural generation enabled/disabled.
-   Assert callback operand identity and unchanged write/no-write outcomes. Cover
-   opaque top-level nonreflexive self equality versus native container identity
-   shortcuts, reflected strict-subclass priority, NotImplemented and nonboolean
-   callback results, facade-left/opaque-right historical False without an extra
-   opaque callback, the reverse direction, exact versus subclass containers,
-   nested dict/set shapes and key-lookup exceptions, native-dict versus opaque
-   mapping proxies (including escaped input proxies, exact original opaque
-   callback operands and forwarding direction), the version-bounded proxy adapter,
-   same-node cross-view identity, shared acyclic branches and entered
-   cyclic pairs. Require these regressions inside the existing ownership fence.
+   Fulfill Section 8's native-comparison/context matrix, including inherited
+   operand-substitution, dictionary-hash and tuple-prefix counterexamples. Test
+   scope/prelude composition and callbacks inside the existing ownership fence;
+   do not substitute a manually emulated native-equality oracle. Public docs
+   must state the contextual historical equality rule and unchanged unhashability.
    Include legacy strings, explicit conflicts, inherited declarations and a
    field-removal generation pair. Keep original experiment results untouched.
 6. Install freshly built wheels in isolated environments on each supported
@@ -789,6 +841,10 @@ cache writes; label operations without a std equivalent. Time generation/decorat
 apart from instance work; measure retained-provider and lazy storage overhead as
 well as shallow instance and aggregate allocated memory. Record whether a base
 dict/weakref is present. Do not time setup or source emission in hot access loops.
+Separately benchmark the new Undoable equality prelude outside write scope and
+native value-write equality inside scope against the pre-integration engine;
+record marker allocation, context set/reset and lookup overhead. These integration
+measurements remain separate from Dataclass-versus-stdlib results.
 
 Use a versioned harness with calibrated batches, warmups, at least five independent
 process runs and repeated samples per case, retaining raw observations, units,
@@ -821,10 +877,17 @@ Version checks used the primary CPython implementations for
 [3.14 public documentation](https://docs.python.org/3.14/library/dataclasses.html).
 The versioned differential corpus remains necessary for any compatibility claim.
 
-The mapping-proxy boundary uses the documented
-[GC referent inspection API](https://docs.python.org/3.14/library/gc.html#gc.get_referents)
-and the CPython exact proxy's single-mapping traversal and equality forwarding in
-[descrobject.c](https://github.com/python/cpython/blob/3.14/Objects/descrobject.c).
-A read-only CPython 3.12.12 probe observed one original dict referent and the
-forwarding directions stated above. This inspection supports the proposed bounded
-adapter; the three-minor adapter and dispatch regressions remain unexecuted.
+The redesigned boundary uses the public
+[ContextVar/context API](https://docs.python.org/3.14/library/contextvars.html),
+with explicit set/reset on all supported minors. Read-only in-memory probes on
+CPython 3.12.12, with bytecode writes disabled, observed native dictionary equality
+adding no key-hash calls after preparation (including a key rejecting later
+hashing), unequal-length tuple prefix callback execution versus list early length
+rejection, original AcceptOriginal list arguments in both directions, and native
+proxy comparisons without an explicit rehashing lookup. Separate ContextVar
+primitive probes observed nested restoration, marker closure after an exception,
+closed markers in copied contexts and an explicitly copied thread context, and
+an async task seeing its copied marker closed after synchronous scope teardown.
+These are observations of Python primitives, not tests of generated Undoable
+preludes, manager integration, performance or the complete three-minor matrix.
+The required implementation corpus and two fresh reviews remain outstanding.
