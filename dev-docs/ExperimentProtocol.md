@@ -60,6 +60,10 @@ Use Undoable as the second consumer of the comparison module, with canonical
 examples proving reuse and tests of explicit comparison flags and selected views.
 Verify its existing behavior with comparisons disabled and document the integration
 revision separately from the frozen original Undoable experiment results.
+Cover the decorator defaults/omitted-option table and both transaction assignment
+policies independently from logical field inclusion, with structural generation
+enabled and disabled. Golden examples must fulfill the inspection and contrast
+requirements in [Golden examples amendment](GoldenExamplesAmendment.md).
 Exercise independent installation and an example built using only the public
 documentation. Report remaining limitations instead of inferring correctness from
 a test count alone.

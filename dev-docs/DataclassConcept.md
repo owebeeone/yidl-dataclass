@@ -69,10 +69,51 @@ such as hashing, can share this boundary while preserving equality/hash consiste
 Use YIDL Undoable as the second consuming generator to demonstrate actual reuse,
 with canonical generated output and behavior checks. Plan an extension of its
 decorator with dataclass-style `eq` and `order` options, and applicable per-field
-`compare` selection. `eq` requests equality generation; `order` requests ordering;
-`compare` selects a field for both. As in dataclasses, requesting ordering without
-equality must be rejected. Preserve the existing bare `@undoable` spelling and
-specify backward-compatible defaults in the detailed design before changing it.
+comparison selection. Dataclass fields use the standard boolean `compare` flag.
+Undoable already has `managed(compare="value"|"identity")` for transaction write
+detection; it must retain that independent meaning. Do not overload or reinterpret
+the shared Lifecycle marker's setting.
+
+For Undoable, provide `compare_fields` on the decorator as a mapping from field
+names to boolean inclusion overrides. It selects fields for generated equality
+and ordering only. Eligible ordinary, const, static/lazy, managed and binding
+fields default to included. Initialization-only providers, class variables,
+transient fields and local storage are excluded; reject attempts to include them,
+unknown names and nonboolean overrides at decoration. The adapter supplies this
+logical selection separately from the managed assignment policy to the shared
+comparison generator. No change to Lifecycle's existing marker API is required.
+
+The Undoable generation defaults are `eq=False, order=False`; these differ from
+the standard dataclass equality default to preserve existing node-identity
+equality and hashing. Disabling structural generation preserves that behavior.
+Bare and empty-parentheses decoration have identical effective defaults.
+
+| Undoable decoration | Requested generation/result |
+| --- | --- |
+| `@undoable` | Existing identity equality/hash; no generated ordering |
+| `@undoable()` | Same as bare decoration |
+| `@undoable(eq=False, order=False)` | Same disabled-generation behavior |
+| `@undoable(eq=True)` | Field equality; no generated ordering |
+| `@undoable(eq=True, order=True)` | Field equality and ordering |
+| `@undoable(order=True)` | Reject: omitted `eq` defaults to false |
+| `@undoable(eq=False, order=True)` | Reject incompatible options |
+
+For example, the following proposed API independently expresses an identity
+assignment policy and exclusion from logical comparison:
+
+```python
+@undoable(eq=True, order=True, compare_fields={"cache": False})
+class Model:
+    value: int = managed(default=0)
+    cache: tuple[str, ...] = managed(default=(), compare="identity")
+```
+
+This is a design requirement, not currently implemented syntax. Both transaction
+policies must remain unchanged with structural comparisons enabled or disabled.
+Require tests of all combinations of value/identity assignment policy and
+included/excluded logical fields: distinct equal values record a replacement
+under identity policy, the same reference skips, and excluded fields affect
+neither generated equality nor ordering. Keep the two metadata controls separate.
 
 The Undoable adapter must explicitly define which values its default, current
 and working facades compare, cross-view/type compatibility and hash behavior for

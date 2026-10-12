@@ -1,6 +1,6 @@
 # YIDL Dataclass checkpoint
 
-Status: requirements-stage independent adversarial review pending. Implementation
+Status: round 1 NO-GO; consolidated correction prepared for independent round 2. Implementation
 has not started. This checkpoint governs this member's experiment preparation.
 
 ## Object and authority
@@ -38,5 +38,21 @@ draft are outside scope. The original Undoable experiment's measurements stay
 unchanged. The owner files prompts/reports and merges verdicts after both reviews.
 Any structural defect requires a redesign before implementation proceeds.
 
-Next action: dispatch both independent reviews of the same immutable object,
-file their full reports and record the merged verdict and required decisions.
+## Round 1 result and correction
+
+Both axes returned NO-GO on the original object. They independently identified
+the collision between logical field inclusion and Undoable's existing transaction
+`compare` setting. Consistency also found missing comparison option defaults.
+See both verbatim reports and `DataclassSpec-RemPlan.md` for dispositions and
+closure requirements. No finding is self-closed by the owner.
+
+The corrected object consists of README, the concept, the protocol, and the new
+`GoldenExamplesAmendment.md` in the same commit as this checkpoint. It separates
+transaction policy from decorator-level logical inclusion and records option
+defaults. Fresh Consistency/Surface and Safety reviewers replace the original two
+because the comparison interface changed. Round 2 prompts will name the exact
+commit and inherit every prior finding on their axis.
+
+Next action: review the corrected committed requirements, verify original
+counterexamples, file reports and merge verdicts. Detailed design and TDD planning
+remain subsequent gates; this work does not start implementation.
