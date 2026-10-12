@@ -67,6 +67,18 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+Latest observations around 2026-10-12T12:27Z across twelve disjoint actors
+estimate $53.6625282 Standard API-equivalent USD, about 8h51m after original GO.
+Input is 273,743,835 tokens, including 268,366,080 repeated cached input; output
+is 1,416,892 tokens, including 779,736 reasoning tokens. Actual billing is
+unavailable. Stage D is active: lazy/retention and inheritance focused checks
+have passed, while copying/replacement and 3.14 annotation boundaries are being
+implemented. Full D acceptance and E–H remain; this is not final product cost.
+The provisional property-constructor spelling for lazy accessors is recorded as
+an existing-resource source choice for final Code/provenance assessment, without
+runtime helper dispatch. Cold benchmark sampling preparation is separate from
+final measured performance (`BenchmarkSamplingNotes.md`).
+
 At 2026-10-12T11:42Z Stage C is owner-verified: all six complete source runs
 have 156 passed/one version-specific skip; all six isolated installed extension
 probes and both installed regeneration checks pass. Owner independently checks
