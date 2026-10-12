@@ -24,7 +24,27 @@ Store fields and generate behavior on one class. No separate facades, transactio
 manager or externally stored state are needed. Follow Lifecycle's specialization
 approach: generate direct field accesses and factory arguments where practical,
 using private backing slots for policies that need generated properties.
-Slots configuration and default settings must be reconciled with compatibility goals.
+
+Slots are the default. An ordinary read-write field must be a public slot, with
+normal Python attribute access and no generated property, name-based helper,
+per-field dictionary lookup or generic runtime dispatch in its access path.
+This changes the standard decorator's default; the detailed design must decide
+whether an explicit nonslotted option remains supported for compatibility.
+
+For constant, frozen, lazy or other fields needing access behavior, generate
+field-specific properties and, where applicable, property setters over private
+backing slots. Read-only properties must reject public replacement and deletion;
+the exact exception contract needs to be specified. Constructor/internal lazy
+writes use the permitted backing storage directly.
+
+Resolve field names, provider wiring, policy selection and other information known
+at generation time during generation. Generate direct field and factory accesses,
+with straight-line code wherever semantics permit. Retain necessary runtime work,
+such as actual conversion/validation callbacks, lazy initialization checks and
+failure guards. Shared generation helpers are acceptable; generic runtime
+accessor dispatch is not the default design. A field with assignment conversion
+or validation may require a property and must be benchmarked separately from an
+ordinary read-write slot.
 
 ## Factories and initialization providers
 
@@ -79,20 +99,46 @@ or hashing materializes when those operations access it. Private initialization
 providers must remain available to the delayed factory. Recursion, dependency
 cycles, callback behavior and hash stability require detailed rules and tests.
 
+## Field families and scope
+
+Provide ordinary fields, constants, lazy fields, initialization-only providers,
+class variables and local storage for per-instance caches or management data.
+Aim to recognize the standard `ClassVar` and `InitVar` annotations alongside any
+convenience declarations. Local storage should default to exclusion from logical
+equality, ordering and hashing; inspection, representation, copying and
+serialization rules still need to be specified.
+
+Conversion, validation and named factory dependencies are options on applicable
+field kinds rather than additional kinds. Transactional fields and transaction
+managers are outside this single-state dataclass's scope.
+
+Pydantic is a useful reference for validation, conversion, diagnostics and schema
+features, but its complete model framework is not a requirement. Additional
+features such as whole-object validation, aliases, JSON serialization and JSON
+Schema generation remain candidates, not agreed scope. Its data-aware factories
+already support dependencies through a mapping of earlier validated fields;
+the proposed named-parameter dependency resolution must be assessed on its own
+contract rather than described as an absent Pydantic capability.
+
 ## Experiment approach
 
-The proposed follow-on experiment would use reviewed design, a separate TDD plan,
-autonomous implementation and recorded time, token observations, estimated cost
-and quality evidence, as in the Undoable experiment. Differential tests against
-the standard library should establish retained behavior on supported Python
-versions; extension tests should establish intentional differences. Benchmarks
-should measure construction, field access and comparisons without assuming speed.
-Creating this member does not start that implementation experiment.
+This is a second experiment in producing a working library from the agreed brief
+with as little operator intervention as possible. Use reviewed design, a separate
+TDD plan, autonomous implementation and recorded time, token observations,
+estimated cost and quality evidence, as in the Undoable experiment. Measure both
+correctness and performance against standard Python dataclasses, including a
+slotted baseline. Detailed measurement and evidence requirements are in
+[Experiment protocol](ExperimentProtocol.md).
+
+This document records the requested brief. Documentation preparation, the design
+start and the autonomous implementation start must have separate timestamps; do
+not retroactively count member creation as the implementation start.
 
 ## Reference evidence
 
 - [Python dataclasses documentation](https://docs.python.org/3.14/library/dataclasses.html)
 - [CPython dataclasses implementation](https://github.com/python/cpython/blob/3.14/Lib/dataclasses.py)
+- [Pydantic field and factory documentation](https://docs.pydantic.dev/latest/concepts/fields/)
 
 Python versions, helper interoperability, the precise public marker API, frozen
 inheritance, private-provider copying, and lazy-field inclusion policies remain

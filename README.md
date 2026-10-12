@@ -11,3 +11,8 @@ facades and separate state objects are unnecessary for this model.
 [Discussion requirements and open decisions](dev-docs/DataclassConcept.md)
 record the starting point. The detailed design, compatibility matrix, TDD plan
 and implementation remain to be developed.
+
+Ordinary writable fields use direct slots by default. Fields requiring constant,
+frozen, lazy or conversion/validation behavior use specialized generated code.
+[Experiment protocol](dev-docs/ExperimentProtocol.md) records the autonomous-run,
+TDD, correctness, performance, time and cost measurement requirements.
