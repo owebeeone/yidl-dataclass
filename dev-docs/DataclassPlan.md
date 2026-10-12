@@ -1,8 +1,10 @@
 # YIDL Dataclass TDD implementation plan
 
-Status: proposed plan awaiting its own review. The design was accepted by both
-replacement reviewers at `de7cadd25c1d3fd5deac0d978043284fa130da1c`, with no
-findings. This plan implements that design; it does not claim code, executed
+Status: plan accepted at `f2514e1c993cb049417b7a10cdf2932bd68bd80f` after
+its Consistency review reported GO. Compiler prerequisites in
+`PrecompiledResourcesImplementation.md` must pass before Stage A. The design was
+accepted by both replacement reviewers at `de7cadd25c1d3fd5deac0d978043284fa130da1c`, with no
+findings. This plan specifies implementation of that design; it does not claim code, executed
 regressions or benchmark results. The owner records acceptance, exact tuples,
 reports, checkpoints and experiment timing separately.
 

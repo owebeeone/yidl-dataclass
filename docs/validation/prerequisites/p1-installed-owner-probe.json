@@ -1,0 +1,106 @@
+{
+  "bytes": 1823697,
+  "import_origin_verified": true,
+  "observed_utc": "2026-10-12T06:05:42.975096+00:00",
+  "results": [
+    {
+      "backend": "python",
+      "fresh_engines": true,
+      "fresh_trees": true,
+      "independent_values": [
+        [
+          1,
+          {
+            "x": 2
+          }
+        ],
+        3,
+        4
+      ],
+      "invalid_structural_inputs_rejected": [
+        "expression_in_statement_list",
+        "statement_in_expression",
+        "wrong_context",
+        "invalid_identifier"
+      ],
+      "normal_static_import_compilations": [
+        "validation.py",
+        "field_catalog.py",
+        "__init__.py",
+        "api.py",
+        "unroll.py",
+        "unroll_domain.py",
+        "pyimport.py"
+      ],
+      "protected_source_compile_calls": 0,
+      "python": "3.12.12"
+    },
+    {
+      "backend": "python",
+      "fresh_engines": true,
+      "fresh_trees": true,
+      "independent_values": [
+        [
+          1,
+          {
+            "x": 2
+          }
+        ],
+        3,
+        4
+      ],
+      "invalid_structural_inputs_rejected": [
+        "expression_in_statement_list",
+        "statement_in_expression",
+        "wrong_context",
+        "invalid_identifier"
+      ],
+      "normal_static_import_compilations": [
+        "validation.py",
+        "field_catalog.py",
+        "__init__.py",
+        "api.py",
+        "unroll.py",
+        "unroll_domain.py",
+        "pyimport.py"
+      ],
+      "protected_source_compile_calls": 0,
+      "python": "3.13.12"
+    },
+    {
+      "backend": "python",
+      "fresh_engines": true,
+      "fresh_trees": true,
+      "independent_values": [
+        [
+          1,
+          {
+            "x": 2
+          }
+        ],
+        3,
+        4
+      ],
+      "invalid_structural_inputs_rejected": [
+        "expression_in_statement_list",
+        "statement_in_expression",
+        "wrong_context",
+        "invalid_identifier"
+      ],
+      "normal_static_import_compilations": [
+        "validation.py",
+        "field_catalog.py",
+        "__init__.py",
+        "api.py",
+        "unroll.py",
+        "unroll_domain.py",
+        "pyimport.py"
+      ],
+      "protected_source_compile_calls": 0,
+      "python": "3.14.3"
+    }
+  ],
+  "scope": "stopped P1 working tree; explicit Python artifact profile only; native capability absent",
+  "sha256": "d54c731829ed1de8bcbb7ef5e1bef92e0145bc074fc4721c64398efca690b885",
+  "wheel": "astichi-1.1.4.dev0-cp312-abi3-macosx_11_0_arm64.whl"
+}

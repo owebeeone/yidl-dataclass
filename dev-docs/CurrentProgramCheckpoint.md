@@ -1,7 +1,7 @@
 # YIDL Dataclass checkpoint
 
-Status: P1 compiler prerequisite implementation is starting after amendment dual
-GO at `356321965b9a527aeee66585235f6883c0312dd4`. Product Stage A remains
+Status: P1 Python compiler prerequisite is verified and committed at Astichi
+`4a62b093498dae7b6d346306eae23e5925aaa004`; P2 native restoration is next. Product Stage A remains
 paused until P1–P4 pass. Detailed-design dual GO and TDD-plan GO remain historical
 gates, not proof of the missing facility.
 GO/start was 2026-10-12T03:36:48Z; implementation preparation starts
@@ -146,3 +146,10 @@ GO with no findings**. See its review result and implementation addendum.
 Next action: P1 Python artifact support with genuine RED/GREEN; product Stage A
 remains paused until P1–P4 prerequisites pass. Native/installed behavior has not
 yet been implemented or verified.
+
+P1 checkpoint: Python artifact APIs and structural frontend verified at Astichi
+`4a62b093498dae7b6d346306eae23e5925aaa004`. See
+`PrecompiledResources-P1Result.md` for exact scope, four source-matrix results,
+installed owner probes and evidence. Source/native legacy behavior is distinct
+from new native artifact capability, which remains absent. Next action: sole
+drafter P2 native IR restoration, strict parser counters and no fallback.

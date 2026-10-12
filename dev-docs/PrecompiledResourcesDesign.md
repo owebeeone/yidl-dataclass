@@ -1,9 +1,10 @@
 # Precompiled YIDL resources: compiler-artifact amendment
 
-Status: proposed owning-layer amendment for two fresh independent Consistency
-and Safety reviews. Documentation only; no compiler, backend, product or test
-implementation is claimed. Dataclass Stage A is suspended until this boundary
-is accepted. Accepted Dataclass design/plan revisions are
+Status: owning-layer amendment accepted at
+`356321965b9a527aeee66585235f6883c0312dd4` after fresh independent Consistency
+and Safety GO reports. This is the reviewed design contract, not executed
+compiler, backend, product or performance evidence. Dataclass Stage A is suspended
+until the P1–P4 implementation prerequisites pass. Accepted Dataclass design/plan revisions are
 `de7cadd25c1d3fd5deac0d978043284fa130da1c` and
 `f2514e1c993cb049417b7a10cdf2932bd68bd80f` respectively.
 

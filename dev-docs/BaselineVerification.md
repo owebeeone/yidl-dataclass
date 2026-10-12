@@ -35,3 +35,13 @@ do not establish the new artifact facility, Dataclass or integration behavior.
 | `astichi-1.1.3-cp312-abi3-macosx_11_0_arm64.whl` | `8f0e6b6c53e6a9d429d131647f072fc4433b461d9a8ed75bfd83e0b1b160e597` | 1803265 |
 | `yidl_cache-0.1.0-py3-none-any.whl` | `cd59c988bb4f62cf4ef324330e60b71db3301ff33f919b91f6b42760f19c7e95` | 15380 |
 | `yidl_lifecycle-0.1.0-py3-none-any.whl` | `6f9f21c60f1fc360ee41e68f4de0289836f1f00a5e1f2c116be6cb4f3473cb4f` | 100592 |
+
+## Existing source support outside artifact v1
+
+The available CPython 3.15.0a5 environment passed an isolated installed unchanged
+Astichi 1.1.3 plain-slot source compile/materialize/execution smoke on Python and
+native-rust, with import origin verified. See
+`docs/validation/baseline/legacy-python315-smoke.json`. This is a limited historical
+source baseline, not a full-suite or newest-release claim. Artifact v1 and
+Dataclass explicitly support only 3.12–3.14; the owning source matrix also needs
+preservation, without relabeling 3.15 as artifact support.

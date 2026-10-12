@@ -1,6 +1,7 @@
 # YIDL Dataclass preparation and review ledger
 
-Status: autonomous run authorized; detailed design underway. The original
+Status: autonomous run authorized; designs and TDD plan accepted; compiler
+prerequisite P1 verified; P2 next before product Stage A. The original
 Undoable experiment and this experiment's earlier requirements preparation remain
 separate measurement stages.
 
@@ -35,6 +36,13 @@ separate measurement stages.
 | Stage A inspection | Before product writes or behavioral RED, actual resource/backend inspection reveals missing whole-template artifact restore and native parser-free payload paths. Product work pauses for an explicit Astichi/YIDL compiler-boundary amendment and dual review. This is a design-assumption escape discovered during implementation preparation; the prior GO reports did not establish executed generation evidence. |
 | Compiler amendment draft | `PrecompiledResourcesDesign.md` specifies Astichi artifact/structural APIs, necessary native IR/payload work, recursive YIDL opt-in emission, candidate minimums and cross-minor/backend tests. Fresh dual review precedes compiler code. No product/test edits or behavioral RED occurred during this inspection/redesign. |
 | `356321965b9a527aeee66585235f6883c0312dd4` | Both compiler amendment reviewers GO with no findings. P1–P4 owning-layer implementation sequence begins; Dataclass Stage A remains paused behind those checks. |
+| `9ebd33a9c831e261919076a5ffef590948ffd546` | Owner acceptance/review reports, explicit P1–P4 execution addendum and baseline installed-native evidence committed before compiler writes. |
+| Compiler-amendment acceptance usage | Latest observations across eight disjoint actors estimate approximately $13.16 Standard API-equivalent USD. Covers autonomous design, reviews and prerequisite preparation to the observed samples, including late owner processing; not a product-completion or actual-billing result. Cached input is repeated context. |
+| 2026-10-12T05:36Z / P1 working | Two-hour checkpoint: latest eight-actor observations estimate approximately $15.94 Standard API-equivalent USD. Python artifact focused and initial canonical gates pass on the working tree; broader prerequisite verification remains ahead. Independent owner inspection discovers context-neutral/identifier validation concerns; the drafter preserves their owning RED/GREEN records. No product Stage A claim. |
+
+| 2026-10-12T06:03Z / P1 stopped | Sole drafter stops after Python artifact/structural implementation, canonical replay, full supported-minor/source-only 3.15 matrix and strict documentation checks. |
+| Astichi `4a62b093498dae7b6d346306eae23e5925aaa004` | Owner verifies source/evidence/raw hashes, installed three-minor source-compile tripwire/ownership probes and downstream YIDL regression, then commits scoped P1. Native support and product work remain outstanding. |
+| P1 verification usage checkpoint | Latest eight-actor observations estimate approximately $18.73 Standard API-equivalent USD, about 2h31m after GO at the latest owner sample. Includes design, reviews and prerequisite work; actual billing unavailable. Approximately 90.1M cumulative input tokens include 88.1M repeated cached input; 506,474 output tokens include reasoning. These are request counters, not unique source volume or completed-product cost. |
 
 ## Autonomous scope and intervention rules
 

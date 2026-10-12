@@ -1,0 +1,1 @@
+{"backend": "python", "fresh_engines": true, "fresh_trees": true, "independent_values": [[1, {"x": 2}], 3, 4], "invalid_structural_inputs_rejected": ["expression_in_statement_list", "statement_in_expression", "wrong_context", "invalid_identifier"], "normal_static_import_compilations": ["validation.py"], "protected_source_compile_calls": 0, "python": "3.12.12"}

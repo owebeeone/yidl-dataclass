@@ -1,9 +1,10 @@
 # YIDL Dataclass detailed design
 
-Status: design proposed for independent review. This document resolves the
-accepted requirements into an implementation contract; it is neither an
-implementation claim nor the TDD plan. Implementation and the separate TDD plan
-begin only after the owner records a reviewed design. The autonomous GO was given
+Status: design accepted at `de7cadd25c1d3fd5deac0d978043284fa130da1c` after
+both replacement reviewers reported GO. The compiler assumptions in Section 9
+are amended by `PrecompiledResourcesDesign.md`, accepted separately at
+`356321965b9a527aeee66585235f6883c0312dd4`. This document is an implementation
+contract, not an implementation or performance claim; the TDD plan is separate. The autonomous GO was given
 at `2026-10-12T03:36:48Z`; stage timestamps and measurements belong in the owner's
 experiment ledger.
 
@@ -19,7 +20,8 @@ rebuilt-container projection and the subsequent manual paired traversal. Review
 counterexamples exposed operand substitution, dictionary rehashing and tuple
 prefix-evaluation defects. Neither approach is retained or extended. This revised
 component changes the generated Undoable equality prelude and callback contract,
-so it requires two fresh independent design reviews before a TDD plan or code.
+and both fresh independent design reviews passed before TDD planning. Their
+reports and exact acceptance boundary are recorded in the design review result.
 
 ## 1. Product and compatibility boundary
 

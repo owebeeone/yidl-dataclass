@@ -1,7 +1,10 @@
 # YIDL Dataclass experiment protocol
 
-Status: experiment requirements captured on 2026-10-12 (Australia/Sydney).
-Detailed design, execution plan and implementation have not started.
+Status: autonomous experiment in progress following the operator GO at
+2026-10-12T03:36:48Z. Detailed design and TDD plan are accepted; owning compiler
+prerequisites precede Dataclass Stage A. `CurrentProgramCheckpoint.md` records the
+live boundary and `ExperimentLedger.md` records measurements. This protocol
+defines obligations, not completed implementation or performance claims.
 
 ## Questions and outcome
 
