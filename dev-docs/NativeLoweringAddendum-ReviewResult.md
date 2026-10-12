@@ -57,3 +57,20 @@ Actual billing is unavailable. Approximately 133.7M cumulative request input tok
 include 130.8M repeated cached input; 707,906 output tokens include reasoning.
 These are observed cumulative counters, not unique source volume or a completed
 product cost. Raw usage rows and actor alias handling remain in the experiment ledger.
+
+## Subsequent evidence-classification erratum
+
+After documentation acceptance, the sole drafter traced the seven tripwire cases
+more closely. Four `provenance_absorb_roundtrip` failures are deliberate oracle
+verification. The two `comment_marker` failures and one Python-to-Python
+`lifecycle_template_surfaces` failure parse generated commented output inside the
+renderer; those are genuine protected-generation defects. The same 78-failure
+attempt therefore contains **four oracle errors and 74 genuine native/parser/
+metadata defects**, superseding the earlier seven/71 partition. The total result,
+original outputs, reviewed document and verbatim reports remain unchanged.
+
+The accepted addendum already requires parser-free commented emission and bars
+reusing that parse-based renderer. This correction does not revise its architecture,
+public API, artifact bytes or guards. Owning append-only evidence records the
+correction before structural renderer implementation. Architecture GO is retained;
+these failures remain open implementation obligations.

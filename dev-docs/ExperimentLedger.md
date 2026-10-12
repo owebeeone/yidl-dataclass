@@ -50,6 +50,8 @@ separate measurement stages.
 
 | 2026-10-12T07:37Z / native lowering design accepted | Fresh Consistency and Safety reviewers both GO with no findings on `1f1bc534b460753e8cd91230e5349ea802c90b5c`. Both classify the prior sufficiency assumption as architectural; the addendum requires retained-shell/native hygiene lowering and pre-expansion without changing APIs/artifact v1. Prototype code remains unaccepted. P2 TDD resumes. Latest ten-actor observations estimate approximately $27.06 Standard API-equivalent USD, about four hours after GO; actual billing unavailable. |
 
+| Post-acceptance P2 classification erratum | The seven tripwires partition as four provenance oracle executions and three genuine commented-renderer parses. Latest 78 failures therefore mean four oracle errors plus 74 genuine behavior/metadata/parser defects. Original output and reviewed seven/71 claim remain historical; appended correction supersedes that classification. Parser-free commented emission was already required by the accepted architecture; its guard stays intact. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated
