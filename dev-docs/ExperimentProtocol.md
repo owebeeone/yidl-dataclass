@@ -56,8 +56,10 @@ intentional differences, particularly slots by default and replacing post-init
 initialization with dependency resolution. Do not treat those as standard parity.
 
 Publish generated examples that make the storage and access paths inspectable.
-Include a canonical example of the comparison module composed by another minimal
-class generator, demonstrating reuse without dataclass-specific storage coupling.
+Use Undoable as the second consumer of the comparison module, with canonical
+examples proving reuse and tests of explicit comparison flags and selected views.
+Verify its existing behavior with comparisons disabled and document the integration
+revision separately from the frozen original Undoable experiment results.
 Exercise independent installation and an example built using only the public
 documentation. Report remaining limitations instead of inferring correctness from
 a test count alone.

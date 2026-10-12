@@ -66,10 +66,19 @@ compatibility and field selection rules belong in the explicit generation
 contract. The detailed design should identify which related generation pieces,
 such as hashing, can share this boundary while preserving equality/hash consistency.
 
-Demonstrate composition with an independently defined minimal class generator,
-using canonical generated output and behavior checks. Actual integration into
-Lifecycle and Undoable is a future consumer task; this experiment must make the
-comparison facility reusable without requiring changes to those libraries now.
+Use YIDL Undoable as the second consuming generator to demonstrate actual reuse,
+with canonical generated output and behavior checks. Plan an extension of its
+decorator with dataclass-style `eq` and `order` options, and applicable per-field
+`compare` selection. `eq` requests equality generation; `order` requests ordering;
+`compare` selects a field for both. As in dataclasses, requesting ordering without
+equality must be rejected. Preserve the existing bare `@undoable` spelling and
+specify backward-compatible defaults in the detailed design before changing it.
+
+The Undoable adapter must explicitly define which values its default, current
+and working facades compare, cross-view/type compatibility and hash behavior for
+values that change as history moves. This amendment authorizes planning that
+integration, not an immediate runtime edit during requirements discussion.
+Lifecycle remains a prospective consumer of the same module.
 
 ## Factories and initialization providers
 
