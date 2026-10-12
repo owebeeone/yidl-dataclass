@@ -62,6 +62,8 @@ separate measurement stages.
 
 | 2026-10-12T08:56:06.871213+00:00 / consumer amendment accepted | Fresh independent Consistency and Safety reviewers both GO with zero findings on `382d389172f38e33de8a00af350b1b6b21d46f5b`. Original-SDK source generation, consumer captures and build-only shared-resource reuse are accepted as the product route. SDK prototypes remain stopped/excluded. Product Stage A resumes next; full semantics, installed gates, benchmarks and final reviews remain ahead. |
 
+| 2026-10-12T09:00Z / product Stage A resumed | Sole drafter begins consumer-only product work after amendment acceptance, using separate original-SDK environments and behavioral slot/constructor RED rather than import/setup failures. Latest twelve-actor observations estimate approximately $35.37 Standard API-equivalent USD, about 5h23m from original GO; actual billing unavailable. This includes the preserved scope detour, operator correction and independent amendment review, not a completed-product cost. SDK source/build changes remain forbidden. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated
