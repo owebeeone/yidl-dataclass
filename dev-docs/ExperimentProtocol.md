@@ -1,8 +1,11 @@
 # YIDL Dataclass experiment protocol
 
 Status: autonomous experiment in progress following the operator GO at
-2026-10-12T03:36:48Z. Detailed design and TDD plan are accepted; owning compiler
-prerequisites precede Dataclass Stage A. `CurrentProgramCheckpoint.md` records the
+2026-10-12T03:36:48Z. Semantic design and TDD plan were accepted; the operator
+removed all SDK prerequisites through `ScopeCorrection.md`. The active consumer
+generation amendment awaits independent review before Dataclass Stage A.
+Astichi/YIDL SDK edits, builds, version increments and resource additions are
+outside this experiment; use original Astichi 1.1.3 / YIDL 0.1.0 APIs. `CurrentProgramCheckpoint.md` records the
 live boundary and `ExperimentLedger.md` records measurements. This protocol
 defines obligations, not completed implementation or performance claims.
 
@@ -30,8 +33,12 @@ review rounds, remediation and any redesign explicitly.
    using matching to select field facilities. Require specialized generated access
    and factory wiring rather than Undoable's generic runtime dispatch pattern.
    Put equality and ordering generation in a separate reusable YIDL module with
-   explicit field-selection and access-expression inputs, suitable for future
-   Lifecycle and Undoable composition.
+   explicit field-selection and access-expression inputs, owned in Dataclass and
+   reused at Undoable regeneration from a pinned consumer build dependency.
+   Existing SDK source compilation/caching during generation is allowed. Native
+   YIDL composition means resources/matching/Astichi composition; it does not
+   mean wholly Rust-owned backend execution. No dynamic method-source emitter
+   or consumer AST repair substitutes for those resources.
 4. Implement through observable failing tests followed by passing behavior. Prefer
    canonical examples/goldens for successful generated code and end-to-end use;
    use narrow tests for failures and mechanics that those examples cannot express.

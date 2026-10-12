@@ -1,11 +1,13 @@
 # YIDL Dataclass detailed design
 
-Status: design accepted at `de7cadd25c1d3fd5deac0d978043284fa130da1c` after
-both replacement reviewers reported GO. The compiler assumptions in Section 9
-are amended by `PrecompiledResourcesDesign.md`, accepted separately at
-`356321965b9a527aeee66585235f6883c0312dd4`. This document is an implementation
-contract, not an implementation or performance claim; the TDD plan is separate. The autonomous GO was given
-at `2026-10-12T03:36:48Z`; stage timestamps and measurements belong in the owner's
+Status: the semantic design was accepted at
+`de7cadd25c1d3fd5deac0d978043284fa130da1c` after both replacement reviewers
+reported GO. The active generation boundary now follows the operator-directed
+`ScopeCorrection.md` and the pending `ConsumerOnlyGenerationAmendment.md` review.
+Astichi/YIDL changes and compiler P1–P4 are outside scope; the earlier compiler
+designs/reports remain historical evidence. This document is an implementation
+contract, not an implementation or performance claim; the TDD plan is separate.
+The autonomous GO was given at `2026-10-12T03:36:48Z`; stage timestamps and measurements belong in the owner's
 experiment ledger.
 
 The controlling brief is `DataclassConcept.md`, `ExperimentProtocol.md`,
@@ -435,15 +437,17 @@ would defeat the generated access contract.
 
 ## 7. Native reusable comparison generation
 
-Own neutral assets in the `yidl` distribution under
-`src/yidl/library/comparison/`: `comparison.yidl`, `resources.py` (resource loader
-only), `__init__.py`. This is an actual two-consumer library asset, not a compiler
-semantic change. Both wheels must include its source resource. Consumers load
-it through `importlib.resources`; never depend on a sibling checkout, scratch
-file, site-packages filesystem shape or installed absolute path.
+Own the authoritative neutral asset in Dataclass at
+`src/yidl_dataclass/yidl/shared/comparison.yidl`. Dataclass wheels/sdists include
+it, and its regenerator reads resources through `importlib.resources`. Undoable
+reuses this same asset at build/regeneration time from a pinned candidate
+Dataclass wheel, then ships its own self-contained generated base. It has no new
+runtime Dataclass dependency or manually maintained comparison source copy.
+Section 9 and `ConsumerOnlyGenerationAmendment.md` define the regeneration and
+digest boundary. No resources, loaders or semantics are added to either SDK.
 
 `comparison.yidl` exports `ComparisonCore`, defining ordered `ComparisonClass`
-and `ComparisonOperand` facts, precompiled guard/read resources, and equality,
+and `ComparisonOperand` facts, authored guard/read resources, and equality,
 four ordering and optional hash productions. Concrete generation inputs are:
 
 - Class identity/order and selected class-body target surface; requested method
@@ -463,7 +467,9 @@ four ordering and optional hash productions. Concrete generation inputs are:
 Read-path inputs are validated Name/Attribute paths, not arbitrary Python source;
 the shared attribute-read resource lowers them using Astichi's `astichi_ref`
 external path binding. Consumer extension resources may provide another structural
-read expression through inherited matchers, not parsed strings or runtime getters.
+read expression through inherited authored resources, not consumer-formatted
+method strings or runtime getters. Existing SDK source parsing is allowed during
+generation; the consumer does not repair or transform the resulting AST.
 The shared YIDL method productions consume those expression contributions into
 named guard and operand holes. Equality/order/hash method definitions live here,
 not in consumer Python helpers. Empty selections are handled by native YIDL
@@ -481,19 +487,27 @@ Lifecycle is a future consumer; this run does not enable comparisons there.
 
 The prelude is a native YIDL extension surface, not post-generation method
 wrapping: shared equality productions expose `eq_prelude`, with a default empty
-matcher contribution. `undoable_comparison.yidl` overrides that matcher with a
-precompiled `HistoricalWriteIdentityPrelude` resource. It binds the private scope
-ContextVar and `RuntimeFacade.__eq__` as external runtime objects with stable
-generated identifiers. Ordering and hash productions have no such prelude.
+matcher contribution. `undoable_comparison.yidl` overrides that matcher with an
+authored `HistoricalWriteIdentityPrelude` resource. The consumer installs the
+private scope ContextVar and `RuntimeFacade.__eq__` method object under stable
+private names in its exec namespace (or authored builder-function captures).
+Existing SDK bindings receive their identifier/path strings, never these runtime
+objects. Ordering and hash productions have no such prelude.
 
-At regeneration, compiler source maps use stable logical keys:
+At regeneration, source maps use stable logical keys:
 `shared/comparison.yidl`, `dataclass/<filename>.yidl`, and
 `undoable/<filename>.yidl`. Consumer imports refer to
-`../shared/comparison.yidl`. Load the shared bytes from the installed package and
-place them under that logical key. Local consumer files receive the same logical
-keys whether in a checkout, wheel or sdist. Record the shared source digest in
-generated-base provenance. No copied comparison source is maintained in a
-consumer repository.
+`../shared/comparison.yidl`. The Dataclass regenerator loads its own authoritative
+resource; the Undoable regenerator loads that resource from the pinned Dataclass
+wheel into the same logical source map. Record its SHA256, candidate version and
+all local resource digests beside each generated base. The existing YIDL emitter
+embeds the selected resource/matcher source into that base, so decoration needs
+only the consumer and its existing SDK dependencies. No runtime cross-package
+resource lookup occurs in Undoable. Regeneration requires the declared build
+dependency and verifies its resource digest; changing the authority requires
+regeneration of both bases. Ordinary Undoable wheel/sdist builds can use the
+checked-in base; an sdist regeneration check installs the pinned build dependency
+and reproduces it. See the amendment for the SDK-unchanged sharing gate.
 
 ## 8. Undoable integration in this experiment
 
@@ -718,6 +732,7 @@ src/yidl_dataclass/
     dataclass_comparison.yidl
     dataclass_copy.yidl
     dataclass_base.yidl
+    shared/comparison.yidl
 tests/
   data/gold_src/, data/goldens/materialized/, actual_test_results/
   data/perf/
@@ -726,33 +741,56 @@ examples/, docs/validation/, dev-docs/
 
 These are responsibility boundaries, not a requirement to create empty files.
 The initial distribution depends on YIDL and Astichi, not Lifecycle or Undoable.
-Use hatch packaging, the existing versioned YIDL golden harness, and a local uv
-development source configuration with repository-relative paths. Package all
-`.yidl` resources and generated bases in wheels/sdists.
+Use hatch packaging and the existing versioned YIDL golden harness. Candidate
+Dataclass build/runtime environments lock original `astichi==1.1.3` and
+`yidl==0.1.0`; no SDK candidate versions or editable overrides to the preserved
+SDK prototype are permitted. Any local consumer development references use
+repository-relative paths. Package all `.yidl` resources and generated bases in
+wheels/sdists. Original-SDK three-minor validation remains required.
 
 Stage A, build/regeneration: compile modular YIDL sources and inherited concepts
 with `compile_yidl_files`; emit the generated DDS/assembly runtime using
 `emit_concept_runtime_source`; check in its generated base and provide a
 `yidl-dataclass-regenerate-base` check/default and `--write` command. This stage
-parses authored template resources once and verifies regeneration determinism.
+parses authored YIDL sources and verifies regeneration determinism. The emitted
+base contains source-based SDK resource wrappers; their existing
+`MatcherGeneratedValue.to_generator()` compiles lazily and caches that template
+within the wrapper. This is ordinary supported source generation, not an artifact
+restore protocol or a zero-parser guarantee.
 
 Stage B, decoration: harvest into immutable typed support dataclasses; normalize
 metadata and resolve signatures, dependencies, layout, liveness, method actions
 and version policy. Lower validated facts into generated records and collections,
 then invoke `build_DataclassModule(...).to_executable_ast()`. Execute the compiled
-AST's builder with captured default/factory/callback objects and user namespace
-bindings. Do not parse fresh Python snippets, format source into methods, invoke
-std method generators, or perform feature-specific AST repair afterward.
+AST in a fresh consumer exec namespace containing default/factory/callback
+objects under deterministic private names and the required user namespace values.
+Generated methods reference those names; SDK external/ref bindings receive only
+their validated name/path strings or supported literals, never arbitrary Python
+objects. For example, capture the factory as `_y_dc_factory_0` in that namespace
+and bind the authored factory reference to the string `_y_dc_factory_0`. An
+authored builder function may instead receive ordinary Python arguments and
+retain captures in closures. No object serialization, executable repr or callback
+execution is involved. The Undoable ContextVar/identity method follows the same
+consumer capture route. Use existing external/identifier/ref bindings, holes and matcher-selected
+contributions. `self.astichi_ref(external=field_name)` specializes to direct
+attribute reads; the existing transparent `._` assignment form specializes stores.
+Generation may parse/cache authored resources and use SDK literal/import/edge
+value facilities. Do not handwrite a dynamic method-source emitter, interpolate
+per-field method snippets, invoke std method generators, or repair the AST.
+Native YIDL composition names this resource/matcher composition; it does not
+promise wholly Rust-owned execution or require selecting a Rust backend.
 
 Stage C, instance use: specialized generated code uses public/private accesses,
 bound callback calls and necessary lazy/pipeline guards. No field metadata
 dictionary is consulted on ordinary reads/writes, callback wiring or comparisons.
-Compilation caching is not required for the initial release; measure cold and
-repeated decoration separately before introducing it.
+Keep the SDK's existing resource compilation cache. Generate fresh class builds
+and external bindings; do not cache model values or final classes. Additional
+consumer caching is not required; measure cold and repeated decoration separately.
 
 The pure specialization contract is: normalized immutable shape facts and
-precompiled resources determine output structure; arbitrary runtime values are
-bound externally, never converted to executable repr text. Callbacks are never
+authored resources determine output structure; arbitrary runtime values remain
+in the consumer namespace or authored builder-function captures described above,
+never SDK-bound objects or executable repr text. Callbacks are never
 executed by harvesting/generation. Given identical shape/version/resource bytes,
 generation produces equivalent AST/source with deterministic names and ordering,
 independent of object ids, filesystem locations or callback repr. Generate a
@@ -769,8 +807,7 @@ beside both readable generated source and observable behavior.
 
 ## 10. Required verification and experiment evidence
 
-The next, separately reviewed TDD plan must turn these obligations into observable
-red/green steps. This design specifies gates, not an implementation sequence:
+The TDD plan turns these obligations into observable red/green steps. This design specifies gates, not an implementation sequence:
 
 1. Regeneration/layering: deterministic bases, packaged shared resource discovery,
    inherited matching, independent neutral fixture and both consuming classes.
@@ -799,8 +836,9 @@ red/green steps. This design specifies gates, not an implementation sequence:
    lazy retry/retention cleanup, failed setter atomicity, provider absence,
    forbidden mutation, active copy/pickle, unsupported combinations and exception
    causes. Test disabled YIDL branches by source/AST checks, not only executed
-   runtime selections. Apply workspace braced-control-flow/conditional-boundary
-   checks to any new or modified C-style/Rust support sources, if any.
+   runtime selections. Workspace braced-control-flow/conditional-boundary checks
+   still apply to any authorized C-style consumer work; SDK/Rust support
+   edits are outside this experiment.
 5. Real Undoable goldens and full regression: defaults table; each view/type/pin
    boundary; unhashability when enabled; all combinations of logical inclusion,
    value/identity assignment policy and enabled/disabled structural generation.
@@ -819,7 +857,8 @@ red/green steps. This design specifies gates, not an implementation sequence:
 6. Install freshly built wheels in isolated environments on each supported
    interpreter. Verify all package resources; run a public-docs-only example and
    the comparison integration without workspace imports. Test wheel/sdist
-   regeneration provenance. Record exact Dataclass/shared YIDL/Undoable revisions
+   regeneration provenance and build-only comparison reuse without a runtime
+   Dataclass dependency in Undoable. Record exact Dataclass/Undoable revisions
    and dependency versions separately from historical reference tuples.
 7. Independent design and implementation review, full relevant regressions,
    documentation/API matrix and final reproducible performance evidence.

@@ -58,6 +58,8 @@ separate measurement stages.
 
 | 2026-10-12T08:37:48.284477+00:00 / operator scope correction | Operator states no Astichi/YIDL SDK changes were in scope. Owner acknowledges introducing an unnecessarily strict parser-free/native-restoration prerequisite. SDK implementation stops; P1/P2 remain a preserved detour, not active product prerequisites. Original installed SDK probe passes core slots/equality/frozen-hash/direct-field-reference/cache checks for both backend selections. Product design/plan correction follows; original elapsed time and cumulative usage remain intact. |
 
+| 2026-10-12T08:42:15.586264+00:00 / corrected-scope assessment | Independent owner and sole-drafter original-SDK probes identify no concrete blocker to consumer-only generation. Latest ten-actor samples estimate $32.98 Standard API-equivalent USD at about 5h01m from original GO; actual billing unavailable. This run has required a post-GO operator scope correction and must not be described as an uninterrupted successful one-shot. Consumer design/plan amendment is assigned; no product code exists yet. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated

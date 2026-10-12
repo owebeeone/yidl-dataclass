@@ -1,8 +1,10 @@
 # YIDL Dataclass TDD implementation plan
 
 Status: plan accepted at `f2514e1c993cb049417b7a10cdf2932bd68bd80f` after
-its Consistency review reported GO. Compiler prerequisites in
-`PrecompiledResourcesImplementation.md` must pass before Stage A. The design was
+its Consistency review reported GO. The active consumer-only boundary follows
+`ScopeCorrection.md` and `ConsumerOnlyGenerationAmendment.md`; this amendment
+and the corresponding plan edits await independent review. Compiler P1–P4 and
+SDK changes are removed from the sequence. The semantic design was
 accepted by both replacement reviewers at `de7cadd25c1d3fd5deac0d978043284fa130da1c`, with no
 findings. This plan specifies implementation of that design; it does not claim code, executed
 regressions or benchmark results. The owner records acceptance, exact tuples,
@@ -11,7 +13,7 @@ reports, checkpoints and experiment timing separately.
 The review tier for this interior plan is one Consistency-axis review. Any
 P0/P1/P2 finding or request for Safety coverage automatically escalates it to
 Safety review; the owner records the tier and resulting verdicts. Implementation
-starts only after this plan's gate passes. Final implementation retains the
+starts only after the consumer amendment's independent gate passes. Final implementation retains the
 independent Code and State axes of the review-loop implementation gate;
 `ExperimentProtocol.md` requires final review but does not rename those axes.
 Architectural/design conflicts stop implementation for redesign and review;
@@ -20,7 +22,7 @@ change the accepted API. UndoableLeaf remains paused.
 
 ## 1. Ownership, execution and evidence
 
-Implement Dataclass in this member, neutral reusable comparison assets in YIDL,
+Implement Dataclass and its authoritative neutral comparison asset in this member,
 and the actual second consumer plus write-context prelude in Undoable. Lifecycle
 is a layout/semantic reference and future comparison consumer; it is not changed
 by this plan. Do not edit workspace membership, GWZ-managed configuration,
@@ -28,11 +30,12 @@ neighboring unrelated work or the original Undoable experiment's results.
 Workspace operations use GWZ. The owner settles revisions and maintains the
 multi-repository tuple; workers do not silently include unrelated changes.
 
-Paths in this document are relative to the named owning member. Development
-dependency references in Dataclass configuration use relative sibling paths;
-installed packages never depend on those paths. Read each member's instructions
-before its first edit, including YIDL's canonical design/coding rules and
-Astichi's rules if a genuine shared composition defect requires work there.
+Paths in this document are relative to the named owning member. Consumer
+development references use repository-relative paths; installed packages never
+depend on those paths. Read each consumer member's instructions before its
+first edit. No SDK source, packaging, version or capability changes are authorized.
+If a genuine SDK limitation blocks the accepted product, report the concrete
+existing-API failure and stop that slice for operator scope resolution.
 
 For every behavior-sized increment within a stage:
 
@@ -78,9 +81,12 @@ uv run --python 3.12 --extra dev python -m pytest tests/test_differential.py -q
 Repeat explicitly for 3.13 and 3.14 at the matrix checkpoints. Pin/record the
 actual patch versions and dependency lock. Use separate interpreter environments
 for concurrent matrix runs; never race uv recreation of a shared `.venv`.
-Development runs must resolve the changed local YIDL/Astichi/Undoable sources,
-not accidentally test older published dependencies. Installed-wheel checks later
-use only the built artifact tuple and locked dependencies.
+Development and installed runs lock original `astichi==1.1.3` and
+`yidl==0.1.0` wheels, verify import origins and never resolve the preserved SDK
+prototype through an editable override. Consumer integration may use local
+Dataclass/Undoable development sources; installed checks use only the built
+consumer tuple and locked SDK dependencies. Record actual patch versions and
+wheel digests for all three supported minors.
 
 ## 2. Intended product and test layout
 
@@ -98,6 +104,7 @@ src/yidl_dataclass/
     dataclass_lazy.yidl, dataclass_initvar_classvar.yidl
     dataclass_local_store.yidl, dataclass_comparison.yidl
     dataclass_copy.yidl, dataclass_base.yidl
+    shared/comparison.yidl
 tests/
   test_markers.py, test_definition.py, test_factory_graph.py
   test_differential.py, test_failures.py, test_lazy_failures.py
@@ -118,15 +125,21 @@ validation/lowering; do not add enums or passive emitter tags as shortcuts.
 
 | Owning member | Files/resources |
 | --- | --- |
-| YIDL | `src/yidl/library/comparison/comparison.yidl`, `resources.py`, `__init__.py`; neutral composition canonical case; explicit package-resource inclusion |
+| Dataclass | `src/yidl_dataclass/yidl/shared/comparison.yidl`; neutral composition canonical case, installed resource inclusion and digest provenance |
 | Undoable | `src/yidl_undoable/undoable_markers.py`, `undoable_harvester.py`, `undoable.py`, `yidl/undoable_comparison.yidl`, `write_comparison_context.py`, existing class/view/transaction integration, regenerated base; canonical comparison/write-compatibility cases and focused context/failure tests |
 
 Regeneration source maps use the accepted logical keys
 `shared/comparison.yidl`, `dataclass/<filename>.yidl` and
 `undoable/<filename>.yidl`; consumer imports use `../shared/comparison.yidl`.
-Load the shared bytes with `importlib.resources` from YIDL's installed package.
-Generated provenance includes resource digests and stable logical names, never
-checkout locations. No duplicate comparison source is checked into a consumer.
+Dataclass loads its own packaged authority. Undoable regeneration uses
+`importlib.resources` from a pinned Dataclass build dependency, puts those bytes
+in the same source map and emits a self-contained base with the existing YIDL
+emitter. Its runtime requires no Dataclass import/resource lookup. Record the
+Dataclass candidate version and shared digest in the regeneration lock/provenance;
+reject mismatches before generation. Rebuild/check both bases whenever the
+authority changes. No manually maintained copy is checked into Undoable. Stage G
+checks wheel/sdist regeneration with that build-only dependency and runtime
+execution in an environment without Dataclass. SDK packages remain unchanged.
 
 ## 3. Canonical corpus and coverage ownership
 
@@ -160,8 +173,8 @@ Canonical cases own success-path assertions. `test_source_contract.py` reads the
 same emitted artifacts for structural inspection rather than recreating models.
 Differential tests run the same declarative compatible corpus against stdlib and
 the product, comparing observations; they do not duplicate designer-golden
-expectations. Focused tests own diagnostics, callback failure/recovery, parser
-boundaries, binding mechanics and cases needing controlled context/exception
+expectations. Focused tests own diagnostics, callback failure/recovery, binding
+isolation, cache ownership and source-generation mechanics and cases needing controlled context/exception
 instrumentation. The evidence manifest assigns every assertion to one primary
 scenario; additional projections must name their independent purpose.
 
@@ -182,7 +195,7 @@ this stage. Add subsequent RED slices for dictionary defaults, keyword-only
 signature order, Field/params inspection, ClassVar and match/weakref behavior.
 Reject unsupported interpreters and field doc on pre-3.14 with explicit tests.
 
-Carry the original initializer finding now: ordinary source-free init=False with
+Carry the original initializer finding now: ordinary required init=False with
 custom init; decorator init=False then assignment; generated init with no consumer;
 dictionary init=False simple default leaving `__dict__` empty and reflecting a
 later class-default update. Their std differential cases are the success oracle.
@@ -201,7 +214,7 @@ until it changes.
 RED the neutral ComparisonCore canonical class and Dataclass comparison corpus,
 then GREEN the packaged neutral YIDL asset and Dataclass inheritance/matcher
 adapter. Method bodies must live in shared native YIDL productions; comparison
-read paths use precompiled structural bindings. Dataclass's `eq_prelude` is empty
+read paths use existing `astichi_ref` external path bindings. Dataclass's `eq_prelude` is empty
 and emits no context branch/import. No generic Python tuple helper is acceptable.
 
 Add RED increments for repr recursion, equality/order empty and excluded fields,
@@ -212,9 +225,11 @@ compare=True/hash=False acceptance. Canonical/differential behavior chooses
 expected outcomes; no test derives expected comparisons by calling the generated
 helper itself.
 
-Checkpoint: full current Dataclass suite and YIDL neutral/layering/resource tests
-on three minors; YIDL full relevant regression once after its asset/build changes.
-Leave compiler semantics untouched unless an actual compiler defect is proven.
+Checkpoint: full current Dataclass suite, including its neutral/layering/resource
+cases, on three minors with original SDK dependencies. Inspect the common YIDL
+method origin and distinct binding/port names; the baseline example's duplicate
+ordering binding is not a consumer template. No SDK asset/build changes or SDK
+implementation regression checkpoint belongs to this plan.
 
 ### Stage C — factory DAG, policies and specialized access
 
@@ -240,8 +255,8 @@ bindings cannot leak across classes, and the same shape/version/resource tuple
 gives stable emitted structure without ids or filesystem names.
 
 Checkpoint: focused callbacks/diagnostics/source and changed canonicals, then full
-current Dataclass suite on three minors. Run shared compiler/Astichi regression
-only if their implementation changed, not for every new consumer fixture.
+current Dataclass suite on three minors. SDKs remain unchanged; a consumer
+fixture failure is investigated against existing APIs without broad SDK work.
 
 ### Stage D — lazy state, retention, copying and inheritance
 
@@ -300,7 +315,7 @@ paused initialization-helper work.
 
 RED native callback/write-compatibility cases against the structural integration
 from Stage E; show where distinct child nodes would otherwise compare equal.
-GREEN only the accepted small scope boundary and adapter-selected precompiled
+GREEN only the accepted small scope boundary and adapter-selected authored
 YIDL prelude. Native `bool(old == value)` receives original operands inside `_call`;
 the identity policy stays `old is value`. The prelude precedes all self/type guards
 and returns bound RuntimeFacade identity equality only for an active marker.
@@ -322,7 +337,7 @@ matrix. Its primary allocation is:
 | Nested/cross-manager scopes; captured outer/inner contexts; async task before/after closure | Focused lifecycle tests with deterministic events/barriers, no sleeps; restore outer marker, closed copied inner cannot revive outer, marker stores bool only |
 | Explicit empty/copied thread contexts and in-flight sampling | Focused context tests with synchronization; record interpreter thread-context defaults; no atomic-cutover or concurrent-manager claim |
 | Identity branch, unhashability, structural ordering and native cycle outcomes | Focused boundary tests: no extra scope/equality in identity branch; unchanged hash/order; native outcomes versus existing read/freeze/graph cycle diagnostics |
-| Native YIDL prelude and absence of Dataclass overhead | Shared/consumer source artifact checks, branch ordering, external scope/method bindings, regenerated output origin and parser-free runtime instrumentation |
+| Native YIDL prelude and absence of Dataclass overhead | Shared/consumer source artifact checks, branch ordering, external scope/method bindings, regenerated output origin, direct access shape and fresh-class binding isolation |
 
 Use native equality and the frozen baseline engine as oracles where applicable;
 never a manually rebuilt/paired comparator. Opaque callback bodies receive
@@ -333,7 +348,8 @@ no manager/node/operand/parent/token references and never enters history/schema.
 Do not keep long-lived contexts just to make a test pass.
 
 Checkpoint: focused native/context/ownership and new canonical cases on all
-minors, then full Undoable and Dataclass matrix plus affected shared YIDL tests.
+minors, then full Undoable and Dataclass matrix plus the affected neutral
+comparison composition cases in Dataclass.
 No hand-normalization pass, monkey-patching, cached-hash emulation or global
 boolean may substitute for the accepted ContextVar mechanism.
 
@@ -341,23 +357,30 @@ boolean may substitute for the accepted ContextVar mechanism.
 
 RED independently built-wheel resource discovery, regeneration and docs-only
 example failures, then GREEN manifests/loaders/docs without changing accepted
-runtime semantics. Verify Dataclass/YIDL/Undoable wheels and sdists contain all
-required `.yidl`, generated bases, loader code and py.typed. Build the whole
-artifact tuple and install from a local wheelhouse into clean environments for
+runtime semantics. Verify Dataclass/Undoable wheels and sdists contain their
+required `.yidl`, generated bases, regeneration code and py.typed. Keep SDK wheels
+unchanged. Build the consumer artifact tuple and install from a local wheelhouse
+with locked original SDK dependencies into clean environments for
 each minor with no editable installs or workspace `PYTHONPATH`. Check imported
 module origins are in those environments. Rebuild wheels from sdists and compare
 regenerated outputs/digests using stable logical source keys.
 
-Parser-free instrumentation runs the first and a second decoration after imports
-in a fresh process: prohibit `ast.parse`, fresh `astichi.compile` source parsing
-and Python compile of source strings in decorator/generated-helper paths, while
-allowing the final `compile(ast.Module, ...)` step. Warm caches must not conceal a
-first-decoration parse. Authored template parsing belongs to regeneration/build;
-source rendering/formatting occurs outside that protected runtime. Inspect all
-generated method/source paths, including unmatched/disabled policy resources.
-If the compiler cannot satisfy this contract, resolve the real generic boundary
-through a tested supported surface and review any design change; do not insert
-consumer source-string workarounds or Astichi-specific AST surgery.
+Inspect first and second decorations from the same shape with different callback/
+default objects, plus differing field names/shapes: existing resource cache reuse
+must not leak bindings, values or final classes. Source compilation during
+generation is allowed; record cold versus warm behavior without a zero-parser or
+wholly Rust-owned claim. Inspect all generated method/source paths, including
+unmatched/disabled policies: behavior comes from checked-in YIDL resources,
+existing bindings/holes and matching, never a handwritten dynamic method-source
+emitter or consumer AST repair. Test malicious callback repr/generation side-effect
+cases separately from legitimate SDK literal/import generation.
+
+Reproduce both bases from packaged sources using the pinned Dataclass regeneration
+dependency; verify shared digest and reject stale/missing authority. Inspect emitted
+Undoable imports, then execute its comparison corpus with Dataclass absent from
+the runtime environment. Confirm installed artifacts need no sibling checkout.
+Run original-SDK consumer smoke with both supported backend selections; preserve
+actual limitations without changing backend under a test or modifying the SDK.
 
 Pin a public-docs-only task before its author attempts it: create a small quote
 model with converted quantity, dependent total, hidden initialization locale for
@@ -514,5 +537,5 @@ YIDL composition, all supported-minor correctness/installation/source gates pass
 actual Undoable reuse and scoped identity obligations pass, public-only usage
 runs, final independent implementation reviews accept the settled tuple, and
 reproducible measurements/limitations plus time/token/cost evidence are delivered.
-This plan's acceptance alone starts implementation; it establishes none of those
-results. The owner updates the checkpoint and ledger at each real boundary.
+Acceptance of the amended plan permits product implementation; it establishes
+none of those results. The owner updates the checkpoint and ledger at each real boundary.

@@ -1,7 +1,9 @@
 # YIDL Dataclass
 
-Status: detailed design independently accepted; TDD planning is underway and
-implementation has not started.
+Status: semantic design and TDD plan independently accepted; product
+implementation has not started. The operator-directed consumer-only generation
+amendment is awaiting independent review. Astichi/YIDL SDK changes are outside
+scope; original Astichi 1.1.3 / YIDL 0.1.0 generation is the candidate baseline.
 
 A proposed YIDL-generated dataclass implementation with standard Python dataclass
 behavior and metadata where compatible, extended with dependent factories,
@@ -13,7 +15,10 @@ facades and separate state objects are unnecessary for this model.
 record the starting point. The [detailed design and compatibility
 matrix](dev-docs/DataclassDesign.md) are accepted at the
 [recorded review checkpoint](dev-docs/DataclassDesign-ReviewResult.md).
-The separately reviewed TDD plan and implementation remain subsequent work.
+The [TDD plan](dev-docs/DataclassPlan.md) retains the product stages A–H.
+The [consumer generation amendment](dev-docs/ConsumerOnlyGenerationAmendment.md)
+and [scope correction](dev-docs/ScopeCorrection.md) supersede the historical
+compiler prerequisites; their time and evidence remain in the experiment record.
 
 Ordinary writable fields use direct slots by default. Fields requiring constant,
 frozen, lazy or conversion/validation behavior use specialized generated code.
