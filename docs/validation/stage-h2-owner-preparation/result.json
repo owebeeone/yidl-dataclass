@@ -1,0 +1,28 @@
+{
+  "scope": "Independent owner H2 integrity/source/frozen-v1 verification and mechanics; no product or performance verdict",
+  "owned_files": 72,
+  "increment_records": 24,
+  "artifact_references": 37,
+  "junit_files": 13,
+  "source_files": 19,
+  "source_map_matches": true,
+  "v1_evidence_files_unchanged": 121,
+  "v1_manifest_unchanged": true,
+  "per_minor_setup_provenance_matches": true,
+  "owner_mechanics": {
+    "3.12": {
+      "passed": 55,
+      "seconds": 0.94
+    },
+    "3.13": {
+      "passed": 55,
+      "seconds": 1.02
+    },
+    "3.14": {
+      "passed": 55,
+      "seconds": 1.07
+    }
+  },
+  "execution_capture": "Owner mechanics stdout/stderr in session tool output, not claimed verbatim on-disk raw archive",
+  "definition_canonical_sha256": "c4226335a0ecef51dc52b23906be2594deb68f2d226878c5ad45d2c2e900fc39"
+}

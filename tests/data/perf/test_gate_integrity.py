@@ -337,4 +337,4 @@ def test_cold_worker_journal_retains_worker_ns_unit(monkeypatch):
         observe=lambda kind, row: seen.append((kind, row)),
     )
     assert seen[0][0] == "cold_worker" and seen[0][1]["units"] == "ns"
-    assert seen[1][0] == "calibration" and seen[1][1]["units"] == "ns/op"
+    assert seen[1][0] == "cold_pilot" and seen[1][1]["units"] == "ns/op"

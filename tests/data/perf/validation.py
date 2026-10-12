@@ -5,6 +5,12 @@ import hashlib, json, math
 
 
 def validate(document, definition):
+    if "minor_provenance" in definition and (
+        document.get("cold_sampling") != definition["cold_sampling"]
+        or type(document.get("cold_operations")) is not int
+        or document["cold_operations"] != definition["cold_operations"]
+    ):
+        raise ValueError("raw cold sampling policy differs from frozen definition")
     required = {tuple(row) for row in definition["timing_keys"]}
     actual = {}
     for row in document["rows"]:
@@ -14,6 +20,8 @@ def validate(document, definition):
         source_key = f"{row['fields']}:{row['variant']}:{row['case']}"
         if row["source_sha256"] != definition["timing_source_sha256"].get(source_key):
             raise ValueError("batch source digest differs from frozen definition")
+        if key[1] == "decorate_cold" and row["operations"] != 1:
+            raise ValueError("cold operation count must be one fresh worker")
         actual.setdefault(key, []).append(row)
     if set(actual) != required:
         raise ValueError("timing inventory differs from frozen definition")
@@ -44,11 +52,15 @@ def validate(document, definition):
             )
         ):
             raise ValueError("measurement normalization does not reconcile")
+    cold_required = {key for key in required if key[1] == "decorate_cold"}
+    ordinary_required = required - cold_required
     calibration = defaultdict(list)
     for row in document["calibration_rows"]:
         key = (row["fields"], row["case"], row["variant"])
-        if key not in required:
-            raise ValueError("unknown calibration case")
+        if key not in ordinary_required:
+            raise ValueError(
+                "unknown or cold calibration case; cold uses separate pilot"
+            )
         if type(row["operations"]) is not int or row["operations"] < 1:
             raise ValueError("calibration operation count must be positive integer")
         if not math.isclose(
@@ -68,7 +80,7 @@ def validate(document, definition):
         ):
             raise ValueError("calibration units must be nonnegative ns and ns/op")
         calibration[key].append(row)
-    if set(calibration) != required:
+    if set(calibration) != ordinary_required:
         raise ValueError("calibration inventory differs from frozen definition")
     for key, rows in calibration.items():
         if rows[-1]["elapsed_ns"] < definition["minimum_calibration_ns"]:
@@ -81,6 +93,26 @@ def validate(document, definition):
                 raise ValueError(
                     "measurement count not compatible with recorded calibration"
                 )
+    pilots = document.get("cold_pilot_rows", [])
+    pilot_keys = {(row["fields"], row["case"], row["variant"]) for row in pilots}
+    if pilot_keys != cold_required or len(pilots) != len(cold_required):
+        raise ValueError("cold pilot inventory differs from frozen definition")
+    for row in pilots:
+        source_key = f"{row['fields']}:{row['variant']}:{row['case']}"
+        if (
+            type(row.get("operations")) is not int
+            or row["operations"] != 1
+            or row.get("phase") != "pilot"
+            or row.get("units") != "ns/op"
+            or row.get("elapsed_units") != "ns"
+            or type(row.get("elapsed_ns")) is not int
+            or row["elapsed_ns"] < 0
+            or not math.isfinite(row.get("ns_per_op", float("nan")))
+            or row["ns_per_op"] != row["elapsed_ns"]
+            or row.get("source_sha256")
+            != definition["timing_source_sha256"].get(source_key)
+        ):
+            raise ValueError("cold pilot count/source/units mismatch")
     memory_keys = {tuple(row) for row in definition["memory_keys"]}
     if {
         (row["fields"], row["case"], row["variant"]) for row in document["memory"]
@@ -105,13 +137,14 @@ def validate(document, definition):
                 raise ValueError("memory quantities must be finite and nonnegative")
     if "minor_provenance" in definition:
         validate_provenance(document, definition)
-        for row in [*document["rows"], *document["calibration_rows"]]:
+        for row in [*document["rows"], *pilots]:
             if row["case"] == "decorate_cold":
                 validate_cold(row, definition, document["provenance"])
     return {
         "timing_cases": len(required),
         "memory_cases": len(memory_keys),
         "calibration_observations": len(document["calibration_rows"]),
+        "cold_pilot_observations": len(pilots),
         "definition_sha256": hashlib.sha256(
             json.dumps(definition, sort_keys=True, separators=(",", ":")).encode()
         ).hexdigest(),
@@ -201,6 +234,9 @@ def validate_definition(definition):
         raise ValueError("frozen definition must contain complete32 memory inventory")
     constants = {
         "minimum_calibration_ns": 20_000_000,
+        "cold_sampling": "single_fresh_worker",
+        "cold_operations": 1,
+        "cold_pilot_operations": 1,
         "warmups": 10,
         "measured_batches": 20,
         "minimum_processes_per_minor": 5,

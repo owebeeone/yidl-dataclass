@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.116" timestamp="2026-10-13T03:04:55.902640+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_cold_amendment" name="test_full_result_cannot_claim_historical_sum_policy" time="0.078"><failure message="Failed: DID NOT RAISE ValueError">def test_full_result_cannot_claim_historical_sum_policy():
+        document, definition = full_inputs()
+        document.update(cold_sampling='historical_sum', cold_operations=1)
+&gt;       with pytest.raises(ValueError, match='cold sampling policy'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_cold_amendment.py:200: Failed</failure></testcase></testsuite></testsuites>

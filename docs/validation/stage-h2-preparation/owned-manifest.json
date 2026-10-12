@@ -1,0 +1,435 @@
+{
+  "changed_or_new_paths": [
+    "tests/data/perf/README.md",
+    "tests/data/perf/cold_worker.py",
+    "tests/data/perf/definition.py",
+    "tests/data/perf/harness.py",
+    "tests/data/perf/report.py",
+    "tests/data/perf/test_cold_amendment.py",
+    "tests/data/perf/test_gate_integrity.py",
+    "tests/data/perf/test_report.py",
+    "tests/data/perf/validation.py",
+    "docs/validation/stage-h2-preparation/Handoff.md",
+    "docs/validation/stage-h2-preparation/check_preparation.py",
+    "docs/validation/stage-h2-preparation/definition-final-312.json",
+    "docs/validation/stage-h2-preparation/definition-final-313.json",
+    "docs/validation/stage-h2-preparation/definition-final-314.json",
+    "docs/validation/stage-h2-preparation/definition.json",
+    "docs/validation/stage-h2-preparation/h2-01-cold-green.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-01-cold-green.log",
+    "docs/validation/stage-h2-preparation/h2-01-cold-red.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-01-cold-red.log",
+    "docs/validation/stage-h2-preparation/h2-01-count-refined-green.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-01-count-refined-green.log",
+    "docs/validation/stage-h2-preparation/h2-01-count-refined-red.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-01-count-refined-red.log",
+    "docs/validation/stage-h2-preparation/h2-02-mechanics-attempt-verification.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-02-mechanics-attempt-verification.log",
+    "docs/validation/stage-h2-preparation/h2-02-mechanics-verification.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-02-mechanics-verification.log",
+    "docs/validation/stage-h2-preparation/h2-03-mechanics-refactor.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-03-mechanics-refactor.log",
+    "docs/validation/stage-h2-preparation/h2-04-final-mechanics-refactor.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-04-final-mechanics-refactor.log",
+    "docs/validation/stage-h2-preparation/h2-04-policy-green.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-04-policy-green.log",
+    "docs/validation/stage-h2-preparation/h2-04-policy-red.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-04-policy-red.log",
+    "docs/validation/stage-h2-preparation/h2-final-cold-setup-312-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-cold-setup-313-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-cold-setup-314-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-definition-312-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-definition-313-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-definition-314-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-definition-merge-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-312-verification.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-312-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-313-verification.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-313-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-314-verification.junit.xml",
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-314-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-qa-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-setup-312-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-setup-313-verification.log",
+    "docs/validation/stage-h2-preparation/h2-final-setup-314-verification.log",
+    "docs/validation/stage-h2-preparation/increments.jsonl",
+    "docs/validation/stage-h2-preparation/qa.json",
+    "docs/validation/stage-h2-preparation/record_increment.py",
+    "docs/validation/stage-h2-preparation/run_preparation.py",
+    "docs/validation/stage-h2-preparation/sanitization-corrections.json",
+    "docs/validation/stage-h2-preparation/setup-final-312.json",
+    "docs/validation/stage-h2-preparation/setup-final-313.json",
+    "docs/validation/stage-h2-preparation/setup-final-314.json",
+    "dev-docs/DataclassPlan.md"
+  ],
+  "definition_canonical_sha256": "c4226335a0ecef51dc52b23906be2594deb68f2d226878c5ad45d2c2e900fc39",
+  "files": [
+    {
+      "bytes": 8168,
+      "path": "tests/data/perf/README.md",
+      "sha256": "4dc191a8476987f1137e6e166fd5d18bf5944010564b8f248047d96bc845a678"
+    },
+    {
+      "bytes": 10692,
+      "path": "tests/data/perf/cases.py",
+      "sha256": "5668c7be5b9d8d08153bcb9c71301906e059bf59bad108e123c0c1f9ee45b29a"
+    },
+    {
+      "bytes": 4207,
+      "path": "tests/data/perf/cold_worker.py",
+      "sha256": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295"
+    },
+    {
+      "bytes": 7946,
+      "path": "tests/data/perf/definition.py",
+      "sha256": "e36f69bf5f9126a0c30dae3c42e2d5be3cc8037b95ca6651f1910a5825abaf79"
+    },
+    {
+      "bytes": 2479,
+      "path": "tests/data/perf/freeze_definition.py",
+      "sha256": "0bf4d5e8ac9002d0f34dcabb891ad0fb6e494ea05d8f1e7e3582b19dc6229883"
+    },
+    {
+      "bytes": 16767,
+      "path": "tests/data/perf/harness.py",
+      "sha256": "b50c23e15a0d3378748691c0aed832a10f26e81939f121e3810e141d0026ddb6"
+    },
+    {
+      "bytes": 5249,
+      "path": "tests/data/perf/measure.py",
+      "sha256": "b16069fa502891b977999c6a5404f059b29eb31cd81899fe6472ba5b0f51e122"
+    },
+    {
+      "bytes": 4642,
+      "path": "tests/data/perf/measurement.py",
+      "sha256": "e528fb36676347864487ee3e383f35b3f18454e232b42450c51b078de5751444"
+    },
+    {
+      "bytes": 2029,
+      "path": "tests/data/perf/memory.py",
+      "sha256": "56cb066b4e63edf487f812035648294bf91fb83bd5a802f2b086e7ae2d6b9dc7"
+    },
+    {
+      "bytes": 4022,
+      "path": "tests/data/perf/provenance.py",
+      "sha256": "590123c21af4f4aeb1765ea6babbddce8b664f09d20a796bbaf3e14e855e0cd3"
+    },
+    {
+      "bytes": 10399,
+      "path": "tests/data/perf/report.py",
+      "sha256": "b4439bd30560e79cb57b921afad8f3f7a92f24e036fbcfd0476fbfd7049efbab"
+    },
+    {
+      "bytes": 7431,
+      "path": "tests/data/perf/setup_check.py",
+      "sha256": "eb1d5b738186c528d71d5f44eae05dcbeaf29dc10605191cfa142aecafbce30b"
+    },
+    {
+      "bytes": 7480,
+      "path": "tests/data/perf/test_cold_amendment.py",
+      "sha256": "f88bd3665cd7d72ebd106e56efb8784e08cde1106fd1f2ea290073caf33b3796"
+    },
+    {
+      "bytes": 11272,
+      "path": "tests/data/perf/test_gate_integrity.py",
+      "sha256": "5f54354b6efd485715ada39b415465762a76e42f99f97644cfe0a0b59f583bdc"
+    },
+    {
+      "bytes": 3388,
+      "path": "tests/data/perf/test_harness_setup.py",
+      "sha256": "d502592feec8fdae3d7d86034905e09c1fc1d0dead1bafb348014915006f1f23"
+    },
+    {
+      "bytes": 3906,
+      "path": "tests/data/perf/test_measurement.py",
+      "sha256": "d9b5734010c33e89f1060f9904214ed06000f12dc625893e74d426874380a47a"
+    },
+    {
+      "bytes": 6810,
+      "path": "tests/data/perf/test_report.py",
+      "sha256": "c5eb7d2c167dfdc14acc2d3cbd43f6715af717125ab65dda592c376fa0d8edcc"
+    },
+    {
+      "bytes": 4442,
+      "path": "tests/data/perf/test_validation.py",
+      "sha256": "756486e4538b56f3b580a9b508f312b5df602b84f6c7261c5bad480ed7e6cdee"
+    },
+    {
+      "bytes": 8416,
+      "path": "tests/data/perf/undoable_cases.py",
+      "sha256": "3e3d1f6ad08037971515be4e6b8e505f91a3b6766c64e0292b4c4f81a4ee1b75"
+    },
+    {
+      "bytes": 13499,
+      "path": "tests/data/perf/validation.py",
+      "sha256": "ff0f07c5a87a98d35b09058dda6060d9a6a0bd1ea8e15b6164c8cd137b6f4819"
+    },
+    {
+      "bytes": 4705,
+      "path": "docs/validation/stage-h2-preparation/Handoff.md",
+      "sha256": "851e6294d9624ad19fdc476e1b8c78f695ef99ae9a20e54e88ba720cf5f34f34"
+    },
+    {
+      "bytes": 5771,
+      "path": "docs/validation/stage-h2-preparation/check_preparation.py",
+      "sha256": "0f81995941cbc5b74cae13964becc61b0f40f987d7c7a03adfda19c5dad8c8d3"
+    },
+    {
+      "bytes": 114148,
+      "path": "docs/validation/stage-h2-preparation/definition-final-312.json",
+      "sha256": "4a7c83771890519c8620545fab32dc6d5a4f7264bde9dab70f74b2b566da43c5"
+    },
+    {
+      "bytes": 114148,
+      "path": "docs/validation/stage-h2-preparation/definition-final-313.json",
+      "sha256": "05e00ef2b2ce47d77e20f573bf6df064be72fd7f4567af11065b3fcd80276838"
+    },
+    {
+      "bytes": 114147,
+      "path": "docs/validation/stage-h2-preparation/definition-final-314.json",
+      "sha256": "8ba93019e4e1c1dbabffd22b6e89a0f2e69421664ba5152beb2778a0d7b66014"
+    },
+    {
+      "bytes": 120163,
+      "path": "docs/validation/stage-h2-preparation/definition.json",
+      "sha256": "279995dee0f0a5088030714a4e9935bf51d139d1f92fad20a2b8af566fa3c29b"
+    },
+    {
+      "bytes": 644,
+      "path": "docs/validation/stage-h2-preparation/h2-01-cold-green.junit.xml",
+      "sha256": "5f4628efbfef65a8cadc96993912eb510ec852d8ffd4cec191a506af81d48078"
+    },
+    {
+      "bytes": 98,
+      "path": "docs/validation/stage-h2-preparation/h2-01-cold-green.log",
+      "sha256": "bf22e88f0e3a0e89eddb09d252b1661a48c9dfc4bd5aa177b5efca41f2700a18"
+    },
+    {
+      "bytes": 6917,
+      "path": "docs/validation/stage-h2-preparation/h2-01-cold-red.junit.xml",
+      "sha256": "911b633c55c795c361bfddf0454785c6de1caa56633493b7523df228f5d20726"
+    },
+    {
+      "bytes": 6662,
+      "path": "docs/validation/stage-h2-preparation/h2-01-cold-red.log",
+      "sha256": "f2e7983ea2bc9fa03e0f08e90610f43d53daf9bed5c97139dac63fb90ddc034f"
+    },
+    {
+      "bytes": 367,
+      "path": "docs/validation/stage-h2-preparation/h2-01-count-refined-green.junit.xml",
+      "sha256": "63d7dc75160b1c1cf1af6a30b376487bd586e1906147db7ddcb9cd71ee2b2917"
+    },
+    {
+      "bytes": 112,
+      "path": "docs/validation/stage-h2-preparation/h2-01-count-refined-green.log",
+      "sha256": "c3e318bf141db2ce370584ea1ca68cbfdc8b71c247bc79a51b8cdb03bf60db04"
+    },
+    {
+      "bytes": 967,
+      "path": "docs/validation/stage-h2-preparation/h2-01-count-refined-red.junit.xml",
+      "sha256": "6bfda2c5ce337e67c79dd090409d778c0183dd778a7219e8e207a2a1fd5aa5bd"
+    },
+    {
+      "bytes": 979,
+      "path": "docs/validation/stage-h2-preparation/h2-01-count-refined-red.log",
+      "sha256": "4ab1381443a509393fa628124dc207e349de87c49c9618d70ed207cc8cfc4af3"
+    },
+    {
+      "bytes": 11237,
+      "path": "docs/validation/stage-h2-preparation/h2-02-mechanics-attempt-verification.junit.xml",
+      "sha256": "dbccccf056df60d5730c7e57d7ccc2c580b5fd19aa9f14325d4d3ab3ae0eb43a"
+    },
+    {
+      "bytes": 4547,
+      "path": "docs/validation/stage-h2-preparation/h2-02-mechanics-attempt-verification.log",
+      "sha256": "efc7aefa20f52b0d70e12368678cadfc7c1aff8a74905e5e924243af1b65e359"
+    },
+    {
+      "bytes": 7352,
+      "path": "docs/validation/stage-h2-preparation/h2-02-mechanics-verification.junit.xml",
+      "sha256": "73a9b91ea80c6539ffe13a0ddb0ea0a480497950e6c571350bde68abb07869b9"
+    },
+    {
+      "bytes": 99,
+      "path": "docs/validation/stage-h2-preparation/h2-02-mechanics-verification.log",
+      "sha256": "c1887b2b6c450cc11c127b733af2adddf7e7f621ea252a1d2ea7c6ce9ed6afda"
+    },
+    {
+      "bytes": 7352,
+      "path": "docs/validation/stage-h2-preparation/h2-03-mechanics-refactor.junit.xml",
+      "sha256": "9555a38c46fab2ea00e541ab574a11c159dc71f32951377a999967626d9ba1fa"
+    },
+    {
+      "bytes": 99,
+      "path": "docs/validation/stage-h2-preparation/h2-03-mechanics-refactor.log",
+      "sha256": "b460876b22761a9eac6abe47a7aa8087709dbc8b32321923c9cfb0a790a05f13"
+    },
+    {
+      "bytes": 7484,
+      "path": "docs/validation/stage-h2-preparation/h2-04-final-mechanics-refactor.junit.xml",
+      "sha256": "c95da329aec70056764ea59397aff460ab60c0cd4418a9f1543820d6a5849881"
+    },
+    {
+      "bytes": 99,
+      "path": "docs/validation/stage-h2-preparation/h2-04-final-mechanics-refactor.log",
+      "sha256": "8aaf63726159ebf9e014cf5ce9464462c8eb0a981fee174b4c96b8738d2a9352"
+    },
+    {
+      "bytes": 374,
+      "path": "docs/validation/stage-h2-preparation/h2-04-policy-green.junit.xml",
+      "sha256": "d4ea135414186d4c677eae3160d0e8fd41b6e8d13ff30e857e2a9bf0ee23df95"
+    },
+    {
+      "bytes": 112,
+      "path": "docs/validation/stage-h2-preparation/h2-04-policy-green.log",
+      "sha256": "d8519d206a8c1c01a454f59cca83934eecfeb4e36c3bff2000633c00c618f25f"
+    },
+    {
+      "bytes": 858,
+      "path": "docs/validation/stage-h2-preparation/h2-04-policy-red.junit.xml",
+      "sha256": "9977581bf4e5e8f6e2a818fd455c6ae4794d7b45ecbc5ef1d5d98465923c40e2"
+    },
+    {
+      "bytes": 870,
+      "path": "docs/validation/stage-h2-preparation/h2-04-policy-red.log",
+      "sha256": "ddfe3e44729c29ad70657ab51b97f29e8fe103b9181d0fb55d14e30241a31de5"
+    },
+    {
+      "bytes": 837,
+      "path": "docs/validation/stage-h2-preparation/h2-final-cold-setup-312-verification.log",
+      "sha256": "f518d7f946b032e7828aa0f51d3d8511f7453662a96f71601acada5f0a5b1625"
+    },
+    {
+      "bytes": 837,
+      "path": "docs/validation/stage-h2-preparation/h2-final-cold-setup-313-verification.log",
+      "sha256": "2f4e86bc39da9ce2ae45e5b9bb2718febe2424ee9be00071087f12f970177a56"
+    },
+    {
+      "bytes": 831,
+      "path": "docs/validation/stage-h2-preparation/h2-final-cold-setup-314-verification.log",
+      "sha256": "0e80be7fc831e1cf2e22fc324611a110f2ee1600b4898de8b8009fac5861fd31"
+    },
+    {
+      "bytes": 207,
+      "path": "docs/validation/stage-h2-preparation/h2-final-definition-312-verification.log",
+      "sha256": "91517b438e70bcf8760cf04901c1dee9e4eb9dff29175dd0cbb2722b264e468f"
+    },
+    {
+      "bytes": 207,
+      "path": "docs/validation/stage-h2-preparation/h2-final-definition-313-verification.log",
+      "sha256": "a76cf72406465ee2446c5d92de44dcf9d47b666f256797ccaad1d5fa09fd553f"
+    },
+    {
+      "bytes": 207,
+      "path": "docs/validation/stage-h2-preparation/h2-final-definition-314-verification.log",
+      "sha256": "30594d4d7370b28335030fc2a2d9ab435cc2859edca0469dbf836c27c556964d"
+    },
+    {
+      "bytes": 215,
+      "path": "docs/validation/stage-h2-preparation/h2-final-definition-merge-verification.log",
+      "sha256": "ecec309abb68d2ff694a803580c6f3f32975901d8dc928dd0152823d1144565b"
+    },
+    {
+      "bytes": 6604,
+      "path": "docs/validation/stage-h2-preparation/h2-final-mechanics-312-verification.junit.xml",
+      "sha256": "c09f019c9982b917debc259370596c11bc60e2a9606f75ca7c513e8b83ce5b5d"
+    },
+    {
+      "bytes": 99,
+      "path": "docs/validation/stage-h2-preparation/h2-final-mechanics-312-verification.log",
+      "sha256": "4108eab3e0b1b028e94829b0b6a6c16c88a790876102d56b181b4efb10cf253d"
+    },
+    {
+      "bytes": 6604,
+      "path": "docs/validation/stage-h2-preparation/h2-final-mechanics-313-verification.junit.xml",
+      "sha256": "f9c32ecd60a35cfca769dd8a0929ba5806e0afeb7b29b205cf08698681822438"
+    },
+    {
+      "bytes": 99,
+      "path": "docs/validation/stage-h2-preparation/h2-final-mechanics-313-verification.log",
+      "sha256": "92ca75350222f395c3ac063932637f790a0acef32ab970133a00c8e231df5203"
+    },
+    {
+      "bytes": 6604,
+      "path": "docs/validation/stage-h2-preparation/h2-final-mechanics-314-verification.junit.xml",
+      "sha256": "b83a52b796cc410f06b757d923d0c663d73cfe085379be5bc6739003ae870486"
+    },
+    {
+      "bytes": 99,
+      "path": "docs/validation/stage-h2-preparation/h2-final-mechanics-314-verification.log",
+      "sha256": "2316b1e8c1a4e74e7df03968d07a1b140e707b3db3a8128b1fd31c91819cd3c7"
+    },
+    {
+      "bytes": 829,
+      "path": "docs/validation/stage-h2-preparation/h2-final-qa-verification.log",
+      "sha256": "6317b004eeb5bbe3b7a1eeaaa1b2eafc95ad3a3683676ec276c2e8ea26aee63d"
+    },
+    {
+      "bytes": 131,
+      "path": "docs/validation/stage-h2-preparation/h2-final-setup-312-verification.log",
+      "sha256": "789b76daca787754132b7e7a47555255cccbf82acd98b6e6fb16fce64e39f9d9"
+    },
+    {
+      "bytes": 131,
+      "path": "docs/validation/stage-h2-preparation/h2-final-setup-313-verification.log",
+      "sha256": "fca41946ec3bfe26f4ed52e235f787d35c08a351d3f9abc6e461bc787d8356a3"
+    },
+    {
+      "bytes": 130,
+      "path": "docs/validation/stage-h2-preparation/h2-final-setup-314-verification.log",
+      "sha256": "228462a43facf8999065d16d0c5d43de76503853557d0c49c6e5a16dfc7bbabb"
+    },
+    {
+      "bytes": 23613,
+      "path": "docs/validation/stage-h2-preparation/increments.jsonl",
+      "sha256": "abc219ca8a83576bcaf1a5a337f4dbd2f6ad25ea74074b51ac5df2df500a4e2b"
+    },
+    {
+      "bytes": 871,
+      "path": "docs/validation/stage-h2-preparation/qa.json",
+      "sha256": "e4e2d6f8d26c16a6d9d1b1f37609c5f2c949d7b8bbbcc1b4406e7f8f12a0308d"
+    },
+    {
+      "bytes": 3312,
+      "path": "docs/validation/stage-h2-preparation/record_increment.py",
+      "sha256": "04f4936c6cb4511732e7b2305409d364c0dbfb219baf00db0f5f827379254c9e"
+    },
+    {
+      "bytes": 3257,
+      "path": "docs/validation/stage-h2-preparation/run_preparation.py",
+      "sha256": "b2b7bd8aef68d6419ee41edd94ec42eeef70e4cbaf39c551849768bf20f84ad8"
+    },
+    {
+      "bytes": 3,
+      "path": "docs/validation/stage-h2-preparation/sanitization-corrections.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 8998,
+      "path": "docs/validation/stage-h2-preparation/setup-final-312.json",
+      "sha256": "a04f3ee9ba877688e50fe8d04e2585a93df20626b06d48e3d0f4771464ad8938"
+    },
+    {
+      "bytes": 8998,
+      "path": "docs/validation/stage-h2-preparation/setup-final-313.json",
+      "sha256": "0189e67adb691b38eb9e393b5754012ff7ece5286afdfbf5724ad320cda5c97d"
+    },
+    {
+      "bytes": 8996,
+      "path": "docs/validation/stage-h2-preparation/setup-final-314.json",
+      "sha256": "46b87707a26a8e620da1e79037949e9f655394d318945b31ecd3ff7ea6ebbc2c"
+    },
+    {
+      "bytes": 40210,
+      "path": "dev-docs/DataclassPlan.md",
+      "sha256": "b10d9f761b2fe2495944690180f44d7a35587c837f0056e9226d1844024f89df"
+    }
+  ],
+  "preserved_v1_manifest_sha256": "04cbfce3ae6aa7032669ddb35b40851f618618233b1e0385d10c50c114c7901e",
+  "raw_archive": "external:yidl-dataclass-stage-h2-preparation-raw",
+  "related_amendment": {
+    "path": "dev-docs/ColdSamplingAmendment.md",
+    "sha256": "666ddbcefe95bc140c2ff8c229ffb7a79e8ac333bacc512b1c56d85baef31b14"
+  },
+  "scope": "H2 cold-only owner sampling amendment; no product/dependency changes or measurements"
+}

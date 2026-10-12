@@ -1,0 +1,91 @@
+{
+  "stage": "H2 cold-only owner sampling amendment; no product/dependency changes or measurements",
+  "manifest_sha256": "b952c001c2dcdffcc0389dbd7f502fd38aa6d20c9e465239462b435ab9a74b17",
+  "owned_files": 72,
+  "increment_records": 24,
+  "artifact_references": 37,
+  "distinct_raw_hashes": 37,
+  "junit_files": 13,
+  "junit": {
+    "docs/validation/stage-h2-preparation/h2-01-cold-red.junit.xml": {
+      "tests": 3,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-01-count-refined-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-01-cold-green.junit.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-01-count-refined-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-02-mechanics-attempt-verification.junit.xml": {
+      "tests": 52,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-02-mechanics-verification.junit.xml": {
+      "tests": 54,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-03-mechanics-refactor.junit.xml": {
+      "tests": 54,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-04-policy-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-04-policy-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-04-final-mechanics-refactor.junit.xml": {
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-312-verification.junit.xml": {
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-313-verification.junit.xml": {
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h2-preparation/h2-final-mechanics-314-verification.junit.xml": {
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "installed_results": [],
+  "scope": "integrity/source-path audit; behavioral verdicts remain separately assessed"
+}

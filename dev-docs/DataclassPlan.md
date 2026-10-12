@@ -443,9 +443,18 @@ logical-operation baselines only when both models exclude them identically.
 
 Do not subtract an empty-loop cost into negative/unstable operation estimates;
 keep harness overhead consistent and report a separate harness-only observation.
-Use perf_counter_ns, calibrate batches to at least 20 ms, 10 warmup batches and
-20 measured batches per timed case in each of at least five independent process
-runs per minor. Alternate paired product/baseline order and predeclare the random
+Use perf_counter_ns, calibrate ordinary/extension/seam batches to at least 20 ms,
+with 10 warmup batches and 20 measured batches per timed case in each of at least
+five independent process runs per minor. Cold generation follows the owner
+[ColdSamplingAmendment](ColdSamplingAmendment.md): one separate fresh-worker pilot,
+10 fresh-worker warmup rows and 20 fresh-worker measured rows, one first-decoration
+operation per row, for each variant/field size and five parent process sets per
+minor. Cold alone is exempt from the 20 ms minimum; retain timer resolution,
+intervals, worker/source/provenance identity and uncertainty without a cold numeric
+parity target. This changes variance and replaces the self-imposed v1 cold
+accumulation method, not a user requirement. V1 source checkpoint `f49b9ec6` and
+its definition/partial journal remain separately auditable and excluded from the
+new full sample sets. Alternate paired product/baseline order and predeclare the random
 seed. Preserve every batch in ns/op and every memory observation in bytes/object,
 including outliers. Aggregate process medians first; report median, min/max,
 IQR/median, paired ratios and bootstrap 95% intervals using a fixed seed and

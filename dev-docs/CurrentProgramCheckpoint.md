@@ -67,6 +67,9 @@ The original H v1 process was controlled-interrupted at
 with individual fresh-worker intervals, retaining ordinary calibration and all
 other gates. V1 evidence/source are archived separately. The sole drafter is
 preparing H2 with genuine focused tests; product and dependency bytes unchanged.
+H2 is now stopped and owner-verified; see `Dataclass-StageH2PreparationResult.md`.
+Its new definition is ready for a committed freeze and restarted full process
+sets. V1 remains a separately archived interrupted attempt, excluded from H2.
 
 ## Requirements review history and authority
 

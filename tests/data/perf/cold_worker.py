@@ -96,6 +96,9 @@ def main():
                 "operations": 1,
                 "elapsed_ns": elapsed,
                 "units": "ns",
+                "clock_resolution_seconds": time.get_clock_info(
+                    "perf_counter"
+                ).resolution,
                 "python": sys.version.split()[0],
                 "imports_and_declaration_setup": "outside measured interval",
                 "cache_boundary": "new interpreter; filesystem/OS caches may be warm",

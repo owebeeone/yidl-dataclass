@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.055" timestamp="2026-10-13T03:00:46.817140+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_cold_amendment" name="test_cold_uses_one_pilot_worker_and_one_worker_per_batch" time="0.010"><failure message="assert 94 == 31&#10; +  where 94 = len([1, 1, 1, 1, 1, 1, ...])">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10968e5a0&gt;
+
+    def test_cold_uses_one_pilot_worker_and_one_worker_per_batch(monkeypatch):
+        harness = load('harness')
+        calls = []
+        observed = []
+        def worker(*a, **kw):
+            calls.append(1)
+            return SimpleNamespace(returncode=0, stdout=json.dumps({'operations': 1, 'elapsed_ns': 10_000_000, 'units': 'ns'}), stderr='')
+        monkeypatch.setattr(harness.subprocess, 'run', worker)
+        result = harness.cold_generation_batches('stdlib_slots', 3, observe=lambda kind, row: observed.append((kind, row)))
+&gt;       assert len(calls) == 31
+E       assert 94 == 31
+E        +  where 94 = len([1, 1, 1, 1, 1, 1, ...])
+
+tests/data/perf/test_cold_amendment.py:26: AssertionError</failure></testcase><testcase classname="tests.data.perf.test_cold_amendment" name="test_cold_pilot_is_exempt_but_ordinary_minimum_is_mandatory" time="0.001"><failure message="ValueError: calibration inventory differs from frozen definition">def test_cold_pilot_is_exempt_but_ordinary_minimum_is_mandatory():
+        validation = load('validation')
+        document, definition = cold_inputs()
+&gt;       assert validation.validate(document, definition)['timing_cases'] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/data/perf/test_cold_amendment.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+document = {'rows': [{'fields': 3, 'case': 'decorate_cold', 'variant': 'product', 'operations': 1, ...}, {'fields': 3, 'case': 'd... 10000, ...}], 'cold_pilot_rows': [{'fields': 3, 'case': 'decorate_cold', 'variant': 'product', 'operations': 1, ...}]}
+definition = {'timing_keys': [[3, 'decorate_cold', 'product']], 'memory_keys': [[3, 'ordinary', 'product']], 'minimum_calibration_ns': 20, 'timing_source_sha256': {'3:product:decorate_cold': 'expected'}, ...}
+
+    def validate(document, definition):
+        required = {tuple(row) for row in definition["timing_keys"]}
+        actual = {}
+        for row in document["rows"]:
+            key = (row["fields"], row["case"], row["variant"])
+            if type(row["operations"]) is not int or row["operations"] &lt; 1:
+                raise ValueError("measurement operation count must be positive integer")
+            source_key = f"{row['fields']}:{row['variant']}:{row['case']}"
+            if row["source_sha256"] != definition["timing_source_sha256"].get(source_key):
+                raise ValueError("batch source digest differs from frozen definition")
+            actual.setdefault(key, []).append(row)
+        if set(actual) != required:
+            raise ValueError("timing inventory differs from frozen definition")
+        for key, rows in actual.items():
+            warmups = definition.get("warmups", 10)
+            measured = definition.get("measured_batches", 20)
+            warm = [row.get("batch") for row in rows if row.get("phase") == "warmup"]
+            samples = [
+                row.get("batch") for row in rows if row.get("phase") == "measurement"
+            ]
+            if (
+                len(rows) != warmups + measured
+                or sorted(warm) != list(range(-warmups, 0))
+                or sorted(samples) != list(range(measured))
+            ):
+                raise ValueError("missing, duplicate or unrecognized measured batch")
+        for row in document["rows"]:
+            if row.get("units") != "ns/op" or row.get("elapsed_units") != "ns":
+                raise ValueError(
+                    "measurement normalization requires explicit ns/op and ns units"
+                )
+            if (
+                type(row.get("elapsed_ns")) is not int
+                or row["elapsed_ns"] &lt; 0
+                or not math.isfinite(row.get("ns_per_op", float("nan")))
+                or not math.isclose(
+                    row["ns_per_op"], row["elapsed_ns"] / row["operations"], rel_tol=1e-12
+                )
+            ):
+                raise ValueError("measurement normalization does not reconcile")
+        calibration = defaultdict(list)
+        for row in document["calibration_rows"]:
+            key = (row["fields"], row["case"], row["variant"])
+            if key not in required:
+                raise ValueError("unknown calibration case")
+            if type(row["operations"]) is not int or row["operations"] &lt; 1:
+                raise ValueError("calibration operation count must be positive integer")
+            if not math.isclose(
+                row["ns_per_op"], row["elapsed_ns"] / row["operations"], rel_tol=1e-12
+            ):
+                raise ValueError("calibration normalization does not reconcile")
+            source_key = f"{row['fields']}:{row['variant']}:{row['case']}"
+            if row.get("source_sha256") != definition["timing_source_sha256"].get(
+                source_key
+            ):
+                raise ValueError("calibration source drift")
+            if (
+                row.get("units") != "ns/op"
+                or row.get("elapsed_units") != "ns"
+                or type(row["elapsed_ns"]) is not int
+                or row["elapsed_ns"] &lt; 0
+            ):
+                raise ValueError("calibration units must be nonnegative ns and ns/op")
+            calibration[key].append(row)
+        if set(calibration) != required:
+&gt;           raise ValueError("calibration inventory differs from frozen definition")
+E           ValueError: calibration inventory differs from frozen definition
+
+tests/data/perf/validation.py:72: ValueError</failure></testcase><testcase classname="tests.data.perf.test_cold_amendment" name="test_cold_count_greater_than_one_is_rejected" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'cold.*count'&#10;  Actual message: 'calibration inventory differs from frozen definition'">def test_cold_count_greater_than_one_is_rejected():
+        validation = load('validation')
+        document, definition = cold_inputs()
+        document['rows'][0].update(operations=2, elapsed_ns=20)
+&gt;       with pytest.raises(ValueError, match='cold.*count'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'cold.*count'
+E         Actual message: 'calibration inventory differs from frozen definition'
+
+tests/data/perf/test_cold_amendment.py:59: AssertionError</failure></testcase></testsuite></testsuites>

@@ -66,7 +66,7 @@ def make_definition(product, baseline, *, artifact_tuple):
                 Path(__file__).with_name("cold_worker.py").read_text()
             )
             classifications[cold_key] = (
-                "first decoration in a fresh worker; sum of generator intervals; per-variant calibration; no numerical target"
+                "first decoration in one fresh worker per row; separate one-worker pilot; cold-only minimum-duration exemption; no numerical target"
             )
             memory.extend(
                 [count, name, variant]
@@ -118,6 +118,10 @@ def make_definition(product, baseline, *, artifact_tuple):
         "classifications": classifications,
         "seam_setup": setup,
         "minimum_calibration_ns": 20_000_000,
+        "cold_sampling": "single_fresh_worker",
+        "cold_operations": 1,
+        "cold_pilot_operations": 1,
+        "cold_sampling_amendment": "dev-docs/ColdSamplingAmendment.md",
         "warmups": 10,
         "measured_batches": 20,
         "minimum_processes_per_minor": 5,

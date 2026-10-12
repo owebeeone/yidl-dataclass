@@ -98,7 +98,7 @@ def cold_generation_batches(
             raise
 
     source_digest = hashlib.sha256(worker_path.read_bytes()).hexdigest()
-    context = {"phase": "calibration"}
+    context = {"phase": "pilot"}
 
     def emit(kind, row):
         tagged = dict(
@@ -120,13 +120,9 @@ def cold_generation_batches(
             worker, n, on_observation=lambda row: emit("cold_worker", row)
         )
 
-    calibration = []
-
-    def calibrated(row):
-        tagged = emit("calibration", row)
-        calibration.append(tagged)
-
-    operations = support.calibrate(measured, on_observation=calibrated)
+    # Cold-only owner amendment: one distinct pilot, not duration calibration.
+    pilot = emit("cold_pilot", measured(1))
+    operations = 1
     rows = []
     for batch in range(warmups + batches):
         context = {
@@ -137,9 +133,8 @@ def cold_generation_batches(
         rows.append(emit("timing", row))
     return {
         "rows": rows,
-        "calibration_operations": operations,
-        "calibration_rows": calibration,
-        "sampling_note": "Each operation is first decoration in a fresh worker. Batches aggregate measured generation intervals; imports, declaration preparation and transport are excluded. Counts calibrate per variant; no generation parity target.",
+        "pilot_rows": [pilot],
+        "sampling_note": "One fresh worker per pilot/warmup/measured row. First decoration after imports/declaration preparation; transport excluded. Cold-only minimum-duration exemption; no numerical parity target.",
     }
 
 
@@ -246,6 +241,7 @@ def run_process(
     sources = {}
     classifications = {}
     calibration_rows = ObservedList("calibration")
+    cold_pilot_rows = []
 
     def measure_family(cases, count):
         names = list(cases["product"])
@@ -430,16 +426,7 @@ def run_process(
                     observe=observe,
                 )
                 rows.extend(observations["rows"])
-                calibration_rows.extend(
-                    dict(
-                        row,
-                        fields=count,
-                        case="decorate_cold",
-                        variant=variant,
-                        phase="calibration",
-                    )
-                    for row in observations["calibration_rows"]
-                )
+                cold_pilot_rows.extend(observations["pilot_rows"])
                 sources[f"{count}:{variant}:decorate_cold"] = (
                     Path(__file__).with_name("cold_worker.py").read_text()
                 )
@@ -463,6 +450,9 @@ def run_process(
         "classifications": classifications,
         "cold_included": include_cold,
         "calibration_rows": calibration_rows,
+        "cold_pilot_rows": cold_pilot_rows,
+        "cold_sampling": "single_fresh_worker",
+        "cold_operations": 1,
     }
 
 

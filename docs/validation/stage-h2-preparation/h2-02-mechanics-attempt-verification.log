@@ -1,0 +1,100 @@
+................F.................F.................                     [100%]
+=================================== FAILURES ===================================
+_______________ test_cold_worker_journal_retains_worker_ns_unit ________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b160590>
+
+    def test_cold_worker_journal_retains_worker_ns_unit(monkeypatch):
+        import json
+        from types import SimpleNamespace
+    
+        harness = load("harness")
+        seen = []
+        monkeypatch.setattr(
+            harness.subprocess,
+            "run",
+            lambda *a, **kw: SimpleNamespace(
+                returncode=0,
+                stdout=json.dumps({"operations": 1, "elapsed_ns": 20, "units": "ns"}),
+                stderr="",
+            ),
+        )
+    
+        def calibrate(measured, **kw):
+            kw["on_observation"](measured(1))
+            return 1
+    
+        monkeypatch.setattr(harness.support, "calibrate", calibrate)
+        harness.cold_generation_batches(
+            "product",
+            3,
+            warmups=0,
+            batches=0,
+            observe=lambda kind, row: seen.append((kind, row)),
+        )
+        assert seen[0][0] == "cold_worker" and seen[0][1]["units"] == "ns"
+>       assert seen[1][0] == "calibration" and seen[1][1]["units"] == "ns/op"
+E       AssertionError: assert ('cold_pilot' == 'calibration'
+E         
+E         - calibration
+E         + cold_pilot)
+
+tests/data/perf/test_gate_integrity.py:340: AssertionError
+_______ Completeness.test_cold_generation_calibrates_counts_per_variant ________
+
+self = <test_report.Completeness testMethod=test_cold_generation_calibrates_counts_per_variant>
+
+    def test_cold_generation_calibrates_counts_per_variant(self):
+        documents = [document(i) for i in range(5)]
+        for item in documents:
+            for row in item["rows"]:
+                row["case"] = "decorate_cold"
+                if row["variant"] != "product":
+                    row["operations"] = 200
+                    row["elapsed_ns"] = row["ns_per_op"] * 200
+>       result = summary.summarize(documents)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/data/perf/test_report.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+documents = [{'environment': {'python': '3.12.12', 'process_pid': 0, 'harness_sha256': 'h', 'support_sha256': 's'}, 'warmups': 10,..._sha256': 'h', 'support_sha256': 's'}, 'warmups': 10, 'measured_batches': 20, 'minimum_calibration_ns': 20000000, ...}]
+
+    def summarize(documents):
+        processes = defaultdict(list)
+        seen = set()
+        hashes = set()
+        for document in documents:
+            environment = document["environment"]
+            minor = ".".join(environment["python"].split()[0].split(".")[:2])
+            identity = (minor, environment["process_pid"])
+            if identity in seen:
+                raise ValueError("duplicate process observation")
+            seen.add(identity)
+            hashes.add((environment["harness_sha256"], environment["support_sha256"]))
+            if (
+                document["warmups"] != 10
+                or document["measured_batches"] != 20
+                or document["minimum_calibration_ns"] < 20_000_000
+            ):
+                raise ValueError("measurement configuration does not match accepted plan")
+            groups = defaultdict(list)
+            operation_counts = defaultdict(set)
+            for row in document["rows"]:
+                count = row["operations"]
+                if type(count) is not int or count < 1:
+                    raise ValueError("invalid operation unit")
+                if not math.isclose(
+                    row["ns_per_op"], row["elapsed_ns"] / count, rel_tol=1e-12
+                ):
+                    raise ValueError("normalized unit does not reconcile")
+                groups[(row["fields"], row["case"], row["variant"])].append(row)
+                if row["case"] == "decorate_cold" and count != 1:
+>                   raise ValueError("cold operation count must be one fresh worker")
+E                   ValueError: cold operation count must be one fresh worker
+
+tests/data/perf/report.py:121: ValueError
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_gate_integrity.py::test_cold_worker_journal_retains_worker_ns_unit
+FAILED tests/data/perf/test_report.py::Completeness::test_cold_generation_calibrates_counts_per_variant
+2 failed, 50 passed in 0.21s

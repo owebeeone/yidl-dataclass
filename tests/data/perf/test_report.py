@@ -156,14 +156,13 @@ class Completeness(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "10,000"):
             summary.summarize(documents)
 
-    def test_cold_generation_calibrates_counts_per_variant(self):
+    def test_cold_generation_single_worker_rows_have_no_numeric_target(self):
         documents = [document(i) for i in range(5)]
         for item in documents:
             for row in item["rows"]:
                 row["case"] = "decorate_cold"
-                if row["variant"] != "product":
-                    row["operations"] = 200
-                    row["elapsed_ns"] = row["ns_per_op"] * 200
+                row["operations"] = 1
+                row["elapsed_ns"] = row["ns_per_op"]
         result = summary.summarize(documents)
         self.assertEqual(result["comparisons"][0]["target"], None)
 

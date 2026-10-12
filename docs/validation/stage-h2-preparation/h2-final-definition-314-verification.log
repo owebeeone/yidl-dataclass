@@ -1,0 +1,1 @@
+{"backend": "native-rust", "definition_sha256": "ef39fc8290b612d1298b2fee86f664da2171ef7cbfbc87d03e0ecc4eb231cf66", "memory_cases": 32, "scope": "untimed frozen definition preparation", "timing_cases": 132}

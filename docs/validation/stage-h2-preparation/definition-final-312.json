@@ -1,0 +1,1595 @@
+{
+  "artifact_tuple": {
+    "consumers": {
+      "dataclass": {
+        "artifact_directory": "dataclass-final",
+        "installed_corpus_runtime_payload_unchanged": true,
+        "package_files": 37,
+        "package_hashes": {
+          "yidl_dataclass/__init__.py": "92740fc93b341af5697ab62043bd7072649ce0277e0a2df97db79f9e2d7f2db9",
+          "yidl_dataclass/_generated_dataclass_base.py": "0821b4be1ee92041a6492ed71a414cdf3043ba31214c52c8d8a8369a6a640430",
+          "yidl_dataclass/copy_generation.py": "ae55af3a18f33b5873b1aeae3f8325f1cfb4eb4f2bb9008d220395ef92a236e0",
+          "yidl_dataclass/copy_support.py": "69531bac97847f65c3661c801e6ade7da9d8f711f7107a0a84b2c4f1991834a2",
+          "yidl_dataclass/dataclass.py": "03b3749c7c3109a6a52f9198d14a2bb07506426b654225b4b4e8af22b377d23e",
+          "yidl_dataclass/dataclass_definition.py": "7214b5f0c784fe966fe1f2287ddc7be9eef65f813daffaa72a9bb2eafa384eb7",
+          "yidl_dataclass/dataclass_harvester.py": "9a00aae1477339ed38fd49134cc2886033367cc0425c0b7f8f251ecd58b1b9ba",
+          "yidl_dataclass/dataclass_markers.py": "0722cb57d6b0f02557bf22de9bf30e3cead5d8ff101b4ad6f657d852e409daf8",
+          "yidl_dataclass/documentation/README.md": "bca02bb92faec55dc0eba82132ca1371504fd91b1e36e9bfdf698dc0fcf0774a",
+          "yidl_dataclass/documentation/docs/API.md": "dc56c40a909d3347c75101a6ee2fe77a279bbe36cc146d314f5c115116702512",
+          "yidl_dataclass/documentation/docs/Generation.md": "bee2d0798b3f66a6f358a62a46cfb2a645cb0c34b5f18e8dd96538a2f77fb624",
+          "yidl_dataclass/documentation/examples/first_use.py": "bf78302fb7ff863f6762a7e9c90fc12117edd9c736d6ee7957ac6c9db28363d0",
+          "yidl_dataclass/errors.py": "7e859565f949e93f5111c6716ac8df37dde7261b7a99bb46b4326a668c4120cc",
+          "yidl_dataclass/factory_generation.py": "6f931877f510a5a7a3dd675c8280f8a6c76e966444fd849f67adda313114397d",
+          "yidl_dataclass/field_kinds.py": "6bf0b6bf9ba874c3bf85a23fa52ae7447663176cee42f24a4fcfdb6b8792434b",
+          "yidl_dataclass/inheritance_plan.py": "93732678a7843427a11928b99a2050489028c0324f71b8306ce3c91bda65ceb4",
+          "yidl_dataclass/method_actions.py": "9b78de8c0064a68a0be4fe50bc807b21b8848dc6447a8c12fcd4513214b83ff2",
+          "yidl_dataclass/policy_generation.py": "5657fd220884b74a7aee3d2118438fbc8a0fca4a7ca8da00c48168c7fb34cd01",
+          "yidl_dataclass/policy_plan.py": "b04dbf08786faa10da0fdf3a838281bd1dc5eb7b0e4bb4a6989e4bf827f309f0",
+          "yidl_dataclass/provider_plan.py": "97b073dd71cf1bbdbbbeea7174ea30832bf6a7bff7fae1568b4be7023d9bb275",
+          "yidl_dataclass/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "yidl_dataclass/regenerate_dataclass_base.py": "fc8c40e2863cfef745622675ff2b31700871d1640ddb8a3a65d6b556253bc322",
+          "yidl_dataclass/retention_generation.py": "7472d11e8354b81c9769233d84a6f76a16cbbf800de88331c0f24f26f7f8bc52",
+          "yidl_dataclass/retention_plan.py": "d816749abe8a3c2b3c172beee5a6a4d90e99595c80e7e5c28042e9811e324f8b",
+          "yidl_dataclass/stdlib_adapter.py": "30ee653e17bdb12adac850945585ba511370559759194d7f19c1f1d524420e8a",
+          "yidl_dataclass/yidl/dataclass_base.yidl": "c4994402d1291ac22af8462b084e5b3f939e8e0b66c757afcfda246b65b95d17",
+          "yidl_dataclass/yidl/dataclass_comparison.yidl": "8fba88b95c563f4424142b4b6071725d766b64a72a872ea815eaaf2a88ccad73",
+          "yidl_dataclass/yidl/dataclass_copy.yidl": "ef960f01bd61506aeda1f53226c9f31c8f5386f64cab68de6197032bd3240c19",
+          "yidl_dataclass/yidl/dataclass_core.yidl": "1fe335035abae3b473c9af8bd1ea8b44df6df806d7226c2c04c82bd8dcd0f1d7",
+          "yidl_dataclass/yidl/dataclass_factories.yidl": "94179ac729eebe7bf97c9c238757466e01d779b73523246fa57081fa183710d2",
+          "yidl_dataclass/yidl/dataclass_lazy.yidl": "ccdc6d9b130b213dec0e84295c80022d816cf00e52aa07a91c2b6b273e268133",
+          "yidl_dataclass/yidl/dataclass_lazy_init.yidl": "de7c175bb69255e5781e882259a4e015e15c2dfb8333bfa5b32509d33b8297a1",
+          "yidl_dataclass/yidl/dataclass_pipelines.yidl": "9bac395230e7d18d87a097f3e171b00d6fb72040fe182ff6f31cc19da890e1d5",
+          "yidl_dataclass/yidl/dataclass_policies.yidl": "fc424d043316dfd6083a7a806b2de4e675337335df06df498ab5e5198a93b0db",
+          "yidl_dataclass/yidl/dataclass_providers.yidl": "4c704e5f06fea0acc54b906a1eea61d1f03401f1179aba1ce7662ff8b5dd69cc",
+          "yidl_dataclass/yidl/dataclass_retention.yidl": "c2660ca00feded0ae9a956cd39f0ec6307a52e16a77d1d165e905d3241b41319",
+          "yidl_dataclass/yidl/shared/comparison.yidl": "2f7e6df989b0714d8764de84d8a6f6b03f39c3ad7f57dba5e55f5131b8354eef"
+        },
+        "rebuilt_wheel_sha256": "50e7a1b17f68de56d88441ee47df8d2b0a4377981dd236e591d2a8eff8ff5f1b",
+        "resource_count": 12,
+        "sdist": "yidl_dataclass-0.1.0.dev0.tar.gz",
+        "sdist_bytes": 1151784,
+        "sdist_sha256": "c6d34f4714d30c45940be9aafac3f5bfb1d1dbda8f60f85093eaee22637b145e",
+        "source_fallback": false,
+        "wheel": "yidl_dataclass-0.1.0.dev0-py3-none-any.whl",
+        "wheel_bytes": 86411,
+        "wheel_sha256": "50e7a1b17f68de56d88441ee47df8d2b0a4377981dd236e591d2a8eff8ff5f1b"
+      },
+      "undoable": {
+        "artifact_directory": "undoable-final",
+        "installed_corpus_runtime_payload_unchanged": true,
+        "package_files": 34,
+        "package_hashes": {
+          "yidl_undoable/__init__.py": "25ae9732f642484976e46cf7a8e694edd9313f9c2ea7d820d6cdbc54ec2f4e32",
+          "yidl_undoable/_generated_undoable_base.py": "f38cfe834ba551d9e91300bcc9aab15d632b17bf6b49d74898c1cada1abbde11",
+          "yidl_undoable/bindings.py": "31e46568faa9838d3a9e11528d825e1127190115f4cc92211cd327d7666235da",
+          "yidl_undoable/callbacks.py": "96763aaa39d77d33b7856d2a0047ed933119b519ab13ac53d690382bf36e595b",
+          "yidl_undoable/candidates.py": "82f4dfb268c1754d4eb1e904fb5d2331e9ac2fb37ada5dbaf2aea95d09775b48",
+          "yidl_undoable/documentation/README.md": "24d785db0efa13f1372b463fc7de45f1e3a449ad06367205dfeee466d200a2e0",
+          "yidl_undoable/documentation/docs/API.md": "d3ff77ae91d189ab35f2d4a39d8ec1a39527ae6b356d8d4ec9940ec7a8097769",
+          "yidl_undoable/documentation/docs/Architecture.md": "77bcfdbdb2588298f8d997615c557cc9f101a6fe95b94d44089e02805c31a97a",
+          "yidl_undoable/documentation/examples/first_use.py": "d5a477f669d86ad1dd0cb5c65f322fcbd937841a364717e2d002fe578b1ca9d9",
+          "yidl_undoable/errors.py": "b941cfc850db021261780c0589748fdd1f39152c2918711dd972a715a946c2ae",
+          "yidl_undoable/facades.py": "0ef6f62c163a08bd865546e42ceabfb04a65ccac68e58ff5d0c178bfc1740a7d",
+          "yidl_undoable/graph.py": "f5bae0901ef2d3848475bf5e084c5320af2f789bc603e1a7512822d1285f4b5d",
+          "yidl_undoable/history.py": "7efa86e3da7ddebd3b2338f02470c4c04ca708548ac499b376bfe6934a862ffc",
+          "yidl_undoable/policies.py": "fbcb81baf2f32d658db20ad3db1123ab6571b9fb28d26b07ca523688646176d3",
+          "yidl_undoable/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "yidl_undoable/regenerate_undoable_base.py": "f5614739ffe674ee3d84d42d3fe2a684ecdcb2e9a489f12df42f573cfd62f34c",
+          "yidl_undoable/snapshots.py": "342fbae13ab38de4c873a98903302e59e6f7a0a40c0896f200e3804dbd15994b",
+          "yidl_undoable/states.py": "84b01c991bbcff71a4a1bdd674d7b8d5baeeefb0319ab591263bfed21c66d58a",
+          "yidl_undoable/transaction_yidl.py": "99ca200875fe1f74f8fd85b3f698d8f220124e9f6b4923fe0f728bb5c77b955b",
+          "yidl_undoable/undoable.py": "740d2012c9d64149fe0d86a56d4b016235118ac599f315680fa5b30d7cb70170",
+          "yidl_undoable/undoable_harvester.py": "18d274aabc21d47167eb03afce0c3a187d7fe55d16ee7038b82df71765fbc412",
+          "yidl_undoable/undoable_markers.py": "0d0fa2566464ca9134b2c28f0f3f2cca4e43705670e2272ef1e4094139caf96d",
+          "yidl_undoable/values.py": "124ebca00e0ef896d8c94fca0883827700834d0c3cc2a669491095b64fccc399",
+          "yidl_undoable/write_comparison_context.py": "1993ffe98c68a1be017aef724feee323237e42343051081dbc21400cbd75032e",
+          "yidl_undoable/yidl/undoable_base.yidl": "5838c0c66a6640fd93f213cf580f244eee5da844ee77a8c052dae02439429448",
+          "yidl_undoable/yidl/undoable_binding.yidl": "b2f5bd18875042e1e552fc5eb96c88981357d25bec2f308fff4bfe8914e73df7",
+          "yidl_undoable/yidl/undoable_comparison.yidl": "34b0b857201d762befdd66f21efde247010bd20537dc043b357675e585244aae",
+          "yidl_undoable/yidl/undoable_const_static.yidl": "518c0e00fdf34119a130b5520fae4b39b126d238b61eb21f7c4e1ab7f6d0d8a0",
+          "yidl_undoable/yidl/undoable_core.yidl": "535cda46c06f44c84dde1fbe3aa2633902c370971b5ee4caa4964b27cb06f269",
+          "yidl_undoable/yidl/undoable_default_factories.yidl": "8b103140dd1de0c4d4584e9acd8a92986459d803431498ae59d0f69d2a75dbcb",
+          "yidl_undoable/yidl/undoable_local_store.yidl": "494830f7b105dee583e53a6a2be0e06addccdb3bac10411d0796296e4b128764",
+          "yidl_undoable/yidl/undoable_managed.yidl": "e550d63f3b405415f2159797992039893498100835dbd189b8417255ec268bc4",
+          "yidl_undoable/yidl/undoable_transient.yidl": "ed0901c22fc66c8f083fa60037a5cb941c4f8e73a0dd429e26a860da654c2a0b",
+          "yidl_undoable/yidl/undoable_views.yidl": "4d073e76b1bd3379ef223fe913c6f356e2628777609bfc5e522150ba41c14806"
+        },
+        "rebuilt_wheel_sha256": "346dcf928dd4bf52362195e1a351b0b716fe03a77ffc7a97b8a5e69310b4281d",
+        "resource_count": 10,
+        "sdist": "yidl_undoable-0.1.0.tar.gz",
+        "sdist_bytes": 91847,
+        "sdist_sha256": "a929ca442ef844799de84082550d4a34835b2b08891dace78020e212ef09d660",
+        "source_fallback": false,
+        "wheel": "yidl_undoable-0.1.0-py3-none-any.whl",
+        "wheel_bytes": 61221,
+        "wheel_sha256": "346dcf928dd4bf52362195e1a351b0b716fe03a77ffc7a97b8a5e69310b4281d"
+      }
+    },
+    "dependency_builds": false,
+    "original_sdk_wheels": {
+      "astichi-1.1.3-cp312-abi3-macosx_11_0_arm64.whl": "8f0e6b6c53e6a9d429d131647f072fc4433b461d9a8ed75bfd83e0b1b160e597",
+      "yidl-0.1.0-py3-none-any.whl": "e65014dc851b14d5517ea7f1d802026314b578fb6bddc0301e5d62547a7fa716",
+      "yidl_cache-0.1.0-py3-none-any.whl": "cd59c988bb4f62cf4ef324330e60b71db3301ff33f919b91f6b42760f19c7e95",
+      "yidl_lifecycle-0.1.0-py3-none-any.whl": "6f9f21c60f1fc360ee41e68f4de0289836f1f00a5e1f2c116be6cb4f3473cb4f"
+    }
+  },
+  "baseline_wheel_sha256": "e63818caa79b4c361d8c6203f572f79d4bb098f6ece09a3bf6b149e6206e5620",
+  "bootstrap_resamples": 10000,
+  "classifications": {
+    "12:frozen_original:undoable_value_scope:child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:frozen_original:undoable_value_scope:dict_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:frozen_original:undoable_value_scope:integer_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:frozen_original:undoable_value_scope:opaque_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:frozen_original:undoable_value_scope:tuple_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:product:construct_defaults": "ordinary comparable operation",
+    "12:product:construct_dependent": "extension; named factory plus ordinary fields",
+    "12:product:construct_factory": "ordinary comparable operation",
+    "12:product:construct_supplied": "ordinary comparable operation",
+    "12:product:decorate_cold": "first decoration in one fresh worker per row; separate one-worker pilot; cold-only minimum-duration exemption; no numerical target",
+    "12:product:decorate_repeated": "fresh declarations prepared outside each clock; in-process compiler caches may be warm",
+    "12:product:eq_early_mismatch": "ordinary comparable operation",
+    "12:product:eq_equal": "ordinary comparable operation",
+    "12:product:eq_late_mismatch": "ordinary comparable operation",
+    "12:product:harness_only": "loop observation; never subtracted",
+    "12:product:hash": "ordinary comparable operation",
+    "12:product:lazy_cached": "separate ready instance per operation; pool initialization outside clock",
+    "12:product:lazy_first": "fresh unready instance per operation; preparation outside clock",
+    "12:product:order": "ordinary comparable operation",
+    "12:product:pipeline_both": "extension policy cost; no std parity target",
+    "12:product:pipeline_converted": "extension policy cost; no std parity target",
+    "12:product:pipeline_plain": "extension policy cost; no std parity target",
+    "12:product:pipeline_validated": "extension policy cost; no std parity target",
+    "12:product:readonly_read": "frozen implementation differs; no numerical parity target",
+    "12:product:readonly_reject": "frozen implementation differs; no numerical parity target",
+    "12:product:repr": "ordinary comparable operation",
+    "12:product:slot_read": "ordinary comparable operation",
+    "12:product:slot_write": "ordinary comparable operation",
+    "12:product:source_emission": "actual existing composable.emit_commented; build/decoration untimed; owned builder temporarily captured and restored during setup",
+    "12:product:undoable_eq_prelude": "generated structural equality outside historical scope; full historical facade getters; no numerical parity promise",
+    "12:product:undoable_value_scope:child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:product:undoable_value_scope:dict_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:product:undoable_value_scope:integer_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:product:undoable_value_scope:opaque_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:product:undoable_value_scope:tuple_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "12:stdlib_default:construct_defaults": "ordinary comparable operation",
+    "12:stdlib_default:construct_factory": "ordinary comparable operation",
+    "12:stdlib_default:construct_supplied": "ordinary comparable operation",
+    "12:stdlib_default:decorate_cold": "first decoration in one fresh worker per row; separate one-worker pilot; cold-only minimum-duration exemption; no numerical target",
+    "12:stdlib_default:decorate_repeated": "fresh declarations prepared outside each clock; in-process compiler caches may be warm",
+    "12:stdlib_default:eq_early_mismatch": "ordinary comparable operation",
+    "12:stdlib_default:eq_equal": "ordinary comparable operation",
+    "12:stdlib_default:eq_late_mismatch": "ordinary comparable operation",
+    "12:stdlib_default:hash": "ordinary comparable operation",
+    "12:stdlib_default:order": "ordinary comparable operation",
+    "12:stdlib_default:readonly_read": "frozen implementation differs; no numerical parity target",
+    "12:stdlib_default:readonly_reject": "frozen implementation differs; no numerical parity target",
+    "12:stdlib_default:repr": "ordinary comparable operation",
+    "12:stdlib_default:slot_read": "ordinary comparable operation",
+    "12:stdlib_default:slot_write": "ordinary comparable operation",
+    "12:stdlib_slots:construct_defaults": "ordinary comparable operation",
+    "12:stdlib_slots:construct_factory": "ordinary comparable operation",
+    "12:stdlib_slots:construct_supplied": "ordinary comparable operation",
+    "12:stdlib_slots:decorate_cold": "first decoration in one fresh worker per row; separate one-worker pilot; cold-only minimum-duration exemption; no numerical target",
+    "12:stdlib_slots:decorate_repeated": "fresh declarations prepared outside each clock; in-process compiler caches may be warm",
+    "12:stdlib_slots:eq_early_mismatch": "ordinary comparable operation",
+    "12:stdlib_slots:eq_equal": "ordinary comparable operation",
+    "12:stdlib_slots:eq_late_mismatch": "ordinary comparable operation",
+    "12:stdlib_slots:hash": "ordinary comparable operation",
+    "12:stdlib_slots:order": "ordinary comparable operation",
+    "12:stdlib_slots:readonly_read": "frozen implementation differs; no numerical parity target",
+    "12:stdlib_slots:readonly_reject": "frozen implementation differs; no numerical parity target",
+    "12:stdlib_slots:repr": "ordinary comparable operation",
+    "12:stdlib_slots:slot_read": "ordinary comparable operation",
+    "12:stdlib_slots:slot_write": "ordinary comparable operation",
+    "12:structural_reference:undoable_eq_prelude": "explicit handwritten frozen-baseline facade structural reference; no context prelude; comparison policy not a std dataclass",
+    "3:frozen_original:undoable_value_scope:child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:frozen_original:undoable_value_scope:dict_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:frozen_original:undoable_value_scope:integer_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:frozen_original:undoable_value_scope:opaque_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:frozen_original:undoable_value_scope:tuple_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:product:construct_defaults": "ordinary comparable operation",
+    "3:product:construct_dependent": "extension; named factory plus ordinary fields",
+    "3:product:construct_factory": "ordinary comparable operation",
+    "3:product:construct_supplied": "ordinary comparable operation",
+    "3:product:decorate_cold": "first decoration in one fresh worker per row; separate one-worker pilot; cold-only minimum-duration exemption; no numerical target",
+    "3:product:decorate_repeated": "fresh declarations prepared outside each clock; in-process compiler caches may be warm",
+    "3:product:eq_early_mismatch": "ordinary comparable operation",
+    "3:product:eq_equal": "ordinary comparable operation",
+    "3:product:eq_late_mismatch": "ordinary comparable operation",
+    "3:product:harness_only": "loop observation; never subtracted",
+    "3:product:hash": "ordinary comparable operation",
+    "3:product:lazy_cached": "separate ready instance per operation; pool initialization outside clock",
+    "3:product:lazy_first": "fresh unready instance per operation; preparation outside clock",
+    "3:product:order": "ordinary comparable operation",
+    "3:product:pipeline_both": "extension policy cost; no std parity target",
+    "3:product:pipeline_converted": "extension policy cost; no std parity target",
+    "3:product:pipeline_plain": "extension policy cost; no std parity target",
+    "3:product:pipeline_validated": "extension policy cost; no std parity target",
+    "3:product:readonly_read": "frozen implementation differs; no numerical parity target",
+    "3:product:readonly_reject": "frozen implementation differs; no numerical parity target",
+    "3:product:repr": "ordinary comparable operation",
+    "3:product:slot_read": "ordinary comparable operation",
+    "3:product:slot_write": "ordinary comparable operation",
+    "3:product:source_emission": "actual existing composable.emit_commented; build/decoration untimed; owned builder temporarily captured and restored during setup",
+    "3:product:undoable_eq_prelude": "generated structural equality outside historical scope; full historical facade getters; no numerical parity promise",
+    "3:product:undoable_value_scope:child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:product:undoable_value_scope:dict_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:product:undoable_value_scope:integer_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:product:undoable_value_scope:opaque_equal": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:product:undoable_value_scope:tuple_child_alternate": "full public managed setter inside one active transaction; untimed reset to right precedes each alternating batch so every timed operation changes node identity; no commit/rollback timed",
+    "3:stdlib_default:construct_defaults": "ordinary comparable operation",
+    "3:stdlib_default:construct_factory": "ordinary comparable operation",
+    "3:stdlib_default:construct_supplied": "ordinary comparable operation",
+    "3:stdlib_default:decorate_cold": "first decoration in one fresh worker per row; separate one-worker pilot; cold-only minimum-duration exemption; no numerical target",
+    "3:stdlib_default:decorate_repeated": "fresh declarations prepared outside each clock; in-process compiler caches may be warm",
+    "3:stdlib_default:eq_early_mismatch": "ordinary comparable operation",
+    "3:stdlib_default:eq_equal": "ordinary comparable operation",
+    "3:stdlib_default:eq_late_mismatch": "ordinary comparable operation",
+    "3:stdlib_default:hash": "ordinary comparable operation",
+    "3:stdlib_default:order": "ordinary comparable operation",
+    "3:stdlib_default:readonly_read": "frozen implementation differs; no numerical parity target",
+    "3:stdlib_default:readonly_reject": "frozen implementation differs; no numerical parity target",
+    "3:stdlib_default:repr": "ordinary comparable operation",
+    "3:stdlib_default:slot_read": "ordinary comparable operation",
+    "3:stdlib_default:slot_write": "ordinary comparable operation",
+    "3:stdlib_slots:construct_defaults": "ordinary comparable operation",
+    "3:stdlib_slots:construct_factory": "ordinary comparable operation",
+    "3:stdlib_slots:construct_supplied": "ordinary comparable operation",
+    "3:stdlib_slots:decorate_cold": "first decoration in one fresh worker per row; separate one-worker pilot; cold-only minimum-duration exemption; no numerical target",
+    "3:stdlib_slots:decorate_repeated": "fresh declarations prepared outside each clock; in-process compiler caches may be warm",
+    "3:stdlib_slots:eq_early_mismatch": "ordinary comparable operation",
+    "3:stdlib_slots:eq_equal": "ordinary comparable operation",
+    "3:stdlib_slots:eq_late_mismatch": "ordinary comparable operation",
+    "3:stdlib_slots:hash": "ordinary comparable operation",
+    "3:stdlib_slots:order": "ordinary comparable operation",
+    "3:stdlib_slots:readonly_read": "frozen implementation differs; no numerical parity target",
+    "3:stdlib_slots:readonly_reject": "frozen implementation differs; no numerical parity target",
+    "3:stdlib_slots:repr": "ordinary comparable operation",
+    "3:stdlib_slots:slot_read": "ordinary comparable operation",
+    "3:stdlib_slots:slot_write": "ordinary comparable operation",
+    "3:structural_reference:undoable_eq_prelude": "explicit handwritten frozen-baseline facade structural reference; no context prelude; comparison policy not a std dataclass"
+  },
+  "cold_operations": 1,
+  "cold_pilot_operations": 1,
+  "cold_sampling": "single_fresh_worker",
+  "cold_sampling_amendment": "dev-docs/ColdSamplingAmendment.md",
+  "extension_generation_memory_undoable_targets": null,
+  "harness_files": {
+    "cold_worker.py": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "harness.py": "b50c23e15a0d3378748691c0aed832a10f26e81939f121e3810e141d0026ddb6",
+    "measurement.py": "e528fb36676347864487ee3e383f35b3f18454e232b42450c51b078de5751444",
+    "report.py": "b4439bd30560e79cb57b921afad8f3f7a92f24e036fbcfd0476fbfd7049efbab",
+    "undoable_cases.py": "3e3d1f6ad08037971515be4e6b8e505f91a3b6766c64e0292b4c4f81a4ee1b75",
+    "validation.py": "ff0f07c5a87a98d35b09058dda6060d9a6a0bd1ea8e15b6164c8cd137b6f4819"
+  },
+  "measured_batches": 20,
+  "memory_instances": 10000,
+  "memory_keys": [
+    [
+      3,
+      "frozen",
+      "product"
+    ],
+    [
+      3,
+      "frozen",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "frozen",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "lazy_ready",
+      "product"
+    ],
+    [
+      3,
+      "lazy_unready",
+      "product"
+    ],
+    [
+      3,
+      "local",
+      "product"
+    ],
+    [
+      3,
+      "local",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "local",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "ordinary",
+      "product"
+    ],
+    [
+      3,
+      "ordinary",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "ordinary",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "retained_shared",
+      "product"
+    ],
+    [
+      3,
+      "retained_unique",
+      "product"
+    ],
+    [
+      3,
+      "weakref",
+      "product"
+    ],
+    [
+      3,
+      "weakref",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "weakref",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "frozen",
+      "product"
+    ],
+    [
+      12,
+      "frozen",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "frozen",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "lazy_ready",
+      "product"
+    ],
+    [
+      12,
+      "lazy_unready",
+      "product"
+    ],
+    [
+      12,
+      "local",
+      "product"
+    ],
+    [
+      12,
+      "local",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "local",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "ordinary",
+      "product"
+    ],
+    [
+      12,
+      "ordinary",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "ordinary",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "retained_shared",
+      "product"
+    ],
+    [
+      12,
+      "retained_unique",
+      "product"
+    ],
+    [
+      12,
+      "weakref",
+      "product"
+    ],
+    [
+      12,
+      "weakref",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "weakref",
+      "stdlib_slots"
+    ]
+  ],
+  "memory_source_boundary": "All model factories in cases.py; allocation/dictionary inspection in memory.py; per-minor stdlib source in minor_provenance. These exact source files govern all32 memory keys.",
+  "memory_source_files": {
+    "cases.py": "5668c7be5b9d8d08153bcb9c71301906e059bf59bad108e123c0c1f9ee45b29a",
+    "memory.py": "56cb066b4e63edf487f812035648294bf91fb83bd5a802f2b086e7ae2d6b9dc7"
+  },
+  "minimum_calibration_ns": 20000000,
+  "minimum_processes_per_minor": 5,
+  "minors": [
+    "3.12",
+    "3.13",
+    "3.14"
+  ],
+  "model_fields": [
+    3,
+    12
+  ],
+  "noisy_iqr_over_median": 0.15,
+  "ordinary_target": 2.0,
+  "provenance": {
+    "artifact_tuple_sha256": "09097b3fe593555dc69c6b12fdd83354a7a7096175488f0a08545c02f00d5aed",
+    "backend": "native-rust",
+    "origins_relative_to_prefix": {
+      "astichi": "lib/python3.12/site-packages/astichi/__init__.py",
+      "yidl": "lib/python3.12/site-packages/yidl/__init__.py",
+      "yidl_cache": "lib/python3.12/site-packages/yidl_cache/__init__.py",
+      "yidl_dataclass": "lib/python3.12/site-packages/yidl_dataclass/__init__.py",
+      "yidl_lifecycle": "lib/python3.12/site-packages/yidl_lifecycle/__init__.py",
+      "yidl_undoable": "lib/python3.12/site-packages/yidl_undoable/__init__.py"
+    },
+    "python": "3.12.12",
+    "sdk_payload_inventory_sha256": "4549548a55091a4643dae7817304f23fccc6e2f1c8462456166947178db61fad",
+    "source_sha256": {
+      "cases.py": "5668c7be5b9d8d08153bcb9c71301906e059bf59bad108e123c0c1f9ee45b29a",
+      "cold_worker.py": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+      "definition.py": "e36f69bf5f9126a0c30dae3c42e2d5be3cc8037b95ca6651f1910a5825abaf79",
+      "freeze_definition.py": "0bf4d5e8ac9002d0f34dcabb891ad0fb6e494ea05d8f1e7e3582b19dc6229883",
+      "harness.py": "b50c23e15a0d3378748691c0aed832a10f26e81939f121e3810e141d0026ddb6",
+      "measure.py": "b16069fa502891b977999c6a5404f059b29eb31cd81899fe6472ba5b0f51e122",
+      "measurement.py": "e528fb36676347864487ee3e383f35b3f18454e232b42450c51b078de5751444",
+      "memory.py": "56cb066b4e63edf487f812035648294bf91fb83bd5a802f2b086e7ae2d6b9dc7",
+      "provenance.py": "590123c21af4f4aeb1765ea6babbddce8b664f09d20a796bbaf3e14e855e0cd3",
+      "report.py": "b4439bd30560e79cb57b921afad8f3f7a92f24e036fbcfd0476fbfd7049efbab",
+      "setup_check.py": "eb1d5b738186c528d71d5f44eae05dcbeaf29dc10605191cfa142aecafbce30b",
+      "test_cold_amendment.py": "f88bd3665cd7d72ebd106e56efb8784e08cde1106fd1f2ea290073caf33b3796",
+      "test_gate_integrity.py": "5f54354b6efd485715ada39b415465762a76e42f99f97644cfe0a0b59f583bdc",
+      "test_harness_setup.py": "d502592feec8fdae3d7d86034905e09c1fc1d0dead1bafb348014915006f1f23",
+      "test_measurement.py": "d9b5734010c33e89f1060f9904214ed06000f12dc625893e74d426874380a47a",
+      "test_report.py": "c5eb7d2c167dfdc14acc2d3cbd43f6715af717125ab65dda592c376fa0d8edcc",
+      "test_validation.py": "756486e4538b56f3b580a9b508f312b5df602b84f6c7261c5bad480ed7e6cdee",
+      "undoable_cases.py": "3e3d1f6ad08037971515be4e6b8e505f91a3b6766c64e0292b4c4f81a4ee1b75",
+      "validation.py": "ff0f07c5a87a98d35b09058dda6060d9a6a0bd1ea8e15b6164c8cd137b6f4819"
+    },
+    "stdlib_dataclasses_sha256": "d242aea5fcf6408b1c1f622442f88f68b9526ce1f8bd2890d74a144677c427d9",
+    "versions": {
+      "astichi": "1.1.3",
+      "yidl": "0.1.0",
+      "yidl-cache": "0.1.0",
+      "yidl-dataclass": "0.1.0.dev0",
+      "yidl-lifecycle": "0.1.0",
+      "yidl-undoable": "0.1.0"
+    }
+  },
+  "scope": "Frozen sampling definition; no result or numerical acceptance",
+  "seam_setup": {
+    "12:frozen_original:undoable_value_scope:child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "child_alternate"
+    },
+    "12:frozen_original:undoable_value_scope:dict_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "dict_child_alternate"
+    },
+    "12:frozen_original:undoable_value_scope:integer_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "integer_equal"
+    },
+    "12:frozen_original:undoable_value_scope:opaque_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "opaque_equal"
+    },
+    "12:frozen_original:undoable_value_scope:tuple_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "tuple_child_alternate"
+    },
+    "12:product:undoable_value_scope:child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "child_alternate"
+    },
+    "12:product:undoable_value_scope:dict_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "dict_child_alternate"
+    },
+    "12:product:undoable_value_scope:integer_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "integer_equal"
+    },
+    "12:product:undoable_value_scope:opaque_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "opaque_equal"
+    },
+    "12:product:undoable_value_scope:tuple_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 12,
+      "ordinary_managed_fields": 12,
+      "shape": "tuple_child_alternate"
+    },
+    "12:structural_reference:undoable_eq_prelude": {
+      "handwritten_benchmark_reference_source": "def reference_equal(self, other):\n    if other.__class__ is self.__class__:\n        return (self.f0, self.f1, self.f2, self.f3, self.f4, self.f5, self.f6, self.f7, self.f8, self.f9, self.f10, self.f11,) == (other.f0, other.f1, other.f2, other.f3, other.f4, other.f5, other.f6, other.f7, other.f8, other.f9, other.f10, other.f11,)\n    return NotImplemented\n"
+    },
+    "3:frozen_original:undoable_value_scope:child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "child_alternate"
+    },
+    "3:frozen_original:undoable_value_scope:dict_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "dict_child_alternate"
+    },
+    "3:frozen_original:undoable_value_scope:integer_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "integer_equal"
+    },
+    "3:frozen_original:undoable_value_scope:opaque_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "opaque_equal"
+    },
+    "3:frozen_original:undoable_value_scope:tuple_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "tuple_child_alternate"
+    },
+    "3:product:undoable_value_scope:child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "child_alternate"
+    },
+    "3:product:undoable_value_scope:dict_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "dict_child_alternate"
+    },
+    "3:product:undoable_value_scope:integer_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "integer_equal"
+    },
+    "3:product:undoable_value_scope:opaque_equal": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "opaque_equal"
+    },
+    "3:product:undoable_value_scope:tuple_child_alternate": {
+      "additional_value_field": 1,
+      "callback": "opaque incoming value reflected equality with stable integer old; true equality skips storing unsupported opaque input; no accumulation",
+      "child_fields": 3,
+      "ordinary_managed_fields": 3,
+      "shape": "tuple_child_alternate"
+    },
+    "3:structural_reference:undoable_eq_prelude": {
+      "handwritten_benchmark_reference_source": "def reference_equal(self, other):\n    if other.__class__ is self.__class__:\n        return (self.f0, self.f1, self.f2,) == (other.f0, other.f1, other.f2,)\n    return NotImplemented\n"
+    }
+  },
+  "seed": 20261012,
+  "selected_backend": "native-rust",
+  "slot_stdlib_slots_target": 1.2,
+  "source_sha256": {
+    "cases.py": "5668c7be5b9d8d08153bcb9c71301906e059bf59bad108e123c0c1f9ee45b29a",
+    "cold_worker.py": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "definition.py": "e36f69bf5f9126a0c30dae3c42e2d5be3cc8037b95ca6651f1910a5825abaf79",
+    "freeze_definition.py": "0bf4d5e8ac9002d0f34dcabb891ad0fb6e494ea05d8f1e7e3582b19dc6229883",
+    "harness.py": "b50c23e15a0d3378748691c0aed832a10f26e81939f121e3810e141d0026ddb6",
+    "measure.py": "b16069fa502891b977999c6a5404f059b29eb31cd81899fe6472ba5b0f51e122",
+    "measurement.py": "e528fb36676347864487ee3e383f35b3f18454e232b42450c51b078de5751444",
+    "memory.py": "56cb066b4e63edf487f812035648294bf91fb83bd5a802f2b086e7ae2d6b9dc7",
+    "provenance.py": "590123c21af4f4aeb1765ea6babbddce8b664f09d20a796bbaf3e14e855e0cd3",
+    "report.py": "b4439bd30560e79cb57b921afad8f3f7a92f24e036fbcfd0476fbfd7049efbab",
+    "setup_check.py": "eb1d5b738186c528d71d5f44eae05dcbeaf29dc10605191cfa142aecafbce30b",
+    "test_cold_amendment.py": "f88bd3665cd7d72ebd106e56efb8784e08cde1106fd1f2ea290073caf33b3796",
+    "test_gate_integrity.py": "5f54354b6efd485715ada39b415465762a76e42f99f97644cfe0a0b59f583bdc",
+    "test_harness_setup.py": "d502592feec8fdae3d7d86034905e09c1fc1d0dead1bafb348014915006f1f23",
+    "test_measurement.py": "d9b5734010c33e89f1060f9904214ed06000f12dc625893e74d426874380a47a",
+    "test_report.py": "c5eb7d2c167dfdc14acc2d3cbd43f6715af717125ab65dda592c376fa0d8edcc",
+    "test_validation.py": "756486e4538b56f3b580a9b508f312b5df602b84f6c7261c5bad480ed7e6cdee",
+    "undoable_cases.py": "3e3d1f6ad08037971515be4e6b8e505f91a3b6766c64e0292b4c4f81a4ee1b75",
+    "validation.py": "ff0f07c5a87a98d35b09058dda6060d9a6a0bd1ea8e15b6164c8cd137b6f4819"
+  },
+  "timing_keys": [
+    [
+      3,
+      "construct_defaults",
+      "product"
+    ],
+    [
+      3,
+      "construct_defaults",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "construct_defaults",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "construct_dependent",
+      "product"
+    ],
+    [
+      3,
+      "construct_factory",
+      "product"
+    ],
+    [
+      3,
+      "construct_factory",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "construct_factory",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "construct_supplied",
+      "product"
+    ],
+    [
+      3,
+      "construct_supplied",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "construct_supplied",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "decorate_cold",
+      "product"
+    ],
+    [
+      3,
+      "decorate_cold",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "decorate_cold",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "decorate_repeated",
+      "product"
+    ],
+    [
+      3,
+      "decorate_repeated",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "decorate_repeated",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "eq_early_mismatch",
+      "product"
+    ],
+    [
+      3,
+      "eq_early_mismatch",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "eq_early_mismatch",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "eq_equal",
+      "product"
+    ],
+    [
+      3,
+      "eq_equal",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "eq_equal",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "eq_late_mismatch",
+      "product"
+    ],
+    [
+      3,
+      "eq_late_mismatch",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "eq_late_mismatch",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "harness_only",
+      "product"
+    ],
+    [
+      3,
+      "hash",
+      "product"
+    ],
+    [
+      3,
+      "hash",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "hash",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "lazy_cached",
+      "product"
+    ],
+    [
+      3,
+      "lazy_first",
+      "product"
+    ],
+    [
+      3,
+      "order",
+      "product"
+    ],
+    [
+      3,
+      "order",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "order",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "pipeline_both",
+      "product"
+    ],
+    [
+      3,
+      "pipeline_converted",
+      "product"
+    ],
+    [
+      3,
+      "pipeline_plain",
+      "product"
+    ],
+    [
+      3,
+      "pipeline_validated",
+      "product"
+    ],
+    [
+      3,
+      "readonly_read",
+      "product"
+    ],
+    [
+      3,
+      "readonly_read",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "readonly_read",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "readonly_reject",
+      "product"
+    ],
+    [
+      3,
+      "readonly_reject",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "readonly_reject",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "repr",
+      "product"
+    ],
+    [
+      3,
+      "repr",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "repr",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "slot_read",
+      "product"
+    ],
+    [
+      3,
+      "slot_read",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "slot_read",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "slot_write",
+      "product"
+    ],
+    [
+      3,
+      "slot_write",
+      "stdlib_default"
+    ],
+    [
+      3,
+      "slot_write",
+      "stdlib_slots"
+    ],
+    [
+      3,
+      "source_emission",
+      "product"
+    ],
+    [
+      3,
+      "undoable_eq_prelude",
+      "product"
+    ],
+    [
+      3,
+      "undoable_eq_prelude",
+      "structural_reference"
+    ],
+    [
+      3,
+      "undoable_value_scope:child_alternate",
+      "frozen_original"
+    ],
+    [
+      3,
+      "undoable_value_scope:child_alternate",
+      "product"
+    ],
+    [
+      3,
+      "undoable_value_scope:dict_child_alternate",
+      "frozen_original"
+    ],
+    [
+      3,
+      "undoable_value_scope:dict_child_alternate",
+      "product"
+    ],
+    [
+      3,
+      "undoable_value_scope:integer_equal",
+      "frozen_original"
+    ],
+    [
+      3,
+      "undoable_value_scope:integer_equal",
+      "product"
+    ],
+    [
+      3,
+      "undoable_value_scope:opaque_equal",
+      "frozen_original"
+    ],
+    [
+      3,
+      "undoable_value_scope:opaque_equal",
+      "product"
+    ],
+    [
+      3,
+      "undoable_value_scope:tuple_child_alternate",
+      "frozen_original"
+    ],
+    [
+      3,
+      "undoable_value_scope:tuple_child_alternate",
+      "product"
+    ],
+    [
+      12,
+      "construct_defaults",
+      "product"
+    ],
+    [
+      12,
+      "construct_defaults",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "construct_defaults",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "construct_dependent",
+      "product"
+    ],
+    [
+      12,
+      "construct_factory",
+      "product"
+    ],
+    [
+      12,
+      "construct_factory",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "construct_factory",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "construct_supplied",
+      "product"
+    ],
+    [
+      12,
+      "construct_supplied",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "construct_supplied",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "decorate_cold",
+      "product"
+    ],
+    [
+      12,
+      "decorate_cold",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "decorate_cold",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "decorate_repeated",
+      "product"
+    ],
+    [
+      12,
+      "decorate_repeated",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "decorate_repeated",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "eq_early_mismatch",
+      "product"
+    ],
+    [
+      12,
+      "eq_early_mismatch",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "eq_early_mismatch",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "eq_equal",
+      "product"
+    ],
+    [
+      12,
+      "eq_equal",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "eq_equal",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "eq_late_mismatch",
+      "product"
+    ],
+    [
+      12,
+      "eq_late_mismatch",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "eq_late_mismatch",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "harness_only",
+      "product"
+    ],
+    [
+      12,
+      "hash",
+      "product"
+    ],
+    [
+      12,
+      "hash",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "hash",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "lazy_cached",
+      "product"
+    ],
+    [
+      12,
+      "lazy_first",
+      "product"
+    ],
+    [
+      12,
+      "order",
+      "product"
+    ],
+    [
+      12,
+      "order",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "order",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "pipeline_both",
+      "product"
+    ],
+    [
+      12,
+      "pipeline_converted",
+      "product"
+    ],
+    [
+      12,
+      "pipeline_plain",
+      "product"
+    ],
+    [
+      12,
+      "pipeline_validated",
+      "product"
+    ],
+    [
+      12,
+      "readonly_read",
+      "product"
+    ],
+    [
+      12,
+      "readonly_read",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "readonly_read",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "readonly_reject",
+      "product"
+    ],
+    [
+      12,
+      "readonly_reject",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "readonly_reject",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "repr",
+      "product"
+    ],
+    [
+      12,
+      "repr",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "repr",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "slot_read",
+      "product"
+    ],
+    [
+      12,
+      "slot_read",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "slot_read",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "slot_write",
+      "product"
+    ],
+    [
+      12,
+      "slot_write",
+      "stdlib_default"
+    ],
+    [
+      12,
+      "slot_write",
+      "stdlib_slots"
+    ],
+    [
+      12,
+      "source_emission",
+      "product"
+    ],
+    [
+      12,
+      "undoable_eq_prelude",
+      "product"
+    ],
+    [
+      12,
+      "undoable_eq_prelude",
+      "structural_reference"
+    ],
+    [
+      12,
+      "undoable_value_scope:child_alternate",
+      "frozen_original"
+    ],
+    [
+      12,
+      "undoable_value_scope:child_alternate",
+      "product"
+    ],
+    [
+      12,
+      "undoable_value_scope:dict_child_alternate",
+      "frozen_original"
+    ],
+    [
+      12,
+      "undoable_value_scope:dict_child_alternate",
+      "product"
+    ],
+    [
+      12,
+      "undoable_value_scope:integer_equal",
+      "frozen_original"
+    ],
+    [
+      12,
+      "undoable_value_scope:integer_equal",
+      "product"
+    ],
+    [
+      12,
+      "undoable_value_scope:opaque_equal",
+      "frozen_original"
+    ],
+    [
+      12,
+      "undoable_value_scope:opaque_equal",
+      "product"
+    ],
+    [
+      12,
+      "undoable_value_scope:tuple_child_alternate",
+      "frozen_original"
+    ],
+    [
+      12,
+      "undoable_value_scope:tuple_child_alternate",
+      "product"
+    ]
+  ],
+  "timing_source_sha256": {
+    "12:frozen_original:undoable_value_scope:child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:frozen_original:undoable_value_scope:dict_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:frozen_original:undoable_value_scope:integer_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:frozen_original:undoable_value_scope:opaque_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:frozen_original:undoable_value_scope:tuple_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:product:construct_defaults": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "12:product:construct_dependent": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "12:product:construct_factory": "31d4bb9cec15faac43c15b1174f1dd551d909090311a02666a54cb4f9b2a7891",
+    "12:product:construct_supplied": "34328348893ef9eab218ead59c3f78f19335827cb127041369983ec116665b06",
+    "12:product:decorate_cold": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "12:product:decorate_repeated": "9cbf01f665cb4c10fd4f437485ab6316f2b641becff2199b189a591848f8501b",
+    "12:product:eq_early_mismatch": "f9de980e758db561a0079d3dffd50e4702709ccfaae7b4476ef2992a86145cf8",
+    "12:product:eq_equal": "12118ede6d447fc6b6afdad38c1503dfaa58c469b87c8ec083fd9cdade44eb3f",
+    "12:product:eq_late_mismatch": "77f29677eb7b874a01e404d6a71750a27d01ca37f341bdd540ea6a6da12edd35",
+    "12:product:harness_only": "e6e6fb226389783d7045d7d690efe921aac3e6f80feaabe616860b200db95639",
+    "12:product:hash": "71215860e9f82214a95948cbe4124c0cf994c6b9431e8cdba52163ffe5c61823",
+    "12:product:lazy_cached": "df41ef8e6bb278affd87d67b538b3bee3bf241c29498036c9fb06f6d3395f59d",
+    "12:product:lazy_first": "df41ef8e6bb278affd87d67b538b3bee3bf241c29498036c9fb06f6d3395f59d",
+    "12:product:order": "0cb11af63eadecf6917a59c7e0df3078c542fc7ff568e6b0371f4aff510c8f1d",
+    "12:product:pipeline_both": "c32e2bd1c827f49bb5736810d9407316f5700e3e3926856c54859c13b9b0868b",
+    "12:product:pipeline_converted": "c32e2bd1c827f49bb5736810d9407316f5700e3e3926856c54859c13b9b0868b",
+    "12:product:pipeline_plain": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "12:product:pipeline_validated": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "12:product:readonly_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "12:product:readonly_reject": "8e9506fd50bcebfd7e2a1351d672ea00bd86164a5bb123722f724f08838f797a",
+    "12:product:repr": "90c77e57f340c916de805bcce9bb79ea677c26dee4b3315aa421afbacffa04a5",
+    "12:product:slot_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "12:product:slot_write": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "12:product:source_emission": "1ea6832724d71802fa17cf6d30248ebcbace65afdc699c32b650473d397b3957",
+    "12:product:undoable_eq_prelude": "eca872f0ffa31e0a9029161c9a5415c5f9a3645d246cb23d2492d48339479ca3",
+    "12:product:undoable_value_scope:child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:product:undoable_value_scope:dict_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:product:undoable_value_scope:integer_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:product:undoable_value_scope:opaque_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:product:undoable_value_scope:tuple_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "12:stdlib_default:construct_defaults": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "12:stdlib_default:construct_factory": "31d4bb9cec15faac43c15b1174f1dd551d909090311a02666a54cb4f9b2a7891",
+    "12:stdlib_default:construct_supplied": "34328348893ef9eab218ead59c3f78f19335827cb127041369983ec116665b06",
+    "12:stdlib_default:decorate_cold": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "12:stdlib_default:decorate_repeated": "9cbf01f665cb4c10fd4f437485ab6316f2b641becff2199b189a591848f8501b",
+    "12:stdlib_default:eq_early_mismatch": "f9de980e758db561a0079d3dffd50e4702709ccfaae7b4476ef2992a86145cf8",
+    "12:stdlib_default:eq_equal": "12118ede6d447fc6b6afdad38c1503dfaa58c469b87c8ec083fd9cdade44eb3f",
+    "12:stdlib_default:eq_late_mismatch": "77f29677eb7b874a01e404d6a71750a27d01ca37f341bdd540ea6a6da12edd35",
+    "12:stdlib_default:hash": "71215860e9f82214a95948cbe4124c0cf994c6b9431e8cdba52163ffe5c61823",
+    "12:stdlib_default:order": "0cb11af63eadecf6917a59c7e0df3078c542fc7ff568e6b0371f4aff510c8f1d",
+    "12:stdlib_default:readonly_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "12:stdlib_default:readonly_reject": "8e9506fd50bcebfd7e2a1351d672ea00bd86164a5bb123722f724f08838f797a",
+    "12:stdlib_default:repr": "90c77e57f340c916de805bcce9bb79ea677c26dee4b3315aa421afbacffa04a5",
+    "12:stdlib_default:slot_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "12:stdlib_default:slot_write": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "12:stdlib_slots:construct_defaults": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "12:stdlib_slots:construct_factory": "31d4bb9cec15faac43c15b1174f1dd551d909090311a02666a54cb4f9b2a7891",
+    "12:stdlib_slots:construct_supplied": "34328348893ef9eab218ead59c3f78f19335827cb127041369983ec116665b06",
+    "12:stdlib_slots:decorate_cold": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "12:stdlib_slots:decorate_repeated": "9cbf01f665cb4c10fd4f437485ab6316f2b641becff2199b189a591848f8501b",
+    "12:stdlib_slots:eq_early_mismatch": "f9de980e758db561a0079d3dffd50e4702709ccfaae7b4476ef2992a86145cf8",
+    "12:stdlib_slots:eq_equal": "12118ede6d447fc6b6afdad38c1503dfaa58c469b87c8ec083fd9cdade44eb3f",
+    "12:stdlib_slots:eq_late_mismatch": "77f29677eb7b874a01e404d6a71750a27d01ca37f341bdd540ea6a6da12edd35",
+    "12:stdlib_slots:hash": "71215860e9f82214a95948cbe4124c0cf994c6b9431e8cdba52163ffe5c61823",
+    "12:stdlib_slots:order": "0cb11af63eadecf6917a59c7e0df3078c542fc7ff568e6b0371f4aff510c8f1d",
+    "12:stdlib_slots:readonly_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "12:stdlib_slots:readonly_reject": "8e9506fd50bcebfd7e2a1351d672ea00bd86164a5bb123722f724f08838f797a",
+    "12:stdlib_slots:repr": "90c77e57f340c916de805bcce9bb79ea677c26dee4b3315aa421afbacffa04a5",
+    "12:stdlib_slots:slot_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "12:stdlib_slots:slot_write": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "12:structural_reference:undoable_eq_prelude": "eca872f0ffa31e0a9029161c9a5415c5f9a3645d246cb23d2492d48339479ca3",
+    "3:frozen_original:undoable_value_scope:child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:frozen_original:undoable_value_scope:dict_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:frozen_original:undoable_value_scope:integer_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:frozen_original:undoable_value_scope:opaque_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:frozen_original:undoable_value_scope:tuple_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:product:construct_defaults": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "3:product:construct_dependent": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "3:product:construct_factory": "31d4bb9cec15faac43c15b1174f1dd551d909090311a02666a54cb4f9b2a7891",
+    "3:product:construct_supplied": "e3d1bbba20f5a8af0f64036c157346199bfdfd5457e66007f65565c58941b889",
+    "3:product:decorate_cold": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "3:product:decorate_repeated": "9cbf01f665cb4c10fd4f437485ab6316f2b641becff2199b189a591848f8501b",
+    "3:product:eq_early_mismatch": "f9de980e758db561a0079d3dffd50e4702709ccfaae7b4476ef2992a86145cf8",
+    "3:product:eq_equal": "12118ede6d447fc6b6afdad38c1503dfaa58c469b87c8ec083fd9cdade44eb3f",
+    "3:product:eq_late_mismatch": "77f29677eb7b874a01e404d6a71750a27d01ca37f341bdd540ea6a6da12edd35",
+    "3:product:harness_only": "e6e6fb226389783d7045d7d690efe921aac3e6f80feaabe616860b200db95639",
+    "3:product:hash": "71215860e9f82214a95948cbe4124c0cf994c6b9431e8cdba52163ffe5c61823",
+    "3:product:lazy_cached": "df41ef8e6bb278affd87d67b538b3bee3bf241c29498036c9fb06f6d3395f59d",
+    "3:product:lazy_first": "df41ef8e6bb278affd87d67b538b3bee3bf241c29498036c9fb06f6d3395f59d",
+    "3:product:order": "0cb11af63eadecf6917a59c7e0df3078c542fc7ff568e6b0371f4aff510c8f1d",
+    "3:product:pipeline_both": "c32e2bd1c827f49bb5736810d9407316f5700e3e3926856c54859c13b9b0868b",
+    "3:product:pipeline_converted": "c32e2bd1c827f49bb5736810d9407316f5700e3e3926856c54859c13b9b0868b",
+    "3:product:pipeline_plain": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "3:product:pipeline_validated": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "3:product:readonly_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "3:product:readonly_reject": "8e9506fd50bcebfd7e2a1351d672ea00bd86164a5bb123722f724f08838f797a",
+    "3:product:repr": "90c77e57f340c916de805bcce9bb79ea677c26dee4b3315aa421afbacffa04a5",
+    "3:product:slot_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "3:product:slot_write": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "3:product:source_emission": "1ea6832724d71802fa17cf6d30248ebcbace65afdc699c32b650473d397b3957",
+    "3:product:undoable_eq_prelude": "eca872f0ffa31e0a9029161c9a5415c5f9a3645d246cb23d2492d48339479ca3",
+    "3:product:undoable_value_scope:child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:product:undoable_value_scope:dict_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:product:undoable_value_scope:integer_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:product:undoable_value_scope:opaque_equal": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:product:undoable_value_scope:tuple_child_alternate": "d2a70af18b374e23bdce76d31c03b3a79c452ac43d807d39f0f3307c723dfd2a",
+    "3:stdlib_default:construct_defaults": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "3:stdlib_default:construct_factory": "31d4bb9cec15faac43c15b1174f1dd551d909090311a02666a54cb4f9b2a7891",
+    "3:stdlib_default:construct_supplied": "e3d1bbba20f5a8af0f64036c157346199bfdfd5457e66007f65565c58941b889",
+    "3:stdlib_default:decorate_cold": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "3:stdlib_default:decorate_repeated": "9cbf01f665cb4c10fd4f437485ab6316f2b641becff2199b189a591848f8501b",
+    "3:stdlib_default:eq_early_mismatch": "f9de980e758db561a0079d3dffd50e4702709ccfaae7b4476ef2992a86145cf8",
+    "3:stdlib_default:eq_equal": "12118ede6d447fc6b6afdad38c1503dfaa58c469b87c8ec083fd9cdade44eb3f",
+    "3:stdlib_default:eq_late_mismatch": "77f29677eb7b874a01e404d6a71750a27d01ca37f341bdd540ea6a6da12edd35",
+    "3:stdlib_default:hash": "71215860e9f82214a95948cbe4124c0cf994c6b9431e8cdba52163ffe5c61823",
+    "3:stdlib_default:order": "0cb11af63eadecf6917a59c7e0df3078c542fc7ff568e6b0371f4aff510c8f1d",
+    "3:stdlib_default:readonly_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "3:stdlib_default:readonly_reject": "8e9506fd50bcebfd7e2a1351d672ea00bd86164a5bb123722f724f08838f797a",
+    "3:stdlib_default:repr": "90c77e57f340c916de805bcce9bb79ea677c26dee4b3315aa421afbacffa04a5",
+    "3:stdlib_default:slot_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "3:stdlib_default:slot_write": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "3:stdlib_slots:construct_defaults": "1cbf24957dad9f7a9affccb2e034fb7cd9efa82ca6a384fdc267a7f00b76b635",
+    "3:stdlib_slots:construct_factory": "31d4bb9cec15faac43c15b1174f1dd551d909090311a02666a54cb4f9b2a7891",
+    "3:stdlib_slots:construct_supplied": "e3d1bbba20f5a8af0f64036c157346199bfdfd5457e66007f65565c58941b889",
+    "3:stdlib_slots:decorate_cold": "f8f83682d389226d5fc27777f5b37c63816c4984a604db6670650855af5e5295",
+    "3:stdlib_slots:decorate_repeated": "9cbf01f665cb4c10fd4f437485ab6316f2b641becff2199b189a591848f8501b",
+    "3:stdlib_slots:eq_early_mismatch": "f9de980e758db561a0079d3dffd50e4702709ccfaae7b4476ef2992a86145cf8",
+    "3:stdlib_slots:eq_equal": "12118ede6d447fc6b6afdad38c1503dfaa58c469b87c8ec083fd9cdade44eb3f",
+    "3:stdlib_slots:eq_late_mismatch": "77f29677eb7b874a01e404d6a71750a27d01ca37f341bdd540ea6a6da12edd35",
+    "3:stdlib_slots:hash": "71215860e9f82214a95948cbe4124c0cf994c6b9431e8cdba52163ffe5c61823",
+    "3:stdlib_slots:order": "0cb11af63eadecf6917a59c7e0df3078c542fc7ff568e6b0371f4aff510c8f1d",
+    "3:stdlib_slots:readonly_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "3:stdlib_slots:readonly_reject": "8e9506fd50bcebfd7e2a1351d672ea00bd86164a5bb123722f724f08838f797a",
+    "3:stdlib_slots:repr": "90c77e57f340c916de805bcce9bb79ea677c26dee4b3315aa421afbacffa04a5",
+    "3:stdlib_slots:slot_read": "8070e256d9fd136d76c8e87b753f2a54581ca0303c8935676f760c17bc1dcbbb",
+    "3:stdlib_slots:slot_write": "2a4958a6bf775079f2b712c90b0b075bed49bec7961e22155b6fab6038940a4c",
+    "3:structural_reference:undoable_eq_prelude": "eca872f0ffa31e0a9029161c9a5415c5f9a3645d246cb23d2492d48339479ca3"
+  },
+  "timing_sources": {
+    "12:frozen_original:undoable_value_scope:child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:frozen_original:undoable_value_scope:dict_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:frozen_original:undoable_value_scope:integer_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:frozen_original:undoable_value_scope:opaque_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:frozen_original:undoable_value_scope:tuple_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:product:construct_defaults": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "12:product:construct_dependent": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "12:product:construct_factory": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = FactoryCls()\n    return result\n",
+    "12:product:construct_supplied": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls(0,1,2,3,4,5,6,7,8,9,10,11)\n    return result\n",
+    "12:product:decorate_cold": "\"\"\"One first generator interval; imports/declaration/transport remain outside clock.\"\"\"\n\nimport argparse\nimport dataclasses as std\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport time\n\n\ndef load(name, filename):\n    spec = importlib.util.spec_from_file_location(\n        name, Path(__file__).with_name(filename)\n    )\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--variant\",\n        choices=(\"product\", \"stdlib_default\", \"stdlib_slots\"),\n        required=True,\n    )\n    parser.add_argument(\"--fields\", choices=(3, 12), type=int, required=True)\n    parser.add_argument(\"--backend\", choices=(\"native-rust\",), default=\"native-rust\")\n    parser.add_argument(\"--definition\", required=True, type=Path)\n    parser.add_argument(\"--artifact-root\", required=True, type=Path)\n    parser.add_argument(\"--sdk-wheel-dir\", required=True, type=Path)\n    parser.add_argument(\"--setup-only\", action=\"store_true\")\n    args = parser.parse_args()\n    os.environ[\"ASTICHI_LOWER_ENGINE\"] = args.backend\n    definition = json.loads(args.definition.read_text())\n    provenance = load(\"perf_provenance\", \"provenance.py\")\n    validation = load(\"perf_validation\", \"validation.py\")\n    validation.validate_definition(definition)\n    if provenance.source_hashes() != definition[\"source_sha256\"]:\n        raise ValueError(\"cold worker source drift from frozen definition\")\n    installed = provenance.verify_installation(\n        definition[\"artifact_tuple\"],\n        args.artifact_root,\n        args.sdk_wheel_dir,\n        backend=args.backend,\n    )\n    if \"minor_provenance\" in definition:\n        minor = \".\".join(installed[\"python\"].split(\".\")[:2])\n        if installed != definition[\"minor_provenance\"].get(minor):\n            raise ValueError(\n                \"cold installed provenance differs from frozen minor tuple\"\n            )\n    if args.variant == \"product\":\n        import yidl_dataclass as api\n    else:\n        api = std\n    namespace = {\n        \"__module__\": __name__,\n        \"__annotations__\": {f\"f{i}\": int for i in range(args.fields)},\n    }\n    namespace.update({f\"f{i}\": i for i in range(args.fields)})\n    declaration = type(\"Fields\", (), namespace)\n    if args.setup_only:\n        model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n            declaration\n        )\n        assert model().f0 == 0\n        print(\n            json.dumps(\n                {\n                    \"scope\": \"untimed cold-worker setup only\",\n                    \"variant\": args.variant,\n                    \"fields\": args.fields,\n                    \"selected_backend\": args.backend,\n                    \"python\": sys.version.split()[0],\n                },\n                sort_keys=True,\n            )\n        )\n        return 0\n    start = time.perf_counter_ns()\n    model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n        declaration\n    )\n    elapsed = time.perf_counter_ns() - start\n    assert model().f0 == 0\n    print(\n        json.dumps(\n            {\n                \"variant\": args.variant,\n                \"fields\": args.fields,\n                \"operations\": 1,\n                \"elapsed_ns\": elapsed,\n                \"units\": \"ns\",\n                \"clock_resolution_seconds\": time.get_clock_info(\n                    \"perf_counter\"\n                ).resolution,\n                \"python\": sys.version.split()[0],\n                \"imports_and_declaration_setup\": \"outside measured interval\",\n                \"cache_boundary\": \"new interpreter; filesystem/OS caches may be warm\",\n                \"pid\": os.getpid(),\n                \"selected_backend\": args.backend,\n                \"source_sha256\": hashlib.sha256(\n                    Path(__file__).read_bytes()\n                ).hexdigest(),\n                \"definition_sha256\": provenance.canonical_digest(definition),\n                \"provenance\": installed,\n            },\n            sort_keys=True,\n        )\n    )\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+    "12:product:decorate_repeated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = decorate(prepared[index])\n    return result\n",
+    "12:product:eq_early_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == early\n    return result\n",
+    "12:product:eq_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == equal\n    return result\n",
+    "12:product:eq_late_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == late\n    return result\n",
+    "12:product:harness_only": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = index\n    return result\n",
+    "12:product:hash": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = hash(frozen)\n    return result\n",
+    "12:product:lazy_cached": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = prepared[index].value\n    return result\n",
+    "12:product:lazy_first": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = prepared[index].value\n    return result\n",
+    "12:product:order": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj < larger\n    return result\n",
+    "12:product:pipeline_both": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7.4\n    return result\n",
+    "12:product:pipeline_converted": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7.4\n    return result\n",
+    "12:product:pipeline_plain": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "12:product:pipeline_validated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "12:product:readonly_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "12:product:readonly_reject": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        try:\n            obj.f0 = 7\n        except FrozenInstanceError:\n            result = index\n    return result\n",
+    "12:product:repr": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = repr(obj)\n    return result\n",
+    "12:product:slot_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "12:product:slot_write": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "12:product:source_emission": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = piece.emit_commented()\n    return result\n",
+    "12:product:undoable_eq_prelude": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = left == right\n    return result\n",
+    "12:product:undoable_value_scope:child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:product:undoable_value_scope:dict_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:product:undoable_value_scope:integer_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:product:undoable_value_scope:opaque_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:product:undoable_value_scope:tuple_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "12:stdlib_default:construct_defaults": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "12:stdlib_default:construct_factory": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = FactoryCls()\n    return result\n",
+    "12:stdlib_default:construct_supplied": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls(0,1,2,3,4,5,6,7,8,9,10,11)\n    return result\n",
+    "12:stdlib_default:decorate_cold": "\"\"\"One first generator interval; imports/declaration/transport remain outside clock.\"\"\"\n\nimport argparse\nimport dataclasses as std\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport time\n\n\ndef load(name, filename):\n    spec = importlib.util.spec_from_file_location(\n        name, Path(__file__).with_name(filename)\n    )\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--variant\",\n        choices=(\"product\", \"stdlib_default\", \"stdlib_slots\"),\n        required=True,\n    )\n    parser.add_argument(\"--fields\", choices=(3, 12), type=int, required=True)\n    parser.add_argument(\"--backend\", choices=(\"native-rust\",), default=\"native-rust\")\n    parser.add_argument(\"--definition\", required=True, type=Path)\n    parser.add_argument(\"--artifact-root\", required=True, type=Path)\n    parser.add_argument(\"--sdk-wheel-dir\", required=True, type=Path)\n    parser.add_argument(\"--setup-only\", action=\"store_true\")\n    args = parser.parse_args()\n    os.environ[\"ASTICHI_LOWER_ENGINE\"] = args.backend\n    definition = json.loads(args.definition.read_text())\n    provenance = load(\"perf_provenance\", \"provenance.py\")\n    validation = load(\"perf_validation\", \"validation.py\")\n    validation.validate_definition(definition)\n    if provenance.source_hashes() != definition[\"source_sha256\"]:\n        raise ValueError(\"cold worker source drift from frozen definition\")\n    installed = provenance.verify_installation(\n        definition[\"artifact_tuple\"],\n        args.artifact_root,\n        args.sdk_wheel_dir,\n        backend=args.backend,\n    )\n    if \"minor_provenance\" in definition:\n        minor = \".\".join(installed[\"python\"].split(\".\")[:2])\n        if installed != definition[\"minor_provenance\"].get(minor):\n            raise ValueError(\n                \"cold installed provenance differs from frozen minor tuple\"\n            )\n    if args.variant == \"product\":\n        import yidl_dataclass as api\n    else:\n        api = std\n    namespace = {\n        \"__module__\": __name__,\n        \"__annotations__\": {f\"f{i}\": int for i in range(args.fields)},\n    }\n    namespace.update({f\"f{i}\": i for i in range(args.fields)})\n    declaration = type(\"Fields\", (), namespace)\n    if args.setup_only:\n        model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n            declaration\n        )\n        assert model().f0 == 0\n        print(\n            json.dumps(\n                {\n                    \"scope\": \"untimed cold-worker setup only\",\n                    \"variant\": args.variant,\n                    \"fields\": args.fields,\n                    \"selected_backend\": args.backend,\n                    \"python\": sys.version.split()[0],\n                },\n                sort_keys=True,\n            )\n        )\n        return 0\n    start = time.perf_counter_ns()\n    model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n        declaration\n    )\n    elapsed = time.perf_counter_ns() - start\n    assert model().f0 == 0\n    print(\n        json.dumps(\n            {\n                \"variant\": args.variant,\n                \"fields\": args.fields,\n                \"operations\": 1,\n                \"elapsed_ns\": elapsed,\n                \"units\": \"ns\",\n                \"clock_resolution_seconds\": time.get_clock_info(\n                    \"perf_counter\"\n                ).resolution,\n                \"python\": sys.version.split()[0],\n                \"imports_and_declaration_setup\": \"outside measured interval\",\n                \"cache_boundary\": \"new interpreter; filesystem/OS caches may be warm\",\n                \"pid\": os.getpid(),\n                \"selected_backend\": args.backend,\n                \"source_sha256\": hashlib.sha256(\n                    Path(__file__).read_bytes()\n                ).hexdigest(),\n                \"definition_sha256\": provenance.canonical_digest(definition),\n                \"provenance\": installed,\n            },\n            sort_keys=True,\n        )\n    )\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+    "12:stdlib_default:decorate_repeated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = decorate(prepared[index])\n    return result\n",
+    "12:stdlib_default:eq_early_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == early\n    return result\n",
+    "12:stdlib_default:eq_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == equal\n    return result\n",
+    "12:stdlib_default:eq_late_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == late\n    return result\n",
+    "12:stdlib_default:hash": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = hash(frozen)\n    return result\n",
+    "12:stdlib_default:order": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj < larger\n    return result\n",
+    "12:stdlib_default:readonly_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "12:stdlib_default:readonly_reject": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        try:\n            obj.f0 = 7\n        except FrozenInstanceError:\n            result = index\n    return result\n",
+    "12:stdlib_default:repr": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = repr(obj)\n    return result\n",
+    "12:stdlib_default:slot_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "12:stdlib_default:slot_write": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "12:stdlib_slots:construct_defaults": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "12:stdlib_slots:construct_factory": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = FactoryCls()\n    return result\n",
+    "12:stdlib_slots:construct_supplied": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls(0,1,2,3,4,5,6,7,8,9,10,11)\n    return result\n",
+    "12:stdlib_slots:decorate_cold": "\"\"\"One first generator interval; imports/declaration/transport remain outside clock.\"\"\"\n\nimport argparse\nimport dataclasses as std\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport time\n\n\ndef load(name, filename):\n    spec = importlib.util.spec_from_file_location(\n        name, Path(__file__).with_name(filename)\n    )\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--variant\",\n        choices=(\"product\", \"stdlib_default\", \"stdlib_slots\"),\n        required=True,\n    )\n    parser.add_argument(\"--fields\", choices=(3, 12), type=int, required=True)\n    parser.add_argument(\"--backend\", choices=(\"native-rust\",), default=\"native-rust\")\n    parser.add_argument(\"--definition\", required=True, type=Path)\n    parser.add_argument(\"--artifact-root\", required=True, type=Path)\n    parser.add_argument(\"--sdk-wheel-dir\", required=True, type=Path)\n    parser.add_argument(\"--setup-only\", action=\"store_true\")\n    args = parser.parse_args()\n    os.environ[\"ASTICHI_LOWER_ENGINE\"] = args.backend\n    definition = json.loads(args.definition.read_text())\n    provenance = load(\"perf_provenance\", \"provenance.py\")\n    validation = load(\"perf_validation\", \"validation.py\")\n    validation.validate_definition(definition)\n    if provenance.source_hashes() != definition[\"source_sha256\"]:\n        raise ValueError(\"cold worker source drift from frozen definition\")\n    installed = provenance.verify_installation(\n        definition[\"artifact_tuple\"],\n        args.artifact_root,\n        args.sdk_wheel_dir,\n        backend=args.backend,\n    )\n    if \"minor_provenance\" in definition:\n        minor = \".\".join(installed[\"python\"].split(\".\")[:2])\n        if installed != definition[\"minor_provenance\"].get(minor):\n            raise ValueError(\n                \"cold installed provenance differs from frozen minor tuple\"\n            )\n    if args.variant == \"product\":\n        import yidl_dataclass as api\n    else:\n        api = std\n    namespace = {\n        \"__module__\": __name__,\n        \"__annotations__\": {f\"f{i}\": int for i in range(args.fields)},\n    }\n    namespace.update({f\"f{i}\": i for i in range(args.fields)})\n    declaration = type(\"Fields\", (), namespace)\n    if args.setup_only:\n        model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n            declaration\n        )\n        assert model().f0 == 0\n        print(\n            json.dumps(\n                {\n                    \"scope\": \"untimed cold-worker setup only\",\n                    \"variant\": args.variant,\n                    \"fields\": args.fields,\n                    \"selected_backend\": args.backend,\n                    \"python\": sys.version.split()[0],\n                },\n                sort_keys=True,\n            )\n        )\n        return 0\n    start = time.perf_counter_ns()\n    model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n        declaration\n    )\n    elapsed = time.perf_counter_ns() - start\n    assert model().f0 == 0\n    print(\n        json.dumps(\n            {\n                \"variant\": args.variant,\n                \"fields\": args.fields,\n                \"operations\": 1,\n                \"elapsed_ns\": elapsed,\n                \"units\": \"ns\",\n                \"clock_resolution_seconds\": time.get_clock_info(\n                    \"perf_counter\"\n                ).resolution,\n                \"python\": sys.version.split()[0],\n                \"imports_and_declaration_setup\": \"outside measured interval\",\n                \"cache_boundary\": \"new interpreter; filesystem/OS caches may be warm\",\n                \"pid\": os.getpid(),\n                \"selected_backend\": args.backend,\n                \"source_sha256\": hashlib.sha256(\n                    Path(__file__).read_bytes()\n                ).hexdigest(),\n                \"definition_sha256\": provenance.canonical_digest(definition),\n                \"provenance\": installed,\n            },\n            sort_keys=True,\n        )\n    )\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+    "12:stdlib_slots:decorate_repeated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = decorate(prepared[index])\n    return result\n",
+    "12:stdlib_slots:eq_early_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == early\n    return result\n",
+    "12:stdlib_slots:eq_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == equal\n    return result\n",
+    "12:stdlib_slots:eq_late_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == late\n    return result\n",
+    "12:stdlib_slots:hash": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = hash(frozen)\n    return result\n",
+    "12:stdlib_slots:order": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj < larger\n    return result\n",
+    "12:stdlib_slots:readonly_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "12:stdlib_slots:readonly_reject": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        try:\n            obj.f0 = 7\n        except FrozenInstanceError:\n            result = index\n    return result\n",
+    "12:stdlib_slots:repr": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = repr(obj)\n    return result\n",
+    "12:stdlib_slots:slot_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "12:stdlib_slots:slot_write": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "12:structural_reference:undoable_eq_prelude": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = left == right\n    return result\n",
+    "3:frozen_original:undoable_value_scope:child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:frozen_original:undoable_value_scope:dict_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:frozen_original:undoable_value_scope:integer_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:frozen_original:undoable_value_scope:opaque_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:frozen_original:undoable_value_scope:tuple_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:product:construct_defaults": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "3:product:construct_dependent": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "3:product:construct_factory": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = FactoryCls()\n    return result\n",
+    "3:product:construct_supplied": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls(0,1,2)\n    return result\n",
+    "3:product:decorate_cold": "\"\"\"One first generator interval; imports/declaration/transport remain outside clock.\"\"\"\n\nimport argparse\nimport dataclasses as std\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport time\n\n\ndef load(name, filename):\n    spec = importlib.util.spec_from_file_location(\n        name, Path(__file__).with_name(filename)\n    )\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--variant\",\n        choices=(\"product\", \"stdlib_default\", \"stdlib_slots\"),\n        required=True,\n    )\n    parser.add_argument(\"--fields\", choices=(3, 12), type=int, required=True)\n    parser.add_argument(\"--backend\", choices=(\"native-rust\",), default=\"native-rust\")\n    parser.add_argument(\"--definition\", required=True, type=Path)\n    parser.add_argument(\"--artifact-root\", required=True, type=Path)\n    parser.add_argument(\"--sdk-wheel-dir\", required=True, type=Path)\n    parser.add_argument(\"--setup-only\", action=\"store_true\")\n    args = parser.parse_args()\n    os.environ[\"ASTICHI_LOWER_ENGINE\"] = args.backend\n    definition = json.loads(args.definition.read_text())\n    provenance = load(\"perf_provenance\", \"provenance.py\")\n    validation = load(\"perf_validation\", \"validation.py\")\n    validation.validate_definition(definition)\n    if provenance.source_hashes() != definition[\"source_sha256\"]:\n        raise ValueError(\"cold worker source drift from frozen definition\")\n    installed = provenance.verify_installation(\n        definition[\"artifact_tuple\"],\n        args.artifact_root,\n        args.sdk_wheel_dir,\n        backend=args.backend,\n    )\n    if \"minor_provenance\" in definition:\n        minor = \".\".join(installed[\"python\"].split(\".\")[:2])\n        if installed != definition[\"minor_provenance\"].get(minor):\n            raise ValueError(\n                \"cold installed provenance differs from frozen minor tuple\"\n            )\n    if args.variant == \"product\":\n        import yidl_dataclass as api\n    else:\n        api = std\n    namespace = {\n        \"__module__\": __name__,\n        \"__annotations__\": {f\"f{i}\": int for i in range(args.fields)},\n    }\n    namespace.update({f\"f{i}\": i for i in range(args.fields)})\n    declaration = type(\"Fields\", (), namespace)\n    if args.setup_only:\n        model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n            declaration\n        )\n        assert model().f0 == 0\n        print(\n            json.dumps(\n                {\n                    \"scope\": \"untimed cold-worker setup only\",\n                    \"variant\": args.variant,\n                    \"fields\": args.fields,\n                    \"selected_backend\": args.backend,\n                    \"python\": sys.version.split()[0],\n                },\n                sort_keys=True,\n            )\n        )\n        return 0\n    start = time.perf_counter_ns()\n    model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n        declaration\n    )\n    elapsed = time.perf_counter_ns() - start\n    assert model().f0 == 0\n    print(\n        json.dumps(\n            {\n                \"variant\": args.variant,\n                \"fields\": args.fields,\n                \"operations\": 1,\n                \"elapsed_ns\": elapsed,\n                \"units\": \"ns\",\n                \"clock_resolution_seconds\": time.get_clock_info(\n                    \"perf_counter\"\n                ).resolution,\n                \"python\": sys.version.split()[0],\n                \"imports_and_declaration_setup\": \"outside measured interval\",\n                \"cache_boundary\": \"new interpreter; filesystem/OS caches may be warm\",\n                \"pid\": os.getpid(),\n                \"selected_backend\": args.backend,\n                \"source_sha256\": hashlib.sha256(\n                    Path(__file__).read_bytes()\n                ).hexdigest(),\n                \"definition_sha256\": provenance.canonical_digest(definition),\n                \"provenance\": installed,\n            },\n            sort_keys=True,\n        )\n    )\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+    "3:product:decorate_repeated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = decorate(prepared[index])\n    return result\n",
+    "3:product:eq_early_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == early\n    return result\n",
+    "3:product:eq_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == equal\n    return result\n",
+    "3:product:eq_late_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == late\n    return result\n",
+    "3:product:harness_only": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = index\n    return result\n",
+    "3:product:hash": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = hash(frozen)\n    return result\n",
+    "3:product:lazy_cached": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = prepared[index].value\n    return result\n",
+    "3:product:lazy_first": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = prepared[index].value\n    return result\n",
+    "3:product:order": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj < larger\n    return result\n",
+    "3:product:pipeline_both": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7.4\n    return result\n",
+    "3:product:pipeline_converted": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7.4\n    return result\n",
+    "3:product:pipeline_plain": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "3:product:pipeline_validated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "3:product:readonly_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "3:product:readonly_reject": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        try:\n            obj.f0 = 7\n        except FrozenInstanceError:\n            result = index\n    return result\n",
+    "3:product:repr": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = repr(obj)\n    return result\n",
+    "3:product:slot_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "3:product:slot_write": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "3:product:source_emission": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = piece.emit_commented()\n    return result\n",
+    "3:product:undoable_eq_prelude": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = left == right\n    return result\n",
+    "3:product:undoable_value_scope:child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:product:undoable_value_scope:dict_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:product:undoable_value_scope:integer_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:product:undoable_value_scope:opaque_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:product:undoable_value_scope:tuple_child_alternate": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.value = choices[index % 2]\n    return result\n",
+    "3:stdlib_default:construct_defaults": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "3:stdlib_default:construct_factory": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = FactoryCls()\n    return result\n",
+    "3:stdlib_default:construct_supplied": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls(0,1,2)\n    return result\n",
+    "3:stdlib_default:decorate_cold": "\"\"\"One first generator interval; imports/declaration/transport remain outside clock.\"\"\"\n\nimport argparse\nimport dataclasses as std\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport time\n\n\ndef load(name, filename):\n    spec = importlib.util.spec_from_file_location(\n        name, Path(__file__).with_name(filename)\n    )\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--variant\",\n        choices=(\"product\", \"stdlib_default\", \"stdlib_slots\"),\n        required=True,\n    )\n    parser.add_argument(\"--fields\", choices=(3, 12), type=int, required=True)\n    parser.add_argument(\"--backend\", choices=(\"native-rust\",), default=\"native-rust\")\n    parser.add_argument(\"--definition\", required=True, type=Path)\n    parser.add_argument(\"--artifact-root\", required=True, type=Path)\n    parser.add_argument(\"--sdk-wheel-dir\", required=True, type=Path)\n    parser.add_argument(\"--setup-only\", action=\"store_true\")\n    args = parser.parse_args()\n    os.environ[\"ASTICHI_LOWER_ENGINE\"] = args.backend\n    definition = json.loads(args.definition.read_text())\n    provenance = load(\"perf_provenance\", \"provenance.py\")\n    validation = load(\"perf_validation\", \"validation.py\")\n    validation.validate_definition(definition)\n    if provenance.source_hashes() != definition[\"source_sha256\"]:\n        raise ValueError(\"cold worker source drift from frozen definition\")\n    installed = provenance.verify_installation(\n        definition[\"artifact_tuple\"],\n        args.artifact_root,\n        args.sdk_wheel_dir,\n        backend=args.backend,\n    )\n    if \"minor_provenance\" in definition:\n        minor = \".\".join(installed[\"python\"].split(\".\")[:2])\n        if installed != definition[\"minor_provenance\"].get(minor):\n            raise ValueError(\n                \"cold installed provenance differs from frozen minor tuple\"\n            )\n    if args.variant == \"product\":\n        import yidl_dataclass as api\n    else:\n        api = std\n    namespace = {\n        \"__module__\": __name__,\n        \"__annotations__\": {f\"f{i}\": int for i in range(args.fields)},\n    }\n    namespace.update({f\"f{i}\": i for i in range(args.fields)})\n    declaration = type(\"Fields\", (), namespace)\n    if args.setup_only:\n        model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n            declaration\n        )\n        assert model().f0 == 0\n        print(\n            json.dumps(\n                {\n                    \"scope\": \"untimed cold-worker setup only\",\n                    \"variant\": args.variant,\n                    \"fields\": args.fields,\n                    \"selected_backend\": args.backend,\n                    \"python\": sys.version.split()[0],\n                },\n                sort_keys=True,\n            )\n        )\n        return 0\n    start = time.perf_counter_ns()\n    model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n        declaration\n    )\n    elapsed = time.perf_counter_ns() - start\n    assert model().f0 == 0\n    print(\n        json.dumps(\n            {\n                \"variant\": args.variant,\n                \"fields\": args.fields,\n                \"operations\": 1,\n                \"elapsed_ns\": elapsed,\n                \"units\": \"ns\",\n                \"clock_resolution_seconds\": time.get_clock_info(\n                    \"perf_counter\"\n                ).resolution,\n                \"python\": sys.version.split()[0],\n                \"imports_and_declaration_setup\": \"outside measured interval\",\n                \"cache_boundary\": \"new interpreter; filesystem/OS caches may be warm\",\n                \"pid\": os.getpid(),\n                \"selected_backend\": args.backend,\n                \"source_sha256\": hashlib.sha256(\n                    Path(__file__).read_bytes()\n                ).hexdigest(),\n                \"definition_sha256\": provenance.canonical_digest(definition),\n                \"provenance\": installed,\n            },\n            sort_keys=True,\n        )\n    )\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+    "3:stdlib_default:decorate_repeated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = decorate(prepared[index])\n    return result\n",
+    "3:stdlib_default:eq_early_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == early\n    return result\n",
+    "3:stdlib_default:eq_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == equal\n    return result\n",
+    "3:stdlib_default:eq_late_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == late\n    return result\n",
+    "3:stdlib_default:hash": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = hash(frozen)\n    return result\n",
+    "3:stdlib_default:order": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj < larger\n    return result\n",
+    "3:stdlib_default:readonly_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "3:stdlib_default:readonly_reject": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        try:\n            obj.f0 = 7\n        except FrozenInstanceError:\n            result = index\n    return result\n",
+    "3:stdlib_default:repr": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = repr(obj)\n    return result\n",
+    "3:stdlib_default:slot_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "3:stdlib_default:slot_write": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "3:stdlib_slots:construct_defaults": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls()\n    return result\n",
+    "3:stdlib_slots:construct_factory": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = FactoryCls()\n    return result\n",
+    "3:stdlib_slots:construct_supplied": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = Cls(0,1,2)\n    return result\n",
+    "3:stdlib_slots:decorate_cold": "\"\"\"One first generator interval; imports/declaration/transport remain outside clock.\"\"\"\n\nimport argparse\nimport dataclasses as std\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport time\n\n\ndef load(name, filename):\n    spec = importlib.util.spec_from_file_location(\n        name, Path(__file__).with_name(filename)\n    )\n    module = importlib.util.module_from_spec(spec)\n    sys.modules[name] = module\n    spec.loader.exec_module(module)\n    return module\n\n\ndef main():\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\n        \"--variant\",\n        choices=(\"product\", \"stdlib_default\", \"stdlib_slots\"),\n        required=True,\n    )\n    parser.add_argument(\"--fields\", choices=(3, 12), type=int, required=True)\n    parser.add_argument(\"--backend\", choices=(\"native-rust\",), default=\"native-rust\")\n    parser.add_argument(\"--definition\", required=True, type=Path)\n    parser.add_argument(\"--artifact-root\", required=True, type=Path)\n    parser.add_argument(\"--sdk-wheel-dir\", required=True, type=Path)\n    parser.add_argument(\"--setup-only\", action=\"store_true\")\n    args = parser.parse_args()\n    os.environ[\"ASTICHI_LOWER_ENGINE\"] = args.backend\n    definition = json.loads(args.definition.read_text())\n    provenance = load(\"perf_provenance\", \"provenance.py\")\n    validation = load(\"perf_validation\", \"validation.py\")\n    validation.validate_definition(definition)\n    if provenance.source_hashes() != definition[\"source_sha256\"]:\n        raise ValueError(\"cold worker source drift from frozen definition\")\n    installed = provenance.verify_installation(\n        definition[\"artifact_tuple\"],\n        args.artifact_root,\n        args.sdk_wheel_dir,\n        backend=args.backend,\n    )\n    if \"minor_provenance\" in definition:\n        minor = \".\".join(installed[\"python\"].split(\".\")[:2])\n        if installed != definition[\"minor_provenance\"].get(minor):\n            raise ValueError(\n                \"cold installed provenance differs from frozen minor tuple\"\n            )\n    if args.variant == \"product\":\n        import yidl_dataclass as api\n    else:\n        api = std\n    namespace = {\n        \"__module__\": __name__,\n        \"__annotations__\": {f\"f{i}\": int for i in range(args.fields)},\n    }\n    namespace.update({f\"f{i}\": i for i in range(args.fields)})\n    declaration = type(\"Fields\", (), namespace)\n    if args.setup_only:\n        model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n            declaration\n        )\n        assert model().f0 == 0\n        print(\n            json.dumps(\n                {\n                    \"scope\": \"untimed cold-worker setup only\",\n                    \"variant\": args.variant,\n                    \"fields\": args.fields,\n                    \"selected_backend\": args.backend,\n                    \"python\": sys.version.split()[0],\n                },\n                sort_keys=True,\n            )\n        )\n        return 0\n    start = time.perf_counter_ns()\n    model = api.dataclass(slots=args.variant != \"stdlib_default\", order=True)(\n        declaration\n    )\n    elapsed = time.perf_counter_ns() - start\n    assert model().f0 == 0\n    print(\n        json.dumps(\n            {\n                \"variant\": args.variant,\n                \"fields\": args.fields,\n                \"operations\": 1,\n                \"elapsed_ns\": elapsed,\n                \"units\": \"ns\",\n                \"clock_resolution_seconds\": time.get_clock_info(\n                    \"perf_counter\"\n                ).resolution,\n                \"python\": sys.version.split()[0],\n                \"imports_and_declaration_setup\": \"outside measured interval\",\n                \"cache_boundary\": \"new interpreter; filesystem/OS caches may be warm\",\n                \"pid\": os.getpid(),\n                \"selected_backend\": args.backend,\n                \"source_sha256\": hashlib.sha256(\n                    Path(__file__).read_bytes()\n                ).hexdigest(),\n                \"definition_sha256\": provenance.canonical_digest(definition),\n                \"provenance\": installed,\n            },\n            sort_keys=True,\n        )\n    )\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+    "3:stdlib_slots:decorate_repeated": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = decorate(prepared[index])\n    return result\n",
+    "3:stdlib_slots:eq_early_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == early\n    return result\n",
+    "3:stdlib_slots:eq_equal": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == equal\n    return result\n",
+    "3:stdlib_slots:eq_late_mismatch": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj == late\n    return result\n",
+    "3:stdlib_slots:hash": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = hash(frozen)\n    return result\n",
+    "3:stdlib_slots:order": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj < larger\n    return result\n",
+    "3:stdlib_slots:readonly_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "3:stdlib_slots:readonly_reject": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        try:\n            obj.f0 = 7\n        except FrozenInstanceError:\n            result = index\n    return result\n",
+    "3:stdlib_slots:repr": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = repr(obj)\n    return result\n",
+    "3:stdlib_slots:slot_read": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = obj.f0\n    return result\n",
+    "3:stdlib_slots:slot_write": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        obj.f0 = 7\n    return result\n",
+    "3:structural_reference:undoable_eq_prelude": "def measured(count, prepared):\n    result = None\n    for index in range(count):\n        result = left == right\n    return result\n"
+  },
+  "warmups": 10
+}

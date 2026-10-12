@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_full_result_cannot_claim_historical_sum_policy ______________
+
+    def test_full_result_cannot_claim_historical_sum_policy():
+        document, definition = full_inputs()
+        document.update(cold_sampling='historical_sum', cold_operations=1)
+>       with pytest.raises(ValueError, match='cold sampling policy'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_cold_amendment.py:200: Failed
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_cold_amendment.py::test_full_result_cannot_claim_historical_sum_policy
+1 failed, 5 deselected in 0.12s

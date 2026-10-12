@@ -117,6 +117,8 @@ def summarize(documents):
             ):
                 raise ValueError("normalized unit does not reconcile")
             groups[(row["fields"], row["case"], row["variant"])].append(row)
+            if row["case"] == "decorate_cold" and count != 1:
+                raise ValueError("cold operation count must be one fresh worker")
             count_variant = row["variant"] if row["case"] == "decorate_cold" else None
             operation_counts[(row["fields"], row["case"], count_variant)].add(count)
         if any(len(counts) != 1 for counts in operation_counts.values()):
@@ -141,6 +143,17 @@ def summarize(documents):
         "absolute_product": [],
         "process_counts": {},
         "memory": summarize_memory(documents),
+        "cold_sampling": "single_fresh_worker",
+        "cold_operations_per_row": 1,
+        "cold_observations_per_parent_case": {
+            "pilot": 1,
+            "warmup": 10,
+            "measurement": 20,
+        },
+        "cold_pilot_rows": [
+            row for document in documents for row in document.get("cold_pilot_rows", [])
+        ],
+        "cold_variance_note": "Single-worker intervals may be shorter than20ms and have different variance from historical summed batches; descriptive only, no cold numerical parity target.",
     }
     target_two = {
         "construct_supplied",

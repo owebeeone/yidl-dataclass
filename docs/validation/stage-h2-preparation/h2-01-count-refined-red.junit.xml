@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.031" timestamp="2026-10-13T03:01:01.336786+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_cold_amendment" name="test_cold_count_greater_than_one_is_rejected" time="0.002"><failure message="Failed: DID NOT RAISE ValueError">def test_cold_count_greater_than_one_is_rejected():
+        validation = load('validation')
+        document, definition = cold_inputs()
+        for row in document['rows']:
+            row.update(operations=2, elapsed_ns=20)
+        document['calibration_rows'] = [dict(document['rows'][0], phase='calibration')]
+&gt;       with pytest.raises(ValueError, match='cold.*count'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_cold_amendment.py:61: Failed</failure></testcase></testsuite></testsuites>
