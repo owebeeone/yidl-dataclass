@@ -10,6 +10,11 @@ which is not bundled; its definitions and scoring procedure are self-contained.
 This is a reference summary, not a completed scorecard or substitute for the full
 instrument. The detailed experiment plan must pin its scoring inputs and mode.
 
+The implemented-product [desk evidence](DeclarativeDeskResult.md) now records
+the separate declaration/dependency/generator surfaces, field-removal observation,
+documented interaction inventory, oracle limits and public-only authoring attempt.
+It deliberately leaves calibrated aggregate scores unscored.
+
 ## Relevant criteria
 
 - B.1 **Locality**: the span of description the engine must read to resolve an

@@ -49,6 +49,11 @@ Stage G package/installation gates are now owner-verified; see
 18 installed suites and six owner public-resource smokes pass. Cold public-only
 authoring now passes all four cards with repairs preserved; H measurements and
 final Code/State review remain.
+The declarative desk evidence is now recorded in `DeclarativeDeskResult.md`.
+Its 104 frozen source/golden hashes still match, public vocabulary counts are
+checked, and no calibrated grade is inferred from the four authoring cards.
+Stage H harness preparation is active; timing has not started. Final reviews
+will inspect the settled implementation and measurement/evidence tuple.
 
 ## Requirements review history and authority
 

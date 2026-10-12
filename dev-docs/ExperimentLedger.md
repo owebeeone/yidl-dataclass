@@ -311,3 +311,21 @@ observations are ignored; a gap that cannot be reconciled to the reported last
 request makes that estimate unavailable. At the comparison-redesign checkpoint,
 the owner log's changed samples all reconcile exactly; its updated estimate uses
 those per-request rates. Actual billing remains unavailable.
+
+## Declarative desk checkpoint — 2026-10-12T15:27:49Z
+
+Elapsed since original GO is approximately 11 hours 51 minutes. Stages A–G and
+the independent public-documentation authoring exercise are complete; performance
+harness preparation and final implementation reviews remain. The desk report
+preserves missing corpus/calibration inputs instead of assigning an overall
+declarativity grade.
+
+Latest disjoint-actor observations (13 actors, historical aliases normalized) sum
+to 360,321,069 input tokens including 353,624,448 cached input, and 1,859,650 output
+tokens. Reasoning output 1,022,577 is a subset of output. Standard API-equivalent
+estimate is **USD 70.3599266**; actual billing remains unavailable. These are
+cumulative observations including the SDK detour, waiting/coordination and
+document work, not just implementation or a finished-run cost. The held-out
+author actor contributes USD 0.249136 at its preserved phase-end observation.
+Owner/drafter counters are sampled during active work; later output is not yet
+included. Raw sanitized counters remain in `experiment/usage.jsonl`.
