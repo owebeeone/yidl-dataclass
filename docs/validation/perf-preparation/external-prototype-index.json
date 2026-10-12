@@ -1,10 +1,10 @@
 {
-  "scope": "External preparation snapshot before final artifact/case freeze; no benchmark result, case completeness or final API acceptance. Includes Undoable baseline-only setup smoke; integrated setup still pending.",
+  "scope": "External preparation before final artifact/case freeze; no timing result or complete performance acceptance. Integrated/frozen-original setup passes six installed backend/minor combinations; deterministic mechanics checks remain separate.",
   "files": [
     {
       "external_name": "yidl-dataclass-owner-perf-cold-worker.py",
-      "sha256": "552ebc9124a361a259a2259e92622755dccf8bce344bf72a2d4f53f308815bb5",
-      "bytes": 1981
+      "sha256": "bf88d275a61d1892c2dcc98f44cba5678e67fd8eb19b71f5e6f7abb0db8769bb",
+      "bytes": 2155
     },
     {
       "external_name": "yidl-dataclass-owner-perf-coverage-test.py",
@@ -15,6 +15,11 @@
       "external_name": "yidl-dataclass-owner-perf-coverage.py",
       "sha256": "0f73f2f17a8ebcaf337ea3ae7f32d08d27d5c2683da40efb1efc6968d88c0f49",
       "bytes": 2769
+    },
+    {
+      "external_name": "yidl-dataclass-owner-perf-definition.py",
+      "sha256": "ed7f68e110da1ff2bcb7950b6c2f091247069c4b29ceeee8c038d057181565b5",
+      "bytes": 5314
     },
     {
       "external_name": "yidl-dataclass-owner-perf-extensions-smoke.py",
@@ -28,8 +33,8 @@
     },
     {
       "external_name": "yidl-dataclass-owner-perf-harness.py",
-      "sha256": "c9f9a88f13c9fc552b05925d5c168bf44a4626d0fd001fc8943e5223af0c1ac1",
-      "bytes": 20551
+      "sha256": "8226b049a7f995bd0912978caaf2d602ca98827c95a08b7983c02367c7d9d34c",
+      "bytes": 21847
     },
     {
       "external_name": "yidl-dataclass-owner-perf-smoke.py",
@@ -57,14 +62,26 @@
       "bytes": 4251
     },
     {
+      "external_name": "yidl-dataclass-owner-perf-undoable-integrated-smoke.py",
+      "sha256": "595a63e9024e08959b62ab2f80efc531596a305f00b633ec3f56aae95e084d45",
+      "bytes": 1406
+    },
+    {
       "external_name": "yidl-dataclass-owner-perf-undoable-smoke.py",
       "sha256": "7f3ad6251326454d21941b89f2c97b6b8a72cbc73f7f12e0df18711c0b31c440",
       "bytes": 1179
     },
     {
       "external_name": "yidl-dataclass-owner-perf-undoable.py",
-      "sha256": "855242d454035e394c15c8a5fdec597b0a833d3c3a75b77161860eb089ecddb7",
-      "bytes": 7041
+      "sha256": "3b80ec304eb4f59783616f4d20c48d4293044a62b643ed98961f86f9ac9fc1b5",
+      "bytes": 7222
     }
-  ]
+  ],
+  "prepared_inventory": {
+    "timing_cases": 132,
+    "memory_cases": 32,
+    "source_digests": "all timing cases identified",
+    "artifact_freeze": "pending Stage G",
+    "measurements": "not started"
+  }
 }

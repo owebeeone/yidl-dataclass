@@ -69,3 +69,15 @@ old value and an opaque incoming operand whose equality skips storage; this is
 benchmark preparation, not a product defect or strict test-first claim. A direct
 handwritten structural comparison on original facade getters is explicitly a
 benchmark reference only, with no independent correctness-oracle claim.
+
+Independent EF-wheel setup also passes 24 integrated/original-reference cases
+in each of the six backend/minor combinations. Subsequent preparation adds an
+untimed right-value reset before alternating-node batches, making every timed
+assignment a node change; the changed setup is rechecked on both 3.12 backends.
+Final frozen setup across supported minors remains a Stage H prerequisite.
+The external summary now reports explicitly labeled original-consumer and
+handwritten structural-reference pairs without numerical targets; a focused
+missing-pair RED precedes its GREEN. Frozen-row source and calibration-count
+checks likewise have actual RED/GREEN records. The four deterministic mechanics
+programs currently pass 35 checks; this is no performance or corpus-completeness
+claim. Final sampling must pin artifacts, sources and the entire case inventory.
