@@ -52,6 +52,8 @@ separate measurement stages.
 
 | Post-acceptance P2 classification erratum | The seven tripwires partition as four provenance oracle executions and three genuine commented-renderer parses. Latest 78 failures therefore mean four oracle errors plus 74 genuine behavior/metadata/parser defects. Original output and reviewed seven/71 claim remain historical; appended correction supersedes that classification. Parser-free commented emission was already required by the accepted architecture; its guard stays intact. |
 
+| 2026-10-12T08:07Z / P2 implementation checkpoint | Latest ten-actor observations estimate approximately $29.48 Standard API-equivalent USD, about 4h30m from GO; actual billing unavailable. Working focused gates pass for structural comment rendering, native workspace ownership/name rewrites and read-only lexical planning; defaulted-hole native-to-Python replay now passes. Lifecycle marker correspondence, complete native shell/lowering integration and broader installed/minor gates remain outstanding. P2 and product work are not accepted. |
+
 ## Autonomous scope and intervention rules
 
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated
