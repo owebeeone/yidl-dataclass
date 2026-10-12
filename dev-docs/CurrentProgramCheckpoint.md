@@ -105,6 +105,15 @@ equality under a temporary historical-identity context, with an Undoable-only
 generated equality prelude. Two fresh reviewers replace the prior pair for this
 changed generation and callback boundary. No product implementation has started.
 
-Next action: settle the redesigned boundary and obtain both replacement reviewers'
-independent verdicts; then create the separate TDD plan and implement only after
-the design is accepted.
+Status: **detailed design accepted at
+`de7cadd25c1d3fd5deac0d978043284fa130da1c` after both replacement reviewers
+reported GO**. Their verbatim round-3 reports and `DataclassDesign-ReviewResult.md`
+define the acceptance boundary. All inherited design findings are independently
+closed; implementation and performance remain unverified.
+
+The separate `DataclassPlan.md` is drafted and awaits its gate. Recorded plan tier: interior single-axis
+Consistency, with automatic second-axis Safety escalation for any P0/P1/P2 or
+reviewer request. No new interface or architectural decision belongs in that plan;
+such a change must return to the dual design gate. Final implementation acceptance
+uses dual Code/State review. Product code starts only after the plan gate passes.
+Next action: settle the plan and obtain the interior Consistency verdict.

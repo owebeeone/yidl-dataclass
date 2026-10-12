@@ -1,6 +1,7 @@
 # YIDL Dataclass
 
-Status: requirements accepted for detailed design; implementation has not started.
+Status: detailed design independently accepted; TDD planning is underway and
+implementation has not started.
 
 A proposed YIDL-generated dataclass implementation with standard Python dataclass
 behavior and metadata where compatible, extended with dependent factories,
@@ -9,10 +10,10 @@ per-field mutability policies. One generated class owns its data and methods;
 facades and separate state objects are unnecessary for this model.
 
 [Discussion requirements and open decisions](dev-docs/DataclassConcept.md)
-record the starting point. The [proposed detailed design and compatibility
-matrix](dev-docs/DataclassDesign.md), including the redesigned Undoable write
-comparison boundary, await two fresh independent reviews. The separately reviewed
-TDD plan and implementation remain subsequent work.
+record the starting point. The [detailed design and compatibility
+matrix](dev-docs/DataclassDesign.md) are accepted at the
+[recorded review checkpoint](dev-docs/DataclassDesign-ReviewResult.md).
+The separately reviewed TDD plan and implementation remain subsequent work.
 
 Ordinary writable fields use direct slots by default. Fields requiring constant,
 frozen, lazy or conversion/validation behavior use specialized generated code.

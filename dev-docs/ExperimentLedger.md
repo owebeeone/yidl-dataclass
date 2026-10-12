@@ -27,6 +27,9 @@ separate measurement stages.
 | Design round 1 | Both NO-GO. Two distinct bounded P2s (initializer suppression and opaque callback operands) and one P3 stale README. One merged remediation assigned; no implementation or TDD plan started. |
 | `5d7883d8838fb9fa170426fbda59a71af3e9188b` | Cycle-1 correction reviewed by the original pair. Both NO-GO, closing initial findings but independently finding dictionary hash-callback drift; Safety additionally finds tuple prefix-callback drift. |
 | 2026-10-12T04:15Z | Small write-comparison boundary redesigned before implementation: retain native equality with a scoped historical-identity prelude for Undoable only. Fresh reviewers replace the prior pair because this changes the generation/callback boundary. |
+| `de7cadd25c1d3fd5deac0d978043284fa130da1c` | Both fresh design reviewers GO, independently closing all inherited findings. Detailed design accepted only; no implementation or performance claim. |
+| 2026-10-12T04:24:33Z | Separate TDD plan drafting begins after design acceptance. Interior single Consistency review tier, auto-escalate for P0/P1/P2 or request; final implementation remains dual Code/State. |
+| Design-acceptance usage checkpoint | Latest observations across six disjoint actors estimate approximately $7.07 Standard API-equivalent USD, including design reviews. These are cumulative observations around acceptance, not exact disjoint stage billing; some immediately subsequent planning/output may enter late actor samples. Actual billing unavailable. Elapsed GO-to-acceptance: about 47m45s. |
 
 ## Autonomous scope and intervention rules
 
@@ -73,6 +76,12 @@ Aggregate only the latest observation for each disjoint actor/segment, not every
 checkpoint's cumulative delta. Preserve missing coverage and counter resets rather
 than turning them into zero or negative usage. Reasoning output remains a subset
 of output and is not added twice.
+
+Historical actor labels `owner` and `lane-owner` identify the same session;
+`design-drafter` and `dataclass-drafter` likewise identify one continuing worker.
+Normalize those aliases before selecting the latest observations. There are six
+disjoint actors at design acceptance, not eight. Raw rows remain unchanged for
+audit; future samples use `lane-owner` and `dataclass-drafter` consistently.
 
 Standard API-equivalent prices checked on 2026-10-12 in the
 [official GPT-6.1 Sol documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol):
