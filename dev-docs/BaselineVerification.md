@@ -23,6 +23,13 @@ is intended for the supported interpreter matrix. Build paths are external
 verification locations, not package dependencies. This is preparation evidence;
 imports and compatibility in all three installed environments remain future gates.
 
+The unchanged wheel tuple subsequently passed isolated `-I` import-origin and
+native-generated plain-slot smoke checks on 3.12.12, 3.13.12 and 3.14.3, selecting
+`native-rust` on each. See `docs/validation/baseline/installed-wheel-smoke.json`.
+An initial setup attempt retained a newline in a temporary path; correcting that
+reader allowed installation. It is not TDD RED or a product failure. These checks
+do not establish the new artifact facility, Dataclass or integration behavior.
+
 | Wheel | SHA-256 | Bytes |
 | --- | --- | --- |
 | `astichi-1.1.3-cp312-abi3-macosx_11_0_arm64.whl` | `8f0e6b6c53e6a9d429d131647f072fc4433b461d9a8ed75bfd83e0b1b160e597` | 1803265 |

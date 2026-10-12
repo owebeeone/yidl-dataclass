@@ -1,8 +1,9 @@
 # YIDL Dataclass checkpoint
 
-Status: Stage A is paused for a compiler-boundary amendment after inspection found
-the required reusable precompiled-resource facility missing. Detailed-design dual
-GO and TDD-plan GO remain historical gates, not proof of this missing facility.
+Status: P1 compiler prerequisite implementation is starting after amendment dual
+GO at `356321965b9a527aeee66585235f6883c0312dd4`. Product Stage A remains
+paused until P1–P4 pass. Detailed-design dual GO and TDD-plan GO remain historical
+gates, not proof of the missing facility.
 GO/start was 2026-10-12T03:36:48Z; implementation preparation starts
 at approximately 2026-10-12T04:36Z. No product writes or behavioral RED yet. This
 checkpoint governs the experiment; historical requirement and design reviews
@@ -138,3 +139,10 @@ The amendment draft is ready for a fresh dual Consistency/Safety gate. It adds
 explicit generic artifact/structural compiler APIs, full native IR restoration,
 recursive YIDL resource policy and candidate dependency versions. The owner
 settles its exact tuple; the sole drafter has made no code or test changes.
+
+Status: **compiler prerequisite design accepted at
+`356321965b9a527aeee66585235f6883c0312dd4` after both fresh reviewers reported
+GO with no findings**. See its review result and implementation addendum.
+Next action: P1 Python artifact support with genuine RED/GREEN; product Stage A
+remains paused until P1–P4 prerequisites pass. Native/installed behavior has not
+yet been implemented or verified.

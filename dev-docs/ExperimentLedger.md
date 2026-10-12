@@ -34,6 +34,7 @@ separate measurement stages.
 | 2026-10-12T04:36Z | Product implementation starts with Stage A after design/plan gates. Sole drafter, strict behavioral RED/GREEN, stage checkpoints for owner verification and scoped commits. |
 | Stage A inspection | Before product writes or behavioral RED, actual resource/backend inspection reveals missing whole-template artifact restore and native parser-free payload paths. Product work pauses for an explicit Astichi/YIDL compiler-boundary amendment and dual review. This is a design-assumption escape discovered during implementation preparation; the prior GO reports did not establish executed generation evidence. |
 | Compiler amendment draft | `PrecompiledResourcesDesign.md` specifies Astichi artifact/structural APIs, necessary native IR/payload work, recursive YIDL opt-in emission, candidate minimums and cross-minor/backend tests. Fresh dual review precedes compiler code. No product/test edits or behavioral RED occurred during this inspection/redesign. |
+| `356321965b9a527aeee66585235f6883c0312dd4` | Both compiler amendment reviewers GO with no findings. P1–P4 owning-layer implementation sequence begins; Dataclass Stage A remains paused behind those checks. |
 
 ## Autonomous scope and intervention rules
 
