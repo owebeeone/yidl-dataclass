@@ -101,3 +101,44 @@ presented as defects in those original dependencies.
 - Blocks the requested Dataclass outcome: **no for the verified cases**. The
   alternative preserves direct reads, and complete Stage B suites pass both
   selections on all supported minors. No SDK work is authorized by this finding.
+
+## Separately composed property identifier scopes
+
+- Classification: observed limitation of a chosen consumer resource arrangement,
+  not an established general SDK defect or contract violation.
+- Evidence: `docs/validation/stage-c/README.md` records property function/decorator
+  port alternatives; `docs/validation/stage-d/README.md`, under accessor spelling,
+  records distinct public scoped identifiers for separately composed
+  `@property`/`@field.setter` fragments on the original Python backend. Original
+  attempts and their raw hashes remain in those stage namespaces.
+- Impact: that source spelling was not the portable route used for the delivered
+  accessors. The consumer generates unique field-specific private functions and
+  installs the captured builtin property with those exact functions. Direct
+  backing reads/stores and callable invocation are source/bytecode verified in
+  `tests/test_source_contract.py`; this adds no generic field dispatcher.
+- Suggested improvement: separately investigate or document supported decorator
+  identifier scopes if literal composed-decorator spelling is important in a
+  future owning-project task. Do not infer that property behavior itself is
+  unavailable from this failed arrangement.
+- Blocks the requested Dataclass outcome: **no**. The original supported route
+  supplies the requested descriptor behavior; the source-spelling difference is
+  explicitly documented in the public generation guide.
+
+## Multi-view comparison naming and statement carriers
+
+- Classification: observed consumer composition failures and supported
+  alternatives, not proof that SDK changes were required.
+- Evidence: `Dataclass-StageEFResult.md` and the Undoable repository's
+  `docs/validation/stage-ef/` retain the rich multi-view Python failures and actual
+  generated hash-name RED/GREEN. Indexed consumer contributions, existing
+  outer-binding markers and an explicit public unhashability adapter resolve the
+  observed arrangement. The equality prelude uses a constant-True statement
+  carrier whose absence of runtime branch overhead is checked in source/bytecode.
+- Impact: reuse needed appropriate consumer binding/assembly choices, rather
+  than a hand-copied comparison engine, recursive payload comparator or compiler
+  feature. Dataclass's shared authority is unchanged and no prelude is inserted
+  into its comparison path.
+- Suggested improvement: separately document those supported multi-view binding
+  and carrier patterns in the SDK's examples under owning-repository authority.
+- Blocks the requested second-consumer outcome: **no**. Six original-backend/minor
+  source matrices and subsequent isolated installed corpora pass the alternative.

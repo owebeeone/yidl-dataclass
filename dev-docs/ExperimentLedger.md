@@ -2,7 +2,8 @@
 
 Status: autonomous Dataclass run authorized; operator has excluded SDK changes.
 Compiler detour stopped and preserved; consumer-only Stages A–D are verified and
-Stages E/F are also verified. G/H and final product acceptance remain outstanding. The original
+Stages E/F and G are also verified. H measurement is underway; final product
+acceptance remains outstanding. The original
 Undoable experiment and this experiment's earlier requirements preparation remain
 separate measurement stages.
 
