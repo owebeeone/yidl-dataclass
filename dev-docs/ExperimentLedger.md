@@ -67,6 +67,26 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+Latest observations around 2026-10-12T13:44Z across twelve disjoint actors
+estimate $60.9429478 Standard API-equivalent USD, about 10h07m from original GO.
+Input is 314,637,200 tokens including 308,613,760 repeated cached input; output
+is 1,601,183 tokens including 883,878 reasoning tokens. Actual billing remains
+unavailable. D is verified; E's identical targeted API/canonical gates pass
+62 tests on each original backend. F's staged/context REDs are preserved and
+composition is still undergoing correction. E's richer declaration-removal
+fixture was authored after core comparison behavior and already passed, explicitly
+recorded as post-GREEN verification rather than the planned feature-first proof.
+No combined E/F, final installation or performance acceptance is claimed.
+
+External benchmark preparation retains calibration observations separately from
+warm/measured batches. The new calibration-observer API first failed as missing;
+its first test expectation incorrectly assumed count2 instead of the existing
+1.1 safety multiplier's count3, so the corrected result is verification rather
+than an unchanged RED→GREEN claim. Current mechanics observations and external
+source hashes are in `docs/validation/perf-preparation/`; coverage validation
+checks are post-drafting verification. No numerical gate was relaxed, and no
+measurement inventory or artifact tuple is yet accepted as final.
+
 At 2026-10-12T13:13Z Stage D is owner-verified: post-fix D13 has 198 cases in
 each original backend/minor source run, with 195/196/197 passes and only 3/2/1
 version-specific skips. All 24 owner installed calls and both installed

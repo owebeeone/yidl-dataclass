@@ -1,0 +1,40 @@
+{
+  "scope": "External prototype mechanics preparation, not final performance results or an unchanged-test-first claim. Calibration observer expectation corrected after implementation to match the existing 1.1 safety multiplier (count 3, not 2).",
+  "records": [
+    {
+      "label": "owner-perf-memory-boundary-red",
+      "exit_code": 1,
+      "output": "..E....\n======================================================================\nERROR: test_dictionary_inspection_allocation_boundary_is_explicit (__main__.HarnessShape.test_dictionary_inspection_allocation_boundary_is_explicit)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-harness-test.py\", line 45, in test_dictionary_inspection_allocation_boundary_is_explicit\n    self.assertEqual(row['allocation_boundary'],\n                     ~~~^^^^^^^^^^^^^^^^^^^^^^^\nKeyError: 'allocation_boundary'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.015s\n\nFAILED (errors=1)\n"
+    },
+    {
+      "label": "owner-perf-memory-boundary-green",
+      "exit_code": 0,
+      "output": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.018s\n\nOK\n"
+    },
+    {
+      "label": "owner-perf-inspection-summary-red",
+      "exit_code": 1,
+      "output": "...E.....\n======================================================================\nERROR: test_memory_aggregates_process_observations_with_zero_dict (__main__.Completeness.test_memory_aggregates_process_observations_with_zero_dict)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-summary-test.py\", line 69, in test_memory_aggregates_process_observations_with_zero_dict\n    self.assertEqual(row['allocation_bytes_per_object_after_dict_inspection']['median'],102)\n                     ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nKeyError: 'allocation_bytes_per_object_after_dict_inspection'\n\n----------------------------------------------------------------------\nRan 9 tests in 0.089s\n\nFAILED (errors=1)\n"
+    },
+    {
+      "label": "owner-perf-inspection-summary-green",
+      "exit_code": 0,
+      "output": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.185s\n\nOK\n"
+    },
+    {
+      "label": "owner-perf-calibration-record-red",
+      "exit_code": 1,
+      "output": "E.........\n======================================================================\nERROR: test_calibration_preserves_observed_batches (__main__.Accounting.test_calibration_preserves_observed_batches)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-support-test.py\", line 40, in test_calibration_preserves_observed_batches\n    count=support.calibrate(measured,minimum_ns=20,on_observation=seen.append)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: calibrate() got an unexpected keyword argument 'on_observation'\n\n----------------------------------------------------------------------\nRan 10 tests in 0.004s\n\nFAILED (errors=1)\n"
+    },
+    {
+      "label": "owner-perf-calibration-record-green",
+      "exit_code": 1,
+      "output": "F.........\n======================================================================\nFAIL: test_calibration_preserves_observed_batches (__main__.Accounting.test_calibration_preserves_observed_batches)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"external:prototype/yidl-dataclass-owner-perf-support-test.py\", line 41, in test_calibration_preserves_observed_batches\n    self.assertEqual(count,2)\nAssertionError: 3 != 2\n\n----------------------------------------------------------------------\nRan 10 tests in 0.013s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "label": "owner-perf-calibration-record-corrected-verification",
+      "exit_code": 0,
+      "output": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.002s\n\nOK\n"
+    }
+  ]
+}
