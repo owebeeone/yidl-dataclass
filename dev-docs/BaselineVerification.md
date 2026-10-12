@@ -11,3 +11,18 @@ These are baseline checks, not Dataclass implementation evidence. The existing
 Undoable checkpoint modification and untracked initialization-helper draft remain
 outside the run. Final verification must additionally cover the new implementation,
 integration, supported interpreter versions and independently installed packages.
+
+## Dependency artifact preparation
+
+Before product implementation, unchanged Astichi, Cache and Lifecycle wheels were
+built with `uv build --wheel --python <verification-python> --out-dir <wheelhouse> MEMBER`.
+Astichi compiled its native extension successfully; its CPython 3.12 ABI3 wheel
+is intended for the supported interpreter matrix. Build paths are external
+verification locations, not package dependencies. This is preparation evidence;
+imports and compatibility in all three installed environments remain future gates.
+
+| Wheel | SHA-256 | Bytes |
+| --- | --- | --- |
+| `astichi-1.1.3-cp312-abi3-macosx_11_0_arm64.whl` | `8f0e6b6c53e6a9d429d131647f072fc4433b461d9a8ed75bfd83e0b1b160e597` | 1803265 |
+| `yidl_cache-0.1.0-py3-none-any.whl` | `cd59c988bb4f62cf4ef324330e60b71db3301ff33f919b91f6b42760f19c7e95` | 15380 |
+| `yidl_lifecycle-0.1.0-py3-none-any.whl` | `6f9f21c60f1fc360ee41e68f4de0289836f1f00a5e1f2c116be6cb4f3473cb4f` | 100592 |

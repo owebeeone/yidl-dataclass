@@ -1,11 +1,12 @@
 # YIDL Dataclass checkpoint
 
-Status: autonomous run authorized at 2026-10-12T03:36:48Z. Requirements accepted
-by the operator after dual round-2 GO and a subsequent operator-approved locality
-amendment without re-review. Detailed design is underway; implementation has not
-started. This checkpoint governs the experiment.
+Status: autonomous implementation is underway at Stage A after detailed-design
+dual GO and TDD-plan GO. GO/start was 2026-10-12T03:36:48Z; implementation starts
+at approximately 2026-10-12T04:36Z. Final implementation is not accepted. This
+checkpoint governs the experiment; historical requirement and design reviews
+below retain their original acceptance boundaries.
 
-## Object and authority
+## Requirements review history and authority
 
 The review object is the committed README, `dev-docs/DataclassConcept.md` and
 `dev-docs/ExperimentProtocol.md` at
@@ -116,4 +117,9 @@ Consistency, with automatic second-axis Safety escalation for any P0/P1/P2 or
 reviewer request. No new interface or architectural decision belongs in that plan;
 such a change must return to the dual design gate. Final implementation acceptance
 uses dual Code/State review. Product code starts only after the plan gate passes.
-Next action: settle the plan and obtain the interior Consistency verdict.
+Status: **TDD plan accepted at `f2514e1c993cb049417b7a10cdf2932bd68bd80f`
+after `DataclassPlan-ReviewConsistency.md` reported GO with no findings**.
+No second-axis escalation was required. Product implementation starts at Stage A,
+with genuine native generation and direct public slots. The drafter stops at
+stage checkpoints for owner verification/commits. Final acceptance remains ahead.
+Next action: Stage A RED/GREEN and its three-minor checkpoint.

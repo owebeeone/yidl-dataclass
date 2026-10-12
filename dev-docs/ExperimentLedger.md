@@ -30,6 +30,8 @@ separate measurement stages.
 | `de7cadd25c1d3fd5deac0d978043284fa130da1c` | Both fresh design reviewers GO, independently closing all inherited findings. Detailed design accepted only; no implementation or performance claim. |
 | 2026-10-12T04:24:33Z | Separate TDD plan drafting begins after design acceptance. Interior single Consistency review tier, auto-escalate for P0/P1/P2 or request; final implementation remains dual Code/State. |
 | Design-acceptance usage checkpoint | Latest observations across six disjoint actors estimate approximately $7.07 Standard API-equivalent USD, including design reviews. These are cumulative observations around acceptance, not exact disjoint stage billing; some immediately subsequent planning/output may enter late actor samples. Actual billing unavailable. Elapsed GO-to-acceptance: about 47m45s. |
+| `f2514e1c993cb049417b7a10cdf2932bd68bd80f` | Interior TDD-plan Consistency review GO with no findings; no Safety escalation required. |
+| 2026-10-12T04:36Z | Product implementation starts with Stage A after design/plan gates. Sole drafter, strict behavioral RED/GREEN, stage checkpoints for owner verification and scoped commits. |
 
 ## Autonomous scope and intervention rules
 
