@@ -67,3 +67,37 @@ presented as defects in those original dependencies.
   reference contexts if needed; no SDK patch is part of this task.
 - Blocks the requested Dataclass outcome: **no for the observed cases**. The
   existing identifier-binding alternative produced the first canonical GREEN.
+
+## Nested equality expression-tail binding pattern
+
+- Classification: confirmed failure of the chosen consumer resource arrangement;
+  a general SDK defect or documented-contract violation is not established.
+- Evidence: Stage B attempts in `docs/validation/stage-b/` leave a later child
+  `term_path` binding unresolved while assembling nested equality terms with
+  original SDKs. `Dataclass-StageBResult.md` records the successful alternative.
+- Impact: that arrangement cannot be used unchanged for the version-specific
+  comparison sequence. Authored flat prefix statements preserve ordered reads,
+  raw returns, truth conversion and temporary release, including exceptional
+  cleanup, with no helper dispatch or SDK patch.
+- Suggested improvement: separately document supported nested expression/binding
+  compositions or investigate the failed pattern under owning-repository scope.
+- Blocks the requested Dataclass outcome: **no**. Six source matrices and six
+  independent installed std differential probes pass the consumer alternative.
+
+## Expression carriers differ between existing backend routes
+
+- Classification: observed source-pattern/backend limitation; SDK contract
+  violation and general defect are not established.
+- Evidence: Stage B explicit Python attempts reject bare value-form reference
+  fragments; tuple funcargs carriers have different lowering behavior from the
+  native route. The existing authored `direct_ref if True else None` carrier
+  passes both routes. Its compiled hash operation sequence matches a direct
+  reference, allowing only the 3.14 LOAD_FAST/LOAD_FAST_BORROW ownership choice.
+- Impact: portable resources need a carrier accepted by both existing routes;
+  the constant branch adds no runtime conditional or extra allocation in the
+  verified projection. Generation parsing remains allowed by the task boundary.
+- Suggested improvement: separately clarify the supported carrier contexts in
+  SDK documentation and assess backend consistency with owning tests if desired.
+- Blocks the requested Dataclass outcome: **no for the verified cases**. The
+  alternative preserves direct reads, and complete Stage B suites pass both
+  selections on all supported minors. No SDK work is authorized by this finding.
