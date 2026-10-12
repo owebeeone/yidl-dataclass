@@ -66,6 +66,21 @@ separate measurement stages.
 
 ## Autonomous scope and intervention rules
 
+Product Stage A was independently verified and committed at
+`9fdcd7cfa8c8bea4e343965f48dab7ed9382e30a` on 2026-10-12 around 09:39Z.
+Its three-minor source suite and six isolated installed owner probes pass the
+bounded core subset. See `Dataclass-StageAResult.md`; full completion remains
+ahead. The operator had to ask why work stopped after status replies; the owner
+acknowledged incorrectly ending active turns and resumed the existing GO.
+This is additional intervention, not an uninterrupted one-shot success.
+
+Latest twelve-actor observations at 09:39Z estimate $38.607173 Standard
+API-equivalent USD, approximately six hours after original GO. The cumulative
+194,894,321 input tokens include 190,959,488 repeated cached input; 993,275 output
+tokens include 527,280 reasoning tokens (a subset, not added again). Actual
+billing remains unavailable. Stage B comparison generation is now in progress;
+these figures include historical detours and are not completed-product cost.
+
 The run includes compact detailed design, a separate TDD plan, native YIDL-generated
 Dataclass implementation, real Undoable comparison integration, canonical goldens,
 independent reviews, correctness/performance/declarative evaluation, package checks
