@@ -1,0 +1,7 @@
+{
+  "scope": "Historical untimed initial definition preserved before final source freeze",
+  "path": "docs/validation/stage-h-preparation/definition-initial-312.json",
+  "sha256": "d54d504d03e998e9f87c313c3e7a9417ce27ab1963fdff0f8d2343ae72c2018d",
+  "historical_increment": "h07-definition312",
+  "superseded_by": "definition.json"
+}

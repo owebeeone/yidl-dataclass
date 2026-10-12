@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.015" timestamp="2026-10-13T02:37:33.931785+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_gate_integrity" name="test_cold_worker_journal_retains_worker_ns_unit" time="0.005" /></testsuite></testsuites>

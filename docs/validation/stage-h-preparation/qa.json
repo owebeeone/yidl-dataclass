@@ -1,0 +1,18 @@
+{
+  "artifact_references": 99,
+  "cold_setup_checks": 18,
+  "definition_file_sha256": "805548ffd088cbbd635667757d6ecf62d655064351aeb63255369b154aeab708",
+  "definition_sha256": "668c864ea59b976a950557ab9d608e351eae9b0aa7e3ef84e2c59f5046191983",
+  "increments": 60,
+  "junit_files": 33,
+  "mechanics_per_minor": 49,
+  "memory_cases": 32,
+  "raw_archive": "external:yidl-dataclass-stage-h-preparation-raw",
+  "sanitization_corrections": 7,
+  "scope": "H preparation only; no timed benchmark samples",
+  "source_files": 18,
+  "success": true,
+  "timing_cases": 132,
+  "unchanged_dataclass_package_files": 37,
+  "untimed_setup_checks_per_minor": 84
+}

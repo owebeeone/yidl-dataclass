@@ -1,0 +1,79 @@
+[
+  {
+    "adopted_initial_sha256": "549239417d1c0c30e59d4b34eb4782bc1610bf4ee487cefe99d19712c70ea93a",
+    "adopted_path": "tests/data/perf/harness.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-harness",
+    "prototype_sha256": "8226b049a7f995bd0912978caaf2d602ca98827c95a08b7983c02367c7d9d34c"
+  },
+  {
+    "adopted_initial_sha256": "78c99f1cefac6612e7eb605c1aeb8561de5279092fdc3fcfb1505229dcd95ad2",
+    "adopted_path": "tests/data/perf/measurement.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-support",
+    "prototype_sha256": "a1a42475981fcdeefb5868a54db3b65300e925ea57caf23f8ecac31648f35946"
+  },
+  {
+    "adopted_initial_sha256": "e0e438d8845f8002ac08159830dbbacd806f14cfb06fe5dd3ec7dcec9f865481",
+    "adopted_path": "tests/data/perf/report.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-summary",
+    "prototype_sha256": "5636a4b3c220a9b0384eabf4d0fe367525029a767915da7e211c6e7b27f4ca22"
+  },
+  {
+    "adopted_initial_sha256": "0f73f2f17a8ebcaf337ea3ae7f32d08d27d5c2683da40efb1efc6968d88c0f49",
+    "adopted_path": "tests/data/perf/validation.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-coverage",
+    "prototype_sha256": "0f73f2f17a8ebcaf337ea3ae7f32d08d27d5c2683da40efb1efc6968d88c0f49"
+  },
+  {
+    "adopted_initial_sha256": "ac5ac9314f6b7bac2303495815726ac68e30eab966d7ff8f0e57dd31792af738",
+    "adopted_path": "tests/data/perf/undoable_cases.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-undoable",
+    "prototype_sha256": "3b80ec304eb4f59783616f4d20c48d4293044a62b643ed98961f86f9ac9fc1b5"
+  },
+  {
+    "adopted_initial_sha256": "bf88d275a61d1892c2dcc98f44cba5678e67fd8eb19b71f5e6f7abb0db8769bb",
+    "adopted_path": "tests/data/perf/cold_worker.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-cold-worker",
+    "prototype_sha256": "bf88d275a61d1892c2dcc98f44cba5678e67fd8eb19b71f5e6f7abb0db8769bb"
+  },
+  {
+    "adopted_initial_sha256": "4b3724b21af02593b6794035097fbc861a4d006767cc288ebf6c9951956521e4",
+    "adopted_path": "tests/data/perf/definition.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-definition",
+    "prototype_sha256": "ed7f68e110da1ff2bcb7950b6c2f091247069c4b29ceeee8c038d057181565b5"
+  },
+  {
+    "adopted_initial_sha256": "93985596db0f8be0581cea434e6179b2fbd40a9e95f673323a5acf168e3e7636",
+    "adopted_path": "tests/data/perf/test_harness_setup.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-harness-test",
+    "prototype_sha256": "08c970f5e68a17d574f6fa012f8cde42b7258f7d6e23b0cc18f56b8340dcb6ea"
+  },
+  {
+    "adopted_initial_sha256": "54a8c01561abd283cc72f822f00d6fdbb15dfe64a5d10b0731ae765cd01fdd3b",
+    "adopted_path": "tests/data/perf/test_measurement.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-support-test",
+    "prototype_sha256": "9b39822de03f5b84f338c77cf900a9abefd801223c03d12cfb01f83bf5c7aac4"
+  },
+  {
+    "adopted_initial_sha256": "4a88f53960c23b2d01122c4dc1931d02630490eb722734aff55da2f7d5d21348",
+    "adopted_path": "tests/data/perf/test_report.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-summary-test",
+    "prototype_sha256": "ce505c3effa70bb2388d19723072a3c7a4d40757812252c48b360b7bc7fc7674"
+  },
+  {
+    "adopted_initial_sha256": "1aa8874bd0f881ec2cf28b4e60751e65130564b8285221f774057420130314ae",
+    "adopted_path": "tests/data/perf/test_validation.py",
+    "history": "Owner prototype preparation; not wholesale strict test-first. See owner-mechanics-observations.json.",
+    "prototype": "external:owner-perf-coverage-test",
+    "prototype_sha256": "e0d4a2f67791aa3b9c2b48159e3907e4065d0f9258cd06ca905d28861dcfd791"
+  }
+]

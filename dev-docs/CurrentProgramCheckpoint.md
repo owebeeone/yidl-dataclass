@@ -54,6 +54,9 @@ Its 104 frozen source/golden hashes still match, public vocabulary counts are
 checked, and no calibrated grade is inferred from the four authoring cards.
 Stage H harness preparation is active; timing has not started. Final reviews
 will inspect the settled implementation and measurement/evidence tuple.
+H preparation is now stopped and owner-verified; see
+`Dataclass-StageHPreparationResult.md`. The complete definition/source/provenance
+freeze is ready for serial measurement; all numerical gates remain unchanged.
 
 ## Requirements review history and authority
 

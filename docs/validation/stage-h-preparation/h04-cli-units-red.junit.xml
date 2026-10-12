@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.077" timestamp="2026-10-13T02:17:03.040948+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_gate_integrity" name="test_raw_measurement_units_are_validated_before_aggregation" time="0.003"><failure message="Failed: DID NOT RAISE ValueError">def test_raw_measurement_units_are_validated_before_aggregation():
+        validation = load('validation')
+        fixture = load('test_validation')
+        document, definition = fixture.inputs()
+        for row in document['rows']:
+            row.update(elapsed_ns=30, ns_per_op=10, units='ns/op', elapsed_units='ns')
+        document['rows'][0]['ns_per_op'] = 999
+&gt;       with pytest.raises(ValueError, match='normaliz'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:88: Failed</failure></testcase><testcase classname="tests.data.perf.test_gate_integrity" name="test_public_measurement_cli_requires_frozen_definition" time="0.051"><failure message="AssertionError: assert '--definition' in 'usage: harness.py [-h] --output OUTPUT [--include-cold]\n                  --undoable-baseline-dir UNDOABLE_BASELINE_...--output OUTPUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n'&#10; +  where 'usage: harness.py [-h] --output OUTPUT [--include-cold]\n                  --undoable-baseline-dir UNDOABLE_BASELINE_...--output OUTPUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n' = CompletedProcess(args=['[consumer-root]/.venv/bin/python', '[example-root]PUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n', stderr='').stdout">def test_public_measurement_cli_requires_frozen_definition():
+        import subprocess
+        import sys
+        result = subprocess.run([sys.executable, str(Path(__file__).with_name('harness.py')), '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+&gt;       assert '--definition' in result.stdout
+E       AssertionError: assert '--definition' in 'usage: harness.py [-h] --output OUTPUT [--include-cold]\n                  --undoable-baseline-dir UNDOABLE_BASELINE_...--output OUTPUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n'
+E        +  where 'usage: harness.py [-h] --output OUTPUT [--include-cold]\n                  --undoable-baseline-dir UNDOABLE_BASELINE_...--output OUTPUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n' = CompletedProcess(args=['[consumer-root]/.venv/bin/python', '[example-root]PUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n', stderr='').stdout
+
+tests/data/perf/test_gate_integrity.py:97: AssertionError</failure></testcase></testsuite></testsuites>

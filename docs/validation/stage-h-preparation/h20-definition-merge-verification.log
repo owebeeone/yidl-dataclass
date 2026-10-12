@@ -1,0 +1,1 @@
+{"definition_sha256": "668c864ea59b976a950557ab9d608e351eae9b0aa7e3ef84e2c59f5046191983", "memory_cases": 32, "minors": ["3.12", "3.13", "3.14"], "scope": "untimed definition freeze candidate", "timing_cases": 132}

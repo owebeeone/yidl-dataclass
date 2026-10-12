@@ -1,0 +1,1 @@
+{"backend": "native-rust", "python": "3.14.3", "scope": "untimed setup only; no performance samples", "untimed_setup_checks": 84}

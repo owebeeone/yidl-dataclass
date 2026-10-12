@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_unverified_baseline_package_is_rejected_before_execution _________
+
+tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1654/test_unverified_baseline_packa0')
+
+    def test_unverified_baseline_package_is_rejected_before_execution(tmp_path):
+        seam = load('undoable_cases')
+        (tmp_path / '__init__.py').write_text("unverified_source = True\n")
+>       with pytest.raises(ValueError, match='baseline'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:77: Failed
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_gate_integrity.py::test_unverified_baseline_package_is_rejected_before_execution
+1 failed, 2 deselected in 0.03s

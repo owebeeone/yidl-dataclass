@@ -1,0 +1,35 @@
+{
+  "scope": "Independent owner H preparation verification; no benchmark samples",
+  "integrity_audit": "integrity-audit.json",
+  "source_hash_map_matches_definition": true,
+  "source_files": 18,
+  "mechanics": {
+    "3.12": {
+      "passed": 49,
+      "seconds": 0.75
+    },
+    "3.13": {
+      "passed": 49,
+      "seconds": 0.85
+    },
+    "3.14": {
+      "passed": 49,
+      "seconds": 0.94
+    }
+  },
+  "untimed_setup_checks_per_minor": 84,
+  "execution_note": "Owner invoked existing harness from isolated installed interpreters with no source fallback. Mechanics are verification, not new RED. stdout/stderr retained in session tool output; this JSON is an observation summary, not a verbatim raw archive.",
+  "prior_owner_setup_attempt": {
+    "environment": "older consumer-verification environments",
+    "minors": [
+      "3.12",
+      "3.13",
+      "3.14"
+    ],
+    "exit_code": 1,
+    "first_signal": "importlib.metadata.PackageNotFoundError: No package metadata was found for yidl-cache",
+    "disposition": "Instrumentation preflight; use already fully pinned Stage G installed environments. No product or dependency edit/install/rebuild. Original complete tracebacks retained in session tool output only.",
+    "raw_file_available": false
+  },
+  "canonical_definition_sha256": "668c864ea59b976a950557ab9d608e351eae9b0aa7e3ef84e2c59f5046191983"
+}

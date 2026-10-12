@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.042" timestamp="2026-10-13T02:31:30.822058+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_gate_integrity" name="test_completed_cold_observation_survives_later_worker_failure" time="0.002"><failure message="AssertionError: assert [] == [{'operations...psed_ns': 10}]&#10;  &#10;  Right contains one more item: {'operations': 1, 'elapsed_ns': 10}&#10;  Use -v to get more diff">def test_completed_cold_observation_survives_later_worker_failure():
+        import inspect
+        measurement = load('measurement')
+        completed = []
+        calls = 0
+    
+        def worker():
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                raise RuntimeError('next worker failed')
+            return {'operations': 1, 'elapsed_ns': 10}
+    
+        options = {'on_observation': completed.append} if 'on_observation' in inspect.signature(measurement.cold_sample).parameters else {}
+        with pytest.raises(RuntimeError, match='next worker failed'):
+            measurement.cold_sample(worker, 2, **options)
+&gt;       assert completed == [{'operations': 1, 'elapsed_ns': 10}]
+E       AssertionError: assert [] == [{'operations...psed_ns': 10}]
+E         
+E         Right contains one more item: {'operations': 1, 'elapsed_ns': 10}
+E         Use -v to get more diff
+
+tests/data/perf/test_gate_integrity.py:133: AssertionError</failure></testcase><testcase classname="tests.data.perf.test_gate_integrity" name="test_failed_final_validation_preserves_completed_result" time="0.002"><failure message="FileNotFoundError: [Errno 2] No such file or directory: '[temp]/pytest-of-user/pytest-1660/test_failed_final_validation_p0/result.attempt.json'">tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1660/test_failed_final_validation_p0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x109185190&gt;
+
+    def test_failed_final_validation_preserves_completed_result(tmp_path, monkeypatch):
+        import json
+        import sys
+        from types import SimpleNamespace
+        measure = load('measure')
+        definition_path = tmp_path / 'definition.json'
+        definition_path.write_text(json.dumps({'source_sha256': {}, 'artifact_tuple': {}}))
+        output = tmp_path / 'result.json'
+        result = {'environment': {}, 'rows': [{'completed': True}], 'memory': []}
+        validation = SimpleNamespace(validate_definition=lambda d: None, validate=lambda *a: (_ for _ in ()).throw(ValueError('late validation')))
+        provenance = SimpleNamespace(source_hashes=lambda: {}, verify_installation=lambda *a, **kw: {}, canonical_digest=lambda d: 'digest')
+        seam = SimpleNamespace(load_baseline=lambda *a, **kw: object(), BASELINE_SHA256='baseline')
+        harness = SimpleNamespace(run_process=lambda *a, **kw: result)
+        monkeypatch.setattr(measure, 'load', lambda name, filename: {'validation.py': validation, 'provenance.py': provenance, 'undoable_cases.py': seam, 'harness.py': harness}[filename])
+        monkeypatch.setitem(sys.modules, 'yidl_dataclass', SimpleNamespace())
+        monkeypatch.setattr(sys, 'argv', ['measure.py', '--definition', str(definition_path), '--artifact-root', str(tmp_path), '--sdk-wheel-dir', str(tmp_path), '--undoable-baseline-dir', str(tmp_path), '--undoable-baseline-wheel', str(tmp_path / 'wheel'), '--output', str(output), '--process-label', 'synthetic'])
+        with pytest.raises(ValueError, match='late validation'):
+            measure.main()
+        assert not output.exists()  # Final valid JSON is never published for a failed attempt.
+&gt;       assert json.loads(output.with_suffix('.attempt.json').read_text())['rows'] == [{'completed': True}]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/data/perf/test_gate_integrity.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('[temp]/pytest-of-user/pytest-1660/test_failed_final_validation_p0/result.attempt.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '[temp]/pytest-of-user/pytest-1660/test_failed_final_validation_p0/result.attempt.json'
+
+[home]/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py:1013: FileNotFoundError</failure></testcase></testsuite></testsuites>

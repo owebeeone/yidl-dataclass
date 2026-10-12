@@ -1,0 +1,471 @@
+{
+  "backend": "native-rust",
+  "baseline_wheel_sha256": "e63818caa79b4c361d8c6203f572f79d4bb098f6ece09a3bf6b149e6206e5620",
+  "checked": [
+    [
+      3,
+      "ordinary",
+      "slot_read"
+    ],
+    [
+      3,
+      "ordinary",
+      "slot_write"
+    ],
+    [
+      3,
+      "ordinary",
+      "construct_supplied"
+    ],
+    [
+      3,
+      "ordinary",
+      "construct_defaults"
+    ],
+    [
+      3,
+      "ordinary",
+      "construct_factory"
+    ],
+    [
+      3,
+      "ordinary",
+      "eq_equal"
+    ],
+    [
+      3,
+      "ordinary",
+      "eq_early_mismatch"
+    ],
+    [
+      3,
+      "ordinary",
+      "eq_late_mismatch"
+    ],
+    [
+      3,
+      "ordinary",
+      "order"
+    ],
+    [
+      3,
+      "ordinary",
+      "hash"
+    ],
+    [
+      3,
+      "ordinary",
+      "repr"
+    ],
+    [
+      3,
+      "readonly",
+      "readonly_read"
+    ],
+    [
+      3,
+      "readonly",
+      "readonly_reject"
+    ],
+    [
+      3,
+      "extension",
+      "pipeline_plain"
+    ],
+    [
+      3,
+      "extension",
+      "pipeline_converted"
+    ],
+    [
+      3,
+      "extension",
+      "pipeline_validated"
+    ],
+    [
+      3,
+      "extension",
+      "pipeline_both"
+    ],
+    [
+      3,
+      "extension",
+      "lazy_first"
+    ],
+    [
+      3,
+      "extension",
+      "lazy_cached"
+    ],
+    [
+      3,
+      "extension",
+      "construct_dependent"
+    ],
+    [
+      3,
+      "generation",
+      "decorate_repeated"
+    ],
+    [
+      3,
+      "generation",
+      "actual_composable_emission"
+    ],
+    [
+      3,
+      "memory_setup",
+      "ordinary"
+    ],
+    [
+      3,
+      "memory_setup",
+      "frozen"
+    ],
+    [
+      3,
+      "memory_setup",
+      "weakref"
+    ],
+    [
+      3,
+      "memory_setup",
+      "local"
+    ],
+    [
+      3,
+      "memory_setup",
+      "lazy_unready"
+    ],
+    [
+      3,
+      "memory_setup",
+      "lazy_ready"
+    ],
+    [
+      3,
+      "memory_setup",
+      "retained_shared"
+    ],
+    [
+      3,
+      "memory_setup",
+      "retained_unique"
+    ],
+    [
+      3,
+      "product",
+      "undoable_eq_prelude"
+    ],
+    [
+      3,
+      "product",
+      "undoable_value_scope:integer_equal"
+    ],
+    [
+      3,
+      "product",
+      "undoable_value_scope:opaque_equal"
+    ],
+    [
+      3,
+      "product",
+      "undoable_value_scope:child_alternate"
+    ],
+    [
+      3,
+      "product",
+      "undoable_value_scope:tuple_child_alternate"
+    ],
+    [
+      3,
+      "product",
+      "undoable_value_scope:dict_child_alternate"
+    ],
+    [
+      3,
+      "frozen_original",
+      "undoable_value_scope:integer_equal"
+    ],
+    [
+      3,
+      "frozen_original",
+      "undoable_value_scope:opaque_equal"
+    ],
+    [
+      3,
+      "frozen_original",
+      "undoable_value_scope:child_alternate"
+    ],
+    [
+      3,
+      "frozen_original",
+      "undoable_value_scope:tuple_child_alternate"
+    ],
+    [
+      3,
+      "frozen_original",
+      "undoable_value_scope:dict_child_alternate"
+    ],
+    [
+      3,
+      "structural_reference",
+      "undoable_eq_prelude"
+    ],
+    [
+      12,
+      "ordinary",
+      "slot_read"
+    ],
+    [
+      12,
+      "ordinary",
+      "slot_write"
+    ],
+    [
+      12,
+      "ordinary",
+      "construct_supplied"
+    ],
+    [
+      12,
+      "ordinary",
+      "construct_defaults"
+    ],
+    [
+      12,
+      "ordinary",
+      "construct_factory"
+    ],
+    [
+      12,
+      "ordinary",
+      "eq_equal"
+    ],
+    [
+      12,
+      "ordinary",
+      "eq_early_mismatch"
+    ],
+    [
+      12,
+      "ordinary",
+      "eq_late_mismatch"
+    ],
+    [
+      12,
+      "ordinary",
+      "order"
+    ],
+    [
+      12,
+      "ordinary",
+      "hash"
+    ],
+    [
+      12,
+      "ordinary",
+      "repr"
+    ],
+    [
+      12,
+      "readonly",
+      "readonly_read"
+    ],
+    [
+      12,
+      "readonly",
+      "readonly_reject"
+    ],
+    [
+      12,
+      "extension",
+      "pipeline_plain"
+    ],
+    [
+      12,
+      "extension",
+      "pipeline_converted"
+    ],
+    [
+      12,
+      "extension",
+      "pipeline_validated"
+    ],
+    [
+      12,
+      "extension",
+      "pipeline_both"
+    ],
+    [
+      12,
+      "extension",
+      "lazy_first"
+    ],
+    [
+      12,
+      "extension",
+      "lazy_cached"
+    ],
+    [
+      12,
+      "extension",
+      "construct_dependent"
+    ],
+    [
+      12,
+      "generation",
+      "decorate_repeated"
+    ],
+    [
+      12,
+      "generation",
+      "actual_composable_emission"
+    ],
+    [
+      12,
+      "memory_setup",
+      "ordinary"
+    ],
+    [
+      12,
+      "memory_setup",
+      "frozen"
+    ],
+    [
+      12,
+      "memory_setup",
+      "weakref"
+    ],
+    [
+      12,
+      "memory_setup",
+      "local"
+    ],
+    [
+      12,
+      "memory_setup",
+      "lazy_unready"
+    ],
+    [
+      12,
+      "memory_setup",
+      "lazy_ready"
+    ],
+    [
+      12,
+      "memory_setup",
+      "retained_shared"
+    ],
+    [
+      12,
+      "memory_setup",
+      "retained_unique"
+    ],
+    [
+      12,
+      "product",
+      "undoable_eq_prelude"
+    ],
+    [
+      12,
+      "product",
+      "undoable_value_scope:integer_equal"
+    ],
+    [
+      12,
+      "product",
+      "undoable_value_scope:opaque_equal"
+    ],
+    [
+      12,
+      "product",
+      "undoable_value_scope:child_alternate"
+    ],
+    [
+      12,
+      "product",
+      "undoable_value_scope:tuple_child_alternate"
+    ],
+    [
+      12,
+      "product",
+      "undoable_value_scope:dict_child_alternate"
+    ],
+    [
+      12,
+      "frozen_original",
+      "undoable_value_scope:integer_equal"
+    ],
+    [
+      12,
+      "frozen_original",
+      "undoable_value_scope:opaque_equal"
+    ],
+    [
+      12,
+      "frozen_original",
+      "undoable_value_scope:child_alternate"
+    ],
+    [
+      12,
+      "frozen_original",
+      "undoable_value_scope:tuple_child_alternate"
+    ],
+    [
+      12,
+      "frozen_original",
+      "undoable_value_scope:dict_child_alternate"
+    ],
+    [
+      12,
+      "structural_reference",
+      "undoable_eq_prelude"
+    ]
+  ],
+  "provenance": {
+    "artifact_tuple_sha256": "09097b3fe593555dc69c6b12fdd83354a7a7096175488f0a08545c02f00d5aed",
+    "backend": "native-rust",
+    "origins_relative_to_prefix": {
+      "astichi": "lib/python3.13/site-packages/astichi/__init__.py",
+      "yidl": "lib/python3.13/site-packages/yidl/__init__.py",
+      "yidl_cache": "lib/python3.13/site-packages/yidl_cache/__init__.py",
+      "yidl_dataclass": "lib/python3.13/site-packages/yidl_dataclass/__init__.py",
+      "yidl_lifecycle": "lib/python3.13/site-packages/yidl_lifecycle/__init__.py",
+      "yidl_undoable": "lib/python3.13/site-packages/yidl_undoable/__init__.py"
+    },
+    "python": "3.13.12",
+    "sdk_payload_inventory_sha256": "4549548a55091a4643dae7817304f23fccc6e2f1c8462456166947178db61fad",
+    "source_sha256": {
+      "cases.py": "5668c7be5b9d8d08153bcb9c71301906e059bf59bad108e123c0c1f9ee45b29a",
+      "cold_worker.py": "ffecf536d266787b25eb2979ba275e85d5ad421546573e6c00037626c029bd22",
+      "definition.py": "f83c00a3d6c9ec98b8166fb61c92b8107e02a12bf965dd2be4101966dcc8e586",
+      "freeze_definition.py": "0bf4d5e8ac9002d0f34dcabb891ad0fb6e494ea05d8f1e7e3582b19dc6229883",
+      "harness.py": "7f1449cfb0455e76475acac98e62bbf229636d3d82a3c409152c6769ec2ef8df",
+      "measure.py": "5ad47a1123985e5cb9998483c9b1d2e27a5f21c4be632760ea456ef6beaa73a2",
+      "measurement.py": "e528fb36676347864487ee3e383f35b3f18454e232b42450c51b078de5751444",
+      "memory.py": "56cb066b4e63edf487f812035648294bf91fb83bd5a802f2b086e7ae2d6b9dc7",
+      "provenance.py": "590123c21af4f4aeb1765ea6babbddce8b664f09d20a796bbaf3e14e855e0cd3",
+      "report.py": "aeb70ee02725cb2503638f43f7bf7bf3ba16736e9f6885d16ba0cde5f21f58dd",
+      "setup_check.py": "eb1d5b738186c528d71d5f44eae05dcbeaf29dc10605191cfa142aecafbce30b",
+      "test_gate_integrity.py": "8ea37403860513fb50cafb6e5a13e7cc579df2a1840ea81b4e25dd836adbe171",
+      "test_harness_setup.py": "d502592feec8fdae3d7d86034905e09c1fc1d0dead1bafb348014915006f1f23",
+      "test_measurement.py": "d9b5734010c33e89f1060f9904214ed06000f12dc625893e74d426874380a47a",
+      "test_report.py": "637e933aef139969f239a2d7de03f2841b24536bd50878aa0a26de6c7894301d",
+      "test_validation.py": "756486e4538b56f3b580a9b508f312b5df602b84f6c7261c5bad480ed7e6cdee",
+      "undoable_cases.py": "3e3d1f6ad08037971515be4e6b8e505f91a3b6766c64e0292b4c4f81a4ee1b75",
+      "validation.py": "765249377a88c78d48f610845a0dcf3deea66924a627695f114af62d5254bbca"
+    },
+    "stdlib_dataclasses_sha256": "18b8b97f6c43ece379793745dfd505ed713a4c86bc6babdcdec593101b5f4399",
+    "versions": {
+      "astichi": "1.1.3",
+      "yidl": "0.1.0",
+      "yidl-cache": "0.1.0",
+      "yidl-dataclass": "0.1.0.dev0",
+      "yidl-lifecycle": "0.1.0",
+      "yidl-undoable": "0.1.0"
+    }
+  },
+  "python": "3.13.12",
+  "scope": "untimed setup only; no performance samples"
+}

@@ -1,0 +1,28 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_______ test_complete_memory_gate_rejects_wrong_units_and_instance_count _______
+
+    def test_complete_memory_gate_rejects_wrong_units_and_instance_count():
+        validation = load('validation')
+        document, definition = load('test_validation').inputs()
+        document['memory'][0].update(instances=1, units='kilobytes/object')
+>       with pytest.raises(ValueError, match='memory'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:162: Failed
+__________________ test_calibration_source_drift_is_rejected ___________________
+
+    def test_calibration_source_drift_is_rejected():
+        validation = load('validation')
+        document, definition = load('test_validation').inputs()
+        document['calibration_rows'][0]['source_sha256'] = 'different'
+>       with pytest.raises(ValueError, match='calibration source'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:170: Failed
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_gate_integrity.py::test_complete_memory_gate_rejects_wrong_units_and_instance_count
+FAILED tests/data/perf/test_gate_integrity.py::test_calibration_source_drift_is_rejected
+2 failed, 8 deselected in 0.03s

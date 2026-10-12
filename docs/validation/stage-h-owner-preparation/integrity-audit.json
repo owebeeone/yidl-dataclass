@@ -1,0 +1,211 @@
+{
+  "stage": "Stage H untimed preparation only; no product/dependency edits or measurements",
+  "manifest_sha256": "04cbfce3ae6aa7032669ddb35b40851f618618233b1e0385d10c50c114c7901e",
+  "owned_files": 140,
+  "increment_records": 60,
+  "artifact_references": 99,
+  "distinct_raw_hashes": 81,
+  "junit_files": 33,
+  "junit": {
+    "docs/validation/stage-h-preparation/h01-adopted-mechanics-verification.junit.xml": {
+      "tests": 35,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h02-integrity-red.junit.xml": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h02-integrity-green.junit.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h02-mechanics-verification.junit.xml": {
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h03-baseline-provenance-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h02-cohesion-refactor-refactor.junit.xml": {
+      "tests": 35,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h03-baseline-provenance-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h04-cli-units-red.junit.xml": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h04-cli-units-green.junit.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h04-mechanics-verification.junit.xml": {
+      "tests": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h05-cold-cli-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h05-cold-cli-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h05-mechanics-verification.junit.xml": {
+      "tests": 41,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h06-mechanics-verification.junit.xml": {
+      "tests": 41,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h08-journal-red.junit.xml": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h08-journal-green.junit.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h08-mechanics-verification.junit.xml": {
+      "tests": 43,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h09-completeness-red.junit.xml": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h09-completeness-green.junit.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h09-mechanics-verification.junit.xml": {
+      "tests": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h10-integration-verification.junit.xml": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h11-final-mechanics-refactor.junit.xml": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h13-final-mechanics-refactor.junit.xml": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h16-mechanics-312-verification.junit.xml": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h16-mechanics-313-verification.junit.xml": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h16-mechanics-314-verification.junit.xml": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h17-journal-provenance-verification.junit.xml": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h18-worker-unit-red.junit.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h18-worker-unit-green.junit.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h18-final-mechanics-refactor.junit.xml": {
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h19-mechanics-312-verification.junit.xml": {
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h19-mechanics-313-verification.junit.xml": {
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "docs/validation/stage-h-preparation/h19-mechanics-314-verification.junit.xml": {
+      "tests": 49,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "installed_results": [],
+  "scope": "integrity/source-path audit; behavioral verdicts remain separately assessed"
+}

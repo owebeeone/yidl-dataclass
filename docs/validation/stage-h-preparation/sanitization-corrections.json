@@ -1,0 +1,58 @@
+[
+  {
+    "path": "docs/validation/stage-h-preparation/h04-cli-units-red.junit.xml",
+    "prior_sanitized_sha256": "7f5d5bf15b78f04cda4cee531b14b7b4ab52c4f6f6e49254d27ce76abd6d21c2",
+    "sha256": "66e26837600b7f033b69b3970c5a827291a3058845329547ed27e0b5c2987d1e",
+    "raw_sha256": "6e1ecbaa9e937c725ccf2058e7ef276d7f348c1bfeafad24dd669bfdb400c2bb",
+    "prior_sanitized_archive_sha256": "7f5d5bf15b78f04cda4cee531b14b7b4ab52c4f6f6e49254d27ce76abd6d21c2",
+    "reason": "Remove hypothetical CLI example roots and system-cache warning paths; original raw and prior sanitized bytes remain external."
+  },
+  {
+    "path": "docs/validation/stage-h-preparation/h04-cli-units-red.log",
+    "prior_sanitized_sha256": "a4e3b922c21571c1103327967696ced16171d0786a0df93c52d8be2f4ad0a9c2",
+    "sha256": "208f800834bc55be3eb9d6f0d623beb2e7079aeba679c88a3e617df80d7ea21e",
+    "raw_sha256": "405d7202edbf7ab91d06a04c4162cbd68546c96b1b518279cc9d998c00ad882f",
+    "prior_sanitized_archive_sha256": "a4e3b922c21571c1103327967696ced16171d0786a0df93c52d8be2f4ad0a9c2",
+    "reason": "Remove hypothetical CLI example roots and system-cache warning paths; original raw and prior sanitized bytes remain external."
+  },
+  {
+    "path": "docs/validation/stage-h-preparation/h05-cold-cli-red.junit.xml",
+    "prior_sanitized_sha256": "795daab75cfb3b52fb9ac4529f780ab1742ba78ddf53f529a5b9af531e512040",
+    "sha256": "93401c0c841d342edfda0297937014cd0ab5441844af63b758506e0e6ab48a05",
+    "raw_sha256": "da8488264772a5a3d0f9e89574541530d9863e0db435c826e0296d0051a74526",
+    "prior_sanitized_archive_sha256": "795daab75cfb3b52fb9ac4529f780ab1742ba78ddf53f529a5b9af531e512040",
+    "reason": "Remove hypothetical CLI example roots and system-cache warning paths; original raw and prior sanitized bytes remain external."
+  },
+  {
+    "path": "docs/validation/stage-h-preparation/h05-cold-cli-red.log",
+    "prior_sanitized_sha256": "775633ccecb054e8d84af7205272674081d72222b9a340a50f9b09ca4566a44c",
+    "sha256": "e1b0f7f9aac58695f77c98321fb4705e9810159ab380138a4ba76921f4267119",
+    "raw_sha256": "847e90938e463f5192f9379d7169b6d80f6fd1a3f70b0a02e2eb8905a845e858",
+    "prior_sanitized_archive_sha256": "775633ccecb054e8d84af7205272674081d72222b9a340a50f9b09ca4566a44c",
+    "reason": "Remove hypothetical CLI example roots and system-cache warning paths; original raw and prior sanitized bytes remain external."
+  },
+  {
+    "path": "docs/validation/stage-h-preparation/h16-mechanics-312-verification.log",
+    "prior_sanitized_sha256": "91c716de27a3f3894a6459c745f63991ba24df9c9c0df4dc98f7086db716ebc1",
+    "sha256": "94d7783a12332aace7bae7386c8e2e6ad20ed4ef2cfdeecb3b3c12e06a0bb3dd",
+    "raw_sha256": "50885ddb3a9317bc31743dcb97197178405e4f071e42c58b3b11e671c7c17b7c",
+    "prior_sanitized_archive_sha256": "91c716de27a3f3894a6459c745f63991ba24df9c9c0df4dc98f7086db716ebc1",
+    "reason": "Remove hypothetical CLI example roots and system-cache warning paths; original raw and prior sanitized bytes remain external."
+  },
+  {
+    "path": "docs/validation/stage-h-preparation/h16-mechanics-313-verification.log",
+    "prior_sanitized_sha256": "1b4279fd11fdd374223bf84983c2232959ab22e75bc227640b46e0ed9aa6580c",
+    "sha256": "d60bbb9e334d4a07c70e9d3ff1b5d1bb48d829e06879dc41a066950125f9ec27",
+    "raw_sha256": "3c3505950558c27e28780489d8f548b45aca3300733a40616edbc45ced2337a8",
+    "prior_sanitized_archive_sha256": "1b4279fd11fdd374223bf84983c2232959ab22e75bc227640b46e0ed9aa6580c",
+    "reason": "Remove hypothetical CLI example roots and system-cache warning paths; original raw and prior sanitized bytes remain external."
+  },
+  {
+    "path": "docs/validation/stage-h-preparation/h16-mechanics-314-verification.log",
+    "prior_sanitized_sha256": "f550d1b5f7a7e1c806fe5c3035adda5aa3464414aea6e95fd574589d19fd5fb3",
+    "sha256": "6dc1be69aa1407dca9cd5b746c898143de13385407bf2385aed00952f909fb90",
+    "raw_sha256": "a74c8217a24400dc5907b40392f295dcaa38bf807d0d9b34bb01dd82728eae58",
+    "prior_sanitized_archive_sha256": "f550d1b5f7a7e1c806fe5c3035adda5aa3464414aea6e95fd574589d19fd5fb3",
+    "reason": "Remove hypothetical CLI example roots and system-cache warning paths; original raw and prior sanitized bytes remain external."
+  }
+]

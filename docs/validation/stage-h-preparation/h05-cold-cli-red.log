@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____ test_cold_worker_cli_requires_same_frozen_tuple_and_untimed_setup_mode ____
+
+    def test_cold_worker_cli_requires_same_frozen_tuple_and_untimed_setup_mode():
+        import subprocess
+        import sys
+        result = subprocess.run([sys.executable, str(Path(__file__).with_name('cold_worker.py')), '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+>       assert '--definition' in result.stdout and '--artifact-root' in result.stdout
+E       AssertionError: assert ('--definition' in 'usage: cold_worker.py [-h] --variant {product,stdlib_default,stdlib_slots}\n                      --fields {3,12} [--...age and exit\n  --variant {product,stdlib_default,stdlib_slots}\n  --fields {3,12}\n  --backend {native-rust,python}\n')
+E        +  where 'usage: cold_worker.py [-h] --variant {product,stdlib_default,stdlib_slots}\n                      --fields {3,12} [--...age and exit\n  --variant {product,stdlib_default,stdlib_slots}\n  --fields {3,12}\n  --backend {native-rust,python}\n' = CompletedProcess(args=['[consumer-root]/.venv/bin/python', '[example-root]\n  --variant {product,stdlib_default,stdlib_slots}\n  --fields {3,12}\n  --backend {native-rust,python}\n', stderr='').stdout
+
+tests/data/perf/test_gate_integrity.py:113: AssertionError
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_gate_integrity.py::test_cold_worker_cli_requires_same_frozen_tuple_and_untimed_setup_mode
+1 failed, 5 deselected in 0.06s

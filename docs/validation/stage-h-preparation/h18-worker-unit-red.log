@@ -1,0 +1,29 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_cold_worker_journal_retains_worker_ns_unit ________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x103a8aa50>
+
+    def test_cold_worker_journal_retains_worker_ns_unit(monkeypatch):
+        import json
+        from types import SimpleNamespace
+        harness = load('harness')
+        seen = []
+        monkeypatch.setattr(harness.subprocess, 'run', lambda *a, **kw: SimpleNamespace(returncode=0, stdout=json.dumps({'operations': 1, 'elapsed_ns': 20, 'units': 'ns'}), stderr=''))
+        def calibrate(measured, **kw):
+            kw['on_observation'](measured(1))
+            return 1
+        monkeypatch.setattr(harness.support, 'calibrate', calibrate)
+        harness.cold_generation_batches('product', 3, warmups=0, batches=0, observe=lambda kind, row: seen.append((kind, row)))
+>       assert seen[0][0] == 'cold_worker' and seen[0][1]['units'] == 'ns'
+E       AssertionError: assert ('cold_worker' == 'cold_worker'
+E         
+E           cold_worker and 'ns/op' == 'ns'
+E         
+E         - ns
+E         + ns/op)
+
+tests/data/perf/test_gate_integrity.py:322: AssertionError
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_gate_integrity.py::test_cold_worker_journal_retains_worker_ns_unit
+1 failed, 13 deselected in 0.03s

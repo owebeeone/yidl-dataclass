@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.027" timestamp="2026-10-13T02:13:13.875461+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_gate_integrity" name="test_unverified_baseline_package_is_rejected_before_execution" time="0.006"><failure message="Failed: DID NOT RAISE ValueError">tmp_path = PosixPath('[temp]/pytest-of-user/pytest-1654/test_unverified_baseline_packa0')
+
+    def test_unverified_baseline_package_is_rejected_before_execution(tmp_path):
+        seam = load('undoable_cases')
+        (tmp_path / '__init__.py').write_text("unverified_source = True\n")
+&gt;       with pytest.raises(ValueError, match='baseline'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:77: Failed</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,8 @@
+................................................                         [100%]
+=============================== warnings summary ===============================
+venv-313/lib/python3.13/site-packages/_pytest/cacheprovider.py:469
+  [temp]/yidl-dataclass-stage-g-artifacts-wn_ssz18/venv-313/lib/python3.13/site-packages/_pytest/cacheprovider.py:469: PytestCacheWarning: could not create cache path [config-cache-root]/.pytest_cache/v/cache/nodeids: [Errno 1] Operation not permitted: '[config-cache-root]/pytest-cache-files-2n0ihwws'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+48 passed, 1 warning in 0.42s

@@ -1,0 +1,6 @@
+{"fields": 3, "python": "3.14.3", "scope": "untimed cold-worker setup only", "selected_backend": "native-rust", "variant": "product"}
+{"fields": 12, "python": "3.14.3", "scope": "untimed cold-worker setup only", "selected_backend": "native-rust", "variant": "product"}
+{"fields": 3, "python": "3.14.3", "scope": "untimed cold-worker setup only", "selected_backend": "native-rust", "variant": "stdlib_default"}
+{"fields": 12, "python": "3.14.3", "scope": "untimed cold-worker setup only", "selected_backend": "native-rust", "variant": "stdlib_default"}
+{"fields": 3, "python": "3.14.3", "scope": "untimed cold-worker setup only", "selected_backend": "native-rust", "variant": "stdlib_slots"}
+{"fields": 12, "python": "3.14.3", "scope": "untimed cold-worker setup only", "selected_backend": "native-rust", "variant": "stdlib_slots"}

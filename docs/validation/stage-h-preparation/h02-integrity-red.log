@@ -1,0 +1,40 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+___________ test_complete_inventory_cannot_accept_one_batch_per_case ___________
+
+    def test_complete_inventory_cannot_accept_one_batch_per_case():
+        validation = load('validation')
+        definition = {'timing_keys': [[3, 'slot_read', 'product']], 'memory_keys': [],
+                      'minimum_calibration_ns': 20, 'warmups': 10, 'measured_batches': 20,
+                      'timing_source_sha256': {'3:product:slot_read': 'source'}}
+        document = {'rows': [{'fields': 3, 'case': 'slot_read', 'variant': 'product',
+                             'operations': 3, 'elapsed_ns': 30, 'ns_per_op': 10,
+                             'phase': 'measurement', 'batch': 0, 'source_sha256': 'source'}],
+                    'calibration_rows': [{'fields': 3, 'case': 'slot_read', 'variant': 'product',
+                                         'operations': 3, 'elapsed_ns': 30, 'ns_per_op': 10}],
+                    'memory': []}
+>       with pytest.raises(ValueError, match='batch'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:29: Failed
+___________________ test_memory_failure_always_stops_tracing ___________________
+
+    def test_memory_failure_always_stops_tracing():
+        harness = load('harness')
+        class Broken:
+            def __init__(self):
+                raise RuntimeError('allocation failed')
+        try:
+            with pytest.raises(RuntimeError, match='allocation failed'):
+                harness.memory_row(Broken, 10)
+>           assert not tracemalloc.is_tracing()
+E           assert not True
+E            +  where True = <built-in function is_tracing>()
+E            +    where <built-in function is_tracing> = tracemalloc.is_tracing
+
+tests/data/perf/test_gate_integrity.py:41: AssertionError
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_gate_integrity.py::test_complete_inventory_cannot_accept_one_batch_per_case
+FAILED tests/data/perf/test_gate_integrity.py::test_memory_failure_always_stops_tracing
+2 failed in 0.05s

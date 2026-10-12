@@ -1,0 +1,44 @@
+[
+  {
+    "prior_path": "docs/validation/stage-h-preparation/prior-candidate-v1/definition.json",
+    "sha256": "bcdce401c892e6868b79b0b7a0b195cb1e44d9b64a9f4054842594a3e7be6c1d",
+    "active_candidate_path": "docs/validation/stage-h-preparation/definition.json",
+    "scope": "untimed historical candidate before H18 final source formatting"
+  },
+  {
+    "prior_path": "docs/validation/stage-h-preparation/prior-candidate-v1/definition-final-312.json",
+    "sha256": "24ac8b57146dd0cacabc4d4eee01fb86442c3a2b96d9c47353b739af23558460",
+    "active_candidate_path": "docs/validation/stage-h-preparation/definition-final-312.json",
+    "scope": "untimed historical candidate before H18 final source formatting"
+  },
+  {
+    "prior_path": "docs/validation/stage-h-preparation/prior-candidate-v1/definition-final-313.json",
+    "sha256": "fe5283519cdae23940f07640449500888f7d4429f5b660797f5892926b638187",
+    "active_candidate_path": "docs/validation/stage-h-preparation/definition-final-313.json",
+    "scope": "untimed historical candidate before H18 final source formatting"
+  },
+  {
+    "prior_path": "docs/validation/stage-h-preparation/prior-candidate-v1/definition-final-314.json",
+    "sha256": "6f1b3c817f519f515c6c11d836b41174697b4b9070c8a8d01344cf391d0d5f33",
+    "active_candidate_path": "docs/validation/stage-h-preparation/definition-final-314.json",
+    "scope": "untimed historical candidate before H18 final source formatting"
+  },
+  {
+    "prior_path": "docs/validation/stage-h-preparation/prior-candidate-v1/setup-final-312.json",
+    "sha256": "8afe9cea4a4bb456a7a024f0d5c35c36a8c2bdd7aec85e262dd4e367255204ba",
+    "active_candidate_path": "docs/validation/stage-h-preparation/setup-final-312.json",
+    "scope": "untimed historical candidate before H18 final source formatting"
+  },
+  {
+    "prior_path": "docs/validation/stage-h-preparation/prior-candidate-v1/setup-final-313.json",
+    "sha256": "72dce49b3774f17396fa4aa81d4a540d3365e144c128d9b0659d302c8b731ebe",
+    "active_candidate_path": "docs/validation/stage-h-preparation/setup-final-313.json",
+    "scope": "untimed historical candidate before H18 final source formatting"
+  },
+  {
+    "prior_path": "docs/validation/stage-h-preparation/prior-candidate-v1/setup-final-314.json",
+    "sha256": "3c4208ae8337758d9f2ac4f6d18baa9b7d7a764c4d1fa61096207e49a34fab21",
+    "active_candidate_path": "docs/validation/stage-h-preparation/setup-final-314.json",
+    "scope": "untimed historical candidate before H18 final source formatting"
+  }
+]

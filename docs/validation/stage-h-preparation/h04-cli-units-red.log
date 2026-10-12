@@ -1,0 +1,32 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_________ test_raw_measurement_units_are_validated_before_aggregation __________
+
+    def test_raw_measurement_units_are_validated_before_aggregation():
+        validation = load('validation')
+        fixture = load('test_validation')
+        document, definition = fixture.inputs()
+        for row in document['rows']:
+            row.update(elapsed_ns=30, ns_per_op=10, units='ns/op', elapsed_units='ns')
+        document['rows'][0]['ns_per_op'] = 999
+>       with pytest.raises(ValueError, match='normaliz'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:88: Failed
+____________ test_public_measurement_cli_requires_frozen_definition ____________
+
+    def test_public_measurement_cli_requires_frozen_definition():
+        import subprocess
+        import sys
+        result = subprocess.run([sys.executable, str(Path(__file__).with_name('harness.py')), '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+>       assert '--definition' in result.stdout
+E       AssertionError: assert '--definition' in 'usage: harness.py [-h] --output OUTPUT [--include-cold]\n                  --undoable-baseline-dir UNDOABLE_BASELINE_...--output OUTPUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n'
+E        +  where 'usage: harness.py [-h] --output OUTPUT [--include-cold]\n                  --undoable-baseline-dir UNDOABLE_BASELINE_...--output OUTPUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n' = CompletedProcess(args=['[consumer-root]/.venv/bin/python', '[example-root]PUT\n  --include-cold\n  --undoable-baseline-dir UNDOABLE_BASELINE_DIR\n  --backend {native-rust,python}\n', stderr='').stdout
+
+tests/data/perf/test_gate_integrity.py:97: AssertionError
+=========================== short test summary info ============================
+FAILED tests/data/perf/test_gate_integrity.py::test_raw_measurement_units_are_validated_before_aggregation
+FAILED tests/data/perf/test_gate_integrity.py::test_public_measurement_cli_requires_frozen_definition
+2 failed, 3 deselected in 0.08s

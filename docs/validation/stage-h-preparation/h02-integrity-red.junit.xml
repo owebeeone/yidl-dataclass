@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.051" timestamp="2026-10-13T02:10:46.121470+11:00" hostname="[host]"><testcase classname="tests.data.perf.test_gate_integrity" name="test_complete_inventory_cannot_accept_one_batch_per_case" time="0.002"><failure message="Failed: DID NOT RAISE ValueError">def test_complete_inventory_cannot_accept_one_batch_per_case():
+        validation = load('validation')
+        definition = {'timing_keys': [[3, 'slot_read', 'product']], 'memory_keys': [],
+                      'minimum_calibration_ns': 20, 'warmups': 10, 'measured_batches': 20,
+                      'timing_source_sha256': {'3:product:slot_read': 'source'}}
+        document = {'rows': [{'fields': 3, 'case': 'slot_read', 'variant': 'product',
+                             'operations': 3, 'elapsed_ns': 30, 'ns_per_op': 10,
+                             'phase': 'measurement', 'batch': 0, 'source_sha256': 'source'}],
+                    'calibration_rows': [{'fields': 3, 'case': 'slot_read', 'variant': 'product',
+                                         'operations': 3, 'elapsed_ns': 30, 'ns_per_op': 10}],
+                    'memory': []}
+&gt;       with pytest.raises(ValueError, match='batch'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/data/perf/test_gate_integrity.py:29: Failed</failure></testcase><testcase classname="tests.data.perf.test_gate_integrity" name="test_memory_failure_always_stops_tracing" time="0.022"><failure message="assert not True&#10; +  where True = &lt;built-in function is_tracing&gt;()&#10; +    where &lt;built-in function is_tracing&gt; = tracemalloc.is_tracing">def test_memory_failure_always_stops_tracing():
+        harness = load('harness')
+        class Broken:
+            def __init__(self):
+                raise RuntimeError('allocation failed')
+        try:
+            with pytest.raises(RuntimeError, match='allocation failed'):
+                harness.memory_row(Broken, 10)
+&gt;           assert not tracemalloc.is_tracing()
+E           assert not True
+E            +  where True = &lt;built-in function is_tracing&gt;()
+E            +    where &lt;built-in function is_tracing&gt; = tracemalloc.is_tracing
+
+tests/data/perf/test_gate_integrity.py:41: AssertionError</failure></testcase></testsuite></testsuites>
