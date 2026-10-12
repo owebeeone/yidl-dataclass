@@ -3,7 +3,7 @@
 Status: owner preparation during Stage D; no final performance result or new
 numerical gate. Final implementation review must assess these sampling boundaries
 against `DataclassPlan.md` Section 5 before accepting the report. Product Stages
-A–C are verified; D–H remain. Prototype tools are external and are not shipped
+A–D are verified; E–H remain. Prototype tools are external and are not shipped
 product facilities.
 
 Ordinary operations use one common calibrated operation count across product and
@@ -40,3 +40,21 @@ processes, mismatched ordinary operation counts and worker error propagation.
 Provisional tools still need the complete agreed case inventory, final installed
 tuple/provenance, extension/Undoable cases, memory variants, actual measurements
 and independent assessment. Passing tool checks does not satisfy those gates.
+
+After D owner verification, extension setup smoke passes on installed D with
+both original backends for 3/12-field pipelines, dependent construction, lazy
+first/cached pools and all product memory variants. This is setup verification,
+not a timing result. Repeated decoration prepares each declaration before timing.
+Source emission times the existing composable emitter captured from the owned
+builder during untimed setup and restored immediately; it does not time reading
+a cached exported string or modify an SDK.
+
+Memory reporting separates the construction/pool allocation delta from the
+after-dictionary-inspection delta, because inspecting a managed instance
+dictionary can materialize it. Shallow instance/dictionary and pool bytes remain
+separate. Standard weak-reference and excluded-cache storage analogues are
+labeled; a standard cache Field's metadata exposure differs from local_store.
+New accounting tests first fail on missing memory aggregation/count validation
+and inspection-boundary output, then pass; earlier prototype checks added after
+drafting remain verification. The full inventory and frozen-artifact measurement
+are still pending, including the Undoable seam.
