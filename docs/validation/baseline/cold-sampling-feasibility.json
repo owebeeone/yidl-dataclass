@@ -1,0 +1,53 @@
+{
+  "scope": "Timing-boundary feasibility only; Stage C installed wheel; not final performance results",
+  "source": "cold-sampling-probe.py",
+  "source_sha256": "bfce9f5bd37ac774dce26f6c9ac6d1350e8357d486d7f8b71d801533bae5670e",
+  "wheel_sha256": "602024966e2b034fb6e484283da06abebeea6aee4ec05f6d523d88ed33fe5d3a",
+  "rows": [
+    {
+      "variant": "product",
+      "exit_code": 0,
+      "observations": {
+        "classification": "cold boundary feasibility only; not final benchmark",
+        "variant": "product",
+        "fields": 3,
+        "operations": 1,
+        "elapsed_ns": 287307708,
+        "minimum_batch_ns": 20000000,
+        "reaches_planned_batch_minimum": true,
+        "imports_and_declaration_setup": "outside measured interval",
+        "source_sha256": "bfce9f5bd37ac774dce26f6c9ac6d1350e8357d486d7f8b71d801533bae5670e"
+      }
+    },
+    {
+      "variant": "stdlib_default",
+      "exit_code": 0,
+      "observations": {
+        "classification": "cold boundary feasibility only; not final benchmark",
+        "variant": "stdlib_default",
+        "fields": 3,
+        "operations": 1,
+        "elapsed_ns": 452458,
+        "minimum_batch_ns": 20000000,
+        "reaches_planned_batch_minimum": false,
+        "imports_and_declaration_setup": "outside measured interval",
+        "source_sha256": "bfce9f5bd37ac774dce26f6c9ac6d1350e8357d486d7f8b71d801533bae5670e"
+      }
+    },
+    {
+      "variant": "stdlib_slots",
+      "exit_code": 0,
+      "observations": {
+        "classification": "cold boundary feasibility only; not final benchmark",
+        "variant": "stdlib_slots",
+        "fields": 3,
+        "operations": 1,
+        "elapsed_ns": 472209,
+        "minimum_batch_ns": 20000000,
+        "reaches_planned_batch_minimum": false,
+        "imports_and_declaration_setup": "outside measured interval",
+        "source_sha256": "bfce9f5bd37ac774dce26f6c9ac6d1350e8357d486d7f8b71d801533bae5670e"
+      }
+    }
+  ]
+}
