@@ -5,9 +5,11 @@ fields use direct writable slots by default. Named factories, conversion,
 validation, constant and lazy fields add specialized generated methods for the
 fields that need them.
 
-This is an unreleased consumer candidate for **CPython 3.12, 3.13 and 3.14**.
-Stages A–F are independently verified; public packaging/usability and performance
-assessment remain in progress. No speed or memory advantage is claimed.
+This is an unreleased consumer for **CPython 3.12, 3.13 and 3.14**. Its supported
+functional/package implementation and Undoable comparison integration are
+[accepted after both independent final reviews reported GO](dev-docs/Dataclass-FinalReviewResult.md).
+Historical benchmarks measured an earlier artifact tuple; corrected final paths
+have not been timed. No universal speed or memory advantage is claimed.
 
 Install the supplied wheel with the original SDK wheels available locally:
 
@@ -62,3 +64,5 @@ reviews and actual evidence. The [active boundary](dev-docs/TaskBoundary.md)
 keeps SDKs/Lifecycle reference-only. The authoritative shared comparison resource
 is owned here; Undoable consumes it at regeneration time and has no Dataclass
 runtime dependency. See [E/F evidence](docs/validation/stage-ef/README.md).
+The [publication record](dev-docs/Publication.md) distinguishes the later initial
+GitHub upload from the completed experiment and its measurements.
