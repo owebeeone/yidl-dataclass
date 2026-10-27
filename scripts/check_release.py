@@ -59,7 +59,7 @@ for example in ('first_use.py', 'runtime_freeze.py'):
     runpy.run_path(str(package / 'documentation' / 'examples' / example), run_name='__main__')
 from yidl_dataclass.regenerate_dataclass_base import main
 sys.argv = ['yidl-dataclass-regenerate-base']
-main()
+assert main() == 0, 'installed regeneration differs from packaged base'
 """
 
 
