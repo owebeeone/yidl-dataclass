@@ -9,7 +9,8 @@ import tempfile
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-MINORS = ("3.12", "3.13", "3.14")
+PROJECT = tomllib.loads((ROOT / "pyproject.toml").read_text())
+MINORS = tuple(PROJECT["tool"]["yidl"]["test-matrix"]["python"])
 ENGINES = ("python", "native-rust")
 
 
@@ -84,6 +85,6 @@ def artifact_checks():
 
 
 if __name__ == "__main__":
-    with ThreadPoolExecutor(max_workers=3) as pool:
+    with ThreadPoolExecutor(max_workers=len(MINORS)) as pool:
         list(pool.map(source_checks, MINORS))
     artifact_checks()

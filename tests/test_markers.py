@@ -53,8 +53,8 @@ def test_imported_field_is_not_mutated_or_shared():
 
 
 def test_unsupported_minor_fails_before_generation(monkeypatch):
-    monkeypatch.setattr(sys, "version_info", (3, 15, 0))
-    with pytest.raises(TypeError, match="3.12.*3.14"):
+    monkeypatch.setattr(sys, "version_info", (3, 16, 0))
+    with pytest.raises(TypeError, match="3.12.*3.15"):
         dataclass(type("Future", (), {}), eq=False, repr=False)
 
 

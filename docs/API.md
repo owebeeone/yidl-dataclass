@@ -1,6 +1,6 @@
 # Public API and behavior
 
-Import declarations/helpers from `yidl_dataclass`. CPython 3.12–3.14 is supported;
+Import declarations/helpers from `yidl_dataclass`. CPython 3.12–3.15 is supported;
 other runtimes/minors fail decoration. An annotation declares a field; it does
 not validate its runtime type unless conversion/validation is selected.
 

@@ -1,6 +1,6 @@
 # Generation, source inspection and distributions
 
-The consumer uses original Astichi 1.1.3 and YIDL 0.1.0. Authored modules live in
+The consumer uses published Astichi 1.1.3 and YIDL 0.1.2. Authored modules live in
 `yidl_dataclass/yidl`: core layout/constructor, comparison adapter, factories,
 providers, pipelines, policies, lazy initialization/retention, copy and runtime-freeze support.
 Inheritance and matching select only the field-specific contributions needed by
@@ -60,7 +60,7 @@ see `RELEASE.md` and `gearu.toml`. Release publishing uses `.github/workflows/pu
 publisher for `owebeeone/yidl-dataclass`. Only a published GitHub release invokes
 the upload job; ordinary pushes, pull requests and manual runs perform checks.
 The tag must equal `v` followed by the version in `pyproject.toml`. The workflow
-tests both lowering backends on CPython 3.12–3.14, builds wheel/sdist artifacts,
+tests both lowering backends on CPython 3.12–3.15, builds wheel/sdist artifacts,
 checks their metadata and runs installed-wheel examples and regeneration outside
 the checkout. OIDC permission is limited to the publish job. The configured
 publisher does not require a named GitHub environment or a stored PyPI token.

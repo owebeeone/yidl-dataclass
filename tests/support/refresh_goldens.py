@@ -51,7 +51,7 @@ def main():
             {
                 name: {
                     f"py3{minor}": name.replace(".py", f"_py3{minor}.py")
-                    for minor in (12, 13, 14)
+                    for minor in (12, 13, 14, 15)
                 }
                 for name in ("generated_output.py", "generated_output_prettier.py")
             }

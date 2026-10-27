@@ -5,7 +5,7 @@ fields use direct writable slots by default. Named factories, conversion,
 validation, constant and lazy fields add specialized generated methods for the
 fields that need them.
 
-This package supports **CPython 3.12, 3.13 and 3.14**. Its original supported
+This package supports **CPython 3.12, 3.13, 3.14 and 3.15**. Its original supported
 functional/package implementation and Undoable comparison integration are
 [accepted after both independent final reviews reported GO](https://github.com/owebeeone/yidl-dataclass/blob/main/dev-docs/Dataclass-FinalReviewResult.md).
 Historical benchmarks measured an earlier artifact tuple; corrected final paths
@@ -17,7 +17,7 @@ Install from PyPI:
 python -m pip install yidl-dataclass
 ```
 
-The locked runtime dependencies are Astichi 1.1.3 and YIDL 0.1.0. Sibling SDK
+The locked runtime dependencies are Astichi 1.1.3 and YIDL 0.1.2. Sibling SDK
 checkouts and SDK rebuilds are unnecessary. The wheel contains this README,
 public guides and the first-use example under `yidl_dataclass/documentation`.
 

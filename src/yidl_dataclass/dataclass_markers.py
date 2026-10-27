@@ -1,12 +1,15 @@
 """Public field declarations; extension policy objects own their validation."""
 
 from __future__ import annotations
-from dataclasses import dataclass, Field, MISSING, _MISSING_TYPE
+from dataclasses import dataclass, Field, MISSING
 import dataclasses as std
 import sys
 from collections.abc import Callable
 from typing import Any
 from .errors import DataclassDefinitionError
+
+# Python 3.15 uses a builtin sentinel instead of the private dataclasses class.
+_MISSING_TYPE = type(MISSING)
 
 
 def require_bool(name: str, value: object) -> None:

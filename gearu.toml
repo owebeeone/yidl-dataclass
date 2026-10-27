@@ -14,17 +14,13 @@ checks = [
     ["uv", "run", "--no-project", "--python", "3.13", "--with", "build==1.6.1", "--with", "twine==7.0.0", "python", "scripts/check_release.py"],
 ]
 github_notes = """
-yidl-dataclass {tag} — first PyPI release.
+yidl-dataclass {tag} — Python 3.15 compatibility patch.
 
-Declarative dataclasses with direct slots, dependent factories, conversion,
-validation, const/lazy/local-store fields and shared comparison generation.
-Opt-in freezable models support mutable setup followed by permanent freeze(),
-including field hooks and typed-child inference. Freezing is optimistic and
-non-transactional: a failed hook does not roll back earlier changes.
+Adds CPython 3.15 to both backend matrices, source goldens and installed wheel/sdist
+verification. Adapts metadata harvesting to Python 3.15's dataclasses sentinel and
+non-evaluating annotation helper while retaining the 3.12–3.14 behavior.
 
-This release fixes runtime-freeze generation on the Python lowering backend.
-Gearu verifies both lowering backends on CPython 3.12–3.14, generated-source
-provenance, strict package metadata and installed wheel/sdist examples.
-See dev-docs/RELEASE_TODOS.md for evidence and limitations, and dev-docs/ for the
-original experiment, reviews, timings and recorded cost evidence.
+Opt-in freezable models still use optimistic, non-transactional permanent freeze.
+See dev-docs/Python315Release.md for qualification and the prior 0.1.0 publication.
+The original experiment, reviews, time and token/cost evidence remain in dev-docs/.
 """

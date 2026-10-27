@@ -125,7 +125,7 @@ package publication and documentation deployment where configured.
 
 Read `dev-docs/RELEASE_TODOS.md` for this candidate's scope and evidence.
 `gearu.toml` runs `scripts/check_release.py` in Gearu's temporary worktree,
-using published dependencies on CPython 3.12–3.14 with both lowering backends.
+using published dependencies on CPython 3.12–3.15 with both lowering backends.
 It verifies the full source suite, generated base, strict wheel/sdist metadata,
 and installed examples/regeneration outside the checkout. These checks run
 again against the exact candidate commit before tagging.

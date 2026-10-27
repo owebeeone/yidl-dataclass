@@ -6,8 +6,8 @@ from yidl_dataclass import dataclass
 
 
 @pytest.mark.skipif(
-    sys.version_info[:2] != (3, 14),
-    reason="lazy function annotations are a CPython 3.14 contract",
+    sys.version_info[:2] < (3, 14),
+    reason="lazy function annotations are a CPython 3.14+ contract",
 )
 def test_class_cell_clone_does_not_evaluate_lazy_function_annotations():
     events = []

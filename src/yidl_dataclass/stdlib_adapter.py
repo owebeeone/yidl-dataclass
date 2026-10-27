@@ -23,9 +23,10 @@ def ensure_supported_runtime() -> None:
         (3, 12),
         (3, 13),
         (3, 14),
+        (3, 15),
     ):
         raise DataclassDefinitionError(
-            "supported runtimes are CPython 3.12 through 3.14"
+            "supported runtimes are CPython 3.12 through 3.15"
         )
 
 
@@ -37,6 +38,13 @@ def annotations_for(cls: type) -> dict[str, Any]:
             cls, format=annotationlib.Format.FORWARDREF
         )
     return inspect.get_annotations(cls, eval_str=False)
+
+
+def _annotation_is_type(annotation, cls, module, target, predicate) -> bool:
+    """Use each supported interpreter's non-evaluating annotation recognizer."""
+    if sys.version_info[:2] >= (3, 15):
+        return predicate(std._get_type_from_annotation(annotation, cls), module)
+    return std._is_type(annotation, cls, module, target, predicate)
 
 
 def fields_for(
@@ -57,7 +65,7 @@ def fields_for(
     for name, annotation in annotations.items():
         if annotation is std.KW_ONLY or (
             isinstance(annotation, str)
-            and std._is_type(
+            and _annotation_is_type(
                 annotation,
                 harvest,
                 std,
@@ -79,13 +87,13 @@ def fields_for(
         if isinstance(declaration, (InitvarDeclaration, ClassvarDeclaration)):
             annotated_initvar = std._is_initvar(original_type, std) or (
                 isinstance(original_type, str)
-                and std._is_type(
+                and _annotation_is_type(
                     original_type, harvest, std, std.InitVar, std._is_initvar
                 )
             )
             annotated_classvar = std._is_classvar(original_type, typing) or (
                 isinstance(original_type, str)
-                and std._is_type(
+                and _annotation_is_type(
                     original_type, harvest, typing, typing.ClassVar, std._is_classvar
                 )
             )

@@ -1,6 +1,8 @@
 # Release readiness — 27 October 2026
 
-Baseline inspected: `0f2fce6` on `main`. Target: first PyPI release, 0.1.0.
+Baseline inspected: `0f2fce6` on `main`. Target: first PyPI release, 0.1.0 (completed).
+The subsequent four-package Python 3.15 patch pass is recorded in
+`Python315Release.md`; its expanded scope supersedes this initial audit boundary.
 Authorized scope: Dataclass release preparation, documentation, consumer fixes,
 packaging and publication through Gearu. Undoable is audited separately. Astichi,
 YIDL, Lifecycle and other dependencies are reference-only; no SDK changes or
@@ -68,10 +70,10 @@ measurements of this release. No new performance advantage is claimed.
   wheel/sdist checks for both backends on CPython 3.12–3.14.
 - [x] Add `.github/workflows/publish.yml`, matching the operator's pending PyPI
   publisher: `owebeeone/yidl-dataclass`, workflow `publish.yml`, no environment.
-- [ ] Inspect `gearu plan 0.1.0` from the committed clean candidate.
-- [ ] Run `gearu release 0.1.0 --push --github-release`; Gearu owns the version
+- [x] Inspect `gearu plan 0.1.0` from the committed clean candidate.
+- [x] Run `gearu release 0.1.0 --push --github-release`; Gearu owns the version
   change, verification and immutable tag. Do not publish locally.
-- [ ] Confirm the release workflow and fresh PyPI installation after publication.
+- [x] Confirm the release workflow and fresh PyPI installation after publication.
 
 The workflow runs both backends on Ubuntu for all three supported minors, checks
 regeneration, builds distributions, checks metadata and exercises an installed

@@ -2,11 +2,13 @@
   "generated_output.py": {
     "py312": "generated_output_py312.py",
     "py313": "generated_output_py313.py",
-    "py314": "generated_output_py314.py"
+    "py314": "generated_output_py314.py",
+    "py315": "generated_output_py315.py"
   },
   "generated_output_prettier.py": {
     "py312": "generated_output_prettier_py312.py",
     "py313": "generated_output_prettier_py313.py",
-    "py314": "generated_output_prettier_py314.py"
+    "py314": "generated_output_prettier_py314.py",
+    "py315": "generated_output_prettier_py315.py"
   }
 }
