@@ -80,3 +80,31 @@ actual runtime sentinel class from `MISSING`. A focused Pyright run has no
 invalid-type-form diagnostics; seven argument-inference diagnostics in the
 untouched field-keyword forwarding block remain, so this is not a claim of a
 fully clean project-wide static check.
+
+## Completed publication
+
+Published **0.1.1** using Gearu 0.1.1. Release commit:
+`a71917a2a146433e7ceb9309865e99759fcf1d3b`.
+
+- GitHub release: https://github.com/owebeeone/yidl-dataclass/releases/tag/v0.1.1
+- Successful trusted publication: https://github.com/owebeeone/yidl-dataclass/actions/runs/40497146941
+- PyPI wheel and source distribution: https://pypi.org/project/yidl-dataclass/0.1.1/
+
+Candidate and exact-commit checks passed for every declared Python minor.
+Local and Ubuntu source matrices include 3.12, 3.13, 3.14 and 3.15.
+Both explicit Python and native Rust lowering backends passed.
+
+A fresh registry-only installation of all four released packages passed the
+combined integration probe on CPython 3.15.2 with each explicit backend. It
+verified freezing, Lifecycle fields/annotations, transactions, rollback, history
+navigation/branching, shared comparisons and installed Dataclass/Undoable
+regeneration. The previously excluded YIDL downstream Lifecycle smoke separately
+passed against the published pair on 3.15.2.
+
+The cross-package evidence, per-cell counts, workflow/tag checks and PyPI artifact
+SHA256s are recorded at:
+https://github.com/owebeeone/yidl-dataclass/blob/main/docs/validation/releases/python315.json
+
+These are qualification results, not new independent reviews or new performance/
+cost measurements. Windows 3.15 remains outside this pass: Astichi 1.1.3 has no
+cp315 Windows wheel. No Astichi implementation change was made.

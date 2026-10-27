@@ -1,0 +1,266 @@
+{
+  "verified_at_utc": "2026-10-27T11:47:59.604833+00:00",
+  "release_tool": {
+    "name": "gearu",
+    "version": "0.1.1"
+  },
+  "python_matrix": [
+    "3.12",
+    "3.13",
+    "3.14",
+    "3.15"
+  ],
+  "packages": [
+    {
+      "name": "yidl",
+      "version": "0.1.2",
+      "release_commit": "ff76068d4c312b9cc92979ac285d9112951400e0",
+      "github_release": "https://github.com/owebeeone/yidl/releases/tag/v0.1.2",
+      "publication_workflow": {
+        "conclusion": "success",
+        "headSha": "ff76068d4c312b9cc92979ac285d9112951400e0",
+        "status": "completed",
+        "url": "https://github.com/owebeeone/yidl/actions/runs/40494655031"
+      },
+      "pypi": "https://pypi.org/project/yidl/0.1.2/",
+      "requires_python": ">=3.12",
+      "local_source_results_per_backend": {
+        "python": {
+          "3.12": {
+            "passed": 297,
+            "skipped": 4
+          },
+          "3.13": {
+            "passed": 297,
+            "skipped": 4
+          },
+          "3.14": {
+            "passed": 297,
+            "skipped": 4
+          },
+          "3.15": {
+            "passed": 297,
+            "skipped": 4
+          }
+        }
+      },
+      "gearu_candidate_and_exact_commit_checks": "passed",
+      "artifacts": [
+        {
+          "filename": "yidl-0.1.2-py3-none-any.whl",
+          "sha256": "e3b7616310eeafa800fbdb0f4b687ebc7703fd942c09894d3c09b29061796216",
+          "upload_time": "2026-10-27T11:17:47.037108Z"
+        },
+        {
+          "filename": "yidl-0.1.2.tar.gz",
+          "sha256": "73bea7b67e59ffefa29842e403fc75b6bc255258f076e600aac8781746bfa5c8",
+          "upload_time": "2026-10-27T11:17:48.871981Z"
+        }
+      ]
+    },
+    {
+      "name": "yidl-lifecycle",
+      "version": "0.1.1",
+      "release_commit": "ad12a2b6d7cb05a4d0f2afd4b4aa0fffe9295549",
+      "github_release": "https://github.com/owebeeone/yidl-lifecycle/releases/tag/v0.1.1",
+      "publication_workflow": {
+        "conclusion": "success",
+        "headSha": "ad12a2b6d7cb05a4d0f2afd4b4aa0fffe9295549",
+        "status": "completed",
+        "url": "https://github.com/owebeeone/yidl-lifecycle/actions/runs/40495906643"
+      },
+      "pypi": "https://pypi.org/project/yidl-lifecycle/0.1.1/",
+      "requires_python": ">=3.12",
+      "local_source_results_per_backend": {
+        "python": {
+          "3.12": {
+            "passed": 464,
+            "skipped": 46
+          },
+          "3.13": {
+            "passed": 464,
+            "skipped": 46
+          },
+          "3.14": {
+            "passed": 464,
+            "skipped": 46
+          },
+          "3.15": {
+            "passed": 464,
+            "skipped": 46
+          }
+        }
+      },
+      "gearu_candidate_and_exact_commit_checks": "passed",
+      "artifacts": [
+        {
+          "filename": "yidl_lifecycle-0.1.1-py3-none-any.whl",
+          "sha256": "59ce9c2fc36dd22ba92703758f820ef6f0eaf977760d46ab0c03841ec8179c3f",
+          "upload_time": "2026-10-27T11:29:01.772546Z"
+        },
+        {
+          "filename": "yidl_lifecycle-0.1.1.tar.gz",
+          "sha256": "41728a01f097c7b1269a90303341cd91411a5edfa780576b6771f350b7ee5ae1",
+          "upload_time": "2026-10-27T11:29:03.239328Z"
+        }
+      ]
+    },
+    {
+      "name": "yidl-dataclass",
+      "version": "0.1.1",
+      "release_commit": "a71917a2a146433e7ceb9309865e99759fcf1d3b",
+      "github_release": "https://github.com/owebeeone/yidl-dataclass/releases/tag/v0.1.1",
+      "publication_workflow": {
+        "conclusion": "success",
+        "headSha": "a71917a2a146433e7ceb9309865e99759fcf1d3b",
+        "status": "completed",
+        "url": "https://github.com/owebeeone/yidl-dataclass/actions/runs/40497146941"
+      },
+      "pypi": "https://pypi.org/project/yidl-dataclass/0.1.1/",
+      "requires_python": "<3.16,>=3.12",
+      "local_source_results_per_backend": {
+        "python": {
+          "3.12": {
+            "passed": 285,
+            "skipped": 3
+          },
+          "3.13": {
+            "passed": 286,
+            "skipped": 2
+          },
+          "3.14": {
+            "passed": 287,
+            "skipped": 1
+          },
+          "3.15": {
+            "passed": 287,
+            "skipped": 1
+          }
+        },
+        "native-rust": {
+          "3.12": {
+            "passed": 285,
+            "skipped": 3
+          },
+          "3.13": {
+            "passed": 286,
+            "skipped": 2
+          },
+          "3.14": {
+            "passed": 287,
+            "skipped": 1
+          },
+          "3.15": {
+            "passed": 287,
+            "skipped": 1
+          }
+        }
+      },
+      "gearu_candidate_and_exact_commit_checks": "passed",
+      "artifacts": [
+        {
+          "filename": "yidl_dataclass-0.1.1-py3-none-any.whl",
+          "sha256": "b32a68deb00d3537d8694e05d350b85fb392d2f157326de749fa809526a7984d",
+          "upload_time": "2026-10-27T11:39:09.178205Z"
+        },
+        {
+          "filename": "yidl_dataclass-0.1.1.tar.gz",
+          "sha256": "66766761a1b7d668c910c12b09fe3b5ed096081cda89e353d993d4f8fdc92d7b",
+          "upload_time": "2026-10-27T11:39:10.838441Z"
+        }
+      ]
+    },
+    {
+      "name": "yidl-undoable",
+      "version": "0.1.1",
+      "release_commit": "44e1a2fbc2ad3563d4f76c1016f2185a7705ca7e",
+      "github_release": "https://github.com/owebeeone/yidl-undoable/releases/tag/v0.1.1",
+      "publication_workflow": {
+        "conclusion": "success",
+        "headSha": "44e1a2fbc2ad3563d4f76c1016f2185a7705ca7e",
+        "status": "completed",
+        "url": "https://github.com/owebeeone/yidl-undoable/actions/runs/40498363068"
+      },
+      "pypi": "https://pypi.org/project/yidl-undoable/0.1.1/",
+      "requires_python": "<3.16,>=3.12",
+      "local_source_results_per_backend": {
+        "python": {
+          "3.12": {
+            "passed": 376,
+            "skipped": 0
+          },
+          "3.13": {
+            "passed": 376,
+            "skipped": 0
+          },
+          "3.14": {
+            "passed": 376,
+            "skipped": 0
+          },
+          "3.15": {
+            "passed": 376,
+            "skipped": 0
+          }
+        },
+        "native-rust": {
+          "3.12": {
+            "passed": 376,
+            "skipped": 0
+          },
+          "3.13": {
+            "passed": 376,
+            "skipped": 0
+          },
+          "3.14": {
+            "passed": 376,
+            "skipped": 0
+          },
+          "3.15": {
+            "passed": 376,
+            "skipped": 0
+          }
+        }
+      },
+      "gearu_candidate_and_exact_commit_checks": "passed",
+      "artifacts": [
+        {
+          "filename": "yidl_undoable-0.1.1-py3-none-any.whl",
+          "sha256": "5e6dc07fd3ac0a453b96e7bae801b7c944266b682a940fcb3690f29d395835a1",
+          "upload_time": "2026-10-27T11:46:04.964996Z"
+        },
+        {
+          "filename": "yidl_undoable-0.1.1.tar.gz",
+          "sha256": "efeb3cadf829c3b3259bd47edd47631e65089e1c1cabbe4cc8e95ca91a91da57",
+          "upload_time": "2026-10-27T11:46:06.685332Z"
+        }
+      ]
+    }
+  ],
+  "registry_integration": {
+    "python": "3.15.2",
+    "backends": [
+      "python",
+      "native-rust"
+    ],
+    "result": "passed",
+    "checks": [
+      "exact published versions",
+      "non-transactional permanent freeze",
+      "typed-child freeze",
+      "Lifecycle lazy fields and annotations",
+      "Undoable commit, rollback, undo, redo and branching",
+      "shared generated comparisons",
+      "Dataclass and Undoable installed regeneration"
+    ]
+  },
+  "yidl_downstream_lifecycle_smoke": {
+    "python": "3.15.2",
+    "passed": 1
+  },
+  "limits": [
+    "No Windows Python 3.15 qualification: Astichi 1.1.3 lacks a cp315 Windows wheel.",
+    "Undoable schema field-name collision remains documented, not fixed.",
+    "Freezing is optimistic and non-transactional; completed earlier work is not rolled back.",
+    "Historical independent reviews and performance/cost measurements retain their original scope."
+  ]
+}
