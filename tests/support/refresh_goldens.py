@@ -30,6 +30,8 @@ VERSIONED = {
     "dataclass_dictionary_copy",
     "dataclass_field_removal",
     "dataclass_result_names",
+    "dataclass_freezable",
+    "dataclass_freeze_inferred",
 }
 
 

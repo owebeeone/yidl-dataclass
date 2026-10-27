@@ -1,0 +1,108 @@
+name: Test and publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.12', '3.13', '3.14']
+        engine: [python, native-rust]
+    env:
+      ASTICHI_LOWER_ENGINE: ${{ matrix.engine }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install consumer and published dependencies
+        run: |
+          python -m pip install --only-binary=:all: '.[dev]'
+      - name: Require the selected backend
+        run: |
+          python - <<'PY'
+          import os
+          from astichi.lower_engine import select_effective_lower_engine
+          state = select_effective_lower_engine().snapshot()
+          assert state['selected_engine'] == os.environ['ASTICHI_LOWER_ENGINE'], state
+          assert state['fallback_scope'] is None, state
+          print(state)
+          PY
+      - run: python -m pytest -q
+      - name: Verify generated base
+        env:
+          PYTHONPATH: src
+        run: python -m yidl_dataclass.regenerate_dataclass_base
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Check release tag matches package version
+        if: github.event_name == 'release'
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python - <<'PY'
+          import os, tomllib
+          from pathlib import Path
+          version = tomllib.loads(Path('pyproject.toml').read_text())['project']['version']
+          assert os.environ['RELEASE_TAG'] == 'v' + version, 'release tag must match package version'
+          PY
+      - run: python -m pip install build twine
+      - run: python -m build
+      - run: python -m twine check --strict dist/*
+      - name: Install built wheel from published dependencies
+        run: |
+          python -m pip install --only-binary=:all: dist/*.whl
+      - name: Test installed wheel outside checkout
+        working-directory: ${{ runner.temp }}
+        env:
+          ASTICHI_LOWER_ENGINE: python
+        run: |
+          python "$GITHUB_WORKSPACE/examples/first_use.py"
+          python "$GITHUB_WORKSPACE/examples/runtime_freeze.py"
+          python -m yidl_dataclass.regenerate_dataclass_base
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import yidl_dataclass
+          assert not Path(yidl_dataclass.__file__).resolve().is_relative_to(
+              Path(os.environ['GITHUB_WORKSPACE']).resolve() / 'src'
+          ), 'wheel smoke must not import source checkout'
+          PY
+      - uses: actions/upload-artifact@v7
+        with:
+          name: distributions
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: distributions
+          path: dist/
+      - name: Publish to PyPI using the configured trusted publisher
+        uses: pypa/gh-action-pypi-publish@release/v1

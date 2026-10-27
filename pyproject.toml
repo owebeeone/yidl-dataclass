@@ -6,14 +6,20 @@ build-backend = "hatchling.build"
 name = "yidl-dataclass"
 version = "0.1.0.dev0"
 description = "Composable YIDL dataclasses with specialized field behavior"
+readme = "README.md"
 requires-python = ">=3.12,<3.15"
 dependencies = ["astichi==1.1.3", "yidl==0.1.0"]
+
+[project.urls]
+Repository = "https://github.com/owebeeone/yidl-dataclass"
+Documentation = "https://github.com/owebeeone/yidl-dataclass/blob/main/docs/API.md"
+Issues = "https://github.com/owebeeone/yidl-dataclass/issues"
 
 [project.scripts]
 yidl-dataclass-regenerate-base = "yidl_dataclass.regenerate_dataclass_base:main"
 
 [project.optional-dependencies]
-dev = ["pytest>=9.0", "black==26.3.1"]
+dev = ["pytest>=9.0", "black==26.3.1", "hatchling>=1.24"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/yidl_dataclass"]
@@ -23,9 +29,10 @@ packages = ["src/yidl_dataclass"]
 "docs/API.md" = "yidl_dataclass/documentation/docs/API.md"
 "docs/Generation.md" = "yidl_dataclass/documentation/docs/Generation.md"
 "examples/first_use.py" = "yidl_dataclass/documentation/examples/first_use.py"
+"examples/runtime_freeze.py" = "yidl_dataclass/documentation/examples/runtime_freeze.py"
 
 [tool.hatch.build.targets.sdist]
-include = ["src/yidl_dataclass", "tests", "examples", "docs/API.md", "docs/Generation.md", "README.md", "pyproject.toml"]
+include = ["src/yidl_dataclass", "tests", "examples", "docs/API.md", "docs/Generation.md", "docs/validation", "dev-docs", "scripts", "gearu.toml", "RELEASE.md", "AGENTS.md", "README.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src", "tests"]

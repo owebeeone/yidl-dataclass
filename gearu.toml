@@ -1,0 +1,30 @@
+[project]
+name = "yidl-dataclass"
+branch = "main"
+remote = "origin"
+tag_prefix = "v"
+github_repo = "owebeeone/yidl-dataclass"
+
+[python]
+version = "static"
+manifest = "pyproject.toml"
+
+[release]
+checks = [
+    ["uv", "run", "--no-project", "--python", "3.13", "--with", "build==1.6.1", "--with", "twine==7.0.0", "python", "scripts/check_release.py"],
+]
+github_notes = """
+yidl-dataclass {tag} — first PyPI release.
+
+Declarative dataclasses with direct slots, dependent factories, conversion,
+validation, const/lazy/local-store fields and shared comparison generation.
+Opt-in freezable models support mutable setup followed by permanent freeze(),
+including field hooks and typed-child inference. Freezing is optimistic and
+non-transactional: a failed hook does not roll back earlier changes.
+
+This release fixes runtime-freeze generation on the Python lowering backend.
+Gearu verifies both lowering backends on CPython 3.12–3.14, generated-source
+provenance, strict package metadata and installed wheel/sdist examples.
+See dev-docs/RELEASE_TODOS.md for evidence and limitations, and dev-docs/ for the
+original experiment, reviews, timings and recorded cost evidence.
+"""

@@ -4,7 +4,7 @@
 # dataclass/dataclass_copy.yidl sha256=ef960f01bd61506aeda1f53226c9f31c8f5386f64cab68de6197032bd3240c19
 # dataclass/dataclass_core.yidl sha256=885a81a58656dcf1c38e3683f99155d506642275e3f6e9ec5de82316c949ed04
 # dataclass/dataclass_factories.yidl sha256=94179ac729eebe7bf97c9c238757466e01d779b73523246fa57081fa183710d2
-# dataclass/dataclass_freeze.yidl sha256=304579787d22b41d7b9eea9d8e18501acd57e22a248d7ad7898afacec7012915
+# dataclass/dataclass_freeze.yidl sha256=73b53df0e0a6c32fbdfe666809ec3b84a419d3799a1af2bdebbf03c2b892b793
 # dataclass/dataclass_lazy.yidl sha256=ccdc6d9b130b213dec0e84295c80022d816cf00e52aa07a91c2b6b273e268133
 # dataclass/dataclass_lazy_init.yidl sha256=de7c175bb69255e5781e882259a4e015e15c2dfb8333bfa5b32509d33b8297a1
 # dataclass/dataclass_pipelines.yidl sha256=9bac395230e7d18d87a097f3e171b00d6fb72040fe182ff6f31cc19da890e1d5
@@ -1597,7 +1597,7 @@ def freeze(self):
         astichi_hole(fields)
         self._y_dc_frozen = True
     finally:
-        self._y_dc_freezing = False""", file_name='dataclass/dataclass_freeze.yidl', line_number=40, keep_names=('freeze', 'self', '_y_dc_getattr'))), 'FreezeFieldHook': astichi_template(from_astichi_code('astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = hook_name__astichi_arg__(astichi_pass(self, outer_bind=True).astichi_ref(external=field_path))', file_name='dataclass/dataclass_freeze.yidl', line_number=51)), 'FreezeFieldRead': astichi_template(from_astichi_code('astichi_pass(self, outer_bind=True).astichi_ref(external=field_path)', file_name='dataclass/dataclass_freeze.yidl', line_number=54)), 'RuntimeSetter': astichi_template(from_astichi_code("""\
+        self._y_dc_freezing = False""", file_name='dataclass/dataclass_freeze.yidl', line_number=40, keep_names=('freeze', 'self', '_y_dc_getattr'))), 'FreezeFieldHook': astichi_template(from_astichi_code('astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = hook_name__astichi_arg__(astichi_pass(self, outer_bind=True).astichi_ref(external=field_path))', file_name='dataclass/dataclass_freeze.yidl', line_number=51)), 'FreezeFieldRead': astichi_template(from_astichi_code('_y_dc_freeze_value = astichi_pass(self, outer_bind=True).astichi_ref(external=field_path)', file_name='dataclass/dataclass_freeze.yidl', line_number=54)), 'RuntimeSetter': astichi_template(from_astichi_code("""\
 def field_name__astichi_arg__(self, value):
     if _y_dc_getattr(self, "_y_dc_frozen", False):
         raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)

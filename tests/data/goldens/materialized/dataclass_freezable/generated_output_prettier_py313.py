@@ -170,7 +170,7 @@ class Scope(*_y_dc_bases, metaclass=_y_dc_metaclass):
         self._y_dc_freezing = True
         try:
             pass
-            self.name
+            _y_dc_freeze_value = self.name
             self._y_dc_store_1 = _y_dc_freeze_1(self.children)
             self._y_dc_frozen = True
         finally:

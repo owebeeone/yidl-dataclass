@@ -51,7 +51,7 @@ concept DataclassFreeze extends copy.DataclassCopy {
         astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = hook_name__astichi_arg__(astichi_pass(self, outer_bind=True).astichi_ref(external=field_path))
     ]$
     resource FreezeFieldRead = template $[
-        astichi_pass(self, outer_bind=True).astichi_ref(external=field_path)
+        _y_dc_freeze_value = astichi_pass(self, outer_bind=True).astichi_ref(external=field_path)
     ]$
     resource RuntimeSetter = template $[
         def field_name__astichi_arg__(self, value):

@@ -23,6 +23,7 @@ def test_wheel_and_sdist_include_public_documentation_and_example(tmp_path):
             "docs/API.md",
             "docs/Generation.md",
             "examples/first_use.py",
+            "examples/runtime_freeze.py",
         ):
             packaged = "yidl_dataclass/documentation/" + name
             assert packaged in names, name
@@ -34,4 +35,5 @@ def test_wheel_and_sdist_include_public_documentation_and_example(tmp_path):
             "docs/API.md",
             "docs/Generation.md",
             "examples/first_use.py",
+            "examples/runtime_freeze.py",
         } <= names

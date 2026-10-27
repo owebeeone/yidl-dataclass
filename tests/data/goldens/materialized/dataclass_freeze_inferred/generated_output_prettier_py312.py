@@ -129,7 +129,7 @@ class Child(*_y_dc_bases, metaclass=_y_dc_metaclass):
         self._y_dc_freezing = True
         try:
             pass
-            self.value
+            _y_dc_freeze_value = self.value
             self._y_dc_frozen = True
         finally:
             self._y_dc_freezing = False
