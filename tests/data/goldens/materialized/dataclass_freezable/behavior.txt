@@ -1,0 +1,1 @@
+mutable-before=True; permanent-after=True; hook-one-value=True; cascade=True; cycle=True; repeat-noop=True; retained-container-safe=True

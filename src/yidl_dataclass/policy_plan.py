@@ -48,12 +48,22 @@ def derive_converter(cls, name, annotation):
 
 
 def normalize_policies(cls, fields, options, captures):
+    if options.freezable and (options.frozen or not options.slots):
+        raise DataclassDefinitionError("freezable requires slots=True and frozen=False")
+    if options.freezable and any(
+        "freeze" in base.__dict__
+        for base in cls.__mro__
+        if "__yidl_dataclass_definition__" not in base.__dict__
+    ):
+        raise DataclassDefinitionError("freezable reserves the freeze method name")
     if options.frozen and not options.slots:
         raise DataclassDefinitionError(
             f"{cls.__qualname__}: frozen requires slots=True"
         )
     result = []
     for index, item in enumerate(fields):
+        if options.freezable and item.name == "freeze":
+            raise DataclassDefinitionError("freezable reserves the freeze method name")
         declaration = cls.__dict__.get(item.name, MISSING)
         policy = (
             declaration.policy
@@ -69,6 +79,16 @@ def normalize_policies(cls, fields, options, captures):
             if isinstance(declaration, ConstDeclaration)
             else LazyKind() if isinstance(declaration, LazyDeclaration) else item.kind
         )
+        if options.freezable and kind.stored and policy.freeze is MISSING:
+            from .freeze_generation import inferred_freeze
+
+            policy = replace(policy, freeze=inferred_freeze(item.field.type))
+        if policy.freeze is not MISSING:
+            if not options.freezable or not kind.stored:
+                raise DataclassDefinitionError(
+                    f"{item.name}: freeze requires a stored freezable field"
+                )
+            callback_contract(cls, item.name, "freeze", policy.freeze)
         converter = policy.converter
         nullable = False
         if kind.label == "classvar":
@@ -111,7 +131,7 @@ def normalize_policies(cls, fields, options, captures):
             callback_contract(cls, item.name, "validator", policy.validator)
         has_pipeline = converter is not None or policy.validator is not None
         has_accessor = kind.stored and (
-            kind.label == "lazy" or not mutable or has_pipeline
+            kind.label == "lazy" or not mutable or has_pipeline or options.freezable
         )
         if (
             options.frozen
@@ -153,7 +173,9 @@ def normalize_policies(cls, fields, options, captures):
                 f"_y_dc_frozen_message_{index}": f"{cls.__qualname__}.{item.name}: cannot replace/delete read-only field {item.name}",
             }
         )
-    policy_class = options.frozen or any(item.has_accessor for item in result)
+    policy_class = (
+        options.frozen or options.freezable or any(item.has_accessor for item in result)
+    )
     if policy_class:
         for base in cls.__mro__:
             if base is object:

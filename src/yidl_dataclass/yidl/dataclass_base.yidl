@@ -1,6 +1,6 @@
 module dataclass.base
-import "dataclass_copy.yidl" as policies
+import "dataclass_freeze.yidl" as policies
 export concept DataclassBase
-concept DataclassBase extends policies.DataclassCopy {
+concept DataclassBase extends policies.DataclassFreeze {
     assembly DataclassModule = CoreModule
 }

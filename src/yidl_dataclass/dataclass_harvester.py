@@ -193,6 +193,12 @@ def harvest(
         for item in definitions
         if item.retained and item.provider_name not in inherited_slots
     )
+    if options.freezable:
+        slot_names += tuple(
+            name
+            for name in ("_y_dc_frozen", "_y_dc_freezing")
+            if name not in inherited_slots
+        )
     dependencies = {call.field_name: call.dependencies for call in calls}
     definitions = tuple(
         std.replace(item, dependencies=dependencies.get(item.name, ()))

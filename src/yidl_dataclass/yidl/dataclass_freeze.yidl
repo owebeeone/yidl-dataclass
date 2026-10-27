@@ -1,0 +1,197 @@
+module dataclass.freeze
+import "dataclass_copy.yidl" as copy
+export concept DataclassFreeze
+
+concept DataclassFreeze extends copy.DataclassCopy {
+    property FreezeFieldId: str
+    property FreezeFieldOwner: str
+    property FreezeFieldOrder: int
+    property FreezeFieldName: str
+    property FreezeStoreName: str
+    property FreezeHasHook: bool = False
+    property FreezeHookName: str
+    record DataclassFreezeField {
+        FreezeFieldId FreezeFieldOwner FreezeFieldOrder FreezeFieldName
+        FreezeStoreName FreezeHasHook FreezeHookName
+    }
+    collection FreezeFields: DataclassFreezeField identity FreezeFieldId many
+
+    resource RuntimeInitFlags = template $[
+        astichi_pass(self, outer_bind=True)._y_dc_frozen = False
+        astichi_pass(self, outer_bind=True)._y_dc_freezing = False
+    ]$
+    contribution RuntimeInit = RuntimeInitProduction { as InitMethod target methods { build /ClassDef } }
+    contribution RuntimeFlags = RuntimeInitFlags { as RuntimeFlags target flags { build /InitMethod } }
+    matcher InitContributions(cls: Classes) -> contribution {
+        rule runtime when RuntimeFreezable == True and GenerateInit == True -> RuntimeInit weight 4
+    }
+    matcher RuntimeFlagContributions(cls: Classes) -> contribution { default -> RuntimeFlags }
+    production RuntimeInitProduction(cls: Classes) -> composable {
+        root InitMethod = LazyInitShell
+        apply empty_params using EmptyParamsContributions
+        apply params from field: Fields where FieldOwner == ClassId using ParamContributions
+        apply runtime_flags using RuntimeFlagContributions
+        apply flags from field: PolicyFields where FieldOwner == ClassId using LazyFlags
+        apply empty_stores using EmptyStoresContributions
+        apply steps from step: InitializationFields where FieldOwner == ClassId using InitializationStepContributions
+    }
+
+    resource RuntimeFreeze = template $[
+        def freeze(self):
+            if _y_dc_getattr(self, "_y_dc_frozen", False) or _y_dc_getattr(self, "_y_dc_freezing", False):
+                return
+            self._y_dc_freezing = True
+            try:
+                astichi_hole(fields)
+                self._y_dc_frozen = True
+            finally:
+                self._y_dc_freezing = False
+    ]$ { keep freeze, self, _y_dc_getattr }
+    resource FreezeFieldHook = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = hook_name__astichi_arg__(astichi_pass(self, outer_bind=True).astichi_ref(external=field_path))
+    ]$
+    resource FreezeFieldRead = template $[
+        astichi_pass(self, outer_bind=True).astichi_ref(external=field_path)
+    ]$
+    resource RuntimeSetter = template $[
+        def field_name__astichi_arg__(self, value):
+            if _y_dc_getattr(self, "_y_dc_frozen", False):
+                raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+            astichi_hole(pipeline)
+            self.astichi_ref(external=backing_name)._ = astichi_pass(processed_name__astichi_arg__, outer_bind=True)
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, value, _y_dc_getattr, _y_dc_FrozenInstanceError }
+    resource RuntimeDeleter = template $[
+        def field_name__astichi_arg__(self):
+            if _y_dc_getattr(self, "_y_dc_frozen", False):
+                raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+            del self.astichi_ref(external=backing_name)._
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, _y_dc_getattr, _y_dc_FrozenInstanceError }
+    resource RuntimeLazySetter = template $[
+        def field_name__astichi_arg__(self, value):
+            if _y_dc_getattr(self, "_y_dc_frozen", False):
+                raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+            if self.astichi_ref(external=busy_path):
+                raise _y_dc_LazyInitializationError(lazy_message__astichi_arg__)
+            astichi_hole(pipeline)
+            self.astichi_ref(external=backing_path)._ = astichi_pass(processed_name__astichi_arg__, outer_bind=True)
+            self.astichi_ref(external=ready_path)._ = True
+            astichi_hole(release)
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, value, _y_dc_getattr, _y_dc_FrozenInstanceError, _y_dc_LazyInitializationError }
+    resource RuntimeLazyDeleter = template $[
+        def field_name__astichi_arg__(self):
+            if _y_dc_getattr(self, "_y_dc_frozen", False):
+                raise _y_dc_FrozenInstanceError(frozen_message__astichi_arg__)
+            if self.astichi_ref(external=busy_path):
+                raise _y_dc_LazyInitializationError(lazy_message__astichi_arg__)
+            if self.astichi_ref(external=ready_path):
+                del self.astichi_ref(external=backing_path)._
+            self.astichi_ref(external=ready_path)._ = False
+        astichi_export(field_name__astichi_arg__)
+    ]$ { keep self, _y_dc_getattr, _y_dc_FrozenInstanceError, _y_dc_LazyInitializationError }
+
+    contribution RuntimeClass = RuntimeClassProduction {
+        as ClassDef index ClassOrder order ClassOrder target classes { build /Root }
+    }
+    matcher ClassContributions(cls: Classes) -> contribution {
+        rule freezable when RuntimeFreezable == True -> RuntimeClass weight 4
+    }
+    contribution RuntimeFreezeContribution = RuntimeFreezeProduction {
+        as RuntimeFreeze target properties { build /ClassDef }
+    }
+    matcher RuntimeFreezes(cls: Classes) -> contribution { default -> RuntimeFreezeContribution }
+    production RuntimeClassProduction(cls: Classes) -> composable {
+        root ClassDef = CompleteClassShell {
+            ident class_name = ClassName
+            external bases_name = BasesName
+            external namespace_name = NamespaceName
+        }
+        apply slots using SlotsContributions
+        apply init using InitContributions
+        apply comparison from cmp: ComparisonClasses where CmpClassId == ClassId using ComparisonBundleContributions
+        apply repr from method: MethodClasses where ReprClassId == ClassId using ReprMethodContributions
+        apply empty_properties using EmptyPropertyContributions
+        apply properties from field: PolicyFields where FieldOwner == ClassId using PropertyContributions
+        apply copy from cpy: CopyClasses where CpyClassId == ClassId using CopyBundleContributions
+        apply runtime_freeze using RuntimeFreezes
+    }
+    contribution FreezeHook = FreezeFieldHook {
+        as FrozenField index FreezeFieldOrder order FreezeFieldOrder target fields { build /RuntimeFreeze }
+        ident hook_name = FreezeHookName
+        external store_path = FreezeStoreName
+        external field_path = FreezeFieldName
+    }
+    contribution FreezeRead = FreezeFieldRead {
+        as FrozenField index FreezeFieldOrder order FreezeFieldOrder target fields { build /RuntimeFreeze }
+        external field_path = FreezeFieldName
+    }
+    contribution FreezeEmpty = EmptyStatement { as FreezeEmpty target fields { build /RuntimeFreeze } }
+    matcher FreezeEmpties(cls: Classes) -> contribution { default -> FreezeEmpty }
+    matcher FreezeSteps(field: FreezeFields, cls: Classes) -> contribution {
+        default -> FreezeRead
+        rule hook when FreezeHasHook == True -> FreezeHook
+    }
+    production RuntimeFreezeProduction(cls: Classes) -> composable {
+        root RuntimeFreeze = RuntimeFreeze
+        apply empty using FreezeEmpties
+        apply fields from field: FreezeFields where FreezeFieldOwner == ClassId using FreezeSteps
+    }
+    contribution RuntimeSet = RuntimeSetterProduction {
+        as Setter index AccessorOrder target setter { build /Property }
+    }
+    contribution RuntimeDelete = RuntimeDeleter {
+        as Deleter index AccessorOrder target deleter { build /Property }
+        ident field_name = LazyDeleterName
+        ident frozen_message = FrozenMessage
+        external backing_name = BackingName
+    }
+    matcher SetterContributions(field: PolicyFields, cls: Classes) -> contribution {
+        rule runtime when RuntimeFreezable == True and WritableAccessor == True -> RuntimeSet weight 2
+    }
+    matcher DeleterContributions(field: PolicyFields, cls: Classes) -> contribution {
+        rule runtime when RuntimeFreezable == True and WritableAccessor == True -> RuntimeDelete weight 2
+    }
+    production RuntimeSetterProduction(field: PolicyFields, cls: Classes) -> composable {
+        root Setter = RuntimeSetter {
+            ident field_name = LazySetterName
+            ident processed_name = LazySetterProcessedName
+            ident frozen_message = FrozenMessage
+            external backing_name = BackingName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == False and GetterSite == False using SetterPipelineContributions
+    }
+    contribution RuntimeLazySet = RuntimeLazySetterProduction {
+        as Setter index AccessorOrder target setter { build /Property }
+    }
+    contribution RuntimeLazyDelete = RuntimeLazyDeleter {
+        as Deleter index AccessorOrder target deleter { build /Property }
+        ident field_name = LazyDeleterName
+        ident frozen_message = FrozenMessage
+        ident lazy_message = LazyMessage
+        external busy_path = BusyName
+        external ready_path = ReadyName
+        external backing_path = BackingName
+    }
+    matcher LazySetters(field: PolicyFields, cls: Classes) -> contribution {
+        rule runtime when RuntimeFreezable == True and WritableAccessor == True -> RuntimeLazySet weight 2
+    }
+    matcher LazyDeleters(field: PolicyFields, cls: Classes) -> contribution {
+        rule runtime when RuntimeFreezable == True and WritableAccessor == True -> RuntimeLazyDelete weight 2
+    }
+    production RuntimeLazySetterProduction(field: PolicyFields, cls: Classes) -> composable {
+        root Setter = RuntimeLazySetter {
+            ident field_name = LazySetterName
+            ident processed_name = LazySetterProcessedName
+            ident frozen_message = FrozenMessage
+            ident lazy_message = LazyMessage
+            external ready_path = ReadyName
+            external busy_path = BusyName
+            external backing_path = BackingName
+        }
+        apply pipeline from pipe: PipelineSites where PipelineOwner == FieldId and ConstructorSite == False and GetterSite == False using SetterPipelineContributions
+        apply release using SetterReleaseContributions
+        apply providers from site: ReleaseSites where ReleaseOwner == FieldId using DirectSetterReleaseContributions
+    }
+}

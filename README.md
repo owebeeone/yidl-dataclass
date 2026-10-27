@@ -51,6 +51,16 @@ caches. Several advanced combinations are rejected rather than silently ignored;
 the API guide lists them. Std `Field`, `MISSING`, `InitVar`, `KW_ONLY`, inspection
 and data helpers remain interoperable on the documented subset.
 
+Opt-in `freezable=True` models can be populated and then permanently frozen using
+`freeze()`. Per-field `freeze` callbacks select the frozen representation and can
+cascade to child objects. The transition is optimistic: cycles and repeated calls
+are handled, but failures do not roll back earlier work. See the API guide for
+field policies, inheritance and shallow-freeze limitations. Frozen hashing still
+follows the existing dataclass options; freeze-time hash activation is not added.
+The runtime-freeze extension is an experimental addition beyond the historical
+review baseline above; its acceptance tests and goldens do not constitute a new
+independent release review.
+
 Development checks use the original SDK wheels: `python -m pytest -q` and
 `python -m yidl_dataclass.regenerate_dataclass_base`. Regeneration checks by
 default; `--write` refreshes the base from the packaged authored YIDL resources.

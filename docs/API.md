@@ -9,7 +9,7 @@ not validate its runtime type unless conversion/validation is selected.
 ```python
 dataclass(cls=None, /, *, init=True, repr=True, eq=True, order=False,
           unsafe_hash=False, frozen=False, match_args=True, kw_only=False,
-          slots=True, weakref_slot=False, convert=False)
+          slots=True, weakref_slot=False, convert=False, freezable=False)
 ```
 
 All switches require exact booleans. Use `@dataclass` or `@dataclass(...)`.
@@ -44,14 +44,15 @@ recursive-safe and uses `repr=True` fields; it may evaluate lazy fields.
 ```python
 field(*, default=MISSING, default_factory=MISSING, init=True, repr=True,
       hash=None, compare=True, metadata=None, kw_only=MISSING, doc=None,
-      mutable=None, converter=MISSING, validator=None, allow_self_factory=False)
+      mutable=None, converter=MISSING, validator=None, allow_self_factory=False,
+      freeze=MISSING)
 const(**field_options)
 lazy(*, default_factory, init=False, **field_options)
 initvar(**field_options)
 classvar(*, default=MISSING, metadata=None, doc=None)
 local_store(*, default=MISSING, default_factory=MISSING, repr=False,
             metadata=None, doc=None, converter=MISSING, validator=None,
-            allow_self_factory=False)
+            allow_self_factory=False, freeze=MISSING)
 ```
 
 An ordinary default and factory are mutually exclusive. Mutable unhashable
@@ -136,6 +137,56 @@ has those exclusions. Such caches may be assigned/deleted. Freezing does not add
 generic attribute dispatcher. Frozen models require slots=True; unknown slotted
 attributes raise ordinary AttributeError rather than std FrozenInstanceError.
 Nonfrozen policy models can use slots=False.
+
+## Opt-in optimistic runtime freezing
+
+`freezable=True` creates a slotted model that starts mutable and exposes an
+irreversible `freeze()` operation. It requires `frozen=False`, generated
+initialization and consistent `freezable` settings throughout model inheritance.
+The name `freeze` is reserved for that operation. Existing `const` and other
+read-only fields retain their construction-time restrictions.
+
+`field(freeze=callback)` and `local_store(freeze=callback)` accept a callable
+invoked with exactly one positional argument, the current field value. Its return
+value replaces that field's backing storage without rerunning input conversion or
+validation. The annotation accepts `Callable[[Any], Any]` or the missing sentinel;
+noncallables and callbacks requiring additional arguments fail definition.
+Freeze hooks require stored fields in a freezable model. Hook exceptions propagate.
+
+When the hook is omitted and the resolved field annotation is itself a YIDL
+Dataclass with `freezable=True`, the generated field policy calls the child's
+`freeze()` and retains that same child object. Recognition uses normalized YIDL
+definition metadata, not the presence of a method named `freeze`. Explicit hooks
+take precedence. This also applies to lazy fields. There is no inference from
+runtime values, container elements, unions or unresolved/string annotations;
+those cases require explicit field hooks. The containing model must still opt in.
+
+Fields are visited in normalized field order, including inherited fields and
+management storage. Lazy fields materialize before freezing completes. Fields
+without hooks retain their values; runtime freezing is shallow unless their
+policies explicitly cascade or produce immutable containers. For example, `tuple`
+freezes a list's container shape, while a custom hook can call `freeze()` on its
+elements and then return a tuple. Retained aliases to mutable containers remain
+the hook author's responsibility; a read-only view of the original dict does not
+detach it from those aliases.
+
+After successful freezing all public field setters/deleters reject writes with
+`FrozenInstanceError`, including lazy and management fields. Repeated freezing is
+a no-op. An in-progress marker terminates recursive visits through shared objects
+or back-references; there is no staging, rollback or concurrency guarantee. A
+failure clears the parent's in-progress marker for retry, but completed children
+and already transformed fields can remain frozen. Hooks should tolerate this
+partial-completion state. No thaw operation is provided.
+
+Copy/deepcopy/pickle preserve the frozen state and reject copying during active
+freezing. Package `replace` constructs a new mutable object; unchanged values may
+still reference immutable or shared contents from the original. Hash selection
+retains the existing dataclass options: default equality models remain unhashable
+after freezing too. This iteration does not activate hashing on freeze; explicit
+`unsafe_hash` remains unsafe and should not be used for mutable collection keys.
+
+This uses Dataclass-owned YIDL resources and field-specific accessors. Lifecycle
+is not a dependency and its freeze/transaction machinery is not reused.
 
 ## Lazy evaluation, retry and hidden-provider lifetime
 

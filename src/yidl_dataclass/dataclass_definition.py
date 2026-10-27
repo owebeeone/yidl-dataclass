@@ -22,6 +22,7 @@ class DataclassOptions:
     slots: bool = True
     weakref_slot: bool = False
     convert: bool = False
+    freezable: bool = False
 
 
 @dataclass(frozen=True, slots=True)

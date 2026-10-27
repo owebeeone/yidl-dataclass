@@ -41,6 +41,10 @@ def model_base_for(cls, options):
                 "generated model base must be directly decorated"
             )
         options_base = model.__yidl_dataclass_definition__.options
+        if options.freezable != options_base.freezable:
+            raise DataclassDefinitionError(
+                "freezable mixing in inheritance is unsupported"
+            )
         if options.frozen != options_base.frozen:
             raise DataclassDefinitionError(
                 f"{cls.__qualname__}: frozen mixing in inheritance is unsupported"

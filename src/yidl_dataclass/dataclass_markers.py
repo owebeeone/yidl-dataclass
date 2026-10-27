@@ -1,9 +1,11 @@
 """Public field declarations; extension policy objects own their validation."""
 
 from __future__ import annotations
-from dataclasses import dataclass, Field, MISSING
+from dataclasses import dataclass, Field, MISSING, _MISSING_TYPE
 import dataclasses as std
 import sys
+from collections.abc import Callable
+from typing import Any
 from .errors import DataclassDefinitionError
 
 
@@ -18,6 +20,9 @@ class FieldPolicy:
     converter: object = std.field(default_factory=lambda: MISSING)
     validator: object = None
     allow_self_factory: bool = False
+    freeze: Callable[[Any], Any] | _MISSING_TYPE = std.field(
+        default_factory=lambda: MISSING
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -66,6 +71,7 @@ def field(
     converter=MISSING,
     validator=None,
     allow_self_factory=False,
+    freeze: Callable[[Any], Any] | _MISSING_TYPE = MISSING,
 ):
     for name, value in (
         ("init", init),
@@ -84,6 +90,8 @@ def field(
         raise DataclassDefinitionError("converter must be callable, None or MISSING")
     if validator is not None and not callable(validator):
         raise DataclassDefinitionError("validator must be callable or None")
+    if freeze is not MISSING and not callable(freeze):
+        raise DataclassDefinitionError("freeze must be callable")
     if doc is not None and sys.version_info[:2] < (3, 14):
         raise DataclassDefinitionError("field doc requires Python 3.14")
     options = dict(
@@ -104,10 +112,11 @@ def field(
         and converter is MISSING
         and validator is None
         and not allow_self_factory
+        and freeze is MISSING
     ):
         return result
     return FieldDeclaration(
-        result, FieldPolicy(mutable, converter, validator, allow_self_factory)
+        result, FieldPolicy(mutable, converter, validator, allow_self_factory, freeze)
     )
 
 
@@ -162,6 +171,7 @@ def local_store(
     converter=MISSING,
     validator=None,
     allow_self_factory=False,
+    freeze: Callable[[Any], Any] | _MISSING_TYPE = MISSING,
 ):
     return _as_declaration(
         field(
@@ -177,6 +187,7 @@ def local_store(
             converter=converter,
             validator=validator,
             allow_self_factory=allow_self_factory,
+            freeze=freeze,
         ),
         LocalStoreDeclaration,
     )

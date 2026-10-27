@@ -46,6 +46,8 @@ def add_copy_facts(
         for name in (item.ready_name, item.busy_name)
     )
     needed.extend(item.provider_name for item in definition.fields if item.retained)
+    if definition.options.freezable:
+        needed.extend(("_y_dc_frozen", "_y_dc_freezing"))
     inherited = [
         name
         for base in declaration.__mro__[1:]
@@ -71,6 +73,8 @@ def add_copy_facts(
     busy = tuple(
         item.busy_name for item in definition.fields if item.kind.label == "lazy"
     )
+    if definition.options.freezable:
+        busy += ("_y_dc_freezing",)
     # Dictionary-backed flags need guards but no duplicate numeric storage capture.
     rows = list(dict.fromkeys((*slots, *busy)))
     for index, name in enumerate(rows):

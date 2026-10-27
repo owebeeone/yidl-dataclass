@@ -25,6 +25,7 @@ def dataclass(
     slots=True,
     weakref_slot=False,
     convert=False,
+    freezable=False,
 ):
     options = DataclassOptions(
         init,
@@ -38,6 +39,7 @@ def dataclass(
         slots,
         weakref_slot,
         convert,
+        freezable,
     )
     for name in options.__dataclass_fields__:
         require_bool(name, getattr(options, name))
@@ -100,6 +102,7 @@ def dataclass(
                 has_helper_methods=copy_support or generate_replace,
                 has_lazy=any(item.kind.label == "lazy" for item in definition.fields),
                 has_properties=any(item.has_accessor for item in definition.fields),
+                runtime_freezable=options.freezable,
             ),
         )
         logical = tuple(
@@ -207,6 +210,9 @@ def dataclass(
         from .copy_generation import add_copy_facts
 
         add_copy_facts(generated, builder, definition, declaration, captures, replace)
+        from .freeze_generation import add_freeze_facts
+
+        add_freeze_facts(generated, builder, definition, captures)
         composable = generated.build_DataclassModule(builder.freeze())
         source = composable.emit_commented()
         tree = composable.to_executable_ast()
