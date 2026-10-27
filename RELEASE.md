@@ -130,7 +130,9 @@ It verifies the full source suite, generated base, strict wheel/sdist metadata,
 and installed examples/regeneration outside the checkout. These checks run
 again against the exact candidate commit before tagging.
 
-Use `gearu plan 0.1.0`, then `gearu release 0.1.0 --push --github-release`.
+For the Python 3.15 patch, use `gearu plan 0.1.1`, then
+`gearu release 0.1.1 --push --github-release`. The earlier 0.1.0 publication is
+recorded in `dev-docs/Python315Release.md`.
 The GitHub Release starts `.github/workflows/publish.yml`. Its OIDC publisher
 matches the pending `yidl-dataclass` project, repository
 `owebeeone/yidl-dataclass`, workflow `publish.yml`, and no environment constraint.
