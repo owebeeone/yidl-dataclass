@@ -51,3 +51,9 @@ comparison authority at regeneration time, with its existing SHA256 gate.
 The freeze operation remains optimistic and non-transactional; this compatibility
 patch does not introduce rollback or thaw. Historical review/performance evidence
 keeps its original scope. This pass adds no unmeasured performance claim.
+
+## Platform boundary
+
+See `Python315DependencyFindings.md` for the confirmed missing Windows cp315
+wheel in Astichi 1.1.3. This pass qualifies macOS locally and Ubuntu in publication
+CI; it does not certify Windows Python 3.15 or an untested SDK source build.
