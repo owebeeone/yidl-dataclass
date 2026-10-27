@@ -49,4 +49,4 @@ def test_consumer_wheel_contains_resources_and_locked_sdk_metadata(tmp_path):
             next(name for name in names if name.endswith("/METADATA"))
         ).decode()
         assert "Requires-Dist: astichi==1.1.3" in metadata
-        assert "Requires-Dist: yidl==0.1.0" in metadata
+        assert "Requires-Dist: yidl==0.1.2" in metadata

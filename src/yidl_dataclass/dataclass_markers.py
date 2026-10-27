@@ -5,11 +5,15 @@ from dataclasses import dataclass, Field, MISSING
 import dataclasses as std
 import sys
 from collections.abc import Callable
-from typing import Any
+from typing import Any, TYPE_CHECKING
 from .errors import DataclassDefinitionError
 
-# Python 3.15 uses a builtin sentinel instead of the private dataclasses class.
-_MISSING_TYPE = type(MISSING)
+# Keep the stdlib stub type for annotations without importing its removed
+# private class at runtime on Python 3.15.
+if TYPE_CHECKING:
+    from dataclasses import _MISSING_TYPE
+else:
+    _MISSING_TYPE = type(MISSING)
 
 
 def require_bool(name: str, value: object) -> None:
