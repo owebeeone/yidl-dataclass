@@ -1,0 +1,67 @@
+site_name: YIDL Dataclass
+site_description: Build Python data models with named factories, field policies, lazy values and permanent freezing.
+site_url: https://owebeeone.github.io/yidl-dataclass/
+repo_url: https://github.com/owebeeone/yidl-dataclass
+repo_name: owebeeone/yidl-dataclass
+edit_uri: edit/main/docs/
+docs_dir: docs
+site_dir: build/docs-site
+strict: true
+exclude_docs: |
+  /validation/
+hooks:
+  - dev-docs/documentation/site_hooks.py
+theme:
+  name: material
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.footer
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn
+nav:
+  - Home: index.md
+  - Start Here:
+      - Your first model: GettingStarted.md
+      - Fields and generated behavior: Concepts.md
+  - Guides:
+      - Initialize dependent values: Initialization.md
+      - Delay expensive values: LazyFields.md
+      - Freeze a finished model: Freezing.md
+      - Copy and extend models: ModelOperations.md
+  - Reference:
+      - Public API and behavior: API.md
+      - Generation and source inspection: Generation.md
+  - Troubleshooting: Troubleshooting.md

@@ -1,7 +1,10 @@
 # Public API and behavior
 
-Import declarations/helpers from `yidl_dataclass`. CPython 3.12–3.15 is supported;
-other runtimes/minors fail decoration. An annotation declares a field; it does
+Import declarations/helpers from `yidl_dataclass`. CPython 3.12–3.15 is the
+accepted minor-version range; other runtimes/minors fail decoration. This is
+subject to the [platform/backend boundary](GettingStarted.md#platform-and-backend-boundary):
+Windows CPython 3.15 has no Astichi 1.1.3 binary wheel and its source build has
+not been qualified. An annotation declares a field; it does
 not validate its runtime type unless conversion/validation is selected.
 
 ## Decorator defaults
@@ -34,7 +37,7 @@ from comparison and hashing. `hash=None` with compare=False qualifies; repr=Fals
 is useful for management caches but is not required.
 
 Equality/order require the exact same generated class. Python 3.12 uses tuple
-equality; 3.13/3.14 use a self shortcut followed by ordered field comparisons.
+equality; 3.13–3.15 use a self shortcut followed by ordered field comparisons.
 Callback order, short-circuiting and raw nonboolean equality results follow that
 minor's std behavior. Ordering and hashing use selected field tuples. Repr is
 recursive-safe and uses `repr=True` fields; it may evaluate lazy fields.
@@ -59,7 +62,7 @@ An ordinary default and factory are mutually exclusive. Mutable unhashable
 literal defaults retain std rejection; use a factory. A stdlib `dataclasses.Field`
 is accepted and copied, so reusing it across declarations does not share name/type
 mutation. Std metadata is a read-only mapping; values remain application objects.
-`doc` is accepted only on 3.14 when non-None. `kw_only` inherits the decorator
+`doc` is accepted on 3.14 and 3.15 when non-None. `kw_only` inherits the decorator
 unless explicit. `KW_ONLY` creates the standard local keyword-only fence.
 Unknown keywords and invalid option types fail instead of being ignored.
 `match_args=True` selects positional init fields excluding keyword-only fields;
@@ -75,7 +78,7 @@ conversion is disabled.
 | `lazy` | Factory required; no default; `init=False` by default; init=True accepts an explicit seed | Standard instance field; included operations can trigger its getter |
 | `initvar` or `InitVar[T]` | Construction provider, with optional default/factory/init=False | No public attribute, repr/compare/hash/helper entry |
 | `classvar` or `ClassVar[T]` | Class storage, no instance pipeline/factory | Std pseudo-field; omitted from fields/helpers and instance operations |
-| `local_store` | Eager per-instance management storage, always writable/init=False | Omitted from std fields/helpers/compare/hash; repr=False unless requested |
+| `local_store` | Eager per-instance management storage; writable before runtime freeze, init=False | Omitted from std fields/helpers/compare/hash; repr=False unless requested |
 
 Convenience InitVars default repr/compare/hash to false and reject explicit
 inclusion. Ordinary std Field pseudo-field flags retain their metadata, but kind
@@ -234,7 +237,7 @@ never replayed. Unknown changes or changes to init=False fields fail.
 
 Std `dataclasses.replace` works when there are no InitVars or every init=True
 InitVar is supplied. Its omitted hidden/defaulted InitVar getter behavior is an
-unsupported subset; use the package helper. On 3.13/3.14 generated `__replace__`
+unsupported subset; use the package helper. On 3.13–3.15 generated `__replace__`
 supports `copy.replace`; a local custom method is preserved. No method is added
 on 3.12.
 
@@ -264,7 +267,8 @@ zero-argument super without mutating the old declaration; class replacement can
 repeat a base __init_subclass__ callback.
 
 There is **no `__post_init__` mechanism**: local or inherited hooks are rejected;
-use named factories/pipelines. Policy models reject custom __getattribute__,
+use named factories/pipelines. See [why there is no post-init hook](Initialization.md#why-no-__post_init__)
+for the inheritance motivation and a practical alternative. Policy models reject custom __getattribute__,
 __setattr__, __delattr__ and bypassing copy/state hooks. Aliases, whole-model
 validation, JSON/schema frameworks and arbitrary metaclasses are outside this
 release.
@@ -280,3 +284,64 @@ and known dependency path; original callback exceptions remain causes. Existing
 contextual errors propagate without repeated wrapping; BaseException is not
 relabeled. Construction/assignment do not roll back application callback side
 effects or a self factory leaking a partially initialized instance.
+
+## Callback argument summary
+
+Factories use signature names to select providers. Converter, validator and
+freeze callbacks instead receive a value positionally; naming their argument
+`self` or another field does not inject that provider.
+
+| Callback | Arguments received | Result and timing |
+| --- | --- | --- |
+| `default_factory` on eager fields, InitVars or local storage | Named providers; `cls=type(self)`; opt-in `self`; positional-only/ordinary/keyword-only supported | Result enters the field pipeline during generated initialization when needed |
+| `lazy(default_factory=...)` | Same provider rules, evaluated from current values when read | Result enters pipeline, then caches after successful evaluation |
+| `converter` | One positional candidate | Returned value goes to validation; runs on initialization, lazy evaluation or permitted assignment |
+| `validator` | One positional converted value | `None`/exact `True` accept, exact `False` rejects; any other result is a direct `TypeError` |
+| `freeze` | One positional current stored value | Returned replacement installs without converter/validator; runs during runtime freeze only |
+
+Unknown optional factory arguments keep their defaults; unknown required ones
+and variadic signatures are rejected. A known provider name wins even when the
+parameter is optional. Signature checking happens during decoration; application
+callbacks execute later. See [dependent initialization](Initialization.md) and
+[permanent freezing](Freezing.md) for complete examples.
+
+## API index and option constraints
+
+All public imports are available from `yidl_dataclass`:
+
+| Area | Names |
+| --- | --- |
+| Model and field declarations | `dataclass`, `field`, `const`, `lazy`, `initvar`, `classvar`, `local_store` |
+| Package operations | `replace`, `storage_fields`, `generated_source` |
+| Standard exports | `MISSING`, `Field`, `InitVar`, `KW_ONLY`, `FrozenInstanceError`, `fields`, `is_dataclass`, `asdict`, `astuple` |
+| Diagnostics | `DataclassDefinitionError`, `FieldInitializationError`, `FieldConversionError`, `FieldValidationError`, `LazyInitializationError` |
+
+`generated_source(Model)` returns inspection source for the generated
+composition; it requires its captured application objects and is not a standalone
+module. See [generation](Generation.md). `storage_fields` accepts a model or
+instance; std `fields` omits extension-only storage and providers as described
+above.
+
+| Decorator option | Default | Constraint/effect |
+| --- | --- | --- |
+| `init` | `True` | Generate initialization unless a supported ordinary custom initializer exists; policies/providers require generated initialization |
+| `repr` | `True` | Generate repr over selected fields unless locally supplied |
+| `eq` | `True` | Exact-class equality over `compare=True` fields unless locally supplied |
+| `order` | `False` | Requires equality; conflicts with local ordering methods |
+| `unsafe_hash` | `False` | Requests std-style hash generation; explicit hash conflicts remain errors |
+| `frozen` | `False` | Read-only data fields after construction; requires slots; excluded writable caches permitted |
+| `match_args` | `True` | Positional init names excluding keyword-only fields; hidden InitVars cannot satisfy attribute patterns |
+| `kw_only` | `False` | Default for constructor fields unless individually overridden |
+| `slots` | `True` | Generate replacement slotted class; `False` updates original declaration |
+| `weakref_slot` | `False` | Requires slots |
+| `convert` | `False` | Infer supported scalar/nullable converters where no field override exists |
+| `freezable` | `False` | Mutable setup then permanent freeze; requires slots/generated init and `frozen=False` |
+
+Every decorator option requires an exact boolean, not `0`, `1` or another truthy
+object. `field` flags have the same exact-boolean rules, with `hash=None`,
+`mutable=None` and `kw_only=MISSING` selecting their documented inherited/default
+behavior. `converter=MISSING` inherits conversion, while `converter=None`
+disables it. `validator=None` disables validation. `freeze=MISSING` omits an
+explicit hook and permits typed-child inference in a freezable model; `freeze=None`
+is invalid. `metadata` is exposed through std's read-only mapping; the values
+inside remain application objects. Non-None `doc` requires CPython 3.14 or 3.15.
