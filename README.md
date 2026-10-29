@@ -1,5 +1,7 @@
 # YIDL Dataclass
 
+> **Full documentation:** [User guides and API reference](https://owebeeone.github.io/yidl-dataclass/).
+
 YIDL Dataclass turns annotated Python classes into slotted data models. Start with
 ordinary dataclass fields, then add named factories, conversion, validation,
 read-only fields, lazy values or permanent runtime freezing where you need them.
