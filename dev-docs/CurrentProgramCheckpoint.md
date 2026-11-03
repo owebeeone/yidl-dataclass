@@ -1,3 +1,11 @@
+# Current configurable-freeze patch preparation
+
+The human has authorized the point release of configurable YIDL freeze names
+and the optional Taut Python backend. Current scope and required gates are in
+ConfigurableFreezeRelease.md and the paired Taut YIDLRecordsPatchRelease-DRAFT.md.
+The previous accepted implementation/checkpoint below remains historical;
+it does not claim acceptance of this new change. SDKs remain reference-only.
+
 # YIDL Dataclass checkpoint
 
 Status: **functional/package implementation accepted** at Dataclass
