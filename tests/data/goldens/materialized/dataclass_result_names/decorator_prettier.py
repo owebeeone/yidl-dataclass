@@ -2,9 +2,9 @@
 # dataclass/dataclass_base.yidl sha256=1a807df52a80792c96ac4484eda3c1bf21bdb6f3ce55da6d14e9d5de2960e9b9
 # dataclass/dataclass_comparison.yidl sha256=8fba88b95c563f4424142b4b6071725d766b64a72a872ea815eaaf2a88ccad73
 # dataclass/dataclass_copy.yidl sha256=ef960f01bd61506aeda1f53226c9f31c8f5386f64cab68de6197032bd3240c19
-# dataclass/dataclass_core.yidl sha256=885a81a58656dcf1c38e3683f99155d506642275e3f6e9ec5de82316c949ed04
+# dataclass/dataclass_core.yidl sha256=1f760bc29069bfc9eecd35bdbe5e53cce7deb216ab5dc68c0159d05d00c55a26
 # dataclass/dataclass_factories.yidl sha256=94179ac729eebe7bf97c9c238757466e01d779b73523246fa57081fa183710d2
-# dataclass/dataclass_freeze.yidl sha256=73b53df0e0a6c32fbdfe666809ec3b84a419d3799a1af2bdebbf03c2b892b793
+# dataclass/dataclass_freeze.yidl sha256=d1f9540a0c0be18842a758b5bae64e721446cbc0a9c13a0fda2fd4a319bf71eb
 # dataclass/dataclass_lazy.yidl sha256=ccdc6d9b130b213dec0e84295c80022d816cf00e52aa07a91c2b6b273e268133
 # dataclass/dataclass_lazy_init.yidl sha256=de7c175bb69255e5781e882259a4e015e15c2dfb8333bfa5b32509d33b8297a1
 # dataclass/dataclass_pipelines.yidl sha256=9bac395230e7d18d87a097f3e171b00d6fb72040fe182ff6f31cc19da890e1d5
@@ -67,6 +67,9 @@ _HasPropertiesProperty = RuntimeProperty(
 )
 _RuntimeFreezableProperty = RuntimeProperty(
     "RuntimeFreezable", bool, default=False, storage_name="runtime_freezable"
+)
+_FreezeMethodNameProperty = RuntimeProperty(
+    "FreezeMethodName", str, default="freeze", storage_name="freeze_method_name"
 )
 _FieldIdProperty = RuntimeProperty(
     "FieldId", str, default=REQUIRED, storage_name="field_id"
@@ -444,6 +447,7 @@ _DataclassClassSpec = RuntimeRecord(
         _HasLazyProperty,
         _HasHelperMethodsProperty,
         _RuntimeFreezableProperty,
+        _FreezeMethodNameProperty,
     ),
 )
 _DataclassFieldSpec = RuntimeRecord(
@@ -662,6 +666,7 @@ class DataclassClass:
         "has_lazy",
         "has_helper_methods",
         "runtime_freezable",
+        "freeze_method_name",
     )
     __dds_record_spec__ = _DataclassClassSpec
     class_id: str
@@ -677,6 +682,7 @@ class DataclassClass:
     has_lazy: bool
     has_helper_methods: bool
     runtime_freezable: bool
+    freeze_method_name: str
 
     def __init__(
         self,
@@ -693,7 +699,8 @@ class DataclassClass:
         has_properties: bool = False,
         has_lazy: bool = False,
         has_helper_methods: bool = False,
-        runtime_freezable: bool = False
+        runtime_freezable: bool = False,
+        freeze_method_name: str = "freeze"
     ):
         if not isinstance(class_id, str):
             raise TypeError("ClassId must be str, got " + type(class_id).__name__)
@@ -745,6 +752,11 @@ class DataclassClass:
                 "RuntimeFreezable must be bool, got " + type(runtime_freezable).__name__
             )
         object.__setattr__(self, "runtime_freezable", runtime_freezable)
+        if not isinstance(freeze_method_name, str):
+            raise TypeError(
+                "FreezeMethodName must be str, got " + type(freeze_method_name).__name__
+            )
+        object.__setattr__(self, "freeze_method_name", freeze_method_name)
 
     def __setattr__(self, name, value):
         if name in (
@@ -761,6 +773,7 @@ class DataclassClass:
             "has_lazy",
             "has_helper_methods",
             "runtime_freezable",
+            "freeze_method_name",
         ):
             raise AttributeError("DataclassClass records are immutable")
         object.__setattr__(self, name, value)
@@ -780,6 +793,7 @@ class DataclassClass:
         pieces.append("has_lazy=" + repr(self.has_lazy))
         pieces.append("has_helper_methods=" + repr(self.has_helper_methods))
         pieces.append("runtime_freezable=" + repr(self.runtime_freezable))
+        pieces.append("freeze_method_name=" + repr(self.freeze_method_name))
         return "DataclassClass" + "(" + ", ".join(pieces) + ")"
 
 
@@ -2608,6 +2622,9 @@ ASSEMBLY_PROPERTIES = {
     "RuntimeFreezable": _YidlSimpleNamespace(
         name="RuntimeFreezable", storage_name="runtime_freezable"
     ),
+    "FreezeMethodName": _YidlSimpleNamespace(
+        name="FreezeMethodName", storage_name="freeze_method_name"
+    ),
     "FieldId": _YidlSimpleNamespace(name="FieldId", storage_name="field_id"),
     "FieldOwner": _YidlSimpleNamespace(name="FieldOwner", storage_name="field_owner"),
     "FieldName": _YidlSimpleNamespace(name="FieldName", storage_name="field_name"),
@@ -2922,7 +2939,7 @@ ASSEMBLY_RESOURCES = {
     "ModuleRoot": from_astichi_code(
         "astichi_hole(classes)",
         file_name="dataclass/dataclass_core.yidl",
-        line_number=68,
+        line_number=70,
     ),
     "ClassShell": astichi_template(
         from_astichi_code(
@@ -2934,20 +2951,20 @@ class class_name__astichi_arg__(*astichi_ref(external=bases_name), metaclass=_y_
     astichi_hole(comparison_methods)
     astichi_hole(repr_method)""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=71,
+            line_number=73,
             keep_names=("_y_dc_metaclass",),
         )
     ),
     "EmptyStatement": astichi_template(
         from_astichi_code(
-            "pass", file_name="dataclass/dataclass_core.yidl", line_number=80, offset=40
+            "pass", file_name="dataclass/dataclass_core.yidl", line_number=82, offset=40
         )
     ),
     "Slots": astichi_template(
         from_astichi_code(
             "__slots__ = astichi_bind_external(slot_names)",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=82,
+            line_number=84,
         )
     ),
     "InitShell": astichi_template(
@@ -2956,7 +2973,7 @@ class class_name__astichi_arg__(*astichi_ref(external=bases_name), metaclass=_y_
 def __init__(self, params__astichi_param_hole__) -> None:
     astichi_hole(stores)""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=85,
+            line_number=87,
             keep_names=("self", "__init__"),
         )
     ),
@@ -2966,7 +2983,7 @@ def __init__(self, params__astichi_param_hole__) -> None:
 def astichi_params():
     pass""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=91,
+            line_number=93,
         )
     ),
     "RequiredParam": astichi_template(
@@ -2975,7 +2992,7 @@ def astichi_params():
 def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__):
     pass""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=95,
+            line_number=97,
         )
     ),
     "DefaultParam": astichi_template(
@@ -2984,14 +3001,14 @@ def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__):
 def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__ = default_name__astichi_arg__):
     pass""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=99,
+            line_number=101,
         )
     ),
     "InputStore": astichi_template(
         from_astichi_code(
             "astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = astichi_pass(param_name__astichi_arg__, outer_bind=True)",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=103,
+            line_number=105,
         )
     ),
     "RequiredKwParam": astichi_template(
@@ -3000,7 +3017,7 @@ def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__ = d
 def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__):
     pass""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=107,
+            line_number=109,
         )
     ),
     "DefaultKwParam": astichi_template(
@@ -3009,7 +3026,7 @@ def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__)
 def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__ = default_name__astichi_arg__):
     pass""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=111,
+            line_number=113,
         )
     ),
     "FactoryParam": astichi_template(
@@ -3018,7 +3035,7 @@ def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__ 
 def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__ = _y_dc_factory_sentinel):
     pass""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=115,
+            line_number=117,
             keep_names=("_y_dc_factory_sentinel",),
         )
     ),
@@ -3028,7 +3045,7 @@ def astichi_params(param_name__astichi_arg__: annotation_name__astichi_arg__ = _
 def astichi_params(*, param_name__astichi_arg__: annotation_name__astichi_arg__ = _y_dc_factory_sentinel):
     pass""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=119,
+            line_number=121,
             keep_names=("_y_dc_factory_sentinel",),
         )
     ),
@@ -3039,7 +3056,7 @@ if astichi_pass(param_name__astichi_arg__, outer_bind=True) is _y_dc_factory_sen
     astichi_pass(param_name__astichi_arg__, outer_bind=True)._ = factory_name__astichi_arg__()
 astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = astichi_pass(param_name__astichi_arg__, outer_bind=True)""",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=123,
+            line_number=125,
             keep_names=("_y_dc_factory_sentinel",),
         )
     ),
@@ -3047,14 +3064,14 @@ astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = astichi_
         from_astichi_code(
             "astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = default_name__astichi_arg__",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=128,
+            line_number=130,
         )
     ),
     "FactoryStore": astichi_template(
         from_astichi_code(
             "astichi_pass(self, outer_bind=True).astichi_ref(external=slot_name)._ = factory_name__astichi_arg__()",
             file_name="dataclass/dataclass_core.yidl",
-            line_number=131,
+            line_number=133,
         )
     ),
     "MethodsShell": from_astichi_code(
@@ -4289,7 +4306,7 @@ astichi_pass(self, outer_bind=True)._y_dc_freezing = False""",
     "RuntimeFreeze": astichi_template(
         from_astichi_code(
             """\
-def freeze(self):
+def freeze_method__astichi_arg__(self):
     if _y_dc_getattr(self, "_y_dc_frozen", False) or _y_dc_getattr(self, "_y_dc_freezing", False):
         return
     self._y_dc_freezing = True
@@ -4300,7 +4317,7 @@ def freeze(self):
         self._y_dc_freezing = False""",
             file_name="dataclass/dataclass_freeze.yidl",
             line_number=40,
-            keep_names=("freeze", "self", "_y_dc_getattr"),
+            keep_names=("self", "_y_dc_getattr"),
         )
     ),
     "FreezeFieldHook": astichi_template(
@@ -17372,7 +17389,15 @@ ASSEMBLY_PRODUCTIONS = {
             AssemblyInputSpec(name="cls", collection_name="Classes", collection=None),
         ),
         root=RootSpec(
-            build_name="RuntimeFreeze", resource_name="RuntimeFreeze", bindings=()
+            build_name="RuntimeFreeze",
+            resource_name="RuntimeFreeze",
+            bindings=(
+                BindingSpec(
+                    kind="ident",
+                    name="freeze_method",
+                    value=ValueRef("FreezeMethodName"),
+                ),
+            ),
         ),
         applies=(
             InlineApplySpec(

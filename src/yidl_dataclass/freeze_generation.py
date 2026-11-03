@@ -3,9 +3,12 @@
 from dataclasses import MISSING
 
 
-def _freeze_typed_child(value):
-    value.freeze()
-    return value
+def _freeze_typed_child(method_name):
+    def freeze_child(value):
+        getattr(value, method_name)()
+        return value
+
+    return freeze_child
 
 
 def inferred_freeze(annotation):
@@ -16,7 +19,7 @@ def inferred_freeze(annotation):
         return MISSING
     definition = getattr(annotation, "__yidl_dataclass_definition__", None)
     if isinstance(definition, DataclassDefinition) and definition.options.freezable:
-        return _freeze_typed_child
+        return _freeze_typed_child(definition.options.freeze_method)
     return MISSING
 
 

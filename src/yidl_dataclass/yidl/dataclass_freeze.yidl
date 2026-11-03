@@ -37,7 +37,7 @@ concept DataclassFreeze extends copy.DataclassCopy {
     }
 
     resource RuntimeFreeze = template $[
-        def freeze(self):
+        def freeze_method__astichi_arg__(self):
             if _y_dc_getattr(self, "_y_dc_frozen", False) or _y_dc_getattr(self, "_y_dc_freezing", False):
                 return
             self._y_dc_freezing = True
@@ -46,7 +46,7 @@ concept DataclassFreeze extends copy.DataclassCopy {
                 self._y_dc_frozen = True
             finally:
                 self._y_dc_freezing = False
-    ]$ { keep freeze, self, _y_dc_getattr }
+    ]$ { keep self, _y_dc_getattr }
     resource FreezeFieldHook = template $[
         astichi_pass(self, outer_bind=True).astichi_ref(external=store_path)._ = hook_name__astichi_arg__(astichi_pass(self, outer_bind=True).astichi_ref(external=field_path))
     ]$
@@ -134,7 +134,7 @@ concept DataclassFreeze extends copy.DataclassCopy {
         rule hook when FreezeHasHook == True -> FreezeHook
     }
     production RuntimeFreezeProduction(cls: Classes) -> composable {
-        root RuntimeFreeze = RuntimeFreeze
+        root RuntimeFreeze = RuntimeFreeze { ident freeze_method = FreezeMethodName }
         apply empty using FreezeEmpties
         apply fields from field: FreezeFields where FreezeFieldOwner == ClassId using FreezeSteps
     }

@@ -12,7 +12,8 @@ not validate its runtime type unless conversion/validation is selected.
 ```python
 dataclass(cls=None, /, *, init=True, repr=True, eq=True, order=False,
           unsafe_hash=False, frozen=False, match_args=True, kw_only=False,
-          slots=True, weakref_slot=False, convert=False, freezable=False)
+          slots=True, weakref_slot=False, convert=False, freezable=False,
+          freeze_method="freeze")
 ```
 
 All switches require exact booleans. Use `@dataclass` or `@dataclass(...)`.
@@ -146,7 +147,16 @@ Nonfrozen policy models can use slots=False.
 `freezable=True` creates a slotted model that starts mutable and exposes an
 irreversible `freeze()` operation. It requires `frozen=False`, generated
 initialization and consistent `freezable` settings throughout model inheritance.
-The name `freeze` is reserved for that operation. Existing `const` and other
+The configured `freeze_method` name is reserved for that operation; the default
+is `"freeze"`. A custom name must be a nonempty Python identifier, cannot be a
+keyword, start with `__` or `_y_dc_`, or collide with a field or existing method.
+Custom names require `freezable=True`. A generated subclass must use the same
+name as its generated model base. Independently typed child models may use
+different names; inferred child freezing uses the child's configured name.
+For example, `@dataclass(freezable=True, freeze_method="seal")` permits a field
+named `freeze` and exposes `record.seal()` instead. A configured decorator made
+with `functools.partial` can apply this setting across a family of records.
+Existing `const` and other
 read-only fields retain their construction-time restrictions.
 
 `field(freeze=callback)` and `local_store(freeze=callback)` accept a callable

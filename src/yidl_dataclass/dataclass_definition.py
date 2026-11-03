@@ -23,6 +23,7 @@ class DataclassOptions:
     weakref_slot: bool = False
     convert: bool = False
     freezable: bool = False
+    freeze_method: str = "freeze"
 
 
 @dataclass(frozen=True, slots=True)

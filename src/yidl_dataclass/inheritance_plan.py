@@ -45,6 +45,10 @@ def model_base_for(cls, options):
             raise DataclassDefinitionError(
                 "freezable mixing in inheritance is unsupported"
             )
+        if options.freezable and options.freeze_method != options_base.freeze_method:
+            raise DataclassDefinitionError(
+                "freeze_method must match the generated model base"
+            )
         if options.frozen != options_base.frozen:
             raise DataclassDefinitionError(
                 f"{cls.__qualname__}: frozen mixing in inheritance is unsupported"

@@ -15,6 +15,7 @@ concept DataclassCore {
     property HasLazy: bool = False
     property HasProperties: bool = False
     property RuntimeFreezable: bool = False
+    property FreezeMethodName: str = "freeze"
     property FieldId: str
     property FieldOwner: str
     property FieldName: str
@@ -44,6 +45,7 @@ concept DataclassCore {
         HasLazy
         HasHelperMethods
         RuntimeFreezable
+        FreezeMethodName
     }
     record DataclassField {
         FieldId

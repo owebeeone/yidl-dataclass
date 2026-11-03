@@ -26,6 +26,7 @@ def dataclass(
     weakref_slot=False,
     convert=False,
     freezable=False,
+    freeze_method="freeze",
 ):
     options = DataclassOptions(
         init,
@@ -40,9 +41,26 @@ def dataclass(
         weakref_slot,
         convert,
         freezable,
+        freeze_method,
     )
     for name in options.__dataclass_fields__:
-        require_bool(name, getattr(options, name))
+        if name != "freeze_method":
+            require_bool(name, getattr(options, name))
+    from keyword import iskeyword
+    from .errors import DataclassDefinitionError
+
+    if (
+        type(freeze_method) is not str
+        or not freeze_method.isidentifier()
+        or iskeyword(freeze_method)
+        or freeze_method.startswith("_y_dc_")
+        or freeze_method.startswith("__")
+    ):
+        raise DataclassDefinitionError(
+            "freeze_method must be a nonreserved Python identifier"
+        )
+    if not freezable and freeze_method != "freeze":
+        raise DataclassDefinitionError("custom freeze_method requires freezable=True")
 
     def decorate(declaration):
         from . import _generated_dataclass_base as generated
@@ -103,6 +121,7 @@ def dataclass(
                 has_lazy=any(item.kind.label == "lazy" for item in definition.fields),
                 has_properties=any(item.has_accessor for item in definition.fields),
                 runtime_freezable=options.freezable,
+                freeze_method_name=options.freeze_method,
             ),
         )
         logical = tuple(

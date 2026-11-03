@@ -51,19 +51,23 @@ def normalize_policies(cls, fields, options, captures):
     if options.freezable and (options.frozen or not options.slots):
         raise DataclassDefinitionError("freezable requires slots=True and frozen=False")
     if options.freezable and any(
-        "freeze" in base.__dict__
+        options.freeze_method in base.__dict__
         for base in cls.__mro__
         if "__yidl_dataclass_definition__" not in base.__dict__
     ):
-        raise DataclassDefinitionError("freezable reserves the freeze method name")
+        raise DataclassDefinitionError(
+            f"freezable reserves the {options.freeze_method} method name"
+        )
     if options.frozen and not options.slots:
         raise DataclassDefinitionError(
             f"{cls.__qualname__}: frozen requires slots=True"
         )
     result = []
     for index, item in enumerate(fields):
-        if options.freezable and item.name == "freeze":
-            raise DataclassDefinitionError("freezable reserves the freeze method name")
+        if options.freezable and item.name == options.freeze_method:
+            raise DataclassDefinitionError(
+                f"freezable reserves the {options.freeze_method} method name"
+            )
         declaration = cls.__dict__.get(item.name, MISSING)
         policy = (
             declaration.policy
