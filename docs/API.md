@@ -2,9 +2,8 @@
 
 Import declarations/helpers from `yidl_dataclass`. CPython 3.12–3.15 is the
 accepted minor-version range; other runtimes/minors fail decoration. This is
-subject to the [platform/backend boundary](GettingStarted.md#platform-and-backend-boundary):
-Windows CPython 3.15 has no Astichi 1.1.3 binary wheel and its source build has
-not been qualified. An annotation declares a field; it does
+subject to the [platform/backend boundary](GettingStarted.md#platform-and-backend-boundary).
+An annotation declares a field; it does
 not validate its runtime type unless conversion/validation is selected.
 
 ## Decorator defaults

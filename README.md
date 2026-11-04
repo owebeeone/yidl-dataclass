@@ -25,9 +25,7 @@ assert replace(item, count=5).count == 5
 Install with `python -m pip install yidl-dataclass`. The release tests
 **CPython 3.12, 3.13, 3.14 and 3.15**, subject to the
 [platform/backend boundary](https://owebeeone.github.io/yidl-dataclass/GettingStarted/#platform-and-backend-boundary).
-Windows CPython 3.15 is outside the release qualification: Astichi 1.1.3 has no
-binary wheel for that combination and its source build has not been qualified.
-Installation brings the pinned Astichi 1.1.3 and YIDL 0.1.2 dependencies; on
+Installation brings the pinned Astichi 1.1.5 and YIDL 0.1.4 dependencies; on
 platforms with their published wheels, SDK checkouts and rebuilds are unnecessary.
 Type annotations describe fields; conversion and validation are explicit options.
 

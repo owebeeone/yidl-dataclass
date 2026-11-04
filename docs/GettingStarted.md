@@ -22,10 +22,10 @@ automatically; no sibling repositories or generation step are required.
 ### Platform and backend boundary
 
 The CPython version matrix does not qualify every platform/backend combination.
-The Python 3.15 release qualification covers macOS locally and Ubuntu in CI.
-Astichi 1.1.3 has no Windows CPython 3.15 binary wheel, and a source build on that
-combination has not been qualified. Windows CPython 3.15 is therefore outside
-that release qualification. Select a platform/version with the required published
+The current release qualification covers Windows locally and Ubuntu in CI; the
+earlier Python 3.15 qualification also covered macOS. Astichi 1.1.5 ships a
+stable-ABI Windows wheel, so Windows CPython 3.15 installs without an SDK source
+build. Select a platform/version with the required published
 SDK wheels rather than assuming an untested SDK source build is supported.
 
 To reproduce the documentation examples' backend selection, set it before

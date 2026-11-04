@@ -14,15 +14,12 @@ checks = [
     ["uv", "run", "--no-project", "--python", "3.13", "--with", "build==1.6.1", "--with", "twine==7.0.0", "python", "scripts/check_release.py"],
 ]
 github_notes = """
-yidl-dataclass {tag} — configurable runtime freeze method.
+yidl-dataclass {tag} — YIDL 0.1.4 and Astichi 1.1.5 dependency patch.
 
-Adds freeze_method to the dataclass decorator, retaining freeze as the default.
-Configured names reserve only their own field/method name. Typed child freezing
-uses the child's configured method; a model inheritance family keeps one name.
-Use a shared configured decorator to apply the choice across a record family.
-CPython3.12–3.15 and both lowering backends retain their release qualification.
-
-Opt-in freezable models still use optimistic, non-transactional permanent freeze.
-See dev-docs/ConfigurableFreezeRelease.md for current qualification; Python315Release.md remains historical evidence.
-The original experiment, reviews, time and token/cost evidence remain in dev-docs/.
+yidl-dataclass now pins YIDL 0.1.4 and Astichi 1.1.5. Astichi 1.1.5 fixes
+CPython 3.15 provenance round-trips, ships a stable-ABI Windows wheel covering
+Windows CPython 3.15 and fixes native-engine name hygiene. The generated base
+is unchanged and the decorator API is unchanged. CPython 3.12–3.15 and both
+lowering backends pass Gearu's release checks.
+See dev-docs/DependencyPatchRelease.md for qualification.
 """

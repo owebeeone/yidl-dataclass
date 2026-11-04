@@ -44,12 +44,11 @@ or memory advantage.
 
 ## Dependencies and backend selection
 
-The consumer depends on published Astichi 1.1.3 and YIDL 0.1.2. On qualified
+The consumer depends on published Astichi 1.1.5 and YIDL 0.1.4. On qualified
 platform/version combinations with the required published wheels, no SDK source
 checkout or rebuild is needed. See the
-[platform/backend boundary](GettingStarted.md#platform-and-backend-boundary):
-Astichi 1.1.3 has no Windows CPython 3.15 wheel and that source-build combination
-has not been qualified. These backend selections are available within their
+[platform/backend boundary](GettingStarted.md#platform-and-backend-boundary).
+These backend selections are available within their
 qualified platform/version combinations:
 
 ```sh
@@ -80,8 +79,8 @@ packaged introductory/runtime-freeze examples. The complete progressive guide
 set is available on this site and in the repository; the package inclusion list
 is controlled separately. Where the required published SDK wheels are available,
 rebuilding from an sdist uses those fixed wheels and the build tool, without
-rebuilding SDKs. This does not qualify a Windows CPython 3.15 SDK source build;
-see the platform/backend boundary above.
+rebuilding SDKs. This does not qualify SDK source builds; see the
+platform/backend boundary above.
 
 ## Shared resources and release checks
 

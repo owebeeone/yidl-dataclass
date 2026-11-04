@@ -26,10 +26,8 @@ The [runnable examples](../examples/README.md) are complete programs.
 
 The release tests CPython 3.12–3.15 subject to the
 [platform/backend boundary](GettingStarted.md#platform-and-backend-boundary).
-Windows CPython 3.15 is outside the release qualification because Astichi 1.1.3
-has no binary wheel for it and its source build has not been qualified.
 Install `yidl-dataclass` from PyPI; its declared runtime dependencies are
-Astichi 1.1.3 and YIDL 0.1.2. The library generates Python
+Astichi 1.1.5 and YIDL 0.1.4. The library generates Python
 methods from YIDL templates when you decorate a class. Application code imports
 `yidl_dataclass`; it does not need to author YIDL. See [generation and source
 inspection](Generation.md) when you want to inspect those methods.
